@@ -155,3 +155,7 @@ ENV/
 # Rope project settings
 .ropeproject
 
+bin/
+/lib64
+/pyvenv.cfg
+share/
