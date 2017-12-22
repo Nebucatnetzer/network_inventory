@@ -31,6 +31,7 @@ class Device(models.Model):
 These models contain all the days of the week the days in a month and
 all month in a year.
 
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Weekday(models.Model):
     name = models.CharField(max_length=50)
 
@@ -43,8 +44,11 @@ class Month(models.Model):
 
     def __str__(self):
         return self.name
+#+END_SRC
 
 
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class RamType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -58,8 +62,11 @@ class Ram(models.Model):
 
     def __str__(self):
         return '{} {} GB'.format(self.type, self.size)
+#+END_SRC
 
 
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class DiskType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -80,6 +87,7 @@ class Disk(models.Model):
 
     def __str__(self):
         return '{} {} GB'.format(self.type, self.size)
+#+END_SRC
 
 
 class Architecture(models.Model):
@@ -105,22 +113,29 @@ class Cpu(models.Model):
 
     def __str__(self):
         return self.name
+#+END_SRC
 
 
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+#+END_SRC
 
 
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Raid(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+#+END_SRC
 
 
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Computer(Device):
     hostname = models.CharField(max_length=20, unique=True)
     raid = models.ForeignKey(Raid, null=True, blank=True,
@@ -135,8 +150,10 @@ class Computer(Device):
 
     def __str__(self):
         return self.hostname
+#+END_SRC
 
 
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class ComputerDiskRelation(models.Model):
     disk = models.ForeignKey(Disk, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
@@ -147,7 +164,10 @@ class ComputerRamRelation(models.Model):
     ram = models.ForeignKey(Ram, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
+#+END_SRC
 
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Warranty(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     files = models.FileField()
@@ -155,8 +175,11 @@ class Warranty(models.Model):
 
     def __str__(self):
         return self.device
+#+END_SRC
 
 
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class CronJob(models.Model):
     name = models.CharField(max_length=50)
     host = models.ForeignKey(Computer, on_delete=models.CASCADE)
@@ -178,9 +201,12 @@ from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               CpuManufacturer, Cpu, OperatingSystem, Raid,
                               Computer, ComputerDiskRelation,
                               ComputerRamRelation, Warranty, CronJob)
+#+END_SRC
+
 
 
 class RamInline(admin.StackedInline):
+#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
     model = ComputerRamRelation
     verbose_name_plural = 'Ram Modules'
 
@@ -192,8 +218,10 @@ class DiskInline(admin.StackedInline):
 
 class ComputerAdmin(admin.ModelAdmin):
     inlines = (RamInline, DiskInline)
+#+END_SRC
 
 
+#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 admin.site.register(Device)
 admin.site.register(Weekday)
 admin.site.register(Month)
