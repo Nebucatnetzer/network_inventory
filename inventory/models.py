@@ -137,6 +137,7 @@ class ComputerRamRelation(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
+
 class Warranty(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     files = models.FileField()
