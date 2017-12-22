@@ -159,3 +159,4 @@ bin/
 /lib64
 /pyvenv.cfg
 share/
+/db.sqlite3
