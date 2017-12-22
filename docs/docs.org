@@ -34,6 +34,7 @@ all month in a year.
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Weekday(models.Model):
     name = models.CharField(max_length=50)
+    value = models.IntegerField()
 class DayOfMonth(models.Model):
     name = models.CharField(max_length=50)
     value = models.IntegerField()
@@ -44,6 +45,7 @@ class DayOfMonth(models.Model):
 
 class Month(models.Model):
     name = models.CharField(max_length=50)
+    value = models.IntegerField()
 
     def __str__(self):
         return self.name
