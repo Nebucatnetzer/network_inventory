@@ -11,6 +11,15 @@ class Device(models.Model):
 
 class Weekday(models.Model):
     name = models.CharField(max_length=50)
+    value = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class DayOfMonth(models.Model):
+    name = models.CharField(max_length=50)
+    value = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -18,6 +27,7 @@ class Weekday(models.Model):
 
 class Month(models.Model):
     name = models.CharField(max_length=50)
+    value = models.IntegerField()
 
     def __str__(self):
         return self.name
