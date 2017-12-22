@@ -33,6 +33,7 @@ class RamType(models.Model):
 class Ram(models.Model):
     type = models.ForeignKey(RamType, on_delete=models.CASCADE)
     size_in_gb = models.FloatField()
+    ecc = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} {} GB'.format(self.type, self.size)
