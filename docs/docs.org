@@ -56,7 +56,10 @@ class Month(models.Model):
         return self.name
 #+END_SRC
 
+** RamType, Ram
 
+"RamType" and "Ram" are ment to specify a ram module. "RamType" stands
+for the DDR verions.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class RamType(models.Model):
@@ -75,7 +78,12 @@ class Ram(models.Model):
         return '{} {} GB'.format(self.type, self.size)
 #+END_SRC
 
+** DiskType, DiskSize, Disk
 
+This three models together represent the various disk types I'm using.
+The idea is that you define the type then enter a common sizes you're
+using and then connect everything together in the "Disk" model.
+This way you have a set of disks you can "insert" into "Computer" models.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class DiskType(models.Model):
@@ -100,7 +108,12 @@ class Disk(models.Model):
         return '{} {} GB'.format(self.type, self.size)
 #+END_SRC
 
+** Architecture, CpuManufacturer and Cpu
 
+"Architecture", "CpuManufacturer" and "Cpu" are the models which
+together specifiy the properties of a CPU.
+
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Architecture(models.Model):
     name = models.CharField(max_length=50)
 
@@ -126,6 +139,9 @@ class Cpu(models.Model):
         return self.name
 #+END_SRC
 
+** OperatingSystem
+
+A simple model to save operating system names.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class OperatingSystem(models.Model):
@@ -135,6 +151,9 @@ class OperatingSystem(models.Model):
         return self.name
 #+END_SRC
 
+** Raid
+
+A model to store the various RAID configurations.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Raid(models.Model):
@@ -144,7 +163,11 @@ class Raid(models.Model):
         return self.name
 #+END_SRC
 
+** Computer
 
+This model represents a complete computer, server or virtual machine.
+It's inheritated from the "Device" model. So that one can link it to a
+warranty.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Computer(Device):
@@ -163,6 +186,10 @@ class Computer(Device):
         return self.hostname
 #+END_SRC
 
+** ComputerDiskRelation and ComputerRamRelation
+
+These models are required to link RAM modules and disks to a computer.
+Without these models it wouldn't be possible to specifiy the used amount.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class ComputerDiskRelation(models.Model):
@@ -177,6 +204,11 @@ class ComputerRamRelation(models.Model):
     amount = models.IntegerField()
 #+END_SRC
 
+** Warranty
+
+As the name suggests this model is for storing warranty informations.
+In addition it has an attribute for a file so that one can attach a
+scan of the warranty paper.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class Warranty(models.Model):
@@ -188,7 +220,10 @@ class Warranty(models.Model):
         return self.device
 #+END_SRC
 
+** CronJob
 
+This model represents a cron job running on a host. It contains all
+the information that one would write in a crontab file.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class CronJob(models.Model):
@@ -205,6 +240,11 @@ class CronJob(models.Model):
 
 * Admin
 
+The admin file specifies which models are visible and in which way the
+get shown in the admin interface.
+
+We have to import each model we want to use.
+
 #+BEGIN_SRC python :tangle ../inventory/admin.py
 from django.contrib import admin
 from inventory.models import (Device, Weekday, Month, RamType, Ram,
@@ -214,7 +254,11 @@ from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               ComputerRamRelation, Warranty, CronJob)
 #+END_SRC
 
+** InLine classes
 
+I made an inline class for both RAM and disks and extended the
+"Computer" admin form with them. This makes it easier to add RAM
+modules and disks to a computer.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 class RamInLine(admin.StackedInline):
@@ -231,6 +275,12 @@ class ComputerAdmin(admin.ModelAdmin):
     inlines = (RamInLine, DiskInLine)
 #+END_SRC
 
+** Registering models
+
+In order for the models to show up in the admin interface we have to
+register them in addition to importing them in the admin.py file.
+In addition we have to define which admin form they should use if we
+want to use something different than the default one.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 admin.site.register(Device)
