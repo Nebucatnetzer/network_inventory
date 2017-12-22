@@ -4,6 +4,16 @@
 
 * Models
 
+Models define the database layout in a django application. Each class
+represents a table in the database. A lot the models in this project
+are very small because they exist mainly to keep the information unified.
+
+** Device
+
+The "Device" model represents a generel device about which I don't have
+that much information. It might represent an IOT device or something
+similarly closed.
+
 #+BEGIN_SRC python :tangle ../inventory/models.py
 #!/usr/bin/python3
 from django.db import models
