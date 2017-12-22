@@ -15,7 +15,6 @@ that much information. It might represent an IOT device or something
 similarly closed.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py
-#!/usr/bin/python3
 from django.db import models
 
 
@@ -168,7 +167,6 @@ class CronJob(models.Model):
 * Admin
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py
-#!/usr/bin/python3
 from django.contrib import admin
 from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,

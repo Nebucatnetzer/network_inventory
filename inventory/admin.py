@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from django.contrib import admin
 from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,
