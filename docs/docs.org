@@ -26,7 +26,10 @@ class Device(models.Model):
         return self.name
 #+END_SRC
 
+** Weekday, DayOfMonth and Month
 
+These models contain all the days of the week the days in a month and
+all month in a year.
 
 class Weekday(models.Model):
     name = models.CharField(max_length=50)
