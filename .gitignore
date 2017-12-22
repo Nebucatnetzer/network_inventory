@@ -160,3 +160,4 @@ bin/
 /pyvenv.cfg
 share/
 /db.sqlite3
+inventory/migrations/*.py
