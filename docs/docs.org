@@ -1,3 +1,26 @@
 #+TITLE: Andreas Zweili
 #+SETUPFILE: ~/git_repos/notes/settings/html_theme/setup/theme-readtheorg.setup
 #+AUTHOR: Andreas Zweili
+
+* Models
+
+#+BEGIN_SRC python :tangle ../network_inventory/models.py
+#!/usr/bin/python3
+from django.db import models
+#+END_SRC
+
+* Admin
+
+#+BEGIN_SRC python :tangle ../network_inventory/admin.py
+#!/usr/bin/python3
+from django.contrib import admin
+
+#+END_SRC
+
+* Views
+
+#+BEGIN_SRC python :tangle ../network_inventory/views.py
+#!/usr/bin/python3
+from django.shortcuts import get_object_or_404, render
+
+#+END_SRC
