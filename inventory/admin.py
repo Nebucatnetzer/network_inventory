@@ -6,18 +6,18 @@ from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               ComputerRamRelation, Warranty, CronJob)
 
 
-class RamInline(admin.StackedInline):
+class RamInLine(admin.StackedInline):
     model = ComputerRamRelation
     verbose_name_plural = 'Ram Modules'
 
 
-class DiskInline(admin.StackedInline):
+class DiskInLine(admin.StackedInline):
     model = ComputerDiskRelation
     verbose_name_plural = 'Disks'
 
 
 class ComputerAdmin(admin.ModelAdmin):
-    inlines = (RamInline, DiskInline)
+    inlines = (RamInLine, DiskInLine)
 
 
 admin.site.register(Device)
