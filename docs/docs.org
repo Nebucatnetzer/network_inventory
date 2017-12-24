@@ -224,6 +224,9 @@ class ComputerDiskRelation(models.Model):
     raid = models.ForeignKey(Raid, null=True, blank=True,
                              on_delete=models.PROTECT)
 
+    class Meta:
+        verbose_name_plural = "Disks in Computer"
+
 
 class ComputerRamRelation(models.Model):
     ram = models.ForeignKey(Ram, on_delete=models.CASCADE)
