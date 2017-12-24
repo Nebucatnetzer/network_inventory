@@ -200,7 +200,7 @@ warranty.
 class Computer(Device):
     hostname = models.CharField(max_length=20, unique=True)
     os = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
-    cpu = models.ForeignKey(Cpu, on_delete=models.PROTECT)
+    cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
     ip = models.CharField(max_length=15)
     disks = models.ManyToManyField(Disk, through='ComputerDiskRelation')
@@ -211,9 +211,9 @@ class Computer(Device):
         return str(self.hostname)
 #+END_SRC
 
-** ComputerDiskRelation and ComputerRamRelation
+** ComputerDiskRelation, ComputerRamRelation and ComputerCpuRelation
 
-These models are required to link RAM modules and disks to a computer.
+These models are required to link RAM modules, disks and CPUs to a computer.
 Without these models it wouldn't be possible to specifiy the used amount.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
@@ -233,6 +233,18 @@ class ComputerRamRelation(models.Model):
 
     class Meta:
         verbose_name_plural = "RAM Modules in Computer"
+
+
+class ComputerCpuRelation(models.Model):
+    cpu = models.ForeignKey(Cpu, on_delete=models.CASCADE)
+    computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+
+    def __str__(self):
+        return self.computer.hostname
+
+    class Meta:
+        verbose_name_plural = "CPUs in Computer"
 #+END_SRC
 
 ** Warranty
@@ -286,8 +298,9 @@ We have to import each model we want to use.
 from django.contrib import admin
 from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,
-                              CpuManufacturer, Cpu, OperatingSystem, Raid,
-                              Computer, ComputerDiskRelation,
+                              CpuManufacturer, Cpu, OperatingSystem,
+                              Raid, Computer, ComputerDiskRelation,
+                              ComputerCpuRelation,
                               ComputerRamRelation, Warranty, CronJob)
 #+END_SRC
 
@@ -308,8 +321,13 @@ class DiskInLine(admin.StackedInline):
     verbose_name_plural = 'Disks'
 
 
+class CpusInLine(admin.StackedInline):
+    model = ComputerCpuRelation
+    verbose_name_plural = 'CPUs'
+
+
 class ComputerAdmin(admin.ModelAdmin):
-    inlines = (RamInLine, DiskInLine)
+    inlines = (CpusInLine, RamInLine, DiskInLine,)
 #+END_SRC
 
 ** Registering models

@@ -1,23 +1,32 @@
 from django.contrib import admin
 from inventory.models import (Device, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,
-                              CpuManufacturer, Cpu, OperatingSystem, Raid,
-                              Computer, ComputerDiskRelation,
+                              CpuManufacturer, Cpu, OperatingSystem,
+                              Raid, Computer, ComputerDiskRelation,
+                              ComputerCpuRelation,
                               ComputerRamRelation, Warranty, CronJob)
 
 
 class RamInLine(admin.StackedInline):
     model = ComputerRamRelation
-    verbose_name_plural = 'Ram Modules'
+    extra = 0
+    verbose_name_plural = 'RAM Modules'
 
 
 class DiskInLine(admin.StackedInline):
     model = ComputerDiskRelation
+    extra = 0
     verbose_name_plural = 'Disks'
 
 
+class CpusInLine(admin.StackedInline):
+    model = ComputerCpuRelation
+    extra = 0
+    verbose_name_plural = 'CPUs'
+
+
 class ComputerAdmin(admin.ModelAdmin):
-    inlines = (RamInLine, DiskInLine)
+    inlines = (CpusInLine, RamInLine, DiskInLine,)
 
 
 admin.site.register(Device)
