@@ -148,7 +148,7 @@ class Computer(Device):
                              on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.hostname
+        return str(self.hostname)
 
 
 class ComputerDiskRelation(models.Model):
