@@ -52,7 +52,7 @@ class Ram(models.Model):
     ecc = models.BooleanField(default=False)
 
     def __str__(self):
-        return '{} {} GB'.format(self.type, self.size)
+        return '{} {} GB'.format(self.type, self.size_in_gb)
 
     class Meta:
         verbose_name_plural = "RAM Modules"
