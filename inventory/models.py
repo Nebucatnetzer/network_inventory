@@ -83,7 +83,7 @@ class Disk(models.Model):
     size_in_gb = models.ForeignKey(DiskSize, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{} {} GB'.format(self.type, self.size)
+        return '{} {}'.format(self.type, self.size_in_gb)
 
 
 class Architecture(models.Model):
