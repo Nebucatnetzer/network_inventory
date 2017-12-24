@@ -158,6 +158,9 @@ class ComputerDiskRelation(models.Model):
     raid = models.ForeignKey(Raid, null=True, blank=True,
                              on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.computer.hostname
+
     class Meta:
         verbose_name_plural = "Disks in Computer"
 
@@ -167,6 +170,8 @@ class ComputerRamRelation(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
+    def __str__(self):
+        return self.computer.hostname
 
     class Meta:
         verbose_name_plural = "RAM Modules in Computer"
