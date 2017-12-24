@@ -364,8 +364,6 @@ admin.site.register(Cpu)
 admin.site.register(OperatingSystem)
 admin.site.register(Raid)
 admin.site.register(Computer)
-admin.site.register(ComputerDiskRelation)
-admin.site.register(ComputerRamRelation)
 admin.site.register(Warranty)
 admin.site.register(CronJob)
 #+END_SRC
