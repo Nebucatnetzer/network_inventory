@@ -1,6 +1,7 @@
 #+TITLE: Andreas Zweili
-#+SETUPFILE: ~/git_repos/notes/settings/html_theme/setup/theme-readtheorg.setup
 #+AUTHOR: Andreas Zweili
+#+LaTeX_HEADER: \input{/home/andreas/git_repos/notes/settings/latex/style}
+#+SETUPFILE: ~/git_repos/notes/settings/html_theme/setup/theme-readtheorg.setup
 
 * Models
 
