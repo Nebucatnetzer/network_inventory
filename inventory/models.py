@@ -139,8 +139,6 @@ class Raid(models.Model):
 
 class Computer(Device):
     hostname = models.CharField(max_length=20, unique=True)
-    raid = models.ForeignKey(Raid, null=True, blank=True,
-                             on_delete=models.PROTECT)
     os = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
     cpu = models.ForeignKey(Cpu, on_delete=models.PROTECT)
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
@@ -157,6 +155,8 @@ class ComputerDiskRelation(models.Model):
     disk = models.ForeignKey(Disk, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
+    raid = models.ForeignKey(Raid, null=True, blank=True,
+                             on_delete=models.PROTECT)
 
     class Meta:
         verbose_name_plural = "Disks in Computer"
