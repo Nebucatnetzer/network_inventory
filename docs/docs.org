@@ -375,4 +375,54 @@ admin.site.register(CronJob)
 #!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
 
+
+* Templates
+
+Templates define the look of the application and where things get
+positioned on the page.
+
+** base.html
+
+The base.html file is the basis for all other html files and gets
+extended by them.
+
+#+BEGIN_SRC html :tangle ../inventory/templates/inventory/base.html
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+        <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
+        {% block content %}{% endblock %}
+</body>
+<footer>
+    {% block footer %}
+    <p><font size="1">Created by Andreas Zweili licensed under GPL v3.0</font></p>
+    {% endblock %}
+</footer>
+</html>
+#+END_SRC
+
+** index.html
+
+index.html is the landing page of the project. It gives a list
+overview over the active devices. In addition it shows some useful
+information about the devices like IP addresses and similar
+information.
+
+#+BEGIN_SRC html :tangle ../inventory/templates/inventory/index.html
+{% extends "inventory/base.html" %}
+{% block content %}
+        {% if device_list or computer_list %}
+        <ul>
+            {% for device in device_list %}
+                <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
+            {% endfor %}
+            {% for computer in computer_list %}
+                <li><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No devices are available.</p>
+        {% endif %}
+{% endblock %}
 #+END_SRC

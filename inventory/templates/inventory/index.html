@@ -1,0 +1,15 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+        {% if device_list or computer_list %}
+        <ul>
+            {% for device in device_list %}
+                <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
+            {% endfor %}
+            {% for computer in computer_list %}
+                <li><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No devices are available.</p>
+        {% endif %}
+{% endblock %}
