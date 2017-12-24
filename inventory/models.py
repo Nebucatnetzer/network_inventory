@@ -48,7 +48,7 @@ class RamType(models.Model):
 
 class Ram(models.Model):
     type = models.ForeignKey(RamType, on_delete=models.CASCADE)
-    size_in_gb = models.FloatField()
+    size_in_gb = models.IntegerField()
     ecc = models.BooleanField(default=False)
 
     def __str__(self):
@@ -69,7 +69,7 @@ class DiskType(models.Model):
 
 
 class DiskSize(models.Model):
-    size = models.FloatField()
+    size = models.IntegerField()
 
     def __str__(self):
         return self.size + " GB"
