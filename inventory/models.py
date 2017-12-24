@@ -24,6 +24,9 @@ class DayOfMonth(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Days of Month"
+
 
 class Month(models.Model):
     name = models.CharField(max_length=50)
@@ -39,6 +42,9 @@ class RamType(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Types of RAM Modules"
+
 
 class Ram(models.Model):
     type = models.ForeignKey(RamType, on_delete=models.CASCADE)
@@ -48,6 +54,9 @@ class Ram(models.Model):
     def __str__(self):
         return '{} {} GB'.format(self.type, self.size)
 
+    class Meta:
+        verbose_name_plural = "RAM Modules"
+
 
 class DiskType(models.Model):
     name = models.CharField(max_length=50)
@@ -55,12 +64,18 @@ class DiskType(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Types of disks"
+
 
 class DiskSize(models.Model):
     size = models.FloatField()
 
     def __str__(self):
         return self.size + " GB"
+
+    class Meta:
+        verbose_name_plural = "Disk sizes"
 
 
 class Disk(models.Model):
@@ -84,6 +99,9 @@ class CpuManufacturer(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "CPU Manufacturers"
+
 
 class Cpu(models.Model):
     name = models.CharField(max_length=50)
@@ -95,6 +113,9 @@ class Cpu(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "CPUs"
+
 
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=50)
@@ -102,12 +123,18 @@ class OperatingSystem(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Operating Systems"
+
 
 class Raid(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Types of RAID"
 
 
 class Computer(Device):
@@ -131,12 +158,18 @@ class ComputerDiskRelation(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
+    class Meta:
+        verbose_name_plural = "Disks in Computer"
+
 
 class ComputerRamRelation(models.Model):
     ram = models.ForeignKey(Ram, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
+
+    class Meta:
+        verbose_name_plural = "RAM Modules in Computer"
 
 class Warranty(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
@@ -145,6 +178,9 @@ class Warranty(models.Model):
 
     def __str__(self):
         return self.device
+
+    class Meta:
+        verbose_name_plural = "Warranties"
 
 
 class CronJob(models.Model):
@@ -157,3 +193,6 @@ class CronJob(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Cron Jobs"
