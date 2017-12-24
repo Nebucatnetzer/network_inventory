@@ -109,7 +109,7 @@ class DiskSize(models.Model):
     size = models.IntegerField()
 
     def __str__(self):
-        return self.size + " GB"
+        return str(self.size) + " GB"
 
     class Meta:
         verbose_name_plural = "Disk sizes"
