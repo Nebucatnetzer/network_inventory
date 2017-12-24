@@ -161,3 +161,8 @@ bin/
 share/
 /db.sqlite3
 inventory/migrations/*.py
+docs/auto/
+/docs/docs.acn
+/docs/docs.glo
+/docs/docs.ist
+/docs/docs.tex
