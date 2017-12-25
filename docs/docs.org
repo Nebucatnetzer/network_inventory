@@ -572,3 +572,19 @@ there are any cron jobs.
 {% endblock %}
 #+END_SRC
 
+** cronjob_details.html
+
+
+
+#+BEGIN_SRC html :tangle ../inventory/templates/inventory/cronjob_details.html
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ cronjob.name }}{% endblock %}
+{% block content %}
+    <h3>Description</h3>
+    <p><b>Host:</b> {{ cronjob.host }}</p>
+    <p><b>Command: </b>{{ cronjob.command }}</p>
+    <p><b>Time:</b> {{ cronjob.time }}</p>
+    <p><b>Weekday:</b> {{ cronjob.weekday }}</p>
+    <p><b>Month:</b> {{ cronjob.month }}</p>
+{% endblock %}
+#+END_SRC
