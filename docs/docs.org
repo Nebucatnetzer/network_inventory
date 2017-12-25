@@ -393,7 +393,7 @@ def index(request):
 
     return render(request,
                   'inventory/index.html',
-                  {'device_list': category_list,
+                  {'device_list': device_list,
                    'computer_list': computer_list})
 * URLs
 
