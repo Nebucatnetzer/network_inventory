@@ -404,7 +404,7 @@ from .models import (GeneralDevice, Computer, CronJob,
 
 def index(request):
     device_list = GeneralDevice.objects.all()
-    computer_list = Computer.objects.all()
+    computer_list = Computer.objects.all().order_by('ip')
 
     return render(request,
                   'inventory/index.html',
