@@ -22,3 +22,17 @@ def device_details(request, device_id):
                       {'device': device})
 
 
+def computer_details(request, computer_id):
+        computer = get_object_or_404(Computer, pk=computer_id)
+        disks = ComputerDiskRelation.objects.get(computer=computer_id)
+        ram = ComputerRamRelation.objects.get(computer=computer_id)
+        cpu = ComputerCpuRelation.objects.get(computer=computer_id)
+        cronjob_list = CronJob.objects.filter(host=computer_id)
+        return render(request, 'inventory/computer_details.html',
+                      {'computer': computer,
+                       'disks': disks,
+                       'ram': ram,
+                       'cpu': cpu,
+                       'cronjob_list': cronjob_list})
+
+
