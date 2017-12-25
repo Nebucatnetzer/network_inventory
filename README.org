@@ -2,3 +2,49 @@
 
 I started this project in order to have solution for keeping an
 inventory over my various servers and other network equipment.
+
+** Setup
+
+1. Clone the repository
+2. Create a virtual environment inside of the repository for example
+   with:
+
+#+BEGIN_EXAMPLE
+python3 -m venv /path/to/repository
+#+END_EXAMPLE
+
+3. Cd into the repository and execute the setup.sh script. It will do
+   some clean up tasks, install some python dependencies into the
+   virtual environment, setup the database and a default user with the
+   login ~admin~ and the password ~password~.
+4. Afterwards you can run:
+
+#+BEGIN_EXAMPLE
+./manage.py runserver
+#+END_EXAMPLE
+
+   In order to run the developmenent server and access the application
+   at http://localhost:8000
+
+** Todos
+
+*** TODO Setup an Ansible role
+
+**** NEXT Create an Apache configuration
+
+**** NEXT move the database to mariadb
+
+**** NEXT setup a server
+
+**** NEXT configure htaccess or something similar
+
+*** NEXT extend the CSS
+
+- A more centered layout would be nice
+- Maybe some colours
+
+** Developemenet
+
+For a detailed documentation of the source have a look at the
+[[file:docs/docs.org][documentation]].
+
