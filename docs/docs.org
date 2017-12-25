@@ -568,7 +568,7 @@ The computer details show all the known information about the selected computer.
 The list of cron jobs running on the computer get's only displayed if
 there are any cron jobs.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/computer_details.html
+#+BEGIN_SRC html :tangle ../inventory/templates/inventory/computer_details.html :padline 0
     {% if cronjob_list %}
     <p><b>Cron Jobs:</b></p>
     <p>
