@@ -46,5 +46,5 @@ python3 -m venv /path/to/repository
 ** Developemenet
 
 For a detailed documentation of the source have a look at the
-[[file:docs/docs.org][documentation]].
+[[https://git.2li.ch/Nebucatnetzer/network_inventory/src/branch/master/docs/docs.org][documentation]].
 
