@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory.models import (Device, Weekday, Month, RamType, Ram,
+from inventory.models import (GeneralDevice, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,
                               CpuManufacturer, Cpu, OperatingSystem,
                               Raid, Computer, ComputerDiskRelation,
@@ -30,7 +30,7 @@ class ComputerAdmin(admin.ModelAdmin):
     inlines = (CpusInLine, RamInLine, DiskInLine,)
 
 
-admin.site.register(Device)
+admin.site.register(GeneralDevice)
 admin.site.register(Weekday)
 admin.site.register(Month)
 admin.site.register(RamType)

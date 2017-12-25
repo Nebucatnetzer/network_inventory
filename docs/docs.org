@@ -11,9 +11,7 @@ are very small because they exist mainly to keep the information unified.
 
 ** Device
 
-The "Device" model represents a generel device about which I don't have
-that much information. It might represent an IOT device or something
-similarly closed.
+The "Device" class is only used as an abstract class.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py
 from django.db import models
@@ -22,6 +20,21 @@ from django.db import models
 class Device(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
+#+END_SRC
+
+** GeneralDevice
+
+The "GeneralDevice" model is used to describe devices which are very
+simple or I don't have much control over.
+
+#+BEGIN_SRC python :tangle ../inventory/models.py
+from django.db import models
+
+
+class GeneralDevice(Device):
 
     def __str__(self):
         return self.name
@@ -311,7 +324,7 @@ We have to import each model we want to use.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py
 from django.contrib import admin
-from inventory.models import (Device, Weekday, Month, RamType, Ram,
+from inventory.models import (GeneralDevice, Weekday, Month, RamType, Ram,
                               DiskType, DiskSize, Disk, Architecture,
                               CpuManufacturer, Cpu, OperatingSystem,
                               Raid, Computer, ComputerDiskRelation,
@@ -357,7 +370,7 @@ In addition we have to define which admin form they should use if we
 want to use something different than the default one.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
-admin.site.register(Device)
+admin.site.register(GeneralDevice)
 admin.site.register(Weekday)
 admin.site.register(Month)
 admin.site.register(RamType)
@@ -377,17 +390,20 @@ admin.site.register(CronJob)
 
 * Views
 
+Views are used to get information from the database and send them to
+the templates.
+
 #+BEGIN_SRC python :tangle ../inventory/views.py
 #!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
-from .models import (Device, Computer, CronJob,
+from .models import (GeneralDevice, Computer, CronJob,
                      ComputerRamRelation,
                      ComputerDiskRelation,
                      ComputerCpuRelation)
 
 
 def index(request):
-    device_list = Device.objects.all()
+    device_list = GeneralDevice.objects.all()
     computer_list = Computer.objects.all()
 
     return render(request,
@@ -397,7 +413,7 @@ def index(request):
 
 
 def device_details(request, device_id):
-        device = get_object_or_404(Device, pk=device_id)
+        device = get_object_or_404(GeneralDevice, pk=device_id)
         return render(request, 'inventory/device_details.html',
                       {'device': device})
 

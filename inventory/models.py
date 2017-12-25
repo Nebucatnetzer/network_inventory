@@ -8,6 +8,14 @@ class Device(models.Model):
     def __str__(self):
         return self.name
 
+from django.db import models
+
+
+class GeneralDevice(Device):
+
+    def __str__(self):
+        return self.name
+
 
 class Weekday(models.Model):
     name = models.CharField(max_length=50)

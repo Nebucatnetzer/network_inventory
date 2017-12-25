@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
-from .models import (Device, Computer, CronJob,
+from .models import (GeneralDevice, Computer, CronJob,
                      ComputerRamRelation,
                      ComputerDiskRelation,
                      ComputerCpuRelation)
 
 
 def index(request):
-    device_list = Device.objects.all()
+    device_list = GeneralDevice.objects.all()
     computer_list = Computer.objects.all()
 
     return render(request,
@@ -17,7 +17,7 @@ def index(request):
 
 
 def device_details(request, device_id):
-        device = get_object_or_404(Device, pk=device_id)
+        device = get_object_or_404(GeneralDevice, pk=device_id)
         return render(request, 'inventory/device_details.html',
                       {'device': device})
 
