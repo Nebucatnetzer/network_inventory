@@ -535,6 +535,17 @@ information.
 {% endblock %}
 #+END_SRC
 
+** device_details.html
+
+#+BEGIN_SRC html :tangle ../inventory/templates/inventory/device_details.html
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ device.name }}{% endblock %}
+{% block content %}
+    <h3>Description</h3>
+    <p>{{ device.description }}</p>
+{% endblock %}
+#+END_SRC
+
 ** computer_details.html
 
 The computer details show all the known information about the selected computer.
