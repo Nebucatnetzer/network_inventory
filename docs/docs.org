@@ -426,6 +426,30 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 #+END_SRC
+
+** inventory/urls.py
+
+Contains the url definitions for the inventory application. For the
+moment the inventory is my only application so all the URLs will start
+from the root.
+
+#+BEGIN_SRC python :tangle ../inventory/urls.py
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^device/(?P<device_id>[0-9]+)/$',
+        views.device_details,
+        name='device'),
+    url(r'^computer/(?P<computer_id>[0-9]+)/$',
+        views.computer_details,
+        name='computer'),
+    url(r'^cronjob/(?P<cronjob_id>[0-9]+)/$',
+        views.cronjob_details,
+        name='cronjob'),
+ ]
 #+END_SRC
 
 * Templates
