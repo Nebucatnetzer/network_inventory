@@ -26,7 +26,7 @@ class CpusInLine(admin.StackedInline):
 
 
 class ComputerAdmin(admin.ModelAdmin):
-    list_display = ('hostname', 'ip', 'host')
+    list_display = ('name', 'ip', 'host')
     inlines = (CpusInLine, RamInLine, DiskInLine,)
 
 

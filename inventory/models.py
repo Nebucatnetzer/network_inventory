@@ -145,7 +145,6 @@ class Raid(models.Model):
 
 
 class Computer(Device):
-    hostname = models.CharField(max_length=20, unique=True)
     os = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
@@ -155,7 +154,7 @@ class Computer(Device):
                              on_delete=models.PROTECT)
 
     def __str__(self):
-        return str(self.hostname)
+        return str(self.name)
 
 
 class ComputerDiskRelation(models.Model):
@@ -166,7 +165,7 @@ class ComputerDiskRelation(models.Model):
                              on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.computer.hostname
+        return self.computer.name
 
     class Meta:
         verbose_name_plural = "Disks in Computer"
@@ -178,7 +177,7 @@ class ComputerRamRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.hostname
+        return self.computer.name
 
     class Meta:
         verbose_name_plural = "RAM Modules in Computer"
@@ -190,7 +189,7 @@ class ComputerCpuRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.hostname
+        return self.computer.name
 
     class Meta:
         verbose_name_plural = "CPUs in Computer"
