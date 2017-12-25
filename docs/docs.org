@@ -381,6 +381,10 @@ admin.site.register(CronJob)
 #+BEGIN_SRC python :tangle ../inventory/views.py
 #!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
+from .models import (Device, Computer, CronJob,
+                     ComputerRamRelation,
+                     ComputerDiskRelation,
+                     ComputerCpuRelation)
 
 
 def index(request):

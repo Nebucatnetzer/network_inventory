@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
+from .models import (Device, Computer, CronJob,
+                     ComputerRamRelation,
+                     ComputerDiskRelation,
+                     ComputerCpuRelation)
 
 
 def index(request):
