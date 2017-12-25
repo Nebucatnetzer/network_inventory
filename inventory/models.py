@@ -16,6 +16,9 @@ class Weekday(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['value']
+
 
 class DayOfMonth(models.Model):
     name = models.CharField(max_length=50)
@@ -26,6 +29,7 @@ class DayOfMonth(models.Model):
 
     class Meta:
         verbose_name_plural = "Days of Month"
+        ordering = ['value']
 
 
 class Month(models.Model):
@@ -34,6 +38,9 @@ class Month(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['value']
 
 
 class RamType(models.Model):
