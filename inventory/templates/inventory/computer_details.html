@@ -1,0 +1,24 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ computer.name }}{% endblock %}
+{% block content %}
+    <h3>Description</h3>
+    <p>{{ computer.description }}</p>
+    <p><b>Hostname:</b> {{ computer.hostname }}</p>
+    <p><b>OS:</b> {{ computer.os }}</p>
+    <p><b>CPU:</b> {{ cpu.cpu }}</p>
+    <p><b>RAM Modules: </b>{{ram.amount}}x {{ ram.ram }}</p>
+    <p><b>IP:</b> {{ computer.ip }}</p>
+    <p><b>Disks:</b> {{ disks.disk }}</p>
+    <p><b>Host:</b> {{ computer.host }}</p>
+    {% if cronjob_list %}
+    <p><b>Cron Jobs:</b></p>
+    <p>
+        <ul>
+            {% for cronjob in cronjob_list %}
+                <li><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}
+                    {{ cronjob.time }} {{ cronjob.weekday }} {{ cronjob.month }}</a></li>
+            {% endfor %}
+        </ul>
+    </p>
+    {% endif %}
+{% endblock %}
