@@ -510,8 +510,10 @@ The base.html file is the basis for all other html files and gets
 extended by them.
 
 #+BEGIN_SRC html :tangle ../inventory/templates/inventory/base.html
+{% load staticfiles %}
 <!DOCTYPE html>
 <head>
+<link rel="stylesheet" href="{% static 'css/inventory.css' %}">
 </head>
 <body>
         <a href="{% url 'index' %}">Home</a>
