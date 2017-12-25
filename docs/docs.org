@@ -391,6 +391,41 @@ def index(request):
                   'inventory/index.html',
                   {'device_list': category_list,
                    'computer_list': computer_list})
+* URLs
+
+The urls.py files contain the definitions for the URLs. This means you
+can define how your various pages get accessed.
+
+** network_inventory/urls.py
+
+This is the main URLs file. All the urls.py files need to get
+registered in here in order to work.
+
+#+BEGIN_SRC python :tangle ../network_inventory/urls.py
+"""network_inventory URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.conf.urls import include, url
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    url(r'', include('inventory.urls')),
+    path('admin/', admin.site.urls),
+]
+#+END_SRC
 #+END_SRC
 
 * Templates
