@@ -36,3 +36,7 @@ def computer_details(request, computer_id):
                        'cronjob_list': cronjob_list})
 
 
+def cronjob_details(request, cronjob_id):
+        cronjob = get_object_or_404(CronJob, pk=cronjob_id)
+        return render(request, 'inventory/cronjob_details.html',
+                      {'cronjob': cronjob})
