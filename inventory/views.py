@@ -14,3 +14,11 @@ def index(request):
                   'inventory/index.html',
                   {'device_list': device_list,
                    'computer_list': computer_list})
+
+
+def device_details(request, device_id):
+        device = get_object_or_404(Device, pk=device_id)
+        return render(request, 'inventory/device_details.html',
+                      {'device': device})
+
+
