@@ -546,7 +546,7 @@ information.
             {% endfor %}
         </ul>
         <h3>Computer List</h3>
-        <table>
+        <table cellpadding="10">
             <tr>
                 <th>Hostname</th>
                 <th>IP</th>
