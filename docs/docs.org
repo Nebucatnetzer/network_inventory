@@ -585,7 +585,7 @@ The computer details show all the known information about the selected computer.
     <p>{{ computer.description }}</p>
     <p><b>OS:</b> {{ computer.os }}</p>
     <p><b>CPU:</b> {{ cpu.cpu }}</p>
-    <p><b>RAM Modules: </b>{{ram.amount}}x {{ ram.ram }}</p>
+    <p><b>RAM Modules: </b>{{ ram.amount }}x {{ ram.ram }}</p>
     <p><b>IP:</b> {{ computer.ip }}</p>
     {% if disks_list %}
     <p><b>Disks:</b></p>
