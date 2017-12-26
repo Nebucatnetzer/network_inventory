@@ -17,6 +17,28 @@ class GeneralDevice(Device):
         return self.name
 
 
+class HoursInDay(models.Model):
+    name = models.IntegerField()
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name_plural = "Hours"
+        ordering = ['name']
+
+
+class MinutesInHour(models.Model):
+    name = models.IntegerField()
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name_plural = "Minutes"
+        ordering = ['name']
+
+
 class Weekday(models.Model):
     name = models.CharField(max_length=50)
     value = models.IntegerField()
@@ -218,7 +240,10 @@ class CronJob(models.Model):
     name = models.CharField(max_length=50)
     host = models.ForeignKey(Computer, on_delete=models.CASCADE)
     command = models.CharField(max_length=50)
-    time = models.TimeField(null=True, blank=True,)
+    minutes = models.ForeignKey(MinutesInHour, on_delete=models.CASCADE,
+                                null=True, blank=True,)
+    hours = models.ForeignKey(HoursInDay, on_delete=models.CASCADE,
+                                null=True, blank=True,)
     weekday = models.ForeignKey(Weekday, on_delete=models.CASCADE,
                                 null=True, blank=True,)
     day = models.ForeignKey(DayOfMonth, on_delete=models.CASCADE,

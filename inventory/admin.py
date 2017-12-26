@@ -1,5 +1,6 @@
 from django.contrib import admin
-from inventory.models import (GeneralDevice, Weekday, DayOfMonth,
+from inventory.models import (GeneralDevice, HoursInDay,
+                              MinutesInHour, Weekday, DayOfMonth,
                               Month, RamType, Ram, DiskType, DiskSize,
                               Disk, Architecture, CpuManufacturer,
                               Cpu, OperatingSystem, Raid, Computer,
@@ -32,6 +33,8 @@ class ComputerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(GeneralDevice)
+admin.site.register(HoursInDay)
+admin.site.register(MinutesInHour)
 admin.site.register(Weekday)
 admin.site.register(DayOfMonth)
 admin.site.register(Month)
