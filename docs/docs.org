@@ -58,15 +58,14 @@ class Weekday(models.Model):
 
 
 class DayOfMonth(models.Model):
-    name = models.CharField(max_length=50)
-    value = models.IntegerField()
+    name = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     class Meta:
         verbose_name_plural = "Days of Month"
-        ordering = ['value']
+        ordering = ['name']
 
 
 class Month(models.Model):
@@ -324,10 +323,11 @@ We have to import each model we want to use.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py
 from django.contrib import admin
-from inventory.models import (GeneralDevice, Weekday, Month, RamType, Ram,
-                              DiskType, DiskSize, Disk, Architecture,
-                              CpuManufacturer, Cpu, OperatingSystem,
-                              Raid, Computer, ComputerDiskRelation,
+from inventory.models import (GeneralDevice, Weekday, DayOfMonth,
+                              Month, RamType, Ram, DiskType, DiskSize,
+                              Disk, Architecture, CpuManufacturer,
+                              Cpu, OperatingSystem, Raid, Computer,
+                              ComputerDiskRelation,
                               ComputerCpuRelation,
                               ComputerRamRelation, Warranty, CronJob)
 #+END_SRC
@@ -372,6 +372,7 @@ want to use something different than the default one.
 #+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 admin.site.register(GeneralDevice)
 admin.site.register(Weekday)
+admin.site.register(DayOfMonth)
 admin.site.register(Month)
 admin.site.register(RamType)
 admin.site.register(Ram)
