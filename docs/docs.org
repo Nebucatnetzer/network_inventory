@@ -303,9 +303,13 @@ class CronJob(models.Model):
     name = models.CharField(max_length=50)
     host = models.ForeignKey(Computer, on_delete=models.CASCADE)
     command = models.CharField(max_length=50)
-    time = models.TimeField()
-    weekday = models.ForeignKey(Weekday, on_delete=models.CASCADE)
-    month = models.ForeignKey(Month, on_delete=models.CASCADE)
+    time = models.TimeField(null=True, blank=True,)
+    weekday = models.ForeignKey(Weekday, on_delete=models.CASCADE,
+                                null=True, blank=True,)
+    day = models.ForeignKey(DayOfMonth, on_delete=models.CASCADE,
+                            null=True, blank=True,)
+    month = models.ForeignKey(Month, on_delete=models.CASCADE,
+                              null=True, blank=True,)
 
     def __str__(self):
         return self.name
