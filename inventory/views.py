@@ -9,11 +9,13 @@ from .models import (GeneralDevice, Computer, CronJob,
 def index(request):
     device_list = GeneralDevice.objects.all()
     computer_list = Computer.objects.all().order_by('ip')
+    cronjob_list = CronJob.objects.all().order_by('host')
 
     return render(request,
                   'inventory/index.html',
                   {'device_list': device_list,
-                   'computer_list': computer_list})
+                   'computer_list': computer_list,
+                   'cronjob_list': cronjob_list})
 
 
 def device_details(request, device_id):

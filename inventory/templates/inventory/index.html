@@ -21,4 +21,27 @@
             {% endfor %}
         </table>
         {% endif %}
+        {% if cronjob_list %}
+        <h3>Cron Job List</h3>
+        <table cellpadding="10">
+            <tr>
+                <th>Name</th>
+                <th>Hostname</th>
+                <th>Time</th>
+                <th>Day of Week</th>
+                <th>Day of Month</th>
+                <th>Month</th>
+            </tr>
+            {% for cronjob in cronjob_list %}
+            <tr>
+                <td><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}</a></td>
+                <td>{{ cronjob.host }}</td>
+                <td>{{ cronjob.time }}</td>
+                <td>{{ cronjob.weekday }}</td>
+                <td>{{ cronjob.day }}</td>
+                <td>{{ cronjob.month }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
 {% endblock %}
