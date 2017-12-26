@@ -7,7 +7,16 @@
     <p><b>CPU:</b> {{ cpu.cpu }}</p>
     <p><b>RAM Modules: </b>{{ram.amount}}x {{ ram.ram }}</p>
     <p><b>IP:</b> {{ computer.ip }}</p>
-    <p><b>Disks:</b> {{ disks.disk }}</p>
+    {% if disks_list %}
+    <p><b>Disks:</b></p>
+    <p>
+        <ul>
+            {% for disk in disks_list %}
+                <li>{{ disk.amount }}x {{ disk.disk }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+    {% endif %}
     <p><b>Host:</b> {{ computer.host }}</p>
     {% if cronjob_list %}
     <p><b>Cron Jobs:</b></p>
