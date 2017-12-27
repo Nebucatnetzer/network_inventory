@@ -119,6 +119,9 @@ class Disk(models.Model):
     def __str__(self):
         return '{} {}'.format(self.type, self.size_in_gb)
 
+    class Meta:
+        ordering = ['type']
+
 
 class Architecture(models.Model):
     name = models.CharField(max_length=50)

@@ -160,6 +160,9 @@ class Disk(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.type, self.size_in_gb)
+
+    class Meta:
+        ordering = ['type']
 #+END_SRC
 
 ** Architecture, CpuManufacturer and Cpu
