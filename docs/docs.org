@@ -601,7 +601,7 @@ Add a padding around the table content.
 
 #+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
 th, td {
-    padding: 10px;
+    padding: 5px;
 }
 #+END_SRC
 
