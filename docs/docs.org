@@ -361,9 +361,9 @@ from inventory.models import (GeneralDevice, HoursInDay,
 
 ** InLine classes
 
-I made an inline class for both RAM and disks and extended the
-"Computer" admin form with them. This makes it easier to add RAM
-modules and disks to a computer.
+I made an inline class for RAM, disks and CPUs and extended the
+"Computer" admin form with them. This makes it easier to add theme to
+a computer.
 
 #+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 class RamInLine(admin.StackedInline):
