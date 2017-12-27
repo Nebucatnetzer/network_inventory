@@ -608,6 +608,13 @@ body {
     margin-bottom: 10px;
     margin-right: 10px;
     margin-left: 20px;
+*** Footer
+
+Styles related to the footer.
+
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+p.copyright {
+    font-size:10px
 }
 #+END_SRC
 
@@ -630,7 +637,7 @@ extended by them.
   {% block content %}{% endblock %}
   <footer>
     {% block footer %}
-    <p>Created by Andreas Zweili licensed under GPL v3.0</p>
+    <p class="copyright">Created by Andreas Zweili licensed under GPL v3.0</p>
     {% endblock %}
   </footer>
 </body>
