@@ -689,8 +689,7 @@ there are any cron jobs.
     <p>
         <ul>
             {% for cronjob in cronjob_list %}
-                <li><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}
-                    {{ cronjob.time }} {{ cronjob.weekday }} {{ cronjob.month }}</a></li>
+                <li><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}</a></li>
             {% endfor %}
         </ul>
     </p>
