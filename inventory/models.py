@@ -241,7 +241,7 @@ class CronJob(models.Model):
     minutes = models.ForeignKey(MinutesInHour, on_delete=models.CASCADE,
                                 null=True, blank=True,)
     hours = models.ForeignKey(HoursInDay, on_delete=models.CASCADE,
-                                null=True, blank=True,)
+                              null=True, blank=True,)
     weekday = models.ForeignKey(Weekday, on_delete=models.CASCADE,
                                 null=True, blank=True,)
     day = models.ForeignKey(DayOfMonth, on_delete=models.CASCADE,
