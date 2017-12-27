@@ -13,7 +13,7 @@ are very small because they exist mainly to keep the information unified.
 
 The "Device" class is only used as an abstract class.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py
 from django.db import models
 
 
@@ -30,7 +30,7 @@ class Device(models.Model):
 The "GeneralDevice" model is used to describe devices which are very
 simple or I don't have much control over.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class GeneralDevice(Device):
 
     def __str__(self):
@@ -42,7 +42,7 @@ class GeneralDevice(Device):
 These models contain all the days of the week the days in a month and
 all month in a year.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class HoursInDay(models.Model):
     name = models.IntegerField()
 
@@ -103,7 +103,7 @@ class Month(models.Model):
 "RamType" and "Ram" are ment to specify a ram module. "RamType" stands
 for the DDR verions.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class RamType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -133,7 +133,7 @@ The idea is that you define the type then enter a common sizes you're
 using and then connect everything together in the "Disk" model.
 This way you have a set of disks you can "insert" into "Computer" models.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class DiskType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -170,7 +170,7 @@ class Disk(models.Model):
 "Architecture", "CpuManufacturer" and "Cpu" are the models which
 together specifiy the properties of a CPU.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class Architecture(models.Model):
     name = models.CharField(max_length=50)
 
@@ -206,7 +206,7 @@ class Cpu(models.Model):
 
 A simple model to save operating system names.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=50)
 
@@ -221,7 +221,7 @@ class OperatingSystem(models.Model):
 
 A model to store the various RAID configurations.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class Raid(models.Model):
     name = models.CharField(max_length=50)
 
@@ -238,7 +238,7 @@ This model represents a complete computer, server or virtual machine.
 It's inheritated from the "Device" model. So that one can link it to a
 warranty.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class Computer(Device):
     os = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
@@ -257,7 +257,7 @@ class Computer(Device):
 These models are required to link RAM modules, disks and CPUs to a computer.
 Without these models it wouldn't be possible to specifiy the used amount.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class ComputerDiskRelation(models.Model):
     disk = models.ForeignKey(Disk, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
@@ -302,7 +302,7 @@ As the name suggests this model is for storing warranty informations.
 In addition it has an attribute for a file so that one can attach a
 scan of the warranty paper.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class Warranty(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     files = models.FileField()
@@ -320,7 +320,7 @@ class Warranty(models.Model):
 This model represents a cron job running on a host. It contains all
 the information that one would write in a crontab file.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/models.py :padline 2
 class CronJob(models.Model):
     name = models.CharField(max_length=50)
     host = models.ForeignKey(Computer, on_delete=models.CASCADE)
@@ -350,7 +350,7 @@ get shown in the admin interface.
 
 We have to import each model we want to use.
 
-#+BEGIN_SRC python :tangle ../inventory/admin.py
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py
 from django.contrib import admin
 from inventory.models import (GeneralDevice, HoursInDay,
                               MinutesInHour, Weekday, DayOfMonth,
@@ -368,7 +368,7 @@ I made an inline class for RAM, disks and CPUs and extended the
 "Computer" admin form with them. This makes it easier to add theme to
 a computer.
 
-#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py :padline 2
 class RamInLine(admin.StackedInline):
     model = ComputerRamRelation
     extra = 0
@@ -399,7 +399,7 @@ interface.
 For one it adds some columns to the list and adds three inline models
 which allows to add them directly from the "Computer" form.
 
-#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py :padline 2
 class ComputerAdmin(admin.ModelAdmin):
     list_display = ('name', 'ip', 'host')
     inlines = (CpusInLine, RamInLine, DiskInLine,)
@@ -410,7 +410,7 @@ class ComputerAdmin(admin.ModelAdmin):
 The "CronJobAdmin" extends the cron job admin list with two columns to
 show to which host they belong.
 
-#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py :padline 2
 class CronJobAdmin(admin.ModelAdmin):
     list_display = ('name', 'host')
 #+END_SRC
@@ -422,7 +422,7 @@ register them in addition to importing them in the admin.py file.
 In addition we have to define which admin form they should use if we
 want to use something different than the default one.
 
-#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py :padline 2
 admin.site.register(GeneralDevice)
 admin.site.register(HoursInDay)
 admin.site.register(MinutesInHour)
@@ -449,7 +449,7 @@ admin.site.register(CronJob, CronJobAdmin)
 Views are used to get information from the database and send them to
 the templates.
 
-#+BEGIN_SRC python :tangle ../inventory/views.py
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/views.py
 from django.shortcuts import get_object_or_404, render
 from .models import (GeneralDevice, Computer, CronJob,
                      ComputerRamRelation,
@@ -505,7 +505,7 @@ can define how your various pages get accessed.
 This is the main URLs file. All the urls.py files need to get
 registered in here in order to work.
 
-#+BEGIN_SRC python :tangle ../network_inventory/urls.py
+#+BEGIN_SRC python :tangle ../network_inventory/network_inventory/urls.py
 """network_inventory URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -537,7 +537,7 @@ Contains the url definitions for the inventory application. For the
 moment the inventory is my only application so all the URLs will start
 from the root.
 
-#+BEGIN_SRC python :tangle ../inventory/urls.py
+#+BEGIN_SRC python :tangle ../network_inventory/inventory/urls.py
 from django.conf.urls import url
 
 from . import views
@@ -570,7 +570,7 @@ some generel theming over the application.
 
 Add a margin of a few pixels around the body.
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 body {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -583,7 +583,7 @@ body {
 
 Display a border around tables.
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 table, th, td {
     border: 1px solid black;
 }
@@ -591,7 +591,7 @@ table, th, td {
 
 Align table headers on the left side.
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 th {
     text-align: left;
 }
@@ -599,7 +599,7 @@ th {
 
 Add a padding around the table content.
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 th, td {
     padding: 5px;
 }
@@ -607,7 +607,7 @@ th, td {
 
 *** Code
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 code {
     background-color: lightgray;
     clear: left;
@@ -620,7 +620,7 @@ code {
 
 Styles related to the footer.
 
-#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
 p.copyright {
     font-size:10px
 }
@@ -631,7 +631,7 @@ p.copyright {
 The base.html file is the basis for all other html files and gets
 extended by them.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/base.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/base.html
 {% load staticfiles %}
 <!DOCTYPE html>
 <head>
@@ -659,7 +659,7 @@ overview over the active devices. In addition it shows some useful
 information about the devices like IP addresses and similar
 information.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/index.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/index.html
 {% extends "inventory/base.html" %}
 {% block content %}
     {% if device_list or computer_list %}
@@ -713,7 +713,7 @@ information.
 
 ** device_details.html
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/device_details.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/device_details.html
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ device.name }}{% endblock %}
 {% block content %}
@@ -726,7 +726,7 @@ information.
 
 The computer details show all the known information about the selected computer.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/computer_details.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/computer_details.html
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ computer.name }}{% endblock %}
 {% block content %}
@@ -752,7 +752,7 @@ The computer details show all the known information about the selected computer.
 The list of cron jobs running on the computer get's only displayed if
 there are any cron jobs.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/computer_details.html :padline 0
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/computer_details.html :padline 0
     {% if cronjob_list %}
     <p><b>Cron Jobs:</b></p>
     <p>
@@ -770,7 +770,7 @@ there are any cron jobs.
 
 The cron job details page shows all the information related to a cron job.
 
-#+BEGIN_SRC html :tangle ../inventory/templates/inventory/cronjob_details.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/cronjob_details.html
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ cronjob.name }}{% endblock %}
 {% block content %}
