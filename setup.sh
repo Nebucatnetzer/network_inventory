@@ -7,3 +7,4 @@ echo "from django.contrib.auth.models import User; \
       User.objects.filter(email='admin@example.com').delete(); \
       User.objects.create_superuser('admin', 'admin@example.com', 'password')" |
       python3 manage.py shell
+python3 manage.py loaddata inventory
