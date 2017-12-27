@@ -166,3 +166,7 @@ docs/auto/
 /docs/docs.glo
 /docs/docs.ist
 /docs/docs.tex
+db.sqlite3
+/network_inventory/pyvenv.cfg
+/network_inventory/lib64
+/network_inventory/inventory/migrations
