@@ -620,7 +620,8 @@ information.
             <tr>
                 <th>Name</th>
                 <th>Hostname</th>
-                <th>Time</th>
+                <th>Minute</th>
+                <th>Hour</th>
                 <th>Day of Week</th>
                 <th>Day of Month</th>
                 <th>Month</th>
@@ -629,7 +630,8 @@ information.
             <tr>
                 <td><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}</a></td>
                 <td>{{ cronjob.host }}</td>
-                <td>{{ cronjob.time }}</td>
+                <td>{{ cronjob.minutes }}</td>
+                <td>{{ cronjob.hours }}</td>
                 <td>{{ cronjob.weekday }}</td>
                 <td>{{ cronjob.day }}</td>
                 <td>{{ cronjob.month }}</td>
@@ -698,17 +700,30 @@ there are any cron jobs.
 
 ** cronjob_details.html
 
-
+The cron job details page shows all the information related to a cron job.
 
 #+BEGIN_SRC html :tangle ../inventory/templates/inventory/cronjob_details.html
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ cronjob.name }}{% endblock %}
 {% block content %}
-    <h3>Description</h3>
-    <p><b>Host:</b> {{ cronjob.host }}</p>
-    <p><b>Command: </b>{{ cronjob.command }}</p>
-    <p><b>Time:</b> {{ cronjob.time }}</p>
-    <p><b>Weekday:</b> {{ cronjob.weekday }}</p>
-    <p><b>Month:</b> {{ cronjob.month }}</p>
+<h3>Description</h3>
+<p><b>Host:</b> {{ cronjob.host }}</p>
+<p><b>Command: </b>{{ cronjob.command }}</p>
+<table cellpadding="10">
+  <tr>
+    <th>Minute</th>
+    <th>Hour</th>
+    <th>Day of Week</th>
+    <th>Day of Month</th>
+    <th>Month</th>
+  </tr>
+  <tr>
+    <td>{{ cronjob.minutes }}</td>
+    <td>{{ cronjob.hours }}</td>
+    <td>{{ cronjob.weekday }}</td>
+    <td>{{ cronjob.day }}</td>
+    <td>{{ cronjob.month }}</td>
+  </tr>
+</table>
 {% endblock %}
 #+END_SRC

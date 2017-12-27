@@ -27,7 +27,8 @@
             <tr>
                 <th>Name</th>
                 <th>Hostname</th>
-                <th>Time</th>
+                <th>Minute</th>
+                <th>Hour</th>
                 <th>Day of Week</th>
                 <th>Day of Month</th>
                 <th>Month</th>
@@ -36,7 +37,8 @@
             <tr>
                 <td><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}</a></td>
                 <td>{{ cronjob.host }}</td>
-                <td>{{ cronjob.time }}</td>
+                <td>{{ cronjob.minutes }}</td>
+                <td>{{ cronjob.hours }}</td>
                 <td>{{ cronjob.weekday }}</td>
                 <td>{{ cronjob.day }}</td>
                 <td>{{ cronjob.month }}</td>

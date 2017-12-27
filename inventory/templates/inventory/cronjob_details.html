@@ -1,10 +1,23 @@
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ cronjob.name }}{% endblock %}
 {% block content %}
-    <h3>Description</h3>
-    <p><b>Host:</b> {{ cronjob.host }}</p>
-    <p><b>Command: </b>{{ cronjob.command }}</p>
-    <p><b>Time:</b> {{ cronjob.time }}</p>
-    <p><b>Weekday:</b> {{ cronjob.weekday }}</p>
-    <p><b>Month:</b> {{ cronjob.month }}</p>
+<h3>Description</h3>
+<p><b>Host:</b> {{ cronjob.host }}</p>
+<p><b>Command: </b>{{ cronjob.command }}</p>
+<table cellpadding="10">
+  <tr>
+    <th>Minute</th>
+    <th>Hour</th>
+    <th>Day of Week</th>
+    <th>Day of Month</th>
+    <th>Month</th>
+  </tr>
+  <tr>
+    <td>{{ cronjob.minutes }}</td>
+    <td>{{ cronjob.hours }}</td>
+    <td>{{ cronjob.weekday }}</td>
+    <td>{{ cronjob.day }}</td>
+    <td>{{ cronjob.month }}</td>
+  </tr>
+</table>
 {% endblock %}
