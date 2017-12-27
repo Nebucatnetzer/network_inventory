@@ -616,7 +616,7 @@ extended by them.
 </body>
 <footer>
     {% block footer %}
-    <p><font size="1">Created by Andreas Zweili licensed under GPL v3.0</font></p>
+    <p>Created by Andreas Zweili licensed under GPL v3.0</p>
     {% endblock %}
 </footer>
 </html>
@@ -747,7 +747,7 @@ The cron job details page shows all the information related to a cron job.
 <h3>Description</h3>
 <p><b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a></p>
 <p><b>Command: </b>{{ cronjob.command }}</p>
-<table cellpadding="10">
+<table>
   <tr>
     <th>Minute</th>
     <th>Hour</th>
