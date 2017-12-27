@@ -25,7 +25,9 @@ SECRET_KEY = 'kzx(i9^@*g^cgp(_3052%*1d%zyu^2z_@pgso5!_q@jb-j%4m='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'inventory.2li.local',
+]
 
 
 # Application definition
