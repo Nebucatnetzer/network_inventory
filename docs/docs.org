@@ -562,6 +562,42 @@ urlpatterns = [
 Templates define the look of the application and where things get
 positioned on the page.
 
+** inventory.css
+
+The inventory.css file get's loaded in the base.html file. It provides
+some generel theming over the application.
+
+*** Tables
+
+Display a border around tables.
+
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+table, th, td {
+    border: 1px solid black;
+}
+#+END_SRC
+
+Align table headers on the left side.
+
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+th {
+    text-align: left;
+}
+#+END_SRC
+
+*** Body
+
+Add a margin of a few pixels around the body.
+
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+#+END_SRC
+
 ** base.html
 
 The base.html file is the basis for all other html files and gets
