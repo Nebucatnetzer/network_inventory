@@ -598,9 +598,14 @@ th {
 }
 #+END_SRC
 
-*** Body
+Add a padding around the table content.
 
-Add a margin of a few pixels around the body.
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+th, td {
+    padding: 10px;
+}
+#+END_SRC
+
 
 #+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
 body {
