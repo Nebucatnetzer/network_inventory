@@ -570,7 +570,7 @@ some generel theming over the application.
 
 Add a margin of a few pixels around the body.
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 body {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -583,7 +583,7 @@ body {
 
 Display a border around tables.
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 table, th, td {
     border: 1px solid black;
 }
@@ -591,7 +591,7 @@ table, th, td {
 
 Align table headers on the left side.
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 th {
     text-align: left;
 }
@@ -599,7 +599,7 @@ th {
 
 Add a padding around the table content.
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 th, td {
     padding: 5px;
 }
@@ -607,7 +607,7 @@ th, td {
 
 *** Code
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 code {
     background-color: lightgray;
     clear: left;
@@ -620,7 +620,7 @@ code {
 
 Styles related to the footer.
 
-#+BEGIN_SRC css :tangle ../network_inventory/inventory/static/css/inventory.css
+#+BEGIN_SRC css :tangle ../network_inventory/static/inventory/css/inventory.css
 p.copyright {
     font-size:10px
 }
@@ -635,7 +635,7 @@ extended by them.
 {% load staticfiles %}
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
+  <link rel="stylesheet" href="{% static 'inventory/css/inventory.css' %}">
   <title>Network Inventory</title>
   <meta charset="utf-8">
 </head>
