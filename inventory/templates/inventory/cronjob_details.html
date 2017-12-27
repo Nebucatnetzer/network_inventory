@@ -6,12 +6,8 @@
   <b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a>
 </p>
 <p>
-  <div>
-    <b>Command:</b>
-  </div>
-  <div>
-    <code>{{ cronjob.command }}</code>
-  </div>
+  <b>Command:</b><br/>
+  <code>{{ cronjob.command }}</code>
 </p>
 <table>
   <tr>
