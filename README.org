@@ -43,7 +43,8 @@ python3 -m venv /path/to/repository
 - A more centered layout would be nice
 - Maybe some colours
 
-*** NEXT Create a list for all the cron jobs
+*** DONE Create a list for all the cron jobs
+CLOSED: [2017-12-27 Wed 16:45]
 
 ** Developemenet
 
