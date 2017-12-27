@@ -3,7 +3,7 @@
 #+LaTeX_HEADER: \input{/home/andreas/git_repos/notes/settings/latex/style}
 #+SETUPFILE: ~/git_repos/notes/settings/html_theme/setup/theme-readtheorg.setup
 
-* Models
+* inventory/models.py
 
 Models define the database layout in a django application. Each class
 represents a table in the database. A lot the models in this project
@@ -343,7 +343,7 @@ class CronJob(models.Model):
         verbose_name_plural = "Cron Jobs"
 #+END_SRC
 
-* Admin
+* inventory/admin.py
 
 The admin file specifies which models are visible and in which way the
 get shown in the admin interface.
@@ -444,7 +444,7 @@ admin.site.register(Warranty)
 admin.site.register(CronJob, CronJobAdmin)
 #+END_SRC
 
-* Views
+* inventory/views.py
 
 Views are used to get information from the database and send them to
 the templates.
