@@ -402,6 +402,16 @@ class ComputerAdmin(admin.ModelAdmin):
     inlines = (CpusInLine, RamInLine, DiskInLine,)
 #+END_SRC
 
+*** CronJobAdmin
+
+The "CronJobAdmin" extends the cron job admin list with two columns to
+show to which host they belong.
+
+#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
+class CronJobAdmin(admin.ModelAdmin):
+    list_display = ('name', 'host')
+#+END_SRC
+
 ** Registering models
 
 In order for the models to show up in the admin interface we have to
@@ -428,7 +438,7 @@ admin.site.register(OperatingSystem)
 admin.site.register(Raid)
 admin.site.register(Computer, ComputerAdmin)
 admin.site.register(Warranty)
-admin.site.register(CronJob)
+admin.site.register(CronJob, CronJobAdmin)
 #+END_SRC
 
 * Views

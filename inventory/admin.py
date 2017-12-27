@@ -32,6 +32,10 @@ class ComputerAdmin(admin.ModelAdmin):
     inlines = (CpusInLine, RamInLine, DiskInLine,)
 
 
+class CronJobAdmin(admin.ModelAdmin):
+    list_display = ('name', 'host')
+
+
 admin.site.register(GeneralDevice)
 admin.site.register(HoursInDay)
 admin.site.register(MinutesInHour)
@@ -50,4 +54,4 @@ admin.site.register(OperatingSystem)
 admin.site.register(Raid)
 admin.site.register(Computer, ComputerAdmin)
 admin.site.register(Warranty)
-admin.site.register(CronJob)
+admin.site.register(CronJob, CronJobAdmin)
