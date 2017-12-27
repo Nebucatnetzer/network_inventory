@@ -2,8 +2,17 @@
 {% block section_title %}{{ cronjob.name }}{% endblock %}
 {% block content %}
 <h3>Description</h3>
-<p><b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a></p>
-<p><b>Command: </b>{{ cronjob.command }}</p>
+<p>
+  <b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a>
+</p>
+<p>
+  <div>
+    <b>Command:</b>
+  </div>
+  <div>
+    <code>{{ cronjob.command }}</code>
+  </div>
+</p>
 <table>
   <tr>
     <th>Minute</th>

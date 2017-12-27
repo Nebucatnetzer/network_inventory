@@ -606,13 +606,17 @@ th, td {
 }
 #+END_SRC
 
+*** Code
 
 #+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
-body {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 20px;
+code {
+    background-color: lightgray;
+    clear: left;
+    border: 1px solid;
+    padding: 5px;
+}
+#+END_SRC
+
 *** Footer
 
 Styles related to the footer.
@@ -772,8 +776,17 @@ The cron job details page shows all the information related to a cron job.
 {% block section_title %}{{ cronjob.name }}{% endblock %}
 {% block content %}
 <h3>Description</h3>
-<p><b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a></p>
-<p><b>Command: </b>{{ cronjob.command }}</p>
+<p>
+  <b>Host:</b> <a href="{% url 'computer' cronjob.host.id %}">{{ cronjob.host }}</a>
+</p>
+<p>
+  <div>
+    <b>Command:</b>
+  </div>
+  <div>
+    <code>{{ cronjob.command }}</code>
+  </div>
+</p>
 <table>
   <tr>
     <th>Minute</th>

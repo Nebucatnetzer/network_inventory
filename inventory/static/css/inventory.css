@@ -17,6 +17,12 @@ th, td {
     padding: 10px;
 }
 
+code {
+    background-color: lightgray;
+    clear: left;
+    border: 1px solid;
+    padding: 5px;
+}
 
 p.copyright {
     font-size:10px
