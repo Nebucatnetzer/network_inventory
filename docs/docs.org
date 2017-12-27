@@ -607,20 +607,20 @@ extended by them.
 {% load staticfiles %}
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="{% static 'css/inventory.css' %}">
+  <link rel="stylesheet" href="{% static 'css/inventory.css' %}">
   <title>Network Inventory</title>
   <meta charset="utf-8">
 </head>
 <body>
-        <a href="{% url 'index' %}">Home</a>
-        <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
-        {% block content %}{% endblock %}
-</body>
-<footer>
+  <a href="{% url 'index' %}">Home</a>
+  <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
+  {% block content %}{% endblock %}
+  <footer>
     {% block footer %}
     <p>Created by Andreas Zweili licensed under GPL v3.0</p>
     {% endblock %}
-</footer>
+  </footer>
+</body>
 </html>
 #+END_SRC
 
