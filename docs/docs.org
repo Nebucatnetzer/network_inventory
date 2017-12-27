@@ -30,7 +30,7 @@ class Device(models.Model):
 The "GeneralDevice" model is used to describe devices which are very
 simple or I don't have much control over.
 
-#+BEGIN_SRC python :tangle ../inventory/models.py
+#+BEGIN_SRC python :tangle ../inventory/models.py :padline 2
 class GeneralDevice(Device):
 
     def __str__(self):
