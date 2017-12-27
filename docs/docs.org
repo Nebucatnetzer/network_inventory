@@ -450,7 +450,6 @@ Views are used to get information from the database and send them to
 the templates.
 
 #+BEGIN_SRC python :tangle ../inventory/views.py
-#!/usr/bin/python3
 from django.shortcuts import get_object_or_404, render
 from .models import (GeneralDevice, Computer, CronJob,
                      ComputerRamRelation,
