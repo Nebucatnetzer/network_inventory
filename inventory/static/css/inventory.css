@@ -4,3 +4,10 @@ table, th, td {
 th {
     text-align: left;
 }
+
+body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
