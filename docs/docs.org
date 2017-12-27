@@ -382,8 +382,21 @@ class CpusInLine(admin.StackedInline):
     model = ComputerCpuRelation
     extra = 0
     verbose_name_plural = 'CPUs'
+#+END_SRC
 
+** Extended Admin Interfaces
 
+This section contains the classes which extend the admin interface for
+certain models in cases where the default form might not work for the task.
+
+*** ComputerAdmin
+
+The "ComputerAdmin" class extends the default "Computer" admin
+interface.
+For one it adds some columns to the list and adds three inline models
+which allows to add them directly from the "Computer" form.
+
+#+BEGIN_SRC python :tangle ../inventory/admin.py :padline 2
 class ComputerAdmin(admin.ModelAdmin):
     list_display = ('name', 'ip', 'host')
     inlines = (CpusInLine, RamInLine, DiskInLine,)
