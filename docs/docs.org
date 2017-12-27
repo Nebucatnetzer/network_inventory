@@ -31,9 +31,6 @@ The "GeneralDevice" model is used to describe devices which are very
 simple or I don't have much control over.
 
 #+BEGIN_SRC python :tangle ../inventory/models.py
-from django.db import models
-
-
 class GeneralDevice(Device):
 
     def __str__(self):
