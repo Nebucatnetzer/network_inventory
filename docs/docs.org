@@ -424,11 +424,6 @@ want to use something different than the default one.
 
 #+BEGIN_SRC python :tangle ../network_inventory/inventory/admin.py :padline 2
 admin.site.register(GeneralDevice)
-admin.site.register(HoursInDay)
-admin.site.register(MinutesInHour)
-admin.site.register(Weekday)
-admin.site.register(DayOfMonth)
-admin.site.register(Month)
 admin.site.register(RamType)
 admin.site.register(Ram)
 admin.site.register(DiskType)
