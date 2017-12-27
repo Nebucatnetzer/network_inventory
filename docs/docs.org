@@ -567,6 +567,19 @@ positioned on the page.
 The inventory.css file get's loaded in the base.html file. It provides
 some generel theming over the application.
 
+*** Body
+
+Add a margin of a few pixels around the body.
+
+#+BEGIN_SRC css :tangle ../inventory/static/css/inventory.css
+body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+#+END_SRC
+
 *** Tables
 
 Display a border around tables.

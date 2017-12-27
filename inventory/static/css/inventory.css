@@ -1,3 +1,10 @@
+body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
 table, th, td {
     border: 1px solid black;
 }
