@@ -37,11 +37,6 @@ class CronJobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(GeneralDevice)
-admin.site.register(HoursInDay)
-admin.site.register(MinutesInHour)
-admin.site.register(Weekday)
-admin.site.register(DayOfMonth)
-admin.site.register(Month)
 admin.site.register(RamType)
 admin.site.register(Ram)
 admin.site.register(DiskType)
