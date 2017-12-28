@@ -743,7 +743,7 @@ The computer details show all the known information about the selected computer.
         </ul>
     </p>
     {% endif %}
-    <p><b>Host:</b> <a href="{% url 'computer' computer.id.host %}">{{ computer.host }}</a></p>
+    <p><b>Host:</b> <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a></p>
 #+END_SRC
 
 The list of cron jobs running on the computer get's only displayed if
