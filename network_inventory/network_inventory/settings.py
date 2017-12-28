@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'inventory.2li.local',
+    'localhost',
+    '127.0.0.1',
 ]
 
 
