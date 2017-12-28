@@ -17,7 +17,7 @@
         </ul>
     </p>
     {% endif %}
-    <p><b>Host:</b> {{ computer.host }}</p>
+    <p><b>Host:</b> <a href="{% url 'computer' computer.id.host %}">{{ computer.host }}</a></p>
     {% if cronjob_list %}
     <p><b>Cron Jobs:</b></p>
     <p>
