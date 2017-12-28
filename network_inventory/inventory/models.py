@@ -100,6 +100,7 @@ class DiskType(models.Model):
 
     class Meta:
         verbose_name_plural = "Types of disks"
+        ordering = ['name']
 
 
 class DiskSize(models.Model):
@@ -110,6 +111,7 @@ class DiskSize(models.Model):
 
     class Meta:
         verbose_name_plural = "Disk sizes"
+        ordering = ['size']
 
 
 class Disk(models.Model):
