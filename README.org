@@ -32,7 +32,11 @@ python3 -m venv /path/to/repository
 
 **** NEXT Create an Apache configuration
 
-**** NEXT move the database to mariadb
+**** CANCELED move the database to mariadb
+CLOSED: [2017-12-28 Thu 16:15]
+
+- I had massive problems with mysqlclient and python3.5 and therefore
+  dropped this. SQLite seems to work reasonably well.
 
 **** NEXT setup a server
 
@@ -42,6 +46,21 @@ python3 -m venv /path/to/repository
 
 - A more centered layout would be nice
 - Maybe some colours
+
+*** NEXT include a RAID calculator
+
+- https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python/
+
+I would like to use this to show the usable space in a RAID system.
+
+*** NEXT calculate the used space on a host
+
+Means calculate the size all the VMs would use if they were thick.
+
+*** NEXT Move the lists to their own page
+
+- Since I have more devices than I thought it would provide a better
+  overview than one big list.
 
 *** DONE Create a list for all the cron jobs
 CLOSED: [2017-12-27 Wed 16:45]
