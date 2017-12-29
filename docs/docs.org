@@ -448,22 +448,11 @@ the templates.
 
 #+BEGIN_SRC python :tangle ../network_inventory/inventory/views.py
 from django.shortcuts import get_object_or_404, render
-from .models import (GeneralDevice, Computer, CronJob,
-                     ComputerRamRelation,
-                     ComputerDiskRelation,
-                     ComputerCpuRelation)
-
-
-def index(request):
-    device_list = GeneralDevice.objects.all()
-    computer_list = Computer.objects.all().order_by('ip')
-    cronjob_list = CronJob.objects.all().order_by('host')
-
-    return render(request,
-                  'inventory/index.html',
-                  {'device_list': device_list,
-                   'computer_list': computer_list,
-                   'cronjob_list': cronjob_list})
+from django.views.generic import ListView
+from inventory.models import (GeneralDevice, Computer, CronJob,
+                              ComputerRamRelation,
+                              ComputerDiskRelation,
+                              ComputerCpuRelation)
 
 
 def device_details(request, device_id):
@@ -490,6 +479,22 @@ def cronjob_details(request, cronjob_id):
         cronjob = get_object_or_404(CronJob, pk=cronjob_id)
         return render(request, 'inventory/cronjob_details.html',
                       {'cronjob': cronjob})
+
+
+class ComputerList(ListView):
+    model = Computer
+    template_name = 'inventory/computer_list.html'
+
+
+class CronJobList(ListView):
+    model = CronJob
+    template_name = 'inventory/cronjob_list.html'
+
+
+class DeviceList(ListView):
+    model = GeneralDevice
+    context_object_name = 'device_list'
+    template_name = 'inventory/device_list.html'
 #+END_SRC
 
 * URLs
@@ -537,10 +542,10 @@ from the root.
 #+BEGIN_SRC python :tangle ../network_inventory/inventory/urls.py
 from django.conf.urls import url
 
-from . import views
+from inventory import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.ComputerList.as_view(), name='computers'),
     url(r'^device/(?P<device_id>[0-9]+)/$',
         views.device_details,
         name='device'),
@@ -550,6 +555,8 @@ urlpatterns = [
     url(r'^cronjob/(?P<cronjob_id>[0-9]+)/$',
         views.cronjob_details,
         name='cronjob'),
+    url(r'^cronjobs/$', views.CronJobList.as_view(), name='cronjobs'),
+    url(r'^devices/$', views.DeviceList.as_view(), name='devices'),
  ]
 #+END_SRC
 
@@ -637,7 +644,9 @@ extended by them.
   <meta charset="utf-8">
 </head>
 <body>
-  <a href="{% url 'index' %}">Home</a>
+  <a href="{% url 'computers' %}">Computers</a> |
+  <a href="{% url 'devices' %}">Devices</a> |
+  <a href="{% url 'cronjobs' %}">Cron Jobs</a>
   <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
   {% block content %}{% endblock %}
   <footer>
@@ -645,29 +654,24 @@ extended by them.
     <p class="copyright">Created by Andreas Zweili licensed under GPL v3.0</p>
     {% endblock %}
   </footer>
+  <script src={% static 'inventory/js/sorttable.js' %}></script>
 </body>
 </html>
 #+END_SRC
 
-** index.html
+** computer_list.html
 
-index.html is the landing page of the project. It gives a list
-overview over the active devices. In addition it shows some useful
+computer_list.html is the landing page of the project. It gives a list
+overview over the active computers. In addition it shows some useful
 information about the devices like IP addresses and similar
 information.
 
-#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/index.html
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/computer_list.html
 {% extends "inventory/base.html" %}
+{% block section_title %}List of Computers{% endblock %}
 {% block content %}
-    {% if device_list or computer_list %}
-    <h3>Device List</h3>
-    <ul>
-      {% for device in device_list %}
-      <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
-      {% endfor %}
-    </ul>
-    <h3>Computer List</h3>
-    <table>
+    {% if computer_list %}
+    <table class="sortable">
       <tr>
         <th>Hostname</th>
         <th>IP</th>
@@ -680,9 +684,40 @@ information.
       {% endfor %}
     </table>
     {% endif %}
-    {% if cronjob_list %}
-    <h3>Cron Job List</h3>
-    <table>
+{% endblock %}
+#+END_SRC
+
+** device_list.html
+
+device_list.html provides an overview about all the general devices in
+addition to a link to detail page of each device.
+
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/device_list.html
+{% extends "inventory/base.html" %}
+{% block section_title %}List of General Devices{% endblock %}
+{% block content %}
+    {% if device_list %}
+    <ul>
+      {% for device in device_list %}
+      <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
+#+END_SRC
+
+** cronjob_list.html
+
+cronjob_list.html provides an overview about all the cron jobs
+including the time they are running and on which computer. In addtion
+it provides a link to the detail page of each cron job.
+
+#+BEGIN_SRC html :tangle ../network_inventory/inventory/templates/inventory/cronjob_list.html
+{% extends "inventory/base.html" %}
+{% block section_title %}List of Cron Jobs{% endblock %}
+{% block content %}
+{% if cronjob_list %}
+    <table class="sortable">
       <tr>
         <th>Name</th>
         <th>Hostname</th>
@@ -729,10 +764,10 @@ The computer details show all the known information about the selected computer.
 {% block content %}
     <h3>Description</h3>
     <p>{{ computer.description }}</p>
-    <p><b>OS:</b> {{ computer.os }}</p>
-    <p><b>CPU:</b> {{ cpu.cpu }}</p>
+    <p><b>OS: </b>{{ computer.os }}</p>
+    <p><b>CPU: </b>{{ cpu.amount }}x {{ cpu.cpu }}</p>
     <p><b>RAM Modules: </b>{{ ram.amount }}x {{ ram.ram }}</p>
-    <p><b>IP:</b> {{ computer.ip }}</p>
+    <p><b>IP: </b>{{ computer.ip }}</p>
     {% if disks_list %}
     <p><b>Disks:</b></p>
     <p>
