@@ -1,0 +1,11 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+    {% if device_list %}
+    <h3>Device List</h3>
+    <ul>
+      {% for device in device_list %}
+      <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

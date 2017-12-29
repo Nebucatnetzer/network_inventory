@@ -1,9 +1,9 @@
 from django.conf.urls import url
 
-from . import views
+from inventory import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.ComputerList.as_view(), name='computers'),
     url(r'^device/(?P<device_id>[0-9]+)/$',
         views.device_details,
         name='device'),
@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^cronjob/(?P<cronjob_id>[0-9]+)/$',
         views.cronjob_details,
         name='cronjob'),
+    url(r'^cronjobs/$', views.CronJobList.as_view(), name='cronjobs'),
+    url(r'^devices/$', views.DeviceList.as_view(), name='devices'),
  ]

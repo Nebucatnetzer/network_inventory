@@ -1,0 +1,18 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+    {% if computer_list %}
+    <h3>Computer List</h3>
+    <table class="sortable">
+      <tr>
+        <th>Hostname</th>
+        <th>IP</th>
+      </tr>
+      {% for computer in computer_list %}
+      <tr>
+        <td><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></td>
+        <td>{{ computer.ip }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}

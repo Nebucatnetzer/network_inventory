@@ -1,27 +1,6 @@
 {% extends "inventory/base.html" %}
 {% block content %}
-    {% if device_list or computer_list %}
-    <h3>Device List</h3>
-    <ul>
-      {% for device in device_list %}
-      <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
-      {% endfor %}
-    </ul>
-    <h3>Computer List</h3>
-    <table class="sortable">
-      <tr>
-        <th>Hostname</th>
-        <th>IP</th>
-      </tr>
-      {% for computer in computer_list %}
-      <tr>
-        <td><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></td>
-        <td>{{ computer.ip }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% endif %}
-    {% if cronjob_list %}
+{% if cronjob_list %}
     <h3>Cron Job List</h3>
     <table class="sortable">
       <tr>

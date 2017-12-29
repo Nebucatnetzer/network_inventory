@@ -1,20 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from .models import (GeneralDevice, Computer, CronJob,
-                     ComputerRamRelation,
-                     ComputerDiskRelation,
-                     ComputerCpuRelation)
-
-
-def index(request):
-    device_list = GeneralDevice.objects.all()
-    computer_list = Computer.objects.all().order_by('ip')
-    cronjob_list = CronJob.objects.all().order_by('host')
-
-    return render(request,
-                  'inventory/index.html',
-                  {'device_list': device_list,
-                   'computer_list': computer_list,
-                   'cronjob_list': cronjob_list})
+from django.views.generic import ListView
+from inventory.models import (GeneralDevice, Computer, CronJob,
+                              ComputerRamRelation,
+                              ComputerDiskRelation,
+                              ComputerCpuRelation)
 
 
 def device_details(request, device_id):
@@ -41,3 +30,19 @@ def cronjob_details(request, cronjob_id):
         cronjob = get_object_or_404(CronJob, pk=cronjob_id)
         return render(request, 'inventory/cronjob_details.html',
                       {'cronjob': cronjob})
+
+
+class ComputerList(ListView):
+    model = Computer
+    template_name = 'inventory/computer_list.html'
+
+
+class CronJobList(ListView):
+    model = CronJob
+    template_name = 'inventory/cronjob_list.html'
+
+
+class DeviceList(ListView):
+    model = GeneralDevice
+    context_object_name = 'device_list'
+    template_name = 'inventory/device_list.html'
