@@ -3,10 +3,10 @@
 {% block content %}
     <h3>Description</h3>
     <p>{{ computer.description }}</p>
-    <p><b>OS:</b> {{ computer.os }}</p>
+    <p><b>OS: </b>{{ computer.os }}</p>
     <p><b>CPU: </b>{{ cpu.amount }}x {{ cpu.cpu }}</p>
     <p><b>RAM Modules: </b>{{ ram.amount }}x {{ ram.ram }}</p>
-    <p><b>IP:</b> {{ computer.ip }}</p>
+    <p><b>IP: </b>{{ computer.ip }}</p>
     {% if disks_list %}
     <p><b>Disks:</b></p>
     <p>
