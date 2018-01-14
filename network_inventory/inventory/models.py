@@ -180,7 +180,7 @@ class Computer(Device):
     os = models.ForeignKey(OperatingSystem, on_delete=models.PROTECT)
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
-    ip = models.CharField(max_length=15)
+    ip = models.GenericIPAddressField()
     disks = models.ManyToManyField(Disk, through='ComputerDiskRelation')
     host = models.ForeignKey('self', null=True, blank=True,
                              on_delete=models.PROTECT)
