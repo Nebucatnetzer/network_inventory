@@ -39,18 +39,7 @@ Vagrant.configure("2") do |config|
         libnss-mdns libapache2-mod-wsgi-py3 python3-mysqldb python3-venv
 
 
-    #Copy the apache configuration for django to the correct place
-    cp /vagrant/apache/000-default.conf /etc/apache2/sites-available/
-    #restart the webserver
-    systemctl restart apache2.service
-    rm /vagrant/migrations/*.py
-    source /vagrant/bin/activate
-    python3 /vagrant/manage.py makemigrations inventory
-    python3 /vagrant/manage.py migrate
-    echo "from django.contrib.auth.models import User; \
-        User.objects.filter(email='admin@example.com').delete(); \
-        User.objects.create_superuser('admin', 'admin@example.com', 'password')" |
-        python3 /vagrant/manage.py shell
+    /vagrant/setup.sh
     SHELL
 
 end
