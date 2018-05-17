@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
-from inventory.models import (GeneralDevice, Computer, CronJob,
-                              ComputerRamRelation,
-                              ComputerDiskRelation,
-                              ComputerCpuRelation)
+from .models import (GeneralDevice, Computer, CronJob,
+                     ComputerRamRelation,
+                     ComputerDiskRelation,
+                     ComputerCpuRelation)
 
 
 def device_details(request, device_id):

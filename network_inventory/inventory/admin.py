@@ -1,12 +1,12 @@
 from django.contrib import admin
-from inventory.models import (GeneralDevice, HoursInDay,
-                              MinutesInHour, Weekday, DayOfMonth,
-                              Month, RamType, Ram, DiskType, DiskSize,
-                              Disk, Architecture, CpuManufacturer,
-                              Cpu, OperatingSystem, Raid, Computer,
-                              ComputerDiskRelation,
-                              ComputerCpuRelation,
-                              ComputerRamRelation, Warranty, CronJob)
+from .models import (GeneralDevice, HoursInDay,
+                     MinutesInHour, Weekday, DayOfMonth,
+                     Month, RamType, Ram, DiskType, DiskSize,
+                     Disk, Architecture, CpuManufacturer,
+                     Cpu, OperatingSystem, Raid, Computer,
+                     ComputerDiskRelation,
+                     ComputerCpuRelation,
+                     ComputerRamRelation, Warranty, CronJob)
 
 
 class RamInLine(admin.StackedInline):
