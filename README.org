@@ -85,6 +85,11 @@ it's DHCP range if one is configured.
 This class shows the relationship between the device and a NET. An
 attribute of a DeviceInNet should be an IP address.
 
+*** NEXT Recreate the RM in draw.io
+
+The Dia RM is okay but not really that great. Draw.io would give a
+better result.
+
 ** Developemenet
 
 For a detailed documentation of the source have a look at the
