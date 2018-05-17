@@ -62,9 +62,6 @@ Means calculate the size all the VMs would use if they were thick.
 - Since I have more devices than I thought it would provide a better
   overview than one big list.
 
-*** DONE Create a list for all the cron jobs
-CLOSED: [2017-12-27 Wed 16:45]
-
 *** NEXT Add a Counter to the RAM Modules
 
 *** NEXT Create an abstract company class
