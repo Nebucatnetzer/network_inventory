@@ -56,9 +56,6 @@ flycheck_*.el
 # projectiles files
 .projectile
 
-# directory configuration
-.dir-locals.el
-
 # ---> Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
