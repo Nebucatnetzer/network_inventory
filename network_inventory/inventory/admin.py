@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import (GeneralDevice, HoursInDay,
-                     MinutesInHour, Weekday, DayOfMonth,
-                     Month, RamType, Ram, DiskType, DiskSize,
+from .models import (GeneralDevice, RamType, Ram, DiskType, DiskSize,
                      Disk, Architecture, CpuManufacturer,
                      Cpu, OperatingSystem, Raid, Computer,
                      ComputerDiskRelation,
