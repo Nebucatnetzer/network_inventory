@@ -168,3 +168,5 @@ db.sqlite3
 /network_inventory/lib64
 /network_inventory/inventory/migrations
 .vagrant/
+
+.vscode/

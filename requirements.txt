@@ -1,5 +1,5 @@
+wheel
 Django==2.0
-wheel==0.30.0
-pyaml==17.12.1
-pytz==2017.3
-PyYAML==3.12
+pyaml
+pytz
+psycopg2
