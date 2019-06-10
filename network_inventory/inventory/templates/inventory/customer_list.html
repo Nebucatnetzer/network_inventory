@@ -1,0 +1,16 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}List of Customers{% endblock %}
+{% block content %}
+    {% if customer_list %}
+    <table class="sortable">
+      <tr>
+        <th>Customer</th>
+      </tr>
+      {% for customer in customer_list %}
+      <tr>
+        <td><a href="{% url 'computers' customer.id %}">{{ customer.name }}</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}

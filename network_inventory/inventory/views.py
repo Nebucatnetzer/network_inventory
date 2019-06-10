@@ -1,14 +1,13 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from guardian.shortcuts import get_objects_for_user
-from .models import (GeneralDevice, Computer, CronJob,
-                     ComputerRamRelation,
+from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation,
-                     ComputerCpuRelation)
+                     ComputerCpuRelation, Customer)
 
 
 def device_details(request, device_id):
-        device = get_object_or_404(GeneralDevice, pk=device_id)
+        device = get_object_or_404(Device, pk=device_id)
         return render(request, 'inventory/device_details.html',
                       {'device': device})
 
@@ -18,19 +17,16 @@ def computer_details(request, computer_id):
         disks_list = ComputerDiskRelation.objects.filter(computer=computer_id)
         ram = ComputerRamRelation.objects.get(computer=computer_id)
         cpu = ComputerCpuRelation.objects.get(computer=computer_id)
-        cronjob_list = CronJob.objects.filter(host=computer_id)
         return render(request, 'inventory/computer_details.html',
                       {'computer': computer,
                        'disks_list': disks_list,
                        'ram': ram,
-                       'cpu': cpu,
-                       'cronjob_list': cronjob_list})
+                       'cpu': cpu})
 
 
-def cronjob_details(request, cronjob_id):
-        cronjob = get_object_or_404(CronJob, pk=cronjob_id)
-        return render(request, 'inventory/cronjob_details.html',
-                      {'cronjob': cronjob})
+class CustomerList(ListView):
+    model = Customer
+    template_name = 'inventory/customer_list.html'
 
 
 class ComputerList(ListView):
@@ -50,6 +46,6 @@ class CronJobList(ListView):
 
 
 class DeviceList(ListView):
-    model = GeneralDevice
+    model = Device
     context_object_name = 'device_list'
     template_name = 'inventory/device_list.html'

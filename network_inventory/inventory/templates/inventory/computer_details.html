@@ -6,7 +6,6 @@
     <p><b>OS: </b>{{ computer.os }}</p>
     <p><b>CPU: </b>{{ cpu.amount }}x {{ cpu.cpu }}</p>
     <p><b>RAM Modules: </b>{{ ram.amount }}x {{ ram.ram }}</p>
-    <p><b>IP: </b>{{ computer.ip }}</p>
     {% if disks_list %}
     <p><b>Disks:</b></p>
     <p>
@@ -21,15 +20,5 @@
     <p><b>Host:</b> <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a></p>
     {% else %}
     <p><b>Host:</b> None</p>
-    {% endif %}
-    {% if cronjob_list %}
-    <p><b>Cron Jobs:</b></p>
-    <p>
-        <ul>
-            {% for cronjob in cronjob_list %}
-                <li><a href="{% url 'cronjob' cronjob.id %}">{{ cronjob.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </p>
     {% endif %}
 {% endblock %}

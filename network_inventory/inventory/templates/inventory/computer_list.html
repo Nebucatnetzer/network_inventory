@@ -10,7 +10,7 @@
       {% for computer in computer_list %}
       <tr>
         <td><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></td>
-        <td>{{ computer.ip }}</td>
+        <td>{{ computer.name }}</td>
       </tr>
       {% endfor %}
     </table>
