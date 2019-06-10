@@ -1,3 +1,106 @@
+- model: inventory.CpuManufacturer
+  fields:
+    name: Intel
+- model: inventory.CpuManufacturer
+  fields:
+    name: AMD
+- model: inventory.CpuArchitecture
+  fields:
+    name: x86_64
+- model: inventory.CpuArchitecture
+  fields:
+    name: i686
+- model: inventory.CpuArchitecture
+  fields:
+    name: ARM
+- model: inventory.CpuArchitecture
+  fields:
+    name: ARM64
+
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Dell
+- model: inventory.DeviceManufacturer
+  fields:
+    name: HP
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Axxiv
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Acer
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Asus
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Lenovo
+- model: inventory.DeviceManufacturer
+  fields:
+    name: Samsung
+
+- model: inventory.RamType
+  fields:
+    name: DDR2
+- model: inventory.RamType
+  fields:
+    name: DDR3
+- model: inventory.RamType
+  fields:
+    name: DDR4
+
+- model: inventory.DiskType
+  fields:
+    name: SSD
+- model: inventory.DiskType
+  fields:
+    name: HDD
+- model: inventory.DiskType
+  fields:
+    name: SAS
+
+- model: inventory.IpStatus
+  fields:
+    name: "Fixed in Device"
+- model: inventory.IpStatus
+  fields:
+    name: Reserved
+- model: inventory.IpStatus
+  fields:
+    name: "Fixed in Device + Reserved"
+- model: inventory.IpStatus
+  fields:
+    name: Dynamic
+
+- model: inventory.SoftwareArchitecture
+  fields:
+    name: "32 Bit"
+- model: inventory.SoftwareArchitecture
+  fields:
+    name: "64 Bit"
+
+- model: inventory.RaidType
+  fields:
+    name: "RAID 0"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 1"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 5"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 6"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 10"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 50"
+- model: inventory.RaidType
+  fields:
+    name: "RAID 60"
+
 - model: inventory.Weekday
   fields:
     name: Sunday
