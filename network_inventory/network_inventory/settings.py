@@ -26,7 +26,6 @@ SECRET_KEY = 'kzx(i9^@*g^cgp(_3052%*1d%zyu^2z_@pgso5!_q@jb-j%4m='
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'inventory.2li.local',
     'localhost',
     '127.0.0.1',
 ]
