@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
+from inventory.models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
                      DiskType, Owner, Disk, CpuArchitecture, CpuManufacturer,
                      Cpu, OperatingSystem, RaidInComputer, Computer,
                      ComputerDiskRelation, DisksInRaid, RaidType,

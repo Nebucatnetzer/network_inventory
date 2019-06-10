@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from guardian.shortcuts import get_objects_for_user
-from .models import (Device, Computer, ComputerRamRelation,
+from inventory.models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation,
                      ComputerCpuRelation, Customer)
 
