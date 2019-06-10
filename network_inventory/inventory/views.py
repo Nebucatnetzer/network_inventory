@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
+from guardian.shortcuts import get_objects_for_user
 from .models import (GeneralDevice, Computer, CronJob,
                      ComputerRamRelation,
                      ComputerDiskRelation,
@@ -35,6 +36,12 @@ def cronjob_details(request, cronjob_id):
 class ComputerList(ListView):
     model = Computer
     template_name = 'inventory/computer_list.html'
+
+    def get_queryset(self):
+        queryset = get_objects_for_user(self.request.user, 'inventory.view_computer', klass=Computer)
+        #return super().get_queryset()
+        return queryset
+
 
 
 class CronJobList(ListView):

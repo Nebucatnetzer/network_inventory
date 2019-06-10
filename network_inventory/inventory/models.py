@@ -190,7 +190,9 @@ class Computer(Device):
 
     class Meta:
         ordering = ['ip']
-
+        permissions = (
+            ('view_computer', 'Can view computer'),
+        )
 
 class ComputerDiskRelation(models.Model):
     disk = models.ForeignKey(Disk, on_delete=models.CASCADE)

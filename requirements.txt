@@ -3,3 +3,4 @@ Django==2.0
 pyaml
 pytz
 psycopg2
+django-guardian
