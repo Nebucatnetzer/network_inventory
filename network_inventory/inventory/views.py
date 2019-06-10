@@ -39,12 +39,6 @@ class ComputerList(ListView):
         return queryset
 
 
-
-class CronJobList(ListView):
-    model = CronJob
-    template_name = 'inventory/cronjob_list.html'
-
-
 class DeviceList(ListView):
     model = Device
     context_object_name = 'device_list'
