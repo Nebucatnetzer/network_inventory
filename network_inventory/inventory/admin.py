@@ -1,15 +1,23 @@
 from django.contrib import admin
-from inventory.models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
-                     DiskType, Owner, Disk, CpuArchitecture, CpuManufacturer,
-                     Cpu, OperatingSystem, RaidInComputer, Computer,
-                     ComputerDiskRelation, DisksInRaid, RaidType,
-                     ComputerCpuRelation, ComputerSoftwareRelation,
-                     ComputerRamRelation, Warranty, WarrantyType, Customer,
-                     DeviceCategory, ConnectedDevice, DeviceInNet, Net,
-                     DeviceManufacturer, AdGroup, MailGroup, Location,
-                     MailAlias, IpStatus, Notification, NotificationType,
-                     SoftwareArchitecture, SoftwareCategory, Software, User,
-                     UserInAdGroup, UserInMailGroup)
+from guardian.admin import GuardedModelAdmin
+from inventory.models import (Backup, BackupMethod, TargetDevice, Device,
+                              RamType, Ram, DiskType, Owner, Disk,
+                              CpuArchitecture, CpuManufacturer, Cpu,
+                              OperatingSystem, RaidInComputer, Computer,
+                              ComputerDiskRelation, DisksInRaid,
+                              RaidType, ComputerCpuRelation,
+                              ComputerSoftwareRelation, ComputerRamRelation,
+                              Warranty, WarrantyType, Customer, DeviceCategory,
+                              ConnectedDevice, DeviceInNet, Net,
+                              DeviceManufacturer, AdGroup, MailGroup, Location,
+                              MailAlias, IpStatus, Notification,
+                              NotificationType, SoftwareArchitecture,
+                              SoftwareCategory, Software, User, UserInAdGroup,
+                              UserInMailGroup)
+
+
+class CustomerAdmin(GuardedModelAdmin):
+    pass
 
 
 class CpuAdmin(admin.ModelAdmin):
@@ -279,7 +287,7 @@ admin.site.register(ConnectedDevice)
 admin.site.register(Cpu, CpuAdmin)
 admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
-admin.site.register(Customer)
+admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Device)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
