@@ -1,5 +1,5 @@
 wheel
-Django==2.0
+Django==2.2
 pyaml
 pytz
 psycopg2
