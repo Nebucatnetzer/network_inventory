@@ -5,12 +5,12 @@
     <table class="sortable">
       <tr>
         <th>Hostname</th>
-        <th>IP</th>
+        <th>Owner</th>
       </tr>
       {% for computer in computer_list %}
       <tr>
         <td><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></td>
-        <td>{{ computer.name }}</td>
+        <td>{{ computer.owner }}</td>
       </tr>
       {% endfor %}
     </table>
