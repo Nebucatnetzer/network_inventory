@@ -19,13 +19,13 @@ def device_details(request, device_id):
 def computer_details(request, computer_id):
     computer = get_object_or_404(Computer, pk=computer_id)
     disks_list = ComputerDiskRelation.objects.filter(computer=computer_id)
-    ram = ComputerRamRelation.objects.get(computer=computer_id)
-    cpu = ComputerCpuRelation.objects.get(computer=computer_id)
+    ram_list = ComputerRamRelation.objects.filter(computer=computer_id)
+    cpu_list = ComputerCpuRelation.objects.filter(computer=computer_id)
     return render(request, 'inventory/computer_details.html',
                   {'computer': computer,
                    'disks_list': disks_list,
-                   'ram': ram,
-                   'cpu': cpu})
+                   'ram_list': ram_list,
+                   'cpu_list': cpu_list})
 
 
 class CustomerList(ListView):

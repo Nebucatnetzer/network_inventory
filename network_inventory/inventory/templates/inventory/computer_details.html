@@ -4,8 +4,26 @@
     <h3>Description</h3>
     <p>{{ computer.description }}</p>
     <p><b>OS: </b>{{ computer.os }}</p>
-    <p><b>CPU: </b>{{ cpu.amount }}x {{ cpu.cpu }}</p>
-    <p><b>RAM Modules: </b>{{ ram.amount }}x {{ ram.ram }}</p>
+    {% if cpu_list %}
+    <p><b>CPUs:</b></p>
+    <p>
+        <ul>
+            {% for cpu in cpu_list %}
+                <li>{{ cpu.amount }}x {{ cpu.cpu }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+    {% endif %}
+    {% if ram_list %}
+    <p><b>RAM Modules:</b></p>
+    <p>
+        <ul>
+            {% for module in ram_list %}
+                <li>{{ module.amount }}x {{ module.ram }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+    {% endif %}
     {% if disks_list %}
     <p><b>Disks:</b></p>
     <p>
