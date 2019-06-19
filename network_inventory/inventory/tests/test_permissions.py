@@ -53,8 +53,8 @@ def test_something():
     c_client = Client()
     h_client = Client()
     response = c_client.post('/admin/',
-                  {'username': 'customer_c',
-                   'password': 'password'})
-    response = c_client.get('/computer/1/')
+                             {'username': 'customer_c',
+                              'password': 'password'})
+    response = c_client.get('/')
     print(response.content)
     assert False
