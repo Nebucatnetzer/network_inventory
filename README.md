@@ -13,8 +13,7 @@ inventory over my various servers and other network equipment.
    in the future and SQlite is not supported for production.
 
 ### Local Setup
-3. Run `make local` to create a virtual environment.
-4. Run `run.sh` to start the development server. You can access it at
+3. Run `make local` to start the development server. You can access it at
    http://localhost:8000 . You're now all set to start developing.
 
 ### Docker Setup

@@ -18,6 +18,8 @@ local:
 	( \
 	source venv/bin/activate; \
 	pip3 install -r requirements/local.txt; \
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	./run.sh; \
 	)
 
 local_test:
