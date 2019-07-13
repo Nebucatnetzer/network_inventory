@@ -9,52 +9,52 @@ from inventory.models import Customer, Computer
 
 def create_users():
     User = get_user_model()
-    customer_c = User.objects.create_user('customer_c',
-                                          'c@ccompany.com',
+    novartis = User.objects.create_user('novartis_admin',
+                                          'novartis_admin@novartis.com',
                                           'password',
                                           is_staff=True)
-    customer_h = User.objects.create_user('customer_h',
-                                          'h@hcompany.com',
+    nestle = User.objects.create_user('nestle_admin',
+                                          'nestle_admin@nestle.com',
                                           'password',
                                           is_staff=True)
-    return customer_c, customer_h
+    return novartis, nestle
 
 
 def create_groups():
-    cadmin = Group.objects.create(name='CAdmin')
-    hadmin = Group.objects.create(name='HAdmin')
-    return cadmin, hadmin
+    novartis_admin_group = Group.objects.create(name='NovartisAdmins')
+    nestle_admin_group = Group.objects.create(name='NestleAdmins')
+    return novartis_admin_group, nestle_admin_group
 
 
 def create_customers():
-    c = Customer.objects.create(name='C')
-    h = Customer.objects.create(name='H')
-    return c, h
+    novartis = Customer.objects.create(name='Novartis')
+    nestle = Customer.objects.create(name='Nestle')
+    return novartis, nestle
 
 
 def create_computers():
-    Computer.objects.create(name='c-pc1',
-                            customer=Customer.objects.get(name='C'))
-    Computer.objects.create(name='h-pc1',
-                            customer=Customer.objects.get(name='H'))
+    Computer.objects.create(name='novartis-pc1',
+                            customer=Customer.objects.get(name='Novartis'))
+    Computer.objects.create(name='nestle-pc1',
+                            customer=Customer.objects.get(name='Nestle'))
 
 
 @pytest.mark.django_db
 def test_something():
-    cadmin, hadmin = create_groups()
-    customer_c, customer_h = create_users()
-    c, h = create_customers()
+    novartis_admin_group, nestle_admin_group = create_groups()
+    novartis_admin, nestle_admin = create_users()
+    novartis, nestle = create_customers()
     create_computers()
-    customer_c.groups.add(cadmin)
-    customer_h.groups.add(hadmin)
-    assign_perm('view_customer', cadmin, c)
-    assign_perm('view_customer', hadmin, h)
+    novartis_admin.groups.add(novartis_admin_group)
+    nestle_admin.groups.add(nestle_admin_group)
+    assign_perm('view_customer', novartis_admin, novartis)
+    assign_perm('view_customer', nestle_admin, nestle)
 
-    c_client = Client()
-    h_client = Client()
-    response = c_client.post('/admin/',
-                             {'username': 'customer_c',
-                              'password': 'password'})
-    response = c_client.get('/')
+    novartis_client = Client()
+    nestle_client = Client()
+    response = novartis_client.post('/admin/',
+                                    {'username': 'novartis_admin',
+                                     'password': 'password'})
+    response = novartis_client.get('/')
     print(response.content)
     assert False
