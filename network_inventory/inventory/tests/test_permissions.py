@@ -10,13 +10,13 @@ from inventory.models import Customer, Computer
 def create_users():
     User = get_user_model()
     novartis = User.objects.create_user('novartis_admin',
-                                          'novartis_admin@novartis.com',
-                                          'password',
-                                          is_staff=True)
+                                        'novartis_admin@novartis.com',
+                                        'password',
+                                        is_staff=True)
     nestle = User.objects.create_user('nestle_admin',
-                                          'nestle_admin@nestle.com',
-                                          'password',
-                                          is_staff=True)
+                                      'nestle_admin@nestle.com',
+                                      'password',
+                                      is_staff=True)
     return novartis, nestle
 
 
@@ -40,7 +40,7 @@ def create_computers():
 
 
 @pytest.mark.django_db
-def test_something():
+def test_customer_permissions():
     novartis_admin_group, nestle_admin_group = create_groups()
     novartis_admin, nestle_admin = create_users()
     novartis, nestle = create_customers()
@@ -52,9 +52,10 @@ def test_something():
 
     novartis_client = Client()
     nestle_client = Client()
-    response = novartis_client.post('/admin/',
-                                    {'username': 'novartis_admin',
-                                     'password': 'password'})
+    response = novartis_client.post('/admin/', follow=True)
+    loginresponse = novartis_client.login(username='novartis_admin',
+                                          password='password')
     response = novartis_client.get('/')
-    print(response.content)
-    assert False
+    print(response.content.decode('utf8'))
+    assert ('Novartis' in response.content.decode('utf8') and
+            'Nestle' not in response.content.decode('utf8'))
