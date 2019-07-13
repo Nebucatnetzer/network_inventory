@@ -13,12 +13,12 @@ services:
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ./run.sh network_inventory.settings.docker
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=network_inventory.settings
+      - DJANGO_SETTINGS_MODULE=network_inventory.settings.local
     depends_on:
       - db

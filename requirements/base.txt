@@ -2,7 +2,4 @@ wheel
 Django==2.2
 pyaml
 pytz
-psycopg2
 django-guardian
-pytest
-pytest-django
