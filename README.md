@@ -6,16 +6,21 @@ inventory over my various servers and other network equipment.
 ## Setup
 
 1. Clone the repository
-2. Run `./setup.sh` to setup the docker container.
-3. Run `docker-compose up` to start the development server. You can access it at
+2. Now decide if you want to develop fully locally or inside the docker
+   container. Locally you'll use SQlite for the database and inside the Docker
+   container you'll use Postgres for the database. For the moment there aren't
+   any features implemented which require Postgres. However this might change
+   in the future and SQlite is not supported for production.
+
+### Local Setup
+3. Run `make local` to create a virtual environment.
+4. Run `run.sh` to start the development server. You can access it at
    http://localhost:8000 . You're now all set to start developing.
 
-If you need to run migrations you can create and apply them with the following
-two commands.
-```
-docker-compose run web python manage.py makemigrations inventory
-docker-compose run web python manage.py migrate
-```
+### Docker Setup
+3. Run `make` to start the development server. You can access it
+   at   http://localhost:8000 . You're now all set to start developing. \
+   If you need to run migrations you can simply restart the Docker container.
 
 ## Todos
 - [ ] Create an Apache configuration

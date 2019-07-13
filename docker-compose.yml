@@ -13,12 +13,12 @@ services:
 
   web:
     build: .
-    command: ./run.sh network_inventory.settings.docker
+    command: ./run.sh
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=network_inventory.settings.local
+      - DJANGO_SETTINGS_MODULE=network_inventory.settings.docker
     depends_on:
       - db
