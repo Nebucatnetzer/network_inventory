@@ -21,10 +21,13 @@ def test_customer_permissions(make_admin_users, make_customers,
 
     novartis_client = Client()
     nestle_client = Client()
-    response = novartis_client.post('/admin/', follow=True)
-    loginresponse = novartis_client.login(username=admins[novartis].username,
-                                          password='password')
-    response = novartis_client.get('/')
-    print(response.content.decode('utf8'))
-    assert (novartis in response.content.decode('utf8') and
-            nestle not in response.content.decode('utf8'))
+    novartis_client.login(username=admins[novartis].username,
+                          password='password')
+    nestle_client.login(username=admins[nestle].username,
+                        password='password')
+    novartis_response = novartis_client.get('/')
+    nestle_response = nestle_client.get('/')
+    assert (novartis in novartis_response.content.decode('utf8') and
+            nestle not in novartis_response.content.decode('utf8') and
+            nestle in nestle_response.content.decode('utf8') and
+            novartis not in nestle_response.content.decode('utf8'))
