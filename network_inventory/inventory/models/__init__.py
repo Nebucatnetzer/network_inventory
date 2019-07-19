@@ -1,12 +1,11 @@
 from .backup import Backup, BackupMethod, TargetDevice
 from .calendar import DayOfMonth, Month, Weekday
 from .category import Category
-from .companies import Company, Owner
+from .companies import Company, Customer, Owner
 from .computer import (Computer, ComputerCpuRelation, ComputerDiskRelation,
                        ComputerRamRelation, RaidInComputer,
                        ComputerSoftwareRelation)
 from .cpu import CpuArchitecture, CpuManufacturer, Cpu
-from .customer import Customer
 from .devices import (DeviceCategory, Device, ConnectedDevice, DeviceInNet,
                       DeviceManufacturer)
 from .disk import DiskType, Disk

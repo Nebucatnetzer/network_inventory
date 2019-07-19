@@ -1,7 +1,6 @@
 from django.db import models
 from .category import Category
-from .companies import Company, Owner
-from .customer import Customer
+from .companies import Company, Customer, Owner
 from .location import Location
 from .user import User
 from .net import Net, IpStatus

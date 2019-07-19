@@ -1,5 +1,5 @@
 from django.db import models
-from .customer import Customer
+from .companies import Customer
 
 
 class Group(models.Model):
