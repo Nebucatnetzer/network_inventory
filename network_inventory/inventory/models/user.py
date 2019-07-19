@@ -27,5 +27,3 @@ class UserInAdGroup(models.Model):
 class UserInMailGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(MailGroup, on_delete=models.CASCADE)
-
-
