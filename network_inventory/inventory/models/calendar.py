@@ -32,5 +32,3 @@ class Month(models.Model):
 
     class Meta:
         ordering = ['value']
-
-

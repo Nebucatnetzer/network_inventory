@@ -15,13 +15,11 @@ class Warranty(models.Model):
     valid_from = models.DateField()
     valid_until = models.DateField()
     duration_in_years = models.IntegerField()
-    warranty_type = models.ForeignKey(WarrantyType, models.SET_NULL, blank=True,
-                                      null=True)
+    warranty_type = models.ForeignKey(WarrantyType, models.SET_NULL,
+                                      blank=True, null=True)
 
     def __str__(self):
         return self.device
 
     class Meta:
         verbose_name_plural = "Warranties"
-
-

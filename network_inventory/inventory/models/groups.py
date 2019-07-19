@@ -1,6 +1,7 @@
 from django.db import models
 from .customer import Customer
 
+
 class Group(models.Model):
     name = models.CharField(max_length=50)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)

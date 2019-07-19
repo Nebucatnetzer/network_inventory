@@ -17,7 +17,7 @@ class SoftwareCategory(Category):
 class Software(models.Model):
     name = models.CharField(max_length=50)
     category = models.ForeignKey(SoftwareCategory, models.SET_NULL, null=True,
-                                blank=True)
+                                 blank=True)
 
     def __str__(self):
         return self.name
