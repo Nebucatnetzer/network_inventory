@@ -1,0 +1,15 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}List of Lists{% endblock %}
+{% block content %}
+<table class="sortable">
+    <tr>
+        <th>Lists</th>
+    </tr>
+    <tr>
+        <td><a href="{% url 'computers' customer_id %}">Computers</a></td>
+    </tr>
+    <tr>
+        <td><a href="{% url 'devices' customer_id %}">Devices</a></td>
+    </tr>
+</table>
+{% endblock %}

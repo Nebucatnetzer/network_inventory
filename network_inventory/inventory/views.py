@@ -29,7 +29,8 @@ def computer_details(request, computer_id):
 
 
 def list_of_lists(request, customer_id):
-    return render(request, 'inventory/list_of_lists.html')
+    return render(request, 'inventory/list_of_lists.html',
+                  {'customer_id': customer_id})
 
 
 class CustomerList(ListView):
@@ -56,3 +57,8 @@ class DeviceList(ListView):
     model = Device
     context_object_name = 'device_list'
     template_name = 'inventory/device_list.html'
+
+    def get_queryset(self):
+        queryset = Device.objects.filter(customer=self.kwargs['customer_id'])
+        return queryset
+
