@@ -35,8 +35,7 @@ local_test:
 	pytest; \
 	)
 
-clean:
-	rm -f network_inventory/network_inventory/db.sqlite3
+clean: .remove_db
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	docker-compose down -v --rmi local
