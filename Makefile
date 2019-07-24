@@ -22,6 +22,11 @@ local:
 	./run.sh; \
 	)
 
+.remove_db:
+	rm -f ./network_inventory/network_inventory/db.sqlite3
+
+local_restart: .remove_db local
+
 local_test:
 	( \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \

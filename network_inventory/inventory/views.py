@@ -28,6 +28,10 @@ def computer_details(request, computer_id):
                    'cpu_list': cpu_list})
 
 
+def list_of_lists(request, customer_id):
+    return render(request, 'inventory/list_of_lists.html')
+
+
 class CustomerList(ListView):
     model = Customer
     template_name = 'inventory/customer_list.html'

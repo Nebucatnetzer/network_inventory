@@ -8,7 +8,7 @@
     </tr>
     {% for customer in customer_list %}
     <tr>
-        <td><a href="{% url 'computers' customer.id %}">{{ customer.name }}</a></td>
+        <td><a href="{% url 'lists' customer.id %}">{{ customer.name }}</a></td>
     </tr>
     {% endfor %}
 </table>

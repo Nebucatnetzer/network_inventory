@@ -10,4 +10,6 @@ urlpatterns = [
     path('computer/<int:computer_id>/', views.computer_details,
          name='computer'),
     path('devices/', views.DeviceList.as_view(), name='devices'),
+    path('customer/<int:customer_id>/lists/', views.list_of_lists,
+         name='lists'),
  ]
