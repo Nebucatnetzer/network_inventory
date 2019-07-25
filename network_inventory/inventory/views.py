@@ -2,10 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from guardian.shortcuts import get_objects_for_user
-from inventory.decorators import computer_view_permission
-from inventory.models import (Device, Computer, ComputerRamRelation,
-                              ComputerDiskRelation, ComputerCpuRelation,
-                              Customer)
+from .decorators import computer_view_permission
+from .models import (Device, Computer, ComputerRamRelation,
+                     ComputerDiskRelation, ComputerCpuRelation,
+                     Customer)
 
 
 def device_details(request, device_id):

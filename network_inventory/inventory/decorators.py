@@ -1,5 +1,5 @@
 from django.http import HttpResponseForbidden
-from inventory.models import Computer, Customer, Device, ConnectedDevice
+from .models import Computer, Customer, Device, ConnectedDevice
 
 
 def computer_view_permission(old_fuction):

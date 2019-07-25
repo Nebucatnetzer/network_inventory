@@ -1,19 +1,16 @@
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
-from inventory.models import (Backup, BackupMethod, TargetDevice, Device,
-                              RamType, Ram, DiskType, Owner, Disk,
-                              CpuArchitecture, CpuManufacturer, Cpu,
-                              OperatingSystem, RaidInComputer, Computer,
-                              ComputerDiskRelation, DisksInRaid,
-                              RaidType, ComputerCpuRelation,
-                              ComputerSoftwareRelation, ComputerRamRelation,
-                              Warranty, WarrantyType, Customer, DeviceCategory,
-                              ConnectedDevice, DeviceInNet, Net,
-                              DeviceManufacturer, AdGroup, MailGroup, Location,
-                              MailAlias, IpStatus, Notification,
-                              NotificationType, SoftwareArchitecture,
-                              SoftwareCategory, Software, User, UserInAdGroup,
-                              UserInMailGroup)
+from .models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
+                     DiskType, Owner, Disk, CpuArchitecture, CpuManufacturer,
+                     Cpu, OperatingSystem, RaidInComputer, Computer,
+                     ComputerDiskRelation, DisksInRaid, RaidType,
+                     ComputerCpuRelation, ComputerSoftwareRelation,
+                     ComputerRamRelation, Warranty, WarrantyType, Customer,
+                     DeviceCategory, ConnectedDevice, DeviceInNet, Net,
+                     DeviceManufacturer, AdGroup, MailGroup, Location,
+                     MailAlias, IpStatus, Notification, NotificationType,
+                     SoftwareArchitecture, SoftwareCategory, Software, User,
+                     UserInAdGroup, UserInMailGroup)
 
 
 class CustomerAdmin(GuardedModelAdmin):
