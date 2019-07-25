@@ -11,6 +11,6 @@ urlpatterns = [
     path('device/<int:device_id>/', views.device_detail_view, name='device'),
     path('computer/<int:computer_id>/', views.computer_detail_view,
          name='computer'),
-    path('devices/<int:customer_id>', views.DeviceListView.as_view(),
+    path('customer/<int:customer_id>/devices/', views.DeviceListView.as_view(),
          name='devices'),
  ]
