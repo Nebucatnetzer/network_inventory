@@ -8,7 +8,7 @@ from .models import (Device, Computer, ComputerRamRelation,
                      Customer)
 
 
-def device_details(request, device_id):
+def device_detail_view(request, device_id):
     device = get_object_or_404(Device, pk=device_id)
     return render(request, 'inventory/device_details.html',
                   {'device': device})
@@ -16,7 +16,7 @@ def device_details(request, device_id):
 
 @login_required
 @computer_view_permission
-def computer_details(request, computer_id):
+def computer_detail_view(request, computer_id):
     computer = get_object_or_404(Computer, pk=computer_id)
     disks_list = ComputerDiskRelation.objects.filter(computer=computer_id)
     ram_list = ComputerRamRelation.objects.filter(computer=computer_id)
@@ -49,7 +49,7 @@ class CustomerListView(ListView):
         return queryset
 
 
-class ComputerList(ListView):
+class ComputerListView(ListView):
     model = Computer
     template_name = 'inventory/computer_list.html'
 
@@ -58,7 +58,7 @@ class ComputerList(ListView):
         return queryset
 
 
-class DeviceList(ListView):
+class DeviceListView(ListView):
     model = Device
     context_object_name = 'device_list'
     template_name = 'inventory/device_list.html'
