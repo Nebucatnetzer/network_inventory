@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from guardian.shortcuts import get_objects_for_user
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
@@ -33,7 +33,12 @@ def list_of_lists(request, customer_id):
                   {'customer_id': customer_id})
 
 
-class CustomerList(ListView):
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = 'inventory/customer_details.html'
+
+
+class CustomerListView(ListView):
     model = Customer
     template_name = 'inventory/customer_list.html'
 
