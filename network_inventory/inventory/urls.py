@@ -13,6 +13,4 @@ urlpatterns = [
          name='computer'),
     path('devices/<int:customer_id>', views.DeviceListView.as_view(),
          name='devices'),
-    path('customer/<int:customer_id>/lists/', views.list_of_lists,
-         name='lists'),
  ]
