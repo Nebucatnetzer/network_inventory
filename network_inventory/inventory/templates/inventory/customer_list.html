@@ -4,11 +4,15 @@
 {% if customer_list %}
 <table class="sortable">
     <tr>
-        <th>Customer</th>
+        <th>Name</th>
+        <th>Computers</th>
+        <th>Devices</th>
     </tr>
     {% for customer in customer_list %}
     <tr>
-        <td><a href="{% url 'lists' customer.id %}">{{ customer.name }}</a></td>
+        <td><a href="{% url 'customer' customer.id %}">{{ customer.name }}</a></td>
+        <td><a href="{% url 'computers' customer.id %}">Computers</a></td>
+        <td><a href="{% url 'devices' customer.id %}">Devices</a></td>
     </tr>
     {% endfor %}
 </table>
