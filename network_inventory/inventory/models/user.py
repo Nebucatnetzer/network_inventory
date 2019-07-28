@@ -5,6 +5,7 @@ from .groups import AdGroup, MailGroup
 
 class User(models.Model):
     name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
     ad_login = models.CharField(max_length=50, blank=True)
     ad_pw = models.CharField(max_length=50, blank=True)
     primary_mail = models.CharField(max_length=50, blank=True)
