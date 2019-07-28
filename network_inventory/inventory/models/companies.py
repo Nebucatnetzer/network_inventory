@@ -17,7 +17,7 @@ class Owner(Company):
 
 class Customer(Company):
     name = models.CharField(max_length=50)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
