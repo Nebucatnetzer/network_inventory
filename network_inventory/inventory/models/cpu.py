@@ -21,6 +21,7 @@ class Cpu(models.Model):
     number_of_cores = models.IntegerField()
     frequency = models.FloatField()
     architecture = models.ForeignKey(CpuArchitecture, on_delete=models.CASCADE)
+    hyper_threading = models.BooleanField()
 
     def __str__(self):
         return self.name
