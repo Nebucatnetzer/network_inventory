@@ -42,3 +42,8 @@ class TargetDevice(models.Model):
 
     class Meta:
         verbose_name_plural = "Target Devices"
+
+
+class NotificationFromBackup(models.Model):
+    backup = models.ForeignKey(Backup, on_delete=models.CASCADE)
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
