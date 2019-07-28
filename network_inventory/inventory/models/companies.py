@@ -21,3 +21,9 @@ class Customer(Company):
 
     def __str__(self):
         return self.name
+
+
+class DeviceManufacturer(Company):
+
+    class Meta:
+        verbose_name_plural = "Device Manufacturers"
