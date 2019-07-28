@@ -1,0 +1,8 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ net.name }}{% endblock %}
+{% block content %}
+    <p>{{ net.range }}</p>
+    <p>{{ net.ip_range }}</p>
+    <p>{{ net.dhcp_range }}</p>
+    <p>{{ net.customer }}</p>
+{% endblock %}

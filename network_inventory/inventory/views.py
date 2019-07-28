@@ -5,7 +5,7 @@ from guardian.shortcuts import get_objects_for_user
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
-                     Customer)
+                     Customer, Net)
 
 
 def device_detail_view(request, device_id):
@@ -62,3 +62,17 @@ class DeviceListView(ListView):
         queryset = Device.objects.filter(customer=self.kwargs['customer_id'])
         return queryset
 
+
+class NetListView(ListView):
+    model = Net
+    context_object_name = 'net_list'
+    template_name = 'inventory/net_list.html'
+
+    def get_queryset(self):
+        queryset = Net.objects.filter(customer=self.kwargs['customer_id'])
+        return queryset
+
+
+class NetDetailView(DetailView):
+    model = Net
+    template_name = 'inventory/net_details.html'
