@@ -35,6 +35,14 @@ class Device(models.Model):
 class ConnectedDevice(Device):
     net = models.ManyToManyField(Net, through='DeviceInNet')
 
+    @property
+    def ips(self):
+        nets = DeviceInNet.objects.filter(device=self.id)
+        ip_addresses = {}
+        for net in nets:
+            ip_addresses[net.net_id] = net.ip
+        return ip_addresses
+
     class Meta:
         verbose_name_plural = "Connected Devices"
 

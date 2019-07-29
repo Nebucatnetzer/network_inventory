@@ -6,11 +6,17 @@
       <tr>
         <th>Hostname</th>
         <th>Owner</th>
+        <th>IP</th>
       </tr>
       {% for computer in computer_list %}
       <tr>
         <td><a href="{% url 'computer' computer.id %}">{{ computer.name }}</a></td>
         <td>{{ computer.owner }}</td>
+        <td>
+          {% for net_id, ip in computer.ips.items %}
+            <a href="{% url 'net' net_id %}">{{ip}}</a><br>
+          {% endfor %}
+        </td>
       </tr>
       {% endfor %}
     </table>
