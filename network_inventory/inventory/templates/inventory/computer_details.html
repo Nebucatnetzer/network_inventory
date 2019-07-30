@@ -3,40 +3,115 @@
 {% block content %}
     <h3>Description</h3>
     <p>{{ computer.description }}</p>
-    <p><b>OS: </b>{{ computer.os }}</p>
+    <table>
+        <tr>
+            <th><b>OS:</b></th>
+            <td>{{ computer.os }}</td>
+        </tr>
+        <tr>
+            <th><b>Serial Number:</b></th>
+            <td>{{ computer.serialnumber }}</td>
+        </tr>
+        <tr>
+            <th><b>Category:</b></th>
+            <td>{{ computer.category }}</td>
+        </tr>
+        <tr>
+            <th><b>Owner:</b></th>
+            <td>{{ computer.owner }}</td>
+        </tr>
+        <tr>
+            <th><b>Customer:</b></th>
+            <td>{{ computer.customer }}</td>
+        </tr>
+        <tr>
+            <th><b>Manufacturer:</b></th>
+            <td>{{ computer.manufacturer }}</td>
+        </tr>
+        <tr>
+            <th><b>Location:</b></th>
+            <td>{{ computer.location }}</td>
+        </tr>
+        <tr>
+            <th><b>User:</b></th>
+            <td>{{ computer.user }}</td>
+        </tr>
+        <tr>
+            <th><b>Installation Date:</b></th>
+            <td>{{ computer.installation_date }}</td>
+        </tr>
+        <tr>
+            <th><b>IPs:</b></th>
+            <td>
+                {% for net_id, ip in computer.ips.items %}
+                    <a href="{% url 'net' net_id %}">{{ip}}</a><br>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    {% if software_list %}
+    <h3>Software</h3>
+    <ul>
+    {% for software in software_list %}
+        <li>{{ software.software }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+        <h3>Hardware</h3>
+    <table>
+        <tr>
+            <th><b>CPUs:</b></th>
+            <td>
     {% if cpu_list %}
-    <p><b>CPUs:</b></p>
-    <p>
-        <ul>
             {% for cpu in cpu_list %}
-                <li>{{ cpu.amount }}x {{ cpu.cpu }}</li>
+                {{ cpu.amount }}x {{ cpu.cpu }}<br>
             {% endfor %}
-        </ul>
-    </p>
+            </td>
+        </tr>
     {% endif %}
+        <tr>
+        <th><b>RAM Modules:</b></th>
+        <td>
     {% if ram_list %}
-    <p><b>RAM Modules:</b></p>
-    <p>
-        <ul>
             {% for module in ram_list %}
-                <li>{{ module.amount }}x {{ module.ram }}</li>
+                {{ module.amount }}x {{ module.ram }}<br>
             {% endfor %}
-        </ul>
-    </p>
+        </td>
+    </tr>
     {% endif %}
+    <tr>
+    <th><b>Disks:</b></th>
+    <td>
     {% if disks_list %}
-    <p><b>Disks:</b></p>
-    <p>
-        <ul>
             {% for disk in disks_list %}
-                <li>{{ disk.amount }}x {{ disk.disk }}</li>
+                {{ disk.amount }}x {{ disk.disk }}<br>
             {% endfor %}
-        </ul>
-    </p>
+    </td>
+    </tr>
+    {% endif %}
+    </table>
+    {% if raid_relations %}
+    <h3>RAID</h3>
+    {% for raid in raid_relations %}
+    <table>
+        <tr>
+            <th><b>Type:</b></th>
+            <td>{{ raid.raid_type }}</td>
+        </tr>
+        <tr>
+            <th><b>Usable Space</b></th>
+            <td>{{ raid.usable_space}}</td>
+        </tr>
+    </table>
+    {% endfor %}
     {% endif %}
     {% if computer.host %}
-    <p><b>Host:</b> <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a></p>
-    {% else %}
-    <p><b>Host:</b> None</p>
+    <table>
+        <th><b>Host:</b></th>
+        <td>
+            <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a>
+        </td>
+    </tr>
+    </table>
     {% endif %}
 {% endblock %}

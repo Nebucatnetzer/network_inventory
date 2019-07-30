@@ -5,7 +5,7 @@ from guardian.shortcuts import get_objects_for_user
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
-                     Customer, Net)
+                     ComputerSoftwareRelation, Customer, Net, RaidInComputer)
 
 
 def device_detail_view(request, device_id):
@@ -21,11 +21,15 @@ def computer_detail_view(request, computer_id):
     disks_list = ComputerDiskRelation.objects.filter(computer=computer_id)
     ram_list = ComputerRamRelation.objects.filter(computer=computer_id)
     cpu_list = ComputerCpuRelation.objects.filter(computer=computer_id)
-    return render(request, 'inventory/computer_details.html',
-                  {'computer': computer,
-                   'disks_list': disks_list,
-                   'ram_list': ram_list,
-                   'cpu_list': cpu_list})
+    software_list = ComputerSoftwareRelation.objects.filter(computer=computer_id)
+    raid_relations = RaidInComputer.objects.filter(computer=computer_id)
+    context = {'computer': computer,
+               'disks_list': disks_list,
+               'ram_list': ram_list,
+               'cpu_list': cpu_list,
+               'software_list': software_list,
+               'raid_relations': raid_relations}
+    return render(request, 'inventory/computer_details.html', context)
 
 
 class CustomerDetailView(DetailView):
