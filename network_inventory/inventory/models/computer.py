@@ -10,7 +10,7 @@ from .software import Software, SoftwareArchitecture
 
 class Computer(ConnectedDevice):
     os = models.ForeignKey(OperatingSystem, models.SET_NULL, blank=True,
-                           null=True)
+                           null=True, verbose_name='OS')
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
     disks = models.ManyToManyField(Disk, through='ComputerDiskRelation')

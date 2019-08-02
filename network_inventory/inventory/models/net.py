@@ -11,8 +11,8 @@ class IpStatus(Category):
 
 class Net(models.Model):
     name = models.CharField(max_length=50)
-    ip_range = models.CharField(max_length=50)
-    dhcp_range = models.CharField(max_length=50)
+    ip_range = models.CharField(max_length=50, verbose_name='IP Range')
+    dhcp_range = models.CharField(max_length=50, verbose_name='DHCP Range')
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     def __str__(self):
