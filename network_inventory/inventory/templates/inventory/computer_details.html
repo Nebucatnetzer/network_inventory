@@ -66,9 +66,10 @@
     </div>
     </div>
     {% endif %}
+
+    {% if cpu_list or ram_list or disks_list or raid_relations or computer.host %}
     <div class="card">
     <div class="content">
-
     <div class="header">Hardware</div>
     <table class="ui celled table">
         <tr>
@@ -102,6 +103,7 @@
     </tr>
     {% endif %}
     </table>
+
     {% if raid_relations %}
     <div class="header">RAID</div>
     {% for raid in raid_relations %}
@@ -117,16 +119,16 @@
     </table>
     {% endfor %}
     {% endif %}
+
     {% if computer.host %}
-    <table class="ui celled table">
-        <th><b>Host:</b></th>
-        <td>
+    <div class="header">Host</div>
+    <div class="description">
             <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a>
-        </td>
-    </tr>
-    </table>
+    </div>
     {% endif %}
     </div>
     </div>
+    {% endif %}
+
 </div>
 {% endblock %}
