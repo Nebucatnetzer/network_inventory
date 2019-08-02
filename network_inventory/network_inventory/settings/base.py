@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventory.apps.InventoryConfig',
     'guardian',
+    'django_tables2'
 ]
 
 MIDDLEWARE = [
