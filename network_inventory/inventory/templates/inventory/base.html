@@ -1,11 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="{% static 'inventory/css/inventory.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.css">
   <title>Network Inventory</title>
   <meta charset="utf-8">
 </head>
 <body>
+  <div class="ui container">
   <a href="{% url 'customers' %}">Home</a> |
   <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
   {% block content %}{% endblock %}
@@ -14,6 +15,7 @@
     <p class="copyright">Created by Andreas Zweili licensed under GPL v3.0</p>
     {% endblock %}
   </footer>
-  <script src={% static 'inventory/js/sorttable.js' %}></script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js"></script>
 </body>
 </html>
