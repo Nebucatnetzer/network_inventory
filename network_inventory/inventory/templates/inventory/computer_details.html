@@ -1,9 +1,13 @@
 {% extends "inventory/base.html" %}
 {% block section_title %}{{ computer.name }}{% endblock %}
 {% block content %}
-    <h3>Description</h3>
-    <p>{{ computer.description }}</p>
-    <table>
+<div class="ui cards">
+    <div class="card">
+    <div class="content">
+    <div class="header">Description</div>
+    <div class="description"><p>{{ computer.description }}</p></div>
+    <div class="extra content">
+    <table class="ui celled table">
         <tr>
             <th><b>OS:</b></th>
             <td>{{ computer.os }}</td>
@@ -49,16 +53,26 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     {% if software_list %}
-    <h3>Software</h3>
+    <div class="card">
+    <div class="content">
+    <div class="header">Software</div>
     <ul>
     {% for software in software_list %}
         <li>{{ software.software }}</li>
     {% endfor %}
     </ul>
+    </div>
+    </div>
     {% endif %}
-        <h3>Hardware</h3>
-    <table>
+    <div class="card">
+    <div class="content">
+
+    <div class="header">Hardware</div>
+    <table class="ui celled table">
         <tr>
             <th><b>CPUs:</b></th>
             <td>
@@ -91,9 +105,9 @@
     {% endif %}
     </table>
     {% if raid_relations %}
-    <h3>RAID</h3>
+    <div class="header">RAID</div>
     {% for raid in raid_relations %}
-    <table>
+    <table class="ui celled table">
         <tr>
             <th><b>Type:</b></th>
             <td>{{ raid.raid_type }}</td>
@@ -106,7 +120,7 @@
     {% endfor %}
     {% endif %}
     {% if computer.host %}
-    <table>
+    <table class="ui celled table">
         <th><b>Host:</b></th>
         <td>
             <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a>
@@ -114,4 +128,7 @@
     </tr>
     </table>
     {% endif %}
+    </div>
+    </div>
+</div>
 {% endblock %}
