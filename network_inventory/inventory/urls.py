@@ -17,4 +17,5 @@ urlpatterns = [
          name='nets'),
     path('net/<int:pk>/', views.net_detail_view, name='net'),
     path('backup/<int:pk>/', views.backup_detail_view, name='backup'),
+    path('computers/all/', views.AllComputersView.as_view(), name='all_computers')
  ]

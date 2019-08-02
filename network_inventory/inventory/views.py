@@ -3,12 +3,15 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from guardian.shortcuts import get_objects_for_user
 from django_tables2 import RequestConfig
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer,
                      Backup)
 from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, NetDetailTable, BackupDetailTable
+from .filters import ComputerFilter
 
 
 def device_detail_view(request, device_id):
@@ -80,3 +83,17 @@ def backup_detail_view(request, pk):
     table = BackupDetailTable(Backup.objects.filter(pk=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/backup_details.html', {'backup': table})
+
+
+
+class AllComputersView(SingleTableMixin, FilterView):
+    table_class = ComputersTable
+    model = Computer
+    template_name = "inventory/all_computers.html"
+
+    filterset_class = ComputerFilter
+
+    def get_queryset(self):
+        return get_objects_for_user(self.request.user,
+                                    'inventory.view_computer',
+                                    klass=Computer)

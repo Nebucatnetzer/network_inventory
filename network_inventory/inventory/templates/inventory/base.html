@@ -8,6 +8,7 @@
 <body>
   <div class="ui container">
   <a href="{% url 'customers' %}">Home</a> |
+  <a href="{% url 'all_computers' %}">All Computers</a> |
   <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
   {% block content %}{% endblock %}
   <footer>

@@ -3,3 +3,5 @@ Django==2.2
 pyaml
 pytz
 django-guardian
+django-tables2
+django-filter
