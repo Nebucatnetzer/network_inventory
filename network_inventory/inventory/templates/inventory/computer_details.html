@@ -54,15 +54,25 @@
     </table>
     </div>
     </div>
-    {% if software_list %}
+    {% if software_list or backup_list %}
     <div class="card">
     <div class="content">
+    {% if software_list %}
     <div class="header">Software</div>
     <ul>
     {% for software in software_list %}
         <li>{{ software.software }}</li>
     {% endfor %}
     </ul>
+    {% endif %}
+    {% if backup_list %}
+    <div class="header">Backup</div>
+    <ul>
+        {% for backup in backup_list %}
+        <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     </div>
     </div>
     {% endif %}

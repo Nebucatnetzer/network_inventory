@@ -16,4 +16,5 @@ urlpatterns = [
     path('customer/<int:customer_id>/nets/', views.nets_table_view,
          name='nets'),
     path('net/<int:pk>/', views.net_detail_view, name='net'),
+    path('backup/<int:pk>/', views.backup_detail_view, name='backup'),
  ]

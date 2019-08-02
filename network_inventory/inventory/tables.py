@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Net, Device
+from .models import Net, Device, Backup
 from django_tables2.utils import A
 
 class CustomersTable(tables.Table):
@@ -47,3 +47,9 @@ class NetDetailTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = Net
+
+
+class BackupDetailTable(tables.Table):
+    class Meta:
+        template_name = 'django_tables2/semantic.html'
+        model = Backup

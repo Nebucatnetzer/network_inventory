@@ -6,8 +6,9 @@ from django_tables2 import RequestConfig
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
-                     ComputerSoftwareRelation, Customer, Net, RaidInComputer)
-from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, NetDetailTable
+                     ComputerSoftwareRelation, Customer, Net, RaidInComputer,
+                     Backup)
+from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, NetDetailTable, BackupDetailTable
 
 
 def device_detail_view(request, device_id):
@@ -25,12 +26,15 @@ def computer_detail_view(request, computer_id):
     cpu_list = ComputerCpuRelation.objects.filter(computer=computer_id)
     software_list = ComputerSoftwareRelation.objects.filter(computer=computer_id)
     raid_relations = RaidInComputer.objects.filter(computer=computer_id)
+    raid_relations = RaidInComputer.objects.filter(computer=computer_id)
+    backup_list = Backup.objects.filter(computer=computer_id)
     context = {'computer': computer,
                'disks_list': disks_list,
                'ram_list': ram_list,
                'cpu_list': cpu_list,
                'software_list': software_list,
-               'raid_relations': raid_relations}
+               'raid_relations': raid_relations,
+               'backup_list': backup_list }
     return render(request, 'inventory/computer_details.html', context)
 
 
@@ -70,3 +74,9 @@ def net_detail_view(request, pk):
     table = NetDetailTable(Net.objects.filter(pk=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/net_details.html', {'net': table})
+
+
+def backup_detail_view(request, pk):
+    table = BackupDetailTable(Backup.objects.filter(pk=pk))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/backup_details.html', {'backup': table})
