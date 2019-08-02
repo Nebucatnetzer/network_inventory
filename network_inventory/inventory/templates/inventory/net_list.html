@@ -1,11 +1,6 @@
 {% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
 {% block section_title %}List of Nets{% endblock %}
 {% block content %}
-    {% if net_list %}
-    <ul>
-      {% for net in net_list %}
-      <li><a href="{% url 'net' net.id %}">{{ net.name }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+{% render_table nets %}
 {% endblock %}

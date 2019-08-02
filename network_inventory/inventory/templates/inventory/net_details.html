@@ -1,8 +1,6 @@
 {% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
 {% block section_title %}{{ net.name }}{% endblock %}
 {% block content %}
-    <p>{{ net.range }}</p>
-    <p>{{ net.ip_range }}</p>
-    <p>{{ net.dhcp_range }}</p>
-    <p>{{ net.customer }}</p>
+{% render_table net %}
 {% endblock %}

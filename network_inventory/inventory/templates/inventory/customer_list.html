@@ -1,19 +1,6 @@
 {% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
 {% block section_title %}List of Customers{% endblock %}
 {% block content %}
-{% if customer_list %}
-<table class="sortable">
-    <tr>
-        <th colspan="4">Name</th>
-    </tr>
-    {% for customer in customer_list %}
-    <tr>
-        <td><a href="{% url 'customer' customer.id %}">{{ customer.name }}</a></td>
-        <td><a href="{% url 'computers' customer.id %}">Computers</a></td>
-        <td><a href="{% url 'devices' customer.id %}">Devices</a></td>
-        <td><a href="{% url 'nets' customer.id %}">NETs</a></td>
-    </tr>
-    {% endfor %}
-</table>
-{% endif %}
+{% render_table customers %}
 {% endblock %}

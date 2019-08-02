@@ -1,11 +1,6 @@
 {% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
 {% block section_title %}List of General Devices{% endblock %}
 {% block content %}
-    {% if device_list %}
-    <ul>
-      {% for device in device_list %}
-      <li><a href="{% url 'device' device.id %}">{{ device.name }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+{% render_table devices %}
 {% endblock %}

@@ -2,10 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from guardian.shortcuts import get_objects_for_user
+from django_tables2 import RequestConfig
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer)
+from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, NetDetailTable
 
 
 def device_detail_view(request, device_id):
@@ -37,46 +39,34 @@ class CustomerDetailView(DetailView):
     template_name = 'inventory/customer_details.html'
 
 
-class CustomerListView(ListView):
-    model = Customer
-    template_name = 'inventory/customer_list.html'
-
-    def get_queryset(self):
-        queryset = get_objects_for_user(self.request.user,
-                                        'inventory.view_customer',
-                                        klass=Customer)
-        return queryset
+def customers_table_view(request):
+    table = CustomersTable(
+        get_objects_for_user(request.user,
+                             'inventory.view_customer',
+                             klass=Customer))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/customer_list.html', {'customers': table})
 
 
-class ComputerListView(ListView):
-    model = Computer
-    template_name = 'inventory/computer_list.html'
-
-    def get_queryset(self):
-        queryset = Computer.objects.filter(customer=self.kwargs['customer_id'])
-        return queryset
+def computers_table_view(request, customer_id):
+    table = ComputersTable(Computer.objects.filter(customer=customer_id))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/computer_list.html', {'computers': table})
 
 
-class DeviceListView(ListView):
-    model = Device
-    context_object_name = 'device_list'
-    template_name = 'inventory/device_list.html'
-
-    def get_queryset(self):
-        queryset = Device.objects.filter(customer=self.kwargs['customer_id'])
-        return queryset
+def devices_table_view(request, customer_id):
+    table = DevicesTable(Device.objects.filter(customer=customer_id))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/device_list.html', {'devices': table})
 
 
-class NetListView(ListView):
-    model = Net
-    context_object_name = 'net_list'
-    template_name = 'inventory/net_list.html'
-
-    def get_queryset(self):
-        queryset = Net.objects.filter(customer=self.kwargs['customer_id'])
-        return queryset
+def nets_table_view(request, customer_id):
+    table = NetsTable(Net.objects.filter(customer=customer_id))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/net_list.html', {'nets': table})
 
 
-class NetDetailView(DetailView):
-    model = Net
-    template_name = 'inventory/net_details.html'
+def net_detail_view(request, pk):
+    table = NetDetailTable(Net.objects.filter(pk=pk))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/net_details.html', {'net': table})
