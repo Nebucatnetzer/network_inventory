@@ -14,6 +14,7 @@ from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, Net
 from .filters import ComputerFilter
 
 
+@login_required
 def device_detail_view(request, device_id):
     device = get_object_or_404(Device, pk=device_id)
     return render(request, 'inventory/device_details.html',
@@ -46,6 +47,7 @@ class CustomerDetailView(DetailView):
     template_name = 'inventory/customer_details.html'
 
 
+@login_required
 def customers_table_view(request):
     table = CustomersTable(
         get_objects_for_user(request.user,
@@ -55,30 +57,35 @@ def customers_table_view(request):
     return render(request, 'inventory/customer_list.html', {'customers': table})
 
 
+@login_required
 def computers_table_view(request, customer_id):
     table = ComputersTable(Computer.objects.filter(customer=customer_id))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/computer_list.html', {'computers': table})
 
 
+@login_required
 def devices_table_view(request, customer_id):
     table = DevicesTable(Device.objects.filter(customer=customer_id))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/device_list.html', {'devices': table})
 
 
+@login_required
 def nets_table_view(request, customer_id):
     table = NetsTable(Net.objects.filter(customer=customer_id))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/net_list.html', {'nets': table})
 
 
+@login_required
 def net_detail_view(request, pk):
     table = NetDetailTable(Net.objects.filter(pk=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/net_details.html', {'net': table})
 
 
+@login_required
 def backup_detail_view(request, pk):
     table = BackupDetailTable(Backup.objects.filter(pk=pk))
     RequestConfig(request).configure(table)
