@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from guardian.shortcuts import get_objects_for_user
@@ -42,7 +43,7 @@ def computer_detail_view(request, computer_id):
     return render(request, 'inventory/computer_details.html', context)
 
 
-class CustomerDetailView(DetailView):
+class CustomerDetailView(LoginRequiredMixin, DetailView):
     model = Customer
     template_name = 'inventory/customer_details.html'
 
@@ -93,7 +94,7 @@ def backup_detail_view(request, pk):
 
 
 
-class AllComputersView(SingleTableMixin, FilterView):
+class AllComputersView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = ComputersTable
     model = Computer
     template_name = "inventory/all_computers.html"
