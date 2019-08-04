@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.customers_table_view, name='customers'),
     path('customer/<int:pk>/', views.CustomerDetailView.as_view(),
          name='customer'),
-    path('customer/<int:customer_id>/computers',
+    path('customer/<int:customer_id>/computers/',
          views.computers_table_view, name='computers'),
     path('customer/<int:customer_id>/devices/', views.devices_table_view,
          name='devices'),
