@@ -16,6 +16,15 @@ def test_customer_list_view_not_logged_in():
 
 
 @pytest.mark.django_db
+def test_customer_list_view_no_customer(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/')
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
 def test_customer_list_view(create_admin_user):
     create_admin_user()
     client = Client()
