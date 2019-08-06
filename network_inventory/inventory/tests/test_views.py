@@ -173,7 +173,6 @@ def test_backup_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/1/')
     assert response.status_code == 200
-    #assert False, "To be done"
 
 
 @pytest.mark.django_db
