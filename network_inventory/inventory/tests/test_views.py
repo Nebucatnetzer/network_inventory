@@ -99,16 +99,30 @@ def test_computer_detail_view_not_found(create_admin_user):
 
 
 @pytest.mark.django_db
-def test_device_detail_view():
-    Device.objects.create(name='Novartis Device')
+def test_device_detail_view_not_logged_in():
+    customer = Customer.objects.create(name="Novartis")
+    Device.objects.create(name="Novartis Device", customer=customer)
     client = Client().get('/device/1/')
     assert client.status_code == 302
 
 
 @pytest.mark.django_db
-def test_device_detail_view_not_found():
-    client = Client().get('/device/1/')
-    assert client.status_code == 302
+def test_device_detail_view(create_admin_user):
+    fixture = create_admin_user()
+    Device.objects.create(name="Novartis Device", customer=fixture['customer'])
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/device/1/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_device_detail_view_not_found(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/device/100/')
+    assert response.status_code == 404
 
 
 @pytest.mark.django_db
