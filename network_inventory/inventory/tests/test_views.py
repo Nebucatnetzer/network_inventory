@@ -30,7 +30,7 @@ def test_customer_list_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert response.status_code == 200
+    assert False, "To be done"
 
 
 @pytest.mark.django_db
@@ -71,7 +71,17 @@ def test_customer_computer_table(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/computers/')
     print(response.content)
-    assert response.status_code == 200
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_customer_computer_table_no_computer(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/customer/1/computers/')
+    print(response.content)
+    assert False, "To be done"
 
 
 @pytest.mark.django_db
@@ -210,7 +220,7 @@ def test_backup_detail_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/1/')
-    assert response.status_code == 200
+    assert False, "To be done"
 
 
 @pytest.mark.django_db
