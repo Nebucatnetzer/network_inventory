@@ -17,7 +17,7 @@ def test_customer_list_view_not_logged_in():
 
 @pytest.mark.django_db
 def test_customer_list_view(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
@@ -26,14 +26,14 @@ def test_customer_list_view(create_admin_user):
 
 @pytest.mark.django_db
 def test_customer_detail_view_not_logged_in():
-    customer = Customer.objects.create(name='Novartis')
+    Customer.objects.create(name='Novartis')
     client = Client().get('/customer/1/')
     assert client.status_code == 302
 
 
 @pytest.mark.django_db
 def test_customer_detail_view_not_found(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/2/')
@@ -42,7 +42,7 @@ def test_customer_detail_view_not_found(create_admin_user):
 
 @pytest.mark.django_db
 def test_customer_detail_view(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/')
@@ -57,7 +57,7 @@ def test_customer_computer_table_not_logged_in():
 
 @pytest.mark.django_db
 def test_customer_computer_table(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/computers/')
@@ -74,7 +74,7 @@ def test_customer_device_table_not_logged_in():
 @pytest.mark.django_db
 def test_computer_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
-    computer = Computer.objects.create(name="Novartis PC", customer=customer)
+    Computer.objects.create(name="Novartis PC", customer=customer)
     client = Client().get('/computer/1/')
     assert client.status_code == 302
 
@@ -82,7 +82,7 @@ def test_computer_detail_view_not_logged_in():
 @pytest.mark.django_db
 def test_computer_detail_view(create_admin_user):
     fixture = create_admin_user()
-    computer = Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
@@ -91,7 +91,7 @@ def test_computer_detail_view(create_admin_user):
 
 @pytest.mark.django_db
 def test_device_detail_view():
-    device = Device.objects.create(name='Novartis Device')
+    Device.objects.create(name='Novartis Device')
     client = Client().get('/device/1/')
     assert client.status_code == 302
 
