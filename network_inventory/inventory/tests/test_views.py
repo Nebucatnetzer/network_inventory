@@ -90,6 +90,15 @@ def test_computer_detail_view(create_admin_user):
 
 
 @pytest.mark.django_db
+def test_computer_detail_view_not_found(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computer/100/')
+    assert response.status_code == 404
+
+
+@pytest.mark.django_db
 def test_device_detail_view():
     Device.objects.create(name='Novartis Device')
     client = Client().get('/device/1/')
