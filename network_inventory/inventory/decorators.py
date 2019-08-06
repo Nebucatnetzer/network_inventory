@@ -33,7 +33,7 @@ def device_view_permission(old_function):
 
 def connect_device_view_permission(old_function):
     def new_function(request, device_id, *args, **kwargs):
-        computer = Device.objects.get(pk=device_id)
+        device = get_object_or_404(ConnectedDevice, pk=device_id)
         customer = Customer.objects.get(pk=device.customer.pk)
         user = request.user
         if user.has_perm('inventory.view_customer', customer):
