@@ -1,10 +1,11 @@
 from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404
 from .models import Computer, Customer, Device, ConnectedDevice
 
 
 def computer_view_permission(old_fuction):
     def new_function(request, computer_id, *args, **kwargs):
-        computer = Computer.objects.get(pk=computer_id)
+        computer = get_object_or_404(Computer, pk=computer_id)
         customer = Customer.objects.get(pk=computer.customer.pk)
         user = request.user
         if user.has_perm('inventory.view_customer', customer):
