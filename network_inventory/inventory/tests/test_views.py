@@ -188,7 +188,6 @@ def test_net_detail_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/1/')
-    assert response.status_code == 200
     assert False, "To be done"
 
 
