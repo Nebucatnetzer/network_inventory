@@ -97,6 +97,35 @@ def test_computer_detail_view_not_found(create_admin_user):
     response = client.get('/computer/100/')
     assert response.status_code == 404
 
+@pytest.mark.django_db
+def test_computer_detail_view_ram_relation(create_admin_user):
+    fixture = create_admin_user()
+    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computer/1/')
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_computer_detail_view_raid_relation(create_admin_user):
+    fixture = create_admin_user()
+    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computer/1/')
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_computer_detail_view_cpu_relation(create_admin_user):
+    fixture = create_admin_user()
+    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computer/1/')
+    assert False, "To be done"
+
 
 @pytest.mark.django_db
 def test_device_detail_view_not_logged_in():
