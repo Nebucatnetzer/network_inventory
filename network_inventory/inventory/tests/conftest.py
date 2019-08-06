@@ -19,8 +19,7 @@ def create_admin_user():
         User = get_user_model()
         admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
                                         "password", is_staff=True)
-        customer = Customer(name="Novartis")
-        customer.save()
+        customer = Customer.objects.create(name="Novartis")
         group = Group.objects.create(name="Novartis Admin")
         admin.groups.add(group)
         assign_perm('view_customer', admin, customer)
