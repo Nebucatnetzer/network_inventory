@@ -6,7 +6,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
-from inventory.models import Device, Customer, Computer
+from inventory.models import Backup, Device, Customer, Computer, Net
 
 
 @pytest.mark.django_db
@@ -123,6 +123,66 @@ def test_device_detail_view_not_found(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/device/100/')
     assert response.status_code == 404
+
+
+@pytest.mark.django_db
+def test_net_detail_view_not_logged_in():
+    customer = Customer.objects.create(name="Novartis")
+    Net.objects.create(name="Novartis Device", customer=customer)
+    client = Client().get('/net/1/')
+    assert client.status_code == 302
+
+
+@pytest.mark.django_db
+def test_net_detail_view(create_admin_user):
+    fixture = create_admin_user()
+    Net.objects.create(name="Novartis Device", customer=fixture['customer'])
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/net/1/')
+    assert response.status_code == 200
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_net_detail_view_not_found(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/net/100/')
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_backup_detail_view_not_logged_in():
+    customer = Customer.objects.create(name="Novartis")
+    computer = Computer.objects.create(name="Novartis PC")
+    Backup.objects.create(name="Novartis Backup", computer=computer,
+                          exec_time="21:30")
+    client = Client().get('/backup/1/')
+    assert client.status_code == 302
+
+
+@pytest.mark.django_db
+def test_backup_detail_view(create_admin_user):
+    fixture = create_admin_user()
+    computer = Computer.objects.create(name="Novartis PC")
+    Backup.objects.create(name="Novartis Backup", computer=computer,
+                          exec_time="21:30")
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/backup/1/')
+    assert response.status_code == 200
+    #assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_backup_detail_view_not_found(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/backup/100/')
+    assert False, "To be done"
 
 
 @pytest.mark.django_db
