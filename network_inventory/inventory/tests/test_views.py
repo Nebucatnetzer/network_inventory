@@ -185,6 +185,18 @@ def test_backup_detail_view_not_found(create_admin_user):
 
 
 @pytest.mark.django_db
-def test_computer_list_view():
+def test_computer_list_view_not_logged_in():
     client = Client().get('/computers/all/')
     assert client.status_code == 302
+
+
+@pytest.mark.django_db
+def test_computer_list_view_no_computers():
+    client = Client().get('/computers/all/')
+    assert False, "To be done"
+
+
+@pytest.mark.django_db
+def test_computer_list_view():
+    client = Client().get('/computers/all/')
+    assert False, "To be done"
