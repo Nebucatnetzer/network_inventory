@@ -70,7 +70,6 @@ def test_customer_computer_table(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/computers/')
-    print(response.content)
     assert False, "To be done"
 
 
