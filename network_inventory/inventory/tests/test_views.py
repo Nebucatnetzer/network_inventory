@@ -23,7 +23,8 @@ def test_customer_list_view_no_customer(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert "Novartis" not in response.content.decode('utf8')
+    assert (response.status_code == 200
+            and "Novartis" not in response.content.decode('utf8'))
 
 
 @pytest.mark.django_db
