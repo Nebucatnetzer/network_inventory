@@ -59,6 +59,18 @@ def test_customer_detail_view(create_admin_user):
 
 
 @pytest.mark.django_db
+def test_customer_detail_view_no_permissions():
+    User = get_user_model()
+    admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
+                                     "password", is_staff=True)
+    client = Client()
+    Customer.objects.create(name="Novartis")
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/customer/1/')
+    assert "Novartis" not in response.content.decode('utf8')
+
+
+@pytest.mark.django_db
 def test_customer_computer_table_not_logged_in():
     client = Client().get('/customer/1/computers/')
     assert client.status_code == 302
