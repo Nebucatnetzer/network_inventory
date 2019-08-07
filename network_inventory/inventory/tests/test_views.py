@@ -17,11 +17,13 @@ def test_customer_list_view_not_logged_in():
 
 @pytest.mark.django_db
 def test_customer_list_view_no_customer(create_admin_user):
-    create_admin_user()
+    User = get_user_model()
+    admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
+                                     "password", is_staff=True)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert False, "To be done"
+    assert "Novartis" not in response.content.decode('utf8')
 
 
 @pytest.mark.django_db
