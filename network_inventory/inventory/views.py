@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from guardian.shortcuts import get_objects_for_user
+from guardian.mixins import PermissionRequiredMixin
 from django_tables2 import RequestConfig
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
@@ -43,9 +44,10 @@ def computer_detail_view(request, computer_id):
     return render(request, 'inventory/computer_details.html', context)
 
 
-class CustomerDetailView(LoginRequiredMixin, DetailView):
+class CustomerDetailView(LoginRequiredMixin,PermissionRequiredMixin, DetailView):
     model = Customer
     template_name = 'inventory/customer_details.html'
+    permission_required = 'computer_view_permission'
 
 
 @login_required
