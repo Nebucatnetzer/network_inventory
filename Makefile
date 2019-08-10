@@ -6,7 +6,7 @@ docker:
 	docker-compose up
 
 test:
-	docker-compose run web pytest network_inventory/inventory/tests
+	docker-compose run web pytest network_inventory/ --nomigrations --cov=. --cov-report=html
 
 venv/bin/activate: requirements/local.txt
 	test -d venv || python3 -m venv venv
