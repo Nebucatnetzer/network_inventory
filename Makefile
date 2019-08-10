@@ -8,6 +8,12 @@ docker:
 test:
 	docker-compose run web pytest network_inventory/ --nomigrations --cov=. --cov-report=html
 
+local:
+	python3 -m venv venv
+	( \
+	source venv/bin/activate; \
+	pip3 install -r requirements/local.txt; \
+	)
 
 clean:
 	rm -rf venv/
