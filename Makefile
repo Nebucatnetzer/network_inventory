@@ -13,6 +13,9 @@ venv/bin/activate: requirements/local.txt
 	. venv/bin/activate; pip3 install wheel; pip3 install -Ur requirements/local.txt
 	touch venv/bin/activate
 
+clean:
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
+	sudo rm -rf htmlcov/
+	sudo rm network_inventory/.second_run
 	docker-compose down -v --rmi local
