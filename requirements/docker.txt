@@ -1,6 +1,3 @@
 -r base.txt
 
-pytest
-pytest-django
-pytest-cov
 psycopg2
