@@ -249,6 +249,10 @@ def test_computer_list_view_no_computers(create_admin_user):
     assert response.status_code == 200
 
 
-def test_computer_list_view():
-    client = Client().get('/computers/all/')
-    assert False, "To be done"
+def test_computer_list_view(create_admin_user):
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer')
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computers/all/')
+    assert response.status_code == 200 and in_content(response, computer.name)
