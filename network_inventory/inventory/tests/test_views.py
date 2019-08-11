@@ -79,8 +79,9 @@ def test_customer_computer_table(create_admin_user):
     create_admin_user()
     client = Client()
     client.login(username="novartis-admin", password="password")
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     response = client.get('/customer/1/computers/')
-    assert False, "To be done"
+    assert response.status_code == 200 and computer.name in response.content.decode('utf8')
 
 
 def test_customer_computer_table_no_computer(create_admin_user):
