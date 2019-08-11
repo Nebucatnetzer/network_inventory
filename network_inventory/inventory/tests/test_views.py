@@ -233,7 +233,7 @@ def test_backup_detail_view_not_found(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/100/')
-    assert False, "To be done"
+    assert response.status_code == 200
 
 
 def test_computer_list_view_not_logged_in():
