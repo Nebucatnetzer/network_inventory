@@ -89,7 +89,7 @@ def test_customer_computer_table_no_computer(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/computers/')
-    assert False, "To be done"
+    assert response.status_code == 200 and "Novartis PC" not in response.content.decode('utf8')
 
 
 def test_customer_device_table_not_logged_in():
