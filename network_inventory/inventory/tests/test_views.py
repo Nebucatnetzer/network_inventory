@@ -12,6 +12,8 @@ from inventory.models import (Backup, Device, Customer, Computer, Net,
                               RaidType, RaidInComputer, DisksInRaid, Disk,
                               Cpu, ComputerCpuRelation)
 
+from helper import in_content, not_in_content
+
 pytestmark=pytest.mark.django_db
 
 
@@ -27,8 +29,7 @@ def test_customer_list_view_no_customer(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert (response.status_code == 200
-            and "Novartis" not in response.content.decode('utf8'))
+    assert response.status_code == 200 and not_in_content(response, "Novartis")
 
 
 def test_customer_list_view(create_admin_user):
@@ -36,8 +37,7 @@ def test_customer_list_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert (response.status_code == 200
-            and "Novartis" in response.content.decode('utf8'))
+    assert response.status_code == 200 and in_content(response, "Novartis")
 
 
 def test_customer_detail_view_not_logged_in():
@@ -70,7 +70,7 @@ def test_customer_detail_view_no_permissions():
     customer = mixer.blend('inventory.Customer')
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/')
-    assert response.status_code == 302 and customer.name not in response.content.decode('utf8')
+    assert response.status_code == 302 and not_in_content(response, customer.name)
 
 
 def test_customer_computer_table_not_logged_in():
@@ -84,7 +84,7 @@ def test_customer_computer_table(create_admin_user):
     client.login(username="novartis-admin", password="password")
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     response = client.get('/customer/1/computers/')
-    assert response.status_code == 200 and computer.name in response.content.decode('utf8')
+    assert response.status_code == 200 and in_content(response, computer.name)
 
 
 def test_customer_computer_table_no_computer(create_admin_user):
@@ -92,7 +92,7 @@ def test_customer_computer_table_no_computer(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/computers/')
-    assert response.status_code == 200 and "Novartis PC" not in response.content.decode('utf8')
+    assert response.status_code == 200 and not_in_content(response, "Novartis PC")
 
 
 def test_customer_device_table_not_logged_in():
@@ -113,7 +113,7 @@ def test_computer_detail_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert response.status_code == 200
+    assert response.status_code == 200 and in_content(response, computer.name)
 
 
 def test_computer_detail_view_not_found(create_admin_user):
@@ -133,7 +133,7 @@ def test_computer_detail_view_ram_relation(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert response.status_code == 200 and "RAM Modules:" in response.content.decode('utf8')
+    assert response.status_code == 200 and in_content(response, "RAM Modules:")
 
 
 def test_computer_detail_view_raid_relation(create_admin_user):
@@ -146,7 +146,7 @@ def test_computer_detail_view_raid_relation(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert response.status_code == 200 and "RAID" in response.content.decode('utf8')
+    assert response.status_code == 200 and in_content(response, "RAID")
 
 
 def test_computer_detail_view_cpu_relation(create_admin_user):
@@ -157,7 +157,7 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert response.status_code == 200 and cpu.name in response.content.decode('utf8')
+    assert response.status_code == 200 and in_content(response, cpu.name)
 
 
 def test_device_detail_view_not_logged_in():
@@ -173,7 +173,7 @@ def test_device_detail_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/device/1/')
-    assert response.status_code == 200
+    assert response.status_code == 200 and in_content(response, device.name)
 
 
 def test_device_detail_view_not_found(create_admin_user):
