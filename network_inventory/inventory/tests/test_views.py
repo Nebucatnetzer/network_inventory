@@ -202,10 +202,11 @@ def test_net_detail_view(create_admin_user):
 
 def test_net_detail_view_not_found(create_admin_user):
     create_admin_user()
+    net = mixer.blend('inventory.Net')
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/100/')
-    assert False, "To be done"
+    assert response.status_code == 200 and not_in_content(response, net.name)
 
 
 def test_backup_detail_view_not_logged_in():
