@@ -8,14 +8,14 @@ from django.contrib.auth.models import Group
 
 from inventory.models import Backup, Device, Customer, Computer, Net
 
+pytestmark=pytest.mark.django_db
 
-@pytest.mark.django_db
+
 def test_customer_list_view_not_logged_in():
     client = Client().get('/')
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_customer_list_view_no_customer(create_admin_user):
     User = get_user_model()
     admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
@@ -27,7 +27,6 @@ def test_customer_list_view_no_customer(create_admin_user):
             and "Novartis" not in response.content.decode('utf8'))
 
 
-@pytest.mark.django_db
 def test_customer_list_view(create_admin_user):
     create_admin_user()
     client = Client()
@@ -36,14 +35,12 @@ def test_customer_list_view(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_customer_detail_view_not_logged_in():
     Customer.objects.create(name='Novartis')
     client = Client().get('/customer/1/')
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_customer_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
@@ -52,7 +49,6 @@ def test_customer_detail_view_not_found(create_admin_user):
     assert response.status_code == 404
 
 
-@pytest.mark.django_db
 def test_customer_detail_view(create_admin_user):
     create_admin_user()
     client = Client()
@@ -61,7 +57,6 @@ def test_customer_detail_view(create_admin_user):
     assert response.status_code == 200
 
 
-@pytest.mark.django_db
 def test_customer_detail_view_no_permissions():
     User = get_user_model()
     admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
@@ -73,13 +68,11 @@ def test_customer_detail_view_no_permissions():
     assert "Novartis" not in response.content.decode('utf8')
 
 
-@pytest.mark.django_db
 def test_customer_computer_table_not_logged_in():
     client = Client().get('/customer/1/computers/')
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_customer_computer_table(create_admin_user):
     create_admin_user()
     client = Client()
@@ -88,7 +81,6 @@ def test_customer_computer_table(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_customer_computer_table_no_computer(create_admin_user):
     create_admin_user()
     client = Client()
@@ -97,13 +89,11 @@ def test_customer_computer_table_no_computer(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_customer_device_table_not_logged_in():
     client = Client().get('/customer/1/devices/')
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_computer_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
     Computer.objects.create(name="Novartis PC", customer=customer)
@@ -111,7 +101,6 @@ def test_computer_detail_view_not_logged_in():
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_computer_detail_view(create_admin_user):
     fixture = create_admin_user()
     Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
@@ -121,7 +110,6 @@ def test_computer_detail_view(create_admin_user):
     assert response.status_code == 200
 
 
-@pytest.mark.django_db
 def test_computer_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
@@ -129,7 +117,6 @@ def test_computer_detail_view_not_found(create_admin_user):
     response = client.get('/computer/100/')
     assert response.status_code == 404
 
-@pytest.mark.django_db
 def test_computer_detail_view_ram_relation(create_admin_user):
     fixture = create_admin_user()
     Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
@@ -139,7 +126,6 @@ def test_computer_detail_view_ram_relation(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_computer_detail_view_raid_relation(create_admin_user):
     fixture = create_admin_user()
     Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
@@ -149,7 +135,6 @@ def test_computer_detail_view_raid_relation(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_computer_detail_view_cpu_relation(create_admin_user):
     fixture = create_admin_user()
     Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
@@ -159,7 +144,6 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_device_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
     Device.objects.create(name="Novartis Device", customer=customer)
@@ -167,7 +151,6 @@ def test_device_detail_view_not_logged_in():
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_device_detail_view(create_admin_user):
     fixture = create_admin_user()
     Device.objects.create(name="Novartis Device", customer=fixture['customer'])
@@ -177,7 +160,6 @@ def test_device_detail_view(create_admin_user):
     assert response.status_code == 200
 
 
-@pytest.mark.django_db
 def test_device_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
@@ -186,7 +168,6 @@ def test_device_detail_view_not_found(create_admin_user):
     assert response.status_code == 404
 
 
-@pytest.mark.django_db
 def test_net_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
     Net.objects.create(name="Novartis Device", customer=customer)
@@ -194,7 +175,6 @@ def test_net_detail_view_not_logged_in():
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_net_detail_view(create_admin_user):
     fixture = create_admin_user()
     Net.objects.create(name="Novartis Device", customer=fixture['customer'])
@@ -204,7 +184,6 @@ def test_net_detail_view(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_net_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
@@ -213,7 +192,6 @@ def test_net_detail_view_not_found(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_backup_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
     computer = Computer.objects.create(name="Novartis PC")
@@ -223,7 +201,6 @@ def test_backup_detail_view_not_logged_in():
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_backup_detail_view(create_admin_user):
     fixture = create_admin_user()
     computer = Computer.objects.create(name="Novartis PC")
@@ -235,7 +212,6 @@ def test_backup_detail_view(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_backup_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
@@ -244,19 +220,16 @@ def test_backup_detail_view_not_found(create_admin_user):
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_computer_list_view_not_logged_in():
     client = Client().get('/computers/all/')
     assert client.status_code == 302
 
 
-@pytest.mark.django_db
 def test_computer_list_view_no_computers():
     client = Client().get('/computers/all/')
     assert False, "To be done"
 
 
-@pytest.mark.django_db
 def test_computer_list_view():
     client = Client().get('/computers/all/')
     assert False, "To be done"
