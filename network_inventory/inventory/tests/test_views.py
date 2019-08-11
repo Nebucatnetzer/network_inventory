@@ -1,4 +1,5 @@
 import pytest
+from mixer.backend.django import mixer
 
 from django.urls import resolve
 from django.test import Client
@@ -36,7 +37,7 @@ def test_customer_list_view(create_admin_user):
 
 
 def test_customer_detail_view_not_logged_in():
-    Customer.objects.create(name='Novartis')
+    mixer.blend('inventory.Customer')
     client = Client().get('/customer/1/')
     assert client.status_code == 302
 
@@ -95,15 +96,15 @@ def test_customer_device_table_not_logged_in():
 
 
 def test_computer_detail_view_not_logged_in():
-    customer = Customer.objects.create(name="Novartis")
-    Computer.objects.create(name="Novartis PC", customer=customer)
+    customer = mixer.blend('inventory.Customer')
+    computer = mixer.blend('inventory.Computer', customer=customer)
     client = Client().get('/computer/1/')
     assert client.status_code == 302
 
 
 def test_computer_detail_view(create_admin_user):
     fixture = create_admin_user()
-    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    computer = mixer.blend('inventory.Computer', customer=fixture['customer'])
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
