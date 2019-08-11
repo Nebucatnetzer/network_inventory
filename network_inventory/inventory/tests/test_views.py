@@ -64,10 +64,10 @@ def test_customer_detail_view_no_permissions():
     admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
                                      "password", is_staff=True)
     client = Client()
-    Customer.objects.create(name="Novartis")
+    customer = mixer.blend('inventory.Customer')
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/')
-    assert "Novartis" not in response.content.decode('utf8')
+    assert response.status_code == 302 and customer.name not in response.content.decode('utf8')
 
 
 def test_customer_computer_table_not_logged_in():
