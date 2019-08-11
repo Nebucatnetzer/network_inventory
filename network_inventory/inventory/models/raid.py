@@ -8,6 +8,5 @@ class RaidType(Category):
 
 
 class DisksInRaid(models.Model):
-    raid = models.ForeignKey(RaidType, on_delete=models.CASCADE)
     disk = models.ForeignKey(Disk, on_delete=models.CASCADE)
     disk_amount = models.IntegerField()
