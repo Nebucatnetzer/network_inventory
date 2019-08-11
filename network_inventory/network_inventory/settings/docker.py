@@ -5,10 +5,10 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
-DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASES = {
     'default': {
