@@ -8,7 +8,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
 from inventory.models import (Backup, Device, Customer, Computer, Net,
-                              Ram,  ComputerRamRelation,)
+                              Ram,  ComputerRamRelation,
+                              RaidType, RaidInComputer, DisksInRaid, Disk,)
 
 pytestmark=pytest.mark.django_db
 
@@ -135,12 +136,16 @@ def test_computer_detail_view_ram_relation(create_admin_user):
 
 
 def test_computer_detail_view_raid_relation(create_admin_user):
-    fixture = create_admin_user()
-    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    raid = mixer.blend('inventory.RaidType')
+    disk = mixer.blend('inventory.Disk')
+    disks = mixer.blend('inventory.DisksInRaid', raid=raid, disk=disk)
+    mixer.blend('inventory.RaidInComputer', computer=computer, raid=disks)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert False, "To be done"
+    assert response.status_code == 200 and "RAID" in response.content.decode('utf8')
 
 
 def test_computer_detail_view_cpu_relation(create_admin_user):
