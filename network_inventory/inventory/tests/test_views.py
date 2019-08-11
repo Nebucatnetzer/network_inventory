@@ -33,7 +33,8 @@ def test_customer_list_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
-    assert False, "To be done"
+    assert (response.status_code == 200
+            and "Novartis" in response.content.decode('utf8'))
 
 
 def test_customer_detail_view_not_logged_in():
