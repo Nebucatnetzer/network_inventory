@@ -105,8 +105,8 @@ def test_computer_detail_view_not_logged_in():
 
 
 def test_computer_detail_view(create_admin_user):
-    fixture = create_admin_user()
-    computer = mixer.blend('inventory.Computer', customer=fixture['customer'])
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
