@@ -161,15 +161,15 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
 
 
 def test_device_detail_view_not_logged_in():
-    customer = Customer.objects.create(name="Novartis")
-    Device.objects.create(name="Novartis Device", customer=customer)
+    mixer.blend('inventory.Customer')
+    mixer.blend('inventory.Device', customer=mixer.SELECT)
     client = Client().get('/device/1/')
     assert client.status_code == 302
 
 
 def test_device_detail_view(create_admin_user):
-    fixture = create_admin_user()
-    Device.objects.create(name="Novartis Device", customer=fixture['customer'])
+    create_admin_user()
+    device = mixer.blend('inventory.Device', customer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/device/1/')
