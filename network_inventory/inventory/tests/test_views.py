@@ -7,7 +7,8 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
-from inventory.models import Backup, Device, Customer, Computer, Net
+from inventory.models import (Backup, Device, Customer, Computer, Net,
+                              Ram,  ComputerRamRelation,)
 
 pytestmark=pytest.mark.django_db
 
@@ -120,13 +121,17 @@ def test_computer_detail_view_not_found(create_admin_user):
     response = client.get('/computer/100/')
     assert response.status_code == 404
 
+
 def test_computer_detail_view_ram_relation(create_admin_user):
-    fixture = create_admin_user()
-    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    ram_type = mixer.blend('inventory.RamType')
+    ram = mixer.blend('inventory.Ram', ram_type=ram_type)
+    mixer.blend('inventory.ComputerRamRelation', computer=computer, ram=ram)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert False, "To be done"
+    assert response.status_code == 200 and "RAM Modules:" in response.content.decode('utf8')
 
 
 def test_computer_detail_view_raid_relation(create_admin_user):
