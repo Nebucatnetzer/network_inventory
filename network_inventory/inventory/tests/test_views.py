@@ -219,14 +219,13 @@ def test_backup_detail_view_not_logged_in():
 
 
 def test_backup_detail_view(create_admin_user):
-    fixture = create_admin_user()
-    computer = Computer.objects.create(name="Novartis PC")
-    Backup.objects.create(name="Novartis Backup", computer=computer,
-                          exec_time="21:30")
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer')
+    backup = mixer.blend('inventory.Backup', computer=computer)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/1/')
-    assert False, "To be done"
+    assert response.status_code == 200 and in_content(response, backup.name)
 
 
 def test_backup_detail_view_not_found(create_admin_user):
