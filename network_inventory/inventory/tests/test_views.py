@@ -9,7 +9,8 @@ from django.contrib.auth.models import Group
 
 from inventory.models import (Backup, Device, Customer, Computer, Net,
                               Ram,  ComputerRamRelation,
-                              RaidType, RaidInComputer, DisksInRaid, Disk,)
+                              RaidType, RaidInComputer, DisksInRaid, Disk,
+                              Cpu, ComputerCpuRelation)
 
 pytestmark=pytest.mark.django_db
 
@@ -149,12 +150,14 @@ def test_computer_detail_view_raid_relation(create_admin_user):
 
 
 def test_computer_detail_view_cpu_relation(create_admin_user):
-    fixture = create_admin_user()
-    Computer.objects.create(name="Novartis PC", customer=fixture['customer'])
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    cpu = mixer.blend('inventory.Cpu', cpu_typ=mixer.SELECT)
+    mixer.blend('inventory.ComputerCpuRelation', cpu=cpu, computer=computer)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/1/')
-    assert False, "To be done"
+    assert response.status_code == 200 and cpu.name in response.content.decode('utf8')
 
 
 def test_device_detail_view_not_logged_in():
