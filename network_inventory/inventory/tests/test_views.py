@@ -192,12 +192,12 @@ def test_net_detail_view_not_logged_in():
 
 
 def test_net_detail_view(create_admin_user):
-    fixture = create_admin_user()
-    Net.objects.create(name="Novartis Device", customer=fixture['customer'])
+    create_admin_user()
+    net = mixer.blend('inventory.Net')
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/1/')
-    assert False, "To be done"
+    assert response.status_code == 200 and in_content(response, net.name)
 
 
 def test_net_detail_view_not_found(create_admin_user):
