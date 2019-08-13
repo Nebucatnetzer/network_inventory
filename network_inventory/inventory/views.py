@@ -44,10 +44,10 @@ def computer_detail_view(request, computer_id):
     return render(request, 'inventory/computer_details.html', context)
 
 
-class CustomerDetailView(LoginRequiredMixin,PermissionRequiredMixin, DetailView):
+class CustomerDetailView(PermissionRequiredMixin, DetailView):
     model = Customer
     template_name = 'inventory/customer_details.html'
-    permission_required = 'computer_view_permission'
+    permission_required = 'view_customer'
 
 
 @login_required
