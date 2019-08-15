@@ -18,8 +18,8 @@ pytestmark=pytest.mark.django_db
 
 
 def test_customer_list_view_not_logged_in():
-    client = Client().get('/')
-    assert client.status_code == 302
+    response = Client().get('/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_customer_list_view_no_customer(create_admin_user):
@@ -42,8 +42,8 @@ def test_customer_list_view(create_admin_user):
 
 def test_customer_detail_view_not_logged_in():
     mixer.blend('inventory.Customer')
-    client = Client().get('/customer/1/')
-    assert client.status_code == 302
+    response = Client().get('/customer/1/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_customer_detail_view_not_found(create_admin_user):
@@ -70,12 +70,12 @@ def test_customer_detail_view_no_permissions():
     customer = mixer.blend('inventory.Customer')
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/1/')
-    assert response.status_code == 302 and not_in_content(response, customer.name)
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_customer_computer_table_not_logged_in():
-    client = Client().get('/customer/1/computers/')
-    assert client.status_code == 302
+    response = Client().get('/customer/1/computers/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_customer_computer_table(create_admin_user):
@@ -96,15 +96,15 @@ def test_customer_computer_table_no_computer(create_admin_user):
 
 
 def test_customer_device_table_not_logged_in():
-    client = Client().get('/customer/1/devices/')
-    assert client.status_code == 302
+    response = Client().get('/customer/1/devices/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_computer_detail_view_not_logged_in():
     customer = mixer.blend('inventory.Customer')
     computer = mixer.blend('inventory.Computer', customer=customer)
-    client = Client().get('/computer/1/')
-    assert client.status_code == 302
+    response = Client().get('/computer/1/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_computer_detail_view(create_admin_user):
@@ -163,8 +163,8 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
 def test_device_detail_view_not_logged_in():
     mixer.blend('inventory.Customer')
     mixer.blend('inventory.Device', customer=mixer.SELECT)
-    client = Client().get('/device/1/')
-    assert client.status_code == 302
+    response = Client().get('/device/1/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_device_detail_view(create_admin_user):
@@ -187,8 +187,8 @@ def test_device_detail_view_not_found(create_admin_user):
 def test_net_detail_view_not_logged_in():
     customer = Customer.objects.create(name="Novartis")
     Net.objects.create(name="Novartis Device", customer=customer)
-    client = Client().get('/net/1/')
-    assert client.status_code == 302
+    response = Client().get('/net/1/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_net_detail_view(create_admin_user):
@@ -214,8 +214,8 @@ def test_backup_detail_view_not_logged_in():
     computer = Computer.objects.create(name="Novartis PC")
     Backup.objects.create(name="Novartis Backup", computer=computer,
                           exec_time="21:30")
-    client = Client().get('/backup/1/')
-    assert client.status_code == 302
+    response = Client().get('/backup/1/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_backup_detail_view(create_admin_user):
@@ -237,8 +237,8 @@ def test_backup_detail_view_not_found(create_admin_user):
 
 
 def test_computer_list_view_not_logged_in():
-    client = Client().get('/computers/all/')
-    assert client.status_code == 302
+    response = Client().get('/computers/all/')
+    assert response.status_code == 302 and 'login' in response.url
 
 
 def test_computer_list_view_no_computers(create_admin_user):
