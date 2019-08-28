@@ -13,13 +13,27 @@ inventory over my various servers and other network equipment.
    in the future and SQlite is not supported for production.
 
 ### Local Setup
-3. Run `make local` to create the virtual environment for developemenet
-   http://localhost:8000 . You're now all set to start developing.
+3. Run `make local` to create the virtual environment for development.
+   You're now all set to start developing.
 
 ### Docker Setup
 3. Run `make` to start the development server. You can access it
    at   http://localhost:8000 . You're now all set to start developing. \
    If you need to run migrations you can simply restart the Docker container.
+
+#### Environment Variables
+
+To customise the application in the Docker container you can use environment
+variables in the docker-compose.yml file. Currently the following variables are
+supported.
+
+- **DJANGO_SECRET_KEY** the secret key is mandatory, otherwise the application
+  doesn't run. Make sure that it is some long random string.
+- **DJANGO_DEBUG** settings this variable to any value enables the Django debug
+  mode. Make sure that you don't set it on a production server.
+- **DJANGO_SETTINGS_MODULE** the path to the settings file to use in the
+  container. This requires a dotet syntax. The default is
+  `network_inventory.settings.docker`.
 
 ## Todos
 - [ ] Create an Apache configuration

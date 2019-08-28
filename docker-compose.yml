@@ -19,8 +19,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DEBUG=False
       - DJANGO_SETTINGS_MODULE=network_inventory.settings.docker
-      - SECRET_KEY=developemenet_key
+      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=foo
     depends_on:
       - db
