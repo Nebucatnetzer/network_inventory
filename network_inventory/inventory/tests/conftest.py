@@ -1,4 +1,6 @@
 import pytest
+from mixer.backend.django import mixer
+
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -19,7 +21,7 @@ def create_admin_user():
         User = get_user_model()
         admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
                                          "password", is_staff=True)
-        customer = Customer.objects.create(name="Novartis")
+        customer = mixer.blend('inventory.Customer')
         group = Group.objects.create(name="Novartis Admin")
         admin.groups.add(group)
         assign_perm('view_customer', admin, customer)
