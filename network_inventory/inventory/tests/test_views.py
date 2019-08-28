@@ -3,7 +3,6 @@ from mixer.backend.django import mixer
 
 from django.urls import resolve
 from django.test import Client
-from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
