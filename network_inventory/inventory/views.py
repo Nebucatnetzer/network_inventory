@@ -96,7 +96,7 @@ def backup_detail_view(request, pk):
 
 
 
-class AllComputersView(LoginRequiredMixin, SingleTableMixin, FilterView):
+class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = ComputersTable
     model = Computer
     template_name = "inventory/all_computers.html"
