@@ -3,9 +3,22 @@
 {% block section_title %}Login{% endblock %}
 
 {% block content %}
-    <form id="login" name="login" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="button_login" type="submit">Login</button>
-    </form>
+<form id="login" name="login" method="post">
+{% csrf_token %}
+<p>
+    <label for="id_username">Username:</label>
+    <div class="ui input">
+        <input type="text" name="username" autofocus required id="id_username">
+    </div>
+</p>
+<p>
+    <label for="id_password">Password:</label>
+    <div class="ui input">
+        <input type="password" name="password" required id="id_password">
+    </div>
+</p>
+<p>
+    <button name="button_login" type="submit" class="ui button">Login</button>
+</form>
+</p>
 {% endblock %}
