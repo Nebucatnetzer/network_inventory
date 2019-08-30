@@ -214,8 +214,8 @@ def test_backup_detail_view_not_logged_in():
 
 def test_backup_detail_view(create_admin_user):
     create_admin_user()
-    computer = mixer.blend('inventory.Computer')
-    backup = mixer.blend('inventory.Backup', computer=computer)
+    mixer.blend('inventory.Computer')
+    backup = mixer.blend('inventory.Backup', computer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/' + str(backup.id) + '/')
