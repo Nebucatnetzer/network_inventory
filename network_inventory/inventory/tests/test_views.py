@@ -41,7 +41,6 @@ def test_customer_list_view(create_admin_user):
 
 
 def test_customer_detail_view_not_logged_in():
-    mixer.blend('inventory.Customer')
     response = Client().get('/customer/1/')
     assert response.status_code == 302 and 'login' in response.url
 
@@ -102,8 +101,6 @@ def test_customer_device_table_not_logged_in():
 
 
 def test_computer_detail_view_not_logged_in():
-    customer = mixer.blend('inventory.Customer')
-    computer = mixer.blend('inventory.Computer', customer=customer)
     response = Client().get('/computer/1/')
     assert response.status_code == 302 and 'login' in response.url
 
@@ -162,8 +159,6 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
 
 
 def test_device_detail_view_not_logged_in():
-    mixer.blend('inventory.Customer')
-    mixer.blend('inventory.Device', customer=mixer.SELECT)
     response = Client().get('/device/1/')
     assert response.status_code == 302 and 'login' in response.url
 
@@ -186,8 +181,6 @@ def test_device_detail_view_not_found(create_admin_user):
 
 
 def test_net_detail_view_not_logged_in():
-    customer = Customer.objects.create(name="Novartis")
-    Net.objects.create(name="Novartis Device", customer=customer)
     response = Client().get('/net/1/')
     assert response.status_code == 302 and 'login' in response.url
 
@@ -211,10 +204,6 @@ def test_net_detail_view_not_found(create_admin_user):
 
 
 def test_backup_detail_view_not_logged_in():
-    customer = Customer.objects.create(name="Novartis")
-    computer = Computer.objects.create(name="Novartis PC")
-    Backup.objects.create(name="Novartis Backup", computer=computer,
-                          exec_time="21:30")
     response = Client().get('/backup/1/')
     assert response.status_code == 302 and 'login' in response.url
 
