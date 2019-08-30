@@ -45,8 +45,3 @@ supported.
       I would like to use this to show the usable space in a RAID system.
 - [ ] calculate the used space on a host
     Means calculate the size all the VMs would use if they were thick.
-
-## Developemenet
-
-For a detailed documentation of the source have a look at the
-[documentation](https://git.2li.ch/Nebucatnetzer/network_inventory/src/branch/master/docs/docs.org).
