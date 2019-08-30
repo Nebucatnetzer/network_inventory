@@ -104,6 +104,6 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = ComputerFilter
 
     def get_queryset(self):
-        return get_objects_for_user(self.request.user,
-                                    'inventory.view_computer',
-                                    klass=Computer)
+        customers = get_objects_for_user(self.request.user, 'inventory.view_customer', klass=Customer)
+        results = Computer.objects.filter(customer__in=customers)
+        return results
