@@ -33,11 +33,12 @@ def test_customer_list_view_no_customer():
 
 def test_customer_list_view(create_admin_user):
     fixture = create_admin_user()
+    customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
     assert (response.status_code == 200
-            and in_content(response, fixture['customer'].name))
+            and in_content(response, customer.name))
 
 
 def test_customer_detail_view_not_logged_in():
@@ -60,7 +61,7 @@ def test_customer_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/')
     assert (response.status_code == 200
-            and in_content(response, fixture['customer'].name))
+            and in_content(response, customer.name))
 
 
 def test_customer_detail_view_no_permissions():
