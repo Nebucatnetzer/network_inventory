@@ -8,4 +8,5 @@ django-filter
 pytest
 pytest-django
 pytest-cov
+pytest-xdist
 mixer
