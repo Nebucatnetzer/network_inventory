@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Net, Device, Backup
+from .models import Net, Device, Backup, DeviceInNet
 from django_tables2.utils import A
 
 class CustomersTable(tables.Table):
@@ -45,9 +45,13 @@ class NetsTable(tables.Table):
 
 
 class NetDetailTable(tables.Table):
+    device = tables.LinkColumn('computer', args=[A('pk')])
+    ip = tables.Column()
+    net = tables.Column(visible=False)
+
     class Meta:
         template_name = 'django_tables2/semantic.html'
-        model = Net
+        model = DeviceInNet
 
 
 class BackupDetailTable(tables.Table):
