@@ -7,6 +7,7 @@ class IpStatus(Category):
 
     class Meta:
         verbose_name_plural = "IP Status"
+        verbose_name = "IP Status"
 
 
 class Net(models.Model):
