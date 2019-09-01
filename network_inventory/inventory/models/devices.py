@@ -50,11 +50,11 @@ class ConnectedDevice(Device):
 class DeviceInNet(models.Model):
     device = models.ForeignKey(ConnectedDevice, on_delete=models.CASCADE)
     net = models.ForeignKey(Net, on_delete=models.CASCADE)
-    ip = models.GenericIPAddressField()
-    nic = models.CharField(max_length=50, blank=True)
-    mac_address = models.CharField(max_length=50, blank=True)
+    ip = models.GenericIPAddressField(verbose_name="IP")
+    nic = models.CharField(max_length=50, blank=True, verbose_name="NIC")
+    mac_address = models.CharField(max_length=50, blank=True, verbose_name="MAC Address")
     ip_status = models.ForeignKey(IpStatus, models.SET_NULL, null=True,
-                                  blank=True)
+                                  blank=True, verbose_name="IP Status")
 
     def __str__(self):
         return self.ip
