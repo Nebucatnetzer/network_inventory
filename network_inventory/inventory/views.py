@@ -88,9 +88,12 @@ def nets_table_view(request, customer_id):
 
 @login_required
 def net_detail_view(request, pk):
-    table = NetDetailTable(Net.objects.filter(pk=pk))
+    net = get_object_or_404(Net, pk=pk)
+    table = NetDetailTable(DeviceInNet.objects.filter(net=net))
     RequestConfig(request).configure(table)
-    return render(request, 'inventory/net_details.html', {'net': table})
+    return render(request, 'inventory/net_details.html',
+                  {'table': table,
+                   'net': net})
 
 
 @login_required
