@@ -37,6 +37,7 @@ class DevicesTable(tables.Table):
 
 class NetsTable(tables.Table):
     name = tables.LinkColumn('net', args=[A('pk')])
+    customer = tables.LinkColumn('customer', args=[A('pk')])
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
