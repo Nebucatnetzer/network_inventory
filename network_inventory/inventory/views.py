@@ -2,17 +2,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
+
 from guardian.shortcuts import get_objects_for_user
 from guardian.mixins import PermissionRequiredMixin
+
 from django_tables2 import RequestConfig
-from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin
+
+from django_filters.views import FilterView
+
 from .decorators import computer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer,
-                     Backup)
-from .tables import CustomersTable, ComputersTable, DevicesTable, NetsTable, NetDetailTable, BackupDetailTable
+                     Backup, DeviceInNet)
+from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
+                     NetDetailTable, BackupDetailTable)
 from .filters import ComputerFilter
 
 
