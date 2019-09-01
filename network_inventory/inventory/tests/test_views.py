@@ -9,7 +9,7 @@ from django.contrib.auth.models import Group
 from inventory.models import (Backup, Device, Customer, Computer, Net,
                               Ram,  ComputerRamRelation,
                               RaidType, RaidInComputer, DisksInRaid, Disk,
-                              Cpu, ComputerCpuRelation)
+                              Cpu, ComputerCpuRelation, DeviceInNet)
 
 from helper import in_content, not_in_content
 
@@ -192,10 +192,14 @@ def test_net_detail_view_not_logged_in():
 def test_net_detail_view(create_admin_user):
     create_admin_user()
     net = mixer.blend('inventory.Net')
+    device = mixer.blend('inventory.Computer')
+    device_in_net = DeviceInNet(device=device, net=net, ip='10.7.89.101')
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/' + str(net.id) + '/')
-    assert response.status_code == 200 and in_content(response, net.name)
+    assert (response.status_code == 200
+            and in_content(response, net.name)
+            and in_content(response, device_in_net.ip))
 
 
 def test_net_detail_view_not_found(create_admin_user):
