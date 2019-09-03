@@ -22,23 +22,23 @@ from .filters import ComputerFilter
 
 
 @login_required
-def device_detail_view(request, device_id):
-    device = get_object_or_404(Device, pk=device_id)
+def device_detail_view(request, pk):
+    device = get_object_or_404(Device, pk=pk)
     return render(request, 'inventory/device_details.html',
                   {'device': device})
 
 
 @login_required
 @computer_view_permission
-def computer_detail_view(request, computer_id):
-    computer = get_object_or_404(Computer, pk=computer_id)
-    disks_list = ComputerDiskRelation.objects.filter(computer=computer_id)
-    ram_list = ComputerRamRelation.objects.filter(computer=computer_id)
-    cpu_list = ComputerCpuRelation.objects.filter(computer=computer_id)
-    software_list = ComputerSoftwareRelation.objects.filter(computer=computer_id)
-    raid_relations = RaidInComputer.objects.filter(computer=computer_id)
-    raid_relations = RaidInComputer.objects.filter(computer=computer_id)
-    backup_list = Backup.objects.filter(computer=computer_id)
+def computer_detail_view(request, pk):
+    computer = get_object_or_404(Computer, pk=pk)
+    disks_list = ComputerDiskRelation.objects.filter(computer=pk)
+    ram_list = ComputerRamRelation.objects.filter(computer=pk)
+    cpu_list = ComputerCpuRelation.objects.filter(computer=pk)
+    software_list = ComputerSoftwareRelation.objects.filter(computer=pk)
+    raid_relations = RaidInComputer.objects.filter(computer=pk)
+    raid_relations = RaidInComputer.objects.filter(computer=pk)
+    backup_list = Backup.objects.filter(computer=pk)
     context = {'computer': computer,
                'disks_list': disks_list,
                'ram_list': ram_list,
@@ -66,22 +66,22 @@ def customers_table_view(request):
 
 
 @login_required
-def computers_table_view(request, customer_id):
-    table = ComputersTable(Computer.objects.filter(customer=customer_id))
+def computers_table_view(request, pk):
+    table = ComputersTable(Computer.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/computer_list.html', {'computers': table})
 
 
 @login_required
-def devices_table_view(request, customer_id):
-    table = DevicesTable(Device.objects.filter(customer=customer_id))
+def devices_table_view(request, pk):
+    table = DevicesTable(Device.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/device_list.html', {'devices': table})
 
 
 @login_required
-def nets_table_view(request, customer_id):
-    table = NetsTable(Net.objects.filter(customer=customer_id))
+def nets_table_view(request, pk):
+    table = NetsTable(Net.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/net_list.html', {'nets': table})
 
