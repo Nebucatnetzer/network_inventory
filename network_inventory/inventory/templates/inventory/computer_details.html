@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <th><b>Customer:</b></th>
-            <td>{{ computer.customer }}</td>
+            <td><a href="{% url 'customer' computer.customer.id %}">{{ computer.customer }}</a></td>
         </tr>
         <tr>
             <th><b>Manufacturer:</b></th>
