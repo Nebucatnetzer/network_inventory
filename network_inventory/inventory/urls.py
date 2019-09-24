@@ -13,6 +13,8 @@ urlpatterns = [
          name='devices'),
     path('customer/<int:pk>/nets/', views.nets_table_view,
          name='nets'),
+    path('customer/<int:pk>/backups/', views.backups_table_view,
+         name='backups'),
     path('computer/<int:pk>/', views.computer_detail_view,
          name='computer'),
     path('device/<int:pk>/', views.device_detail_view, name='device'),

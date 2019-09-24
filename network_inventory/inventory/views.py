@@ -17,7 +17,7 @@ from .models import (Device, Computer, ComputerRamRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer,
                      Backup, DeviceInNet)
 from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
-                     NetDetailTable, BackupDetailTable)
+                     BackupsTable, NetDetailTable, BackupDetailTable)
 from .filters import ComputerFilter
 
 
@@ -97,11 +97,18 @@ def net_detail_view(request, pk):
 
 
 @login_required
+def backups_table_view(request, pk):
+    computers = Computer.objects.filter(customer=pk)
+    table = BackupsTable(Backup.objects.filter(computer__in=computers))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/backup_list.html', {'backups': table})
+
+
+@login_required
 def backup_detail_view(request, pk):
     table = BackupDetailTable(Backup.objects.filter(pk=pk))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/backup_details.html', {'backup': table})
-
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
