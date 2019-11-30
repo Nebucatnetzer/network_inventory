@@ -35,12 +35,12 @@ def test_customer_backup_table_no_backup(create_admin_user):
 
 
 def test_customer_backup_table_no_permission(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
     customer = Customer.objects.create(name='Nestle')
     client = Client()
     client.login(username="novartis-admin", password="password")
     computer = mixer.blend('inventory.Computer', customer=customer)
-    backup = mixer.blend('inventory.Backup', computer=computer)
+    mixer.blend('inventory.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert response.status_code == 403
 
