@@ -16,8 +16,8 @@ def test_customer_list_view_not_logged_in():
 
 def test_customer_list_view_no_customer():
     User = get_user_model()
-    admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
-                                     "password", is_staff=True)
+    User.objects.create_user("novartis-admin", "admin@novartis.com",
+                             "password", is_staff=True)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/')

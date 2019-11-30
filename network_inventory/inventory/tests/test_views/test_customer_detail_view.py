@@ -34,8 +34,8 @@ def test_customer_detail_view(create_admin_user):
 
 def test_customer_detail_view_no_permissions():
     User = get_user_model()
-    admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
-                                     "password", is_staff=True)
+    User.objects.create_user("novartis-admin", "admin@novartis.com",
+                             "password", is_staff=True)
     client = Client()
     customer = mixer.blend('inventory.Customer')
     client.login(username="novartis-admin", password="password")
