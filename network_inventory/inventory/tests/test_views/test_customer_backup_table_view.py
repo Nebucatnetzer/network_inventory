@@ -3,7 +3,7 @@ from mixer.backend.django import mixer
 
 from django.test import Client
 
-from helper import in_content
+import helper
 
 from inventory.models import Customer
 
@@ -23,7 +23,8 @@ def test_customer_backup_table(create_admin_user):
     computer = mixer.blend('inventory.Computer', customer=customer)
     backup = mixer.blend('inventory.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
-    assert response.status_code == 200 and in_content(response, backup.name)
+    assert (response.status_code == 200
+            and helper.in_content(response, backup.name))
 
 
 def test_customer_backup_table_no_backup(create_admin_user):

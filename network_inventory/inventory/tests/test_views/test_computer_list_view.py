@@ -3,7 +3,7 @@ from mixer.backend.django import mixer
 
 from django.test import Client
 
-from helper import in_content, not_in_content
+import helper
 
 pytestmark=pytest.mark.django_db
 
@@ -28,4 +28,5 @@ def test_computer_list_view(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computers/all/')
-    assert response.status_code == 200 and in_content(response, computer.name)
+    assert (response.status_code == 200
+            and helper.in_content(response, computer.name))
