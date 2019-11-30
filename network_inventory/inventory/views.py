@@ -11,7 +11,7 @@ from django_tables2.views import SingleTableMixin
 
 from django_filters.views import FilterView
 
-from .decorators import computer_view_permission
+from .decorators import computer_view_permission, customer_view_permission
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer,
@@ -97,6 +97,7 @@ def net_detail_view(request, pk):
 
 
 @login_required
+@customer_view_permission
 def backups_table_view(request, pk):
     computers = Computer.objects.filter(customer=pk)
     table = BackupsTable(Backup.objects.filter(computer__in=computers))

@@ -5,6 +5,8 @@ from django.test import Client
 
 from helper import in_content, not_in_content
 
+from inventory.models import Customer
+
 pytestmark=pytest.mark.django_db
 
 def test_customer_backup_table_not_logged_in():
@@ -29,4 +31,16 @@ def test_customer_backup_table_no_backup(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/backups/')
-    assert response.status_code == 200 and not_in_content(response, "Novartis PC")
+    assert response.status_code == 200
+
+
+def test_customer_backup_table_no_permission(create_admin_user):
+    fixture = create_admin_user()
+    customer = Customer.objects.create(name='Nestle')
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    computer = mixer.blend('inventory.Computer', customer=customer)
+    backup = mixer.blend('inventory.Backup', computer=computer)
+    response = client.get('/customer/' + str(customer.id) + '/backups/')
+    assert response.status_code == 403
+
