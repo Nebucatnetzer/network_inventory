@@ -20,5 +20,6 @@ urlpatterns = [
     path('device/<int:pk>/', views.device_detail_view, name='device'),
     path('net/<int:pk>/', views.net_detail_view, name='net'),
     path('backup/<int:pk>/', views.backup_detail_view, name='backup'),
-    path('computers/all/', views.ComputersFilterView.as_view(), name='all_computers')
+    path('computers/all/', views.ComputersFilterView.as_view(),
+         name='all_computers')
  ]
