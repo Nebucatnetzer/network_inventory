@@ -17,7 +17,8 @@ def test_customer_backup_table(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
-    backup = mixer.blend('inventory.Backup', customer=mixer.SELECT)
+    computer = mixer.blend('inventory.Computer', customer=customer)
+    backup = mixer.blend('inventory.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert response.status_code == 200 and in_content(response, backup.name)
 
