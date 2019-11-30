@@ -45,7 +45,7 @@ def computer_detail_view(request, pk):
                'cpu_list': cpu_list,
                'software_list': software_list,
                'raid_relations': raid_relations,
-               'backup_list': backup_list }
+               'backup_list': backup_list}
     return render(request, 'inventory/computer_details.html', context)
 
 
