@@ -8,7 +8,8 @@ from inventory.models import DeviceInNet
 
 import helper
 
-pytestmark=pytest.mark.django_db
+pytestmark = pytest.mark.django_db
+
 
 def test_net_detail_view_no_permission(create_admin_user):
     create_admin_user()

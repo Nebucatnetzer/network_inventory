@@ -4,7 +4,7 @@ from django.test import Client
 
 import helper
 
-pytestmark=pytest.mark.django_db
+pytestmark = pytest.mark.django_db
 
 
 def test_backup_detail_view_not_logged_in():

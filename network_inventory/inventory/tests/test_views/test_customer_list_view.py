@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 import helper
 
-pytestmark=pytest.mark.django_db
+pytestmark = pytest.mark.django_db
 
 
 def test_customer_list_view_not_logged_in():

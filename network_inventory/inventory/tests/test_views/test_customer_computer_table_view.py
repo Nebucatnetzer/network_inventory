@@ -5,7 +5,8 @@ from django.test import Client
 
 import helper
 
-pytestmark=pytest.mark.django_db
+pytestmark = pytest.mark.django_db
+
 
 def test_customer_computer_table_not_logged_in():
     response = Client().get('/customer/1/computers/')
