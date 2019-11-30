@@ -3,7 +3,7 @@ from mixer.backend.django import mixer
 
 from django.test import Client
 
-from helper import in_content, not_in_content
+from helper import in_content
 
 from inventory.models import Customer
 
