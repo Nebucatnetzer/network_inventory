@@ -23,7 +23,7 @@ def device_view_permission(old_function):
         customer = Customer.objects.get(pk=device.customer.pk)
         user = request.user
         if user.has_perm('inventory.view_customer', customer):
-            return old_fuction(request, pk)
+            return old_function(request, pk)
         else:
             return HttpResponseForbidden(
                 "You're not allowed to access this device."
