@@ -6,8 +6,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from guardian.shortcuts import assign_perm
 
-from inventory.models import Customer, Computer
-
 
 @pytest.fixture(scope='session')
 def django_db_setup(django_db_setup, django_db_blocker):
