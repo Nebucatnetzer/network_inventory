@@ -30,6 +30,10 @@ class Backup(models.Model):
     def __str__(self):
         return str(self.name)
 
+    @property
+    def customer(self):
+        return self.computer.customer
+
 
 class TargetDevice(models.Model):
     device = models.ForeignKey(Computer, models.SET_NULL, blank=True,

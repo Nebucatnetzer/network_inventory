@@ -23,3 +23,7 @@ class Warranty(models.Model):
 
     class Meta:
         verbose_name_plural = "Warranties"
+
+    @property
+    def customer(self):
+        return self.device.customer
