@@ -31,14 +31,17 @@ def test_computer_detail_view_not_found(create_admin_user):
     assert response.status_code == 404
 
 
-def test_computer_detail_view(create_admin_user):
+def test_computer_detail_view_ram_relation(create_admin_user):
     create_admin_user()
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    ram_type = mixer.blend('inventory.RamType')
+    ram = mixer.blend('inventory.Ram', ram_type=ram_type)
+    mixer.blend('inventory.ComputerRamRelation', computer=computer, ram=ram)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
     assert (response.status_code == 200
-            and helper.in_content(response, computer.name))
+            and helper.in_content(response, "RAM Modules:"))
 
 
 def test_computer_detail_view_no_permissions():
