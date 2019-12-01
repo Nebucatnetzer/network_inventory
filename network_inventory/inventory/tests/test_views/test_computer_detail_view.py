@@ -55,7 +55,15 @@ def test_computer_detail_view_raid_relation(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
     assert response.status_code == 200 and helper.in_content(response, "RAID")
+
+
+def test_computer_detail_view_cpu_relation(create_admin_user):
+    create_admin_user()
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    cpu = mixer.blend('inventory.Cpu', cpu_typ=mixer.SELECT)
+    mixer.blend('inventory.ComputerCpuRelation', cpu=cpu, computer=computer)
+    client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
-    assert response.status_code == 403
+    assert (response.status_code == 200
+            and helper.in_content(response, cpu.name))
