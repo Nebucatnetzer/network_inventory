@@ -44,12 +44,17 @@ def test_computer_detail_view_ram_relation(create_admin_user):
             and helper.in_content(response, "RAM Modules:"))
 
 
-def test_computer_detail_view_no_permissions():
-    User = get_user_model()
-    User.objects.create_user("novartis-admin", "admin@novartis.com",
-                             "password", is_staff=True)
+def test_computer_detail_view_raid_relation(create_admin_user):
+    create_admin_user()
+    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    raid = mixer.blend('inventory.RaidType')
+    disk = mixer.blend('inventory.Disk')
+    disks = mixer.blend('inventory.DisksInRaid', raid=raid, disk=disk)
+    mixer.blend('inventory.RaidInComputer', computer=computer, raid=disks)
     client = Client()
-    mixer.blend('inventory.Customer')
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/computer/' + str(computer.id) + '/')
+    assert response.status_code == 200 and helper.in_content(response, "RAID")
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
