@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 
 from guardian.shortcuts import get_objects_for_user
 from guardian.mixins import PermissionRequiredMixin
