@@ -19,3 +19,7 @@ class Net(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('net', args=[str(self.id)])

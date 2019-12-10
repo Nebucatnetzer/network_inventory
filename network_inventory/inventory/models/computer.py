@@ -26,6 +26,10 @@ class Computer(ConnectedDevice):
     class Meta:
         ordering = ['name']
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('computer', args=[str(self.id)])
+
 
 class ComputerCpuRelation(models.Model):
     cpu = models.ForeignKey(Cpu, on_delete=models.CASCADE)

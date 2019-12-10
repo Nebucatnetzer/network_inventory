@@ -34,6 +34,10 @@ class Backup(models.Model):
     def customer(self):
         return self.computer.customer
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('backup', args=[str(self.id)])
+
 
 class TargetDevice(models.Model):
     device = models.ForeignKey(Computer, models.SET_NULL, blank=True,

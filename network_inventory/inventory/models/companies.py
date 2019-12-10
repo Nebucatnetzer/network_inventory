@@ -22,6 +22,10 @@ class Customer(Company):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('customer', args=[str(self.id)])
+
 
 class DeviceManufacturer(Company):
 
