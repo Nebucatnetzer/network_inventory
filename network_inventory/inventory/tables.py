@@ -38,7 +38,7 @@ class DevicesTable(tables.Table):
 
 class NetsTable(tables.Table):
     name = tables.LinkColumn('net', args=[A('pk')])
-    customer = tables.LinkColumn('customer', args=[A('customer.id')])
+    customer = tables.LinkColumn('customer', args=[A('customer__id')])
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -47,7 +47,7 @@ class NetsTable(tables.Table):
 
 class BackupsTable(tables.Table):
     name = tables.LinkColumn('backup', args=[A('pk')])
-    computer = tables.LinkColumn('computer', args=[A('computer.id')])
+    computer = tables.LinkColumn('computer', args=[A('computer__id')])
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
