@@ -14,7 +14,7 @@ class CustomersTable(tables.Table):
 
 
 class ComputersTable(tables.Table):
-    name = tables.LinkColumn('computer', args=[A('pk')])
+    name = tables.Column('computer', linkify=True)
     description = tables.Column()
     serialnumber = tables.Column()
     owner = tables.Column()
@@ -29,7 +29,7 @@ class ComputersTable(tables.Table):
 
 
 class DevicesTable(tables.Table):
-    name = tables.LinkColumn('device', args=[A('pk')])
+    name = tables.Column('device', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -37,8 +37,8 @@ class DevicesTable(tables.Table):
 
 
 class NetsTable(tables.Table):
-    name = tables.LinkColumn('net', args=[A('pk')])
-    customer = tables.LinkColumn('customer', args=[A('customer__id')])
+    name = tables.Column('net', linkify=True)
+    customer = tables.Column('customer', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -46,8 +46,8 @@ class NetsTable(tables.Table):
 
 
 class BackupsTable(tables.Table):
-    name = tables.LinkColumn('backup', args=[A('pk')])
-    computer = tables.LinkColumn('computer', args=[A('computer__id')])
+    name = tables.Column('backup', linkify=True)
+    computer = tables.Column('computer', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -55,7 +55,7 @@ class BackupsTable(tables.Table):
 
 
 class NetDetailTable(tables.Table):
-    device = tables.LinkColumn('computer', args=[A('pk')])
+    device = tables.Column('computer', linkify=True)
     ip = tables.Column()
     net = tables.Column(visible=False)
 
@@ -65,7 +65,7 @@ class NetDetailTable(tables.Table):
 
 
 class BackupDetailTable(tables.Table):
-    computer = tables.LinkColumn('computer', args=[A('pk')])
+    computer = tables.Column('computer', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
