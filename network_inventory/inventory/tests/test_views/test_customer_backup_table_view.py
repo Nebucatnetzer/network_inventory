@@ -46,3 +46,16 @@ def test_customer_backup_table_no_permission(create_admin_user):
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert response.status_code == 403
 
+
+def test_customer_backup_table_with_multiple_computers(create_admin_user):
+    fixture = create_admin_user()
+    customer = fixture['customer']
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    computer = mixer.blend('inventory.Computer', customer=customer)
+    backup1 = mixer.blend('inventory.Backup', computer=computer)
+    backup2 = mixer.blend('inventory.Backup', computer=computer)
+    response = client.get('/customer/' + str(customer.id) + '/backups/')
+    assert (response.status_code == 200
+            and helper.in_content(response, backup1.name)
+            and helper.in_content(response, backup2.name))
