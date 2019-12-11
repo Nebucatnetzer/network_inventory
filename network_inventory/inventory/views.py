@@ -11,7 +11,8 @@ from django_tables2.views import SingleTableMixin
 
 from django_filters.views import FilterView
 
-from .decorators import computer_view_permission, customer_view_permission
+from .decorators import (computer_view_permission, customer_view_permission,
+                         net_view_permission)
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, RaidInComputer,
@@ -87,6 +88,7 @@ def nets_table_view(request, pk):
 
 
 @login_required
+@net_view_permission
 def net_detail_view(request, pk):
     net = get_object_or_404(Net, pk=pk)
     table = NetDetailTable(DeviceInNet.objects.filter(net=net))

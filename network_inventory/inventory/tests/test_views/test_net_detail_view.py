@@ -13,19 +13,21 @@ pytestmark = pytest.mark.django_db
 def test_net_detail_view_no_permission(create_admin_user):
     create_admin_user()
     net = mixer.blend('inventory.Net')
-    device = mixer.blend('inventory.Computer')
-    device_in_net = DeviceInNet.objects.create(device=device, net=net, ip='10.7.89.101')
+    customer = mixer.blend('inventory.Customer')
+    device = mixer.blend('inventory.Computer', customer=customer)
+    mixer.blend('inventory.DeviceInNet',
+                device=device,
+                net=net,
+                ip='10.7.89.101')
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/' + str(net.id) + '/')
-    assert (response.status_code == 200
-            and helper.in_content(response, net.name)
-            and helper.not_in_content(response, device_in_net.ip))
+    assert (response.status_code == 403)
 
 
 def test_net_detail_view(create_admin_user):
     fixture = create_admin_user()
-    net = mixer.blend('inventory.Net')
+    net = mixer.blend('inventory.Net', customer=mixer.SELECT)
     device = mixer.blend('inventory.Computer', customer=fixture['customer'])
     device_in_net = DeviceInNet.objects.create(device=device,
                                                net=net, ip='10.7.89.101')
