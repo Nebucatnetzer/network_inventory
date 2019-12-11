@@ -2,6 +2,7 @@ import django_tables2 as tables
 from .models import Net, Device, Backup, DeviceInNet
 from django_tables2.utils import A
 
+
 class CustomersTable(tables.Table):
     name = tables.LinkColumn('customer', args=[A('pk')])
     nets = tables.LinkColumn('nets', text='Nets', args=[A('pk')])
