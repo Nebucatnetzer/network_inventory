@@ -81,6 +81,7 @@ def devices_table_view(request, pk):
 
 
 @login_required
+@customer_view_permission
 def nets_table_view(request, pk):
     table = NetsTable(Net.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
