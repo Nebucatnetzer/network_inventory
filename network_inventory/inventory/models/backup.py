@@ -30,10 +30,6 @@ class Backup(models.Model):
     def __str__(self):
         return str(self.name)
 
-    @property
-    def customer(self):
-        return self.computer.customer
-
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('backup', args=[str(self.id)])
