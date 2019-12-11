@@ -47,7 +47,7 @@ def test_customer_backup_table_no_permission(create_admin_user):
     assert response.status_code == 403
 
 
-def test_customer_backup_table_with_multiple_computers(create_admin_user):
+def test_customer_backup_table_with_multiple_backups(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
