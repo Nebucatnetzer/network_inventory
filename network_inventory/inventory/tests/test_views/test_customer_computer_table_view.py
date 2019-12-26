@@ -4,6 +4,7 @@ from mixer.backend.django import mixer
 from django.test import Client
 
 import helper
+from inventory.models import Customer
 
 pytestmark = pytest.mark.django_db
 
@@ -32,3 +33,14 @@ def test_customer_computer_table_no_computer(create_admin_user):
     response = client.get('/customer/' + str(customer.id) + '/computers/')
     assert (response.status_code == 200
             and helper.not_in_content(response, "Novartis PC"))
+
+
+def test_customer_computer_table_no_permission(create_admin_user):
+    create_admin_user()
+    customer = Customer.objects.create(name='Nestle')
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    computer = mixer.blend('inventory.Computer', customer=customer)
+    response = client.get('/customer/' + str(customer.id) + '/computers/')
+    assert response.status_code == 403
+

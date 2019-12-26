@@ -67,6 +67,7 @@ def customers_table_view(request):
 
 
 @login_required
+@customer_view_permission
 def computers_table_view(request, pk):
     table = ComputersTable(Computer.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
@@ -74,6 +75,7 @@ def computers_table_view(request, pk):
 
 
 @login_required
+@customer_view_permission
 def devices_table_view(request, pk):
     table = DevicesTable(Device.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
