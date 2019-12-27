@@ -41,6 +41,9 @@
 
 - model: inventory.RamType
   fields:
+    name: unkown
+- model: inventory.RamType
+  fields:
     name: DDR2
 - model: inventory.RamType
   fields:
@@ -526,3 +529,411 @@
   fields:
     name: December
     value: 12
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows XP'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 7 Home'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 7 Pro'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 7 Enterprise'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8 Home'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8 Pro'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8 Enterprise'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8.1 Home'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8.1 Pro'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 8.1 Enterprise'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 10 Home'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 10 Pro'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: FreeBSD
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'VMware ESXi 6.5.0'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 10 Enterprise'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Server 2003'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Server 2008'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Server 2012'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Server 2012 R2'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Server 2016'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Ubuntu 14.04'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Ubuntu 16.04'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'VMware ESXi 6.0.0'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'pfsense 2.4.x'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'VMware vCenter Server Appliance 6.0.0'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 4.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 5.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 6.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 7.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 8.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 9.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 10.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'iOS 11.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 4.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 5.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 6.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 7.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 8.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 9.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 10.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'tvOS 11.X'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'VMware ESXi 5.5.0'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'VMware vCenter Server Appliance 6.5.0'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows Storage Server 2016 Standard'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Windows 7 Home Premium'
+-
+  model: inventory.OperatingSystem
+  fields:
+    name: 'Ubuntu 18.04'
+-
+  model: inventory.SoftwareCategory
+  fields:
+    name: Office
+-
+  model: inventory.SoftwareCategory
+  fields:
+    name: Backup
+-
+  model: inventory.SoftwareCategory
+  fields:
+    name: Anti-Virus
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2010 Student'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2010 Pro'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2010 Enterprise'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2013 Student'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2013 Pro'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2013 Enterprise'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2016 Home & Business'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2016 Pro'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2016 Enterprise'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 365'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2013 Home & Business'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2010 Home & Business'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: '2007 Microsoft Office System'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2007 Standard'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: 'Office 2019 Home & Business'
+    category: '1'
+-
+  model: inventory.Software
+  fields:
+    name: Veeam
+    category: '2'
+-
+  model: inventory.Software
+  fields:
+    name: 'Backup Exec'
+    category: '2'
+-
+  model: inventory.Software
+  fields:
+    name: Acronis
+    category: '2'
+-
+  model: inventory.Software
+  fields:
+    name: 'Hyper Backup'
+    category: '2'
+-
+  model: inventory.Software
+  fields:
+    name: 'Bit Defender'
+    category: '3'
+-
+  model: inventory.Software
+  fields:
+    name: 'Panda Cloud Pro'
+    category: '3'
+-
+  model: inventory.Software
+  fields:
+    name: 'Panda Cloud Pro Plus'
+    category: '3'
+-
+  model: inventory.Software
+  fields:
+    name: 'Windows Defender'
+    category: '3'
+-
+  model: inventory.Software
+  fields:
+    name: 'Microsoft Security Essentials'
+    category: '3'
+-
+  model: inventory.Software
+  fields:
+    name: 'Panda Antivirus Pro'
+    category: '3'
+- model: inventory.BackupMethod
+  fields:
+    description: Sync
+- model: inventory.BackupMethod
+  fields:
+    description: 'Forward Incremental'
+- model: inventory.BackupMethod
+  fields:
+    description: 'Reversed Incremental'
+- model: inventory.BackupMethod
+  fields:
+    description: 'Sure Backup'
+- model: inventory.BackupMethod
+  fields:
+    description: "Copy Job"
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 1
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 2
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 4
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 8
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 16
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 24
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 32
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 64
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 96
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 128
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 256
+    ecc: False
+-
+  model: inventory.Ram
+  fields:
+    ram_type: 1
+    size_in_gb: 512
+    ecc: False
