@@ -5,6 +5,7 @@ pytz
 django-guardian
 django-tables2
 django-filter
+django-nested-admin
 pytest
 pytest-django
 pytest-cov

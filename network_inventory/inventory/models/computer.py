@@ -3,7 +3,6 @@ from .cpu import Cpu
 from .devices import ConnectedDevice
 from .disk import Disk
 from .os import OperatingSystem
-from .raid import RaidType, DisksInRaid
 from .ram import Ram
 from .software import Software, SoftwareArchitecture
 
@@ -65,21 +64,6 @@ class ComputerDiskRelation(models.Model):
 
     class Meta:
         verbose_name_plural = "Disks in Computer"
-
-
-class RaidInComputer(models.Model):
-    disks = models.ForeignKey(DisksInRaid, models.SET_NULL, blank=True,
-                              null=True)
-    usable_space = models.IntegerField(blank=True, null=True)
-    raid_type = models.ForeignKey(RaidType, models.SET_NULL, blank=True,
-                                  null=True)
-    computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.computer.name
-
-    class Meta:
-        verbose_name_plural = "RAIDs in Computer"
 
 
 class ComputerSoftwareRelation(models.Model):

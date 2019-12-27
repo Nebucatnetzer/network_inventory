@@ -1,8 +1,10 @@
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
+import nested_admin
+
 from .models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
                      DiskType, Owner, Disk, CpuArchitecture, CpuManufacturer,
-                     Cpu, OperatingSystem, RaidInComputer, Computer,
+                     Cpu, OperatingSystem, Computer, Raid,
                      ComputerDiskRelation, DisksInRaid, RaidType,
                      ComputerCpuRelation, ComputerSoftwareRelation,
                      ComputerRamRelation, Warranty, WarrantyType, Customer,
@@ -105,14 +107,6 @@ class OperatingSystemAdmin(admin.ModelAdmin):
         return {}
 
 
-class RaidInComputerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class RamModuleAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -201,43 +195,50 @@ class DiskInRaidAdmin(admin.ModelAdmin):
         return {}
 
 
-class SoftwareInLine(admin.StackedInline):
+class SoftwareInLine(nested_admin.NestedStackedInline):
     model = ComputerSoftwareRelation
     extra = 0
     verbose_name_plural = 'Software'
 
 
-class RamInLine(admin.StackedInline):
+class RamInLine(nested_admin.NestedStackedInline):
     model = ComputerRamRelation
     extra = 0
     verbose_name_plural = 'RAM Modules'
 
 
-class DiskInLine(admin.StackedInline):
+class DiskInLine(nested_admin.NestedStackedInline):
     model = ComputerDiskRelation
     extra = 0
     verbose_name_plural = 'Disks'
 
 
-class CpusInLine(admin.StackedInline):
+class DisksInRaidInLine(nested_admin.NestedStackedInline):
+    model = DisksInRaid
+    extra = 0
+    verbose_name_plural = 'Disks in RAID'
+
+
+class CpusInLine(nested_admin.NestedStackedInline):
     model = ComputerCpuRelation
     extra = 0
     verbose_name_plural = 'CPUs'
 
 
-class RaidInLine(admin.StackedInline):
-    model = RaidInComputer
+class RaidInLine(nested_admin.NestedStackedInline):
+    model = Raid
     extra = 0
     verbose_name_plural = 'RAID'
+    inlines = (DisksInRaidInLine,)
 
 
-class DeviceInNetInline(admin.StackedInline):
+class DeviceInNetInline(nested_admin.NestedStackedInline):
     model = DeviceInNet
     extra = 0
     verbose_name_plural = 'Nets'
 
 
-class ComputerAdmin(admin.ModelAdmin):
+class ComputerAdmin(nested_admin.NestedModelAdmin):
     list_display = ('name', 'host')
     inlines = (SoftwareInLine, CpusInLine, RamInLine, DiskInLine, RaidInLine,
                DeviceInNetInline)
@@ -291,7 +292,6 @@ admin.site.register(DeviceInNet)
 admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
-admin.site.register(DisksInRaid, DiskInRaidAdmin)
 admin.site.register(IpStatus, IpStatusAdmin)
 admin.site.register(Location)
 admin.site.register(MailAlias, MailAliasAdmin)
@@ -301,7 +301,6 @@ admin.site.register(Notification, NotificationAdmin)
 admin.site.register(NotificationType, NotificationTypeAdmin)
 admin.site.register(OperatingSystem, OperatingSystemAdmin)
 admin.site.register(Owner)
-admin.site.register(RaidInComputer, RaidInComputerAdmin)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
 admin.site.register(RamType, RamTypeAdmin)

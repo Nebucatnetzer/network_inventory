@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'guardian',
     'django_tables2',
     'django_filters',
+    'nested_admin',
 ]
 
 MIDDLEWARE = [

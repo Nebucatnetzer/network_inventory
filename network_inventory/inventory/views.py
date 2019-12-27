@@ -15,7 +15,7 @@ from .decorators import (computer_view_permission, customer_view_permission,
                          net_view_permission)
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
-                     ComputerSoftwareRelation, Customer, Net, RaidInComputer,
+                     ComputerSoftwareRelation, Customer, Net, Raid,
                      Backup, DeviceInNet)
 from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
                      BackupsTable, NetDetailTable, BackupDetailTable)
@@ -37,8 +37,8 @@ def computer_detail_view(request, pk):
     ram_list = ComputerRamRelation.objects.filter(computer=pk)
     cpu_list = ComputerCpuRelation.objects.filter(computer=pk)
     software_list = ComputerSoftwareRelation.objects.filter(computer=pk)
-    raid_relations = RaidInComputer.objects.filter(computer=pk)
-    raid_relations = RaidInComputer.objects.filter(computer=pk)
+    raid_relations = Raid.objects.filter(computer=pk)
+    raid_relations = Raid.objects.filter(computer=pk)
     backup_list = Backup.objects.filter(computer=pk)
     context = {'computer': computer,
                'disks_list': disks_list,

@@ -3,7 +3,7 @@ from .calendar import DayOfMonth, Month, Weekday
 from .category import Category
 from .companies import Company, Customer, DeviceManufacturer, Owner
 from .computer import (Computer, ComputerCpuRelation, ComputerDiskRelation,
-                       ComputerRamRelation, RaidInComputer,
+                       ComputerRamRelation,
                        ComputerSoftwareRelation)
 from .cpu import CpuArchitecture, CpuManufacturer, Cpu
 from .devices import (DeviceCategory, Device, ConnectedDevice, DeviceInNet)
@@ -14,7 +14,7 @@ from .mailalias import MailAlias
 from .net import Net, IpStatus
 from .notification import Notification, NotificationType
 from .os import OperatingSystem
-from .raid import DisksInRaid, RaidType
+from .raid import DisksInRaid, RaidType, Raid
 from .ram import RamType, Ram
 from .software import SoftwareArchitecture, SoftwareCategory, Software
 from .time import HoursInDay, MinutesInHour
