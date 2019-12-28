@@ -40,7 +40,7 @@ def test_customer_computer_table_no_permission(create_admin_user):
     customer = Customer.objects.create(name='Nestle')
     client = Client()
     client.login(username="novartis-admin", password="password")
-    computer = mixer.blend('inventory.Computer', customer=customer)
+    mixer.blend('inventory.Computer', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/computers/')
     assert response.status_code == 403
 
