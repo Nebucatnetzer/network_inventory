@@ -12,7 +12,7 @@ from django_tables2.views import SingleTableMixin
 from django_filters.views import FilterView
 
 from .decorators import (computer_view_permission, customer_view_permission,
-                         net_view_permission)
+                         net_view_permission, device_view_permission)
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, Raid,
@@ -23,6 +23,7 @@ from .filters import ComputerFilter
 
 
 @login_required
+@device_view_permission
 def device_detail_view(request, pk):
     device = get_object_or_404(Device, pk=pk)
     return render(request, 'inventory/device_details.html',
