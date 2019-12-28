@@ -22,7 +22,7 @@ def test_customer_computer_table(create_admin_user):
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/computers/')
     assert (response.status_code == 200
-            and helper.in_content(response, computer.name))
+            and helper.in_content(response, computer))
 
 
 def test_customer_computer_table_no_computer(create_admin_user):

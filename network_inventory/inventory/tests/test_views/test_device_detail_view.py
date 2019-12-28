@@ -28,13 +28,13 @@ def test_device_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/device/' + str(device.id) + '/')
     assert (response.status_code == 200
-            and helper.in_content(response, str(device))
-            and helper.in_content(response, str(device.serialnumber))
-            and helper.in_content(response, str(device.category))
-            and helper.in_content(response, str(device.owner))
-            and helper.in_content(response, str(device.customer))
-            and helper.in_content(response, str(device.manufacturer))
-            and helper.in_content(response, str(device.location)))
+            and helper.in_content(response, device)
+            and helper.in_content(response, device.serialnumber)
+            and helper.in_content(response, device.category)
+            and helper.in_content(response, device.owner)
+            and helper.in_content(response, device.customer)
+            and helper.in_content(response, device.manufacturer)
+            and helper.in_content(response, device.location))
 
 
 def test_device_detail_view_not_found(create_admin_user):

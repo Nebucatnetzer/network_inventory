@@ -28,4 +28,4 @@ def test_computer_list_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/computers/all/')
     assert (response.status_code == 200
-            and helper.in_content(response, computer.name))
+            and helper.in_content(response, computer))

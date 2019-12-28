@@ -57,5 +57,5 @@ def test_customer_backup_table_with_multiple_backups(create_admin_user):
     backup2 = mixer.blend('inventory.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert (response.status_code == 200
-            and helper.in_content(response, backup1.name)
-            and helper.in_content(response, backup2.name))
+            and helper.in_content(response, backup1)
+            and helper.in_content(response, backup2))

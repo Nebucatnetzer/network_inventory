@@ -29,7 +29,7 @@ def test_customer_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/')
     assert (response.status_code == 200
-            and helper.in_content(response, customer.name))
+            and helper.in_content(response, customer))
 
 
 def test_customer_detail_view_no_permissions():

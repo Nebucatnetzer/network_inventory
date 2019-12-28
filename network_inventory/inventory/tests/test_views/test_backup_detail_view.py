@@ -20,7 +20,7 @@ def test_backup_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/backup/' + str(backup.id) + '/')
     assert (response.status_code == 200
-            and helper.in_content(response, backup.name))
+            and helper.in_content(response, backup))
 
 
 def test_backup_detail_view_not_found(create_admin_user):

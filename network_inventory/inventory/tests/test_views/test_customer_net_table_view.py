@@ -22,7 +22,7 @@ def test_customer_net_table(create_admin_user):
     net = mixer.blend('inventory.Net', customer=mixer.SELECT)
     response = client.get('/customer/' + str(net.customer.id) + '/nets/')
     assert (response.status_code == 200
-            and helper.in_content(response, net.name))
+            and helper.in_content(response, net))
 
 
 def test_customer_net_table_no_net(create_admin_user):

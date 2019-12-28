@@ -35,7 +35,7 @@ def test_net_detail_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/net/' + str(net.id) + '/')
     assert (response.status_code == 200
-            and helper.in_content(response, net.name)
+            and helper.in_content(response, net)
             and helper.in_content(response, device_in_net.ip))
 
 
