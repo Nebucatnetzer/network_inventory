@@ -3,4 +3,16 @@
 {% block content %}
     <h3>Description</h3>
     <p>{{ device.description }}</p>
+    <h3>Serial Number</h3>
+    <p><code>{{ device.serialnumber }}</code></p>
+    <h3>Category</h3>
+    <p>{{ device.category }}</p>
+    <h3>Owner</h3>
+    <p>{{ device.owner }}</p>
+    <h3>Customer</h3>
+    <p><a href="{% url 'customer' device.customer.id %}">{{ device.customer }}</a></p>
+    <h3>Manufacturer</h3>
+    <p>{{ device.manufacturer }}</p>
+    <h3>Location</h3>
+    <p>{{ device.location }}</p>
 {% endblock %}
