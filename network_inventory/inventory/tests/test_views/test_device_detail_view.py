@@ -14,12 +14,14 @@ def test_device_detail_view_not_logged_in():
 
 
 def test_device_detail_view(create_admin_user):
-    create_admin_user()
+    fixture = create_admin_user()
     mixer.blend('inventory.DeviceCategory')
     mixer.blend('inventory.Owner')
     mixer.blend('inventory.Location')
-    device = mixer.blend('inventory.Device', customer=mixer.SELECT,
-                         owner=mixer.SELECT, category=mixer.SELECT,
+    device = mixer.blend('inventory.Device',
+                         customer=fixture['customer'],
+                         owner=mixer.SELECT,
+                         category=mixer.SELECT,
                          manufacturer=mixer.SELECT,
                          location=mixer.SELECT)
     client = Client()
