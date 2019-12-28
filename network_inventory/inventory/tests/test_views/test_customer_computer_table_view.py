@@ -44,3 +44,15 @@ def test_customer_computer_table_no_permission(create_admin_user):
     response = client.get('/customer/' + str(customer.id) + '/computers/')
     assert response.status_code == 403
 
+
+def test_customer_computer_table_multiple_computers(create_admin_user):
+    fixture = create_admin_user()
+    customer = fixture['customer']
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    computer1 = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    computer2 = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    response = client.get('/customer/' + str(customer.id) + '/computers/')
+    assert (response.status_code == 200
+            and helper.in_content(response, computer1)
+            and helper.in_content(response, computer2))
