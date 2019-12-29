@@ -113,6 +113,7 @@ def backups_table_view(request, pk):
 
 
 @login_required
+@backup_view_permission
 def backup_detail_view(request, pk):
     backup = get_object_or_404(Backup, pk=pk)
     return render(request, 'inventory/backup_details.html', {'backup': backup})
