@@ -63,11 +63,3 @@ class NetDetailTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = DeviceInNet
-
-
-class BackupDetailTable(tables.Table):
-    computer = tables.Column('computer', linkify=True)
-
-    class Meta:
-        template_name = 'django_tables2/semantic.html'
-        model = Backup

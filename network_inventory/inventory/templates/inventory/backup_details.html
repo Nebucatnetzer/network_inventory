@@ -1,6 +1,39 @@
 {% extends "inventory/base.html" %}
-{% load render_table from django_tables2 %}
-{% block section_title %}{{ net.name }}{% endblock %}
+{% block section_title %}{{ backup.name }}{% endblock %}
 {% block content %}
-{% render_table backup %}
+<div class="ui cards">
+    <div class="card">
+    <div class="content">
+    <div class="header">Description</div>
+    <div class="description"><p>{{ backup.description }}</p></div>
+    <table class="ui celled table">
+        </tr>
+        <tr>
+            <th><b>Computer:</b></th>
+            <td><a href="{% url 'computer' backup.computer.id %}">{{ backup.computer }}</a></td>
+        </tr>
+        <tr>
+            <th><b>Backup Method:</b></th>
+            <td>{{ backup.method }}</td>
+        </tr>
+        <tr>
+            <th><b>Backup Software:</b></th>
+            <td>{{ backup.software }}</td>
+        </tr>
+        <tr>
+            <th><b>Target Device:</b></th>
+            <td>{{ backup.target_device.device }}</td>
+        </tr>
+        <tr>
+            <th><b>Exec Time:</b></th>
+            <td>{{ backup.exec_time }}</td>
+        </tr>
+        <tr>
+            <th><b>Exec Day:</b></th>
+            <td>{{ backup.exec_day }}</td>
+        </tr>
+    </table>
+    </div>
+    </div>
+</div>
 {% endblock %}

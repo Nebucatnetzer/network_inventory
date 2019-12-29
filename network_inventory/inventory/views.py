@@ -12,13 +12,14 @@ from django_tables2.views import SingleTableMixin
 from django_filters.views import FilterView
 
 from .decorators import (computer_view_permission, customer_view_permission,
-                         net_view_permission, device_view_permission)
+                         net_view_permission, device_view_permission,
+                         backup_view_permission)
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, Raid,
                      Backup, DeviceInNet)
 from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
-                     BackupsTable, NetDetailTable, BackupDetailTable)
+                     BackupsTable, NetDetailTable)
 from .filters import ComputerFilter
 
 
@@ -113,9 +114,8 @@ def backups_table_view(request, pk):
 
 @login_required
 def backup_detail_view(request, pk):
-    table = BackupDetailTable(Backup.objects.filter(pk=pk))
-    RequestConfig(request).configure(table)
-    return render(request, 'inventory/backup_details.html', {'backup': table})
+    backup = get_object_or_404(Backup, pk=pk)
+    return render(request, 'inventory/backup_details.html', {'backup': backup})
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
