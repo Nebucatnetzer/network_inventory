@@ -45,7 +45,19 @@ class LicenseWithUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     license = models.ForeignKey(UserLicense, on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'license'],
+                                    name='user per license')
+        ]
+
 
 class LicenseWithComputer(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     license = models.ForeignKey(ComputerLicense, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['computer', 'license'],
+                                    name='computer per license')
+        ]
