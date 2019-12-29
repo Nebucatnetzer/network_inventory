@@ -16,7 +16,7 @@ class CustomersTable(tables.Table):
 
 
 class ComputersTable(tables.Table):
-    name = tables.Column('computer', linkify=True)
+    name = tables.Column('Computer', linkify=True)
     description = tables.Column()
     serialnumber = tables.Column()
     owner = tables.Column()
@@ -31,7 +31,7 @@ class ComputersTable(tables.Table):
 
 
 class DevicesTable(tables.Table):
-    name = tables.Column('device', linkify=True)
+    name = tables.Column('Device', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -40,7 +40,7 @@ class DevicesTable(tables.Table):
 
 class NetsTable(tables.Table):
     name = tables.Column('net', linkify=True)
-    customer = tables.Column('customer', linkify=True)
+    customer = tables.Column('Customer', linkify=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -48,8 +48,8 @@ class NetsTable(tables.Table):
 
 
 class BackupsTable(tables.Table):
-    name = tables.Column('backup', linkify=True)
-    computer = tables.Column('computer', linkify=True)
+    name = tables.Column('Backup', linkify=True)
+    computer = tables.Column('Computer', linkify=True)
     target_device = tables.ManyToManyColumn(linkify_item=True)
 
     class Meta:
@@ -58,7 +58,7 @@ class BackupsTable(tables.Table):
 
 
 class NetDetailTable(tables.Table):
-    device = tables.Column('computer', linkify=True)
+    device = tables.Column('Computer', linkify=True)
     ip = tables.Column()
     net = tables.Column(visible=False)
 
