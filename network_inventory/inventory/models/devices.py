@@ -18,8 +18,8 @@ class Device(models.Model):
     serialnumber = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(DeviceCategory, on_delete=models.SET_NULL,
                                  null=True, blank=True)
-    customer = models.ForeignKey(Customer)
     owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     manufacturer = models.ForeignKey(DeviceManufacturer, models.SET_NULL,
                                      null=True, blank=True)
     location = models.ForeignKey(Location, models.SET_NULL, null=True,
