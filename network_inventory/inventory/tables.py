@@ -31,6 +31,7 @@ class ComputersTable(tables.Table):
 
 
 class DevicesTable(tables.Table):
+    id = tables.Column(visible=False)
     name = tables.Column('Device', linkify=True)
 
     class Meta:
@@ -39,6 +40,7 @@ class DevicesTable(tables.Table):
 
 
 class NetsTable(tables.Table):
+    id = tables.Column(visible=False)
     name = tables.Column('net', linkify=True)
     customer = tables.Column('Customer', linkify=True)
 
@@ -48,6 +50,7 @@ class NetsTable(tables.Table):
 
 
 class BackupsTable(tables.Table):
+    id = tables.Column(visible=False)
     name = tables.Column('Backup', linkify=True)
     computer = tables.Column('Computer', linkify=True)
     target_device = tables.ManyToManyColumn(linkify_item=True)
