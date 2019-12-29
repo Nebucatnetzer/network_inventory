@@ -12,7 +12,8 @@ from .models import (Backup, BackupMethod, TargetDevice, Device, RamType, Ram,
                      DeviceManufacturer, AdGroup, MailGroup, Location,
                      MailAlias, IpStatus, Notification, NotificationType,
                      SoftwareArchitecture, SoftwareCategory, Software, User,
-                     UserInAdGroup, UserInMailGroup)
+                     UserInAdGroup, UserInMailGroup, UserLicense,
+                     ComputerLicense, LicenseWithComputer, LicenseWithUser)
 
 
 class CustomerAdmin(GuardedModelAdmin):
@@ -68,6 +69,22 @@ class DeviceManufacturerAdmin(admin.ModelAdmin):
 
 
 class IpStatusAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class LicenseWithComputerAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class LicenseWithUserAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -238,16 +255,28 @@ class DeviceInNetInline(nested_admin.NestedStackedInline):
     verbose_name_plural = 'Nets'
 
 
+class LicenseWithComputerInLine(nested_admin.NestedStackedInline):
+    model = LicenseWithComputer
+    extra = 0
+    verbose_name_plural = 'Licenses'
+
+
 class ComputerAdmin(nested_admin.NestedModelAdmin):
     list_display = ('name', 'host')
     inlines = (SoftwareInLine, CpusInLine, RamInLine, DiskInLine, RaidInLine,
-               DeviceInNetInline)
+               DeviceInNetInline, LicenseWithComputerInLine)
 
 
 class AdGroupInLine(admin.StackedInline):
     model = UserInAdGroup
     extra = 0
     verbose_name_plural = 'AD Groups'
+
+
+class LicenseWithUserInLine(admin.StackedInline):
+    model = LicenseWithUser
+    extra = 0
+    verbose_name_plural = 'Licenses'
 
 
 class MailGroupInLine(admin.StackedInline):
@@ -264,7 +293,7 @@ class MailAliasInLine(admin.StackedInline):
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('name', 'customer', 'enabled')
-    inlines = (AdGroupInLine, MailGroupInLine, MailAliasInLine)
+    inlines = (AdGroupInLine, MailGroupInLine, MailAliasInLine, LicenseWithUserInLine)
 
 
 class TargetDeviceInLine(admin.StackedInline):
@@ -277,10 +306,23 @@ class BackupAdmin(admin.ModelAdmin):
     inlines = (TargetDeviceInLine,)
 
 
+class UserLicenseAdmin(admin.ModelAdmin):
+    model = UserLicense
+    extra = 0
+    verbose_name_plural = 'User Licenses'
+
+
+class ComputerLicenseAdmin(admin.ModelAdmin):
+    model = ComputerLicense
+    extra = 0
+    verbose_name_plural = 'Computer Licenses'
+
+
 admin.site.register(AdGroup)
 admin.site.register(Backup, BackupAdmin)
 admin.site.register(BackupMethod, BackupMethodAdmin)
 admin.site.register(Computer, ComputerAdmin)
+admin.site.register(ComputerLicense, ComputerLicenseAdmin)
 admin.site.register(ConnectedDevice)
 admin.site.register(Cpu, CpuAdmin)
 admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
@@ -293,6 +335,8 @@ admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
 admin.site.register(IpStatus, IpStatusAdmin)
+admin.site.register(LicenseWithComputer, LicenseWithComputerAdmin)
+admin.site.register(LicenseWithUser, LicenseWithUserAdmin)
 admin.site.register(Location)
 admin.site.register(MailAlias, MailAliasAdmin)
 admin.site.register(MailGroup)
@@ -311,6 +355,7 @@ admin.site.register(TargetDevice, TargetDeviceAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(UserInAdGroup, UserInAdGroupAdmin)
 admin.site.register(UserInMailGroup, UserInMailGroupAdmin)
+admin.site.register(UserLicense, UserLicenseAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)
 

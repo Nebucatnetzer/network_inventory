@@ -9,6 +9,8 @@ from .cpu import CpuArchitecture, CpuManufacturer, Cpu
 from .devices import (DeviceCategory, Device, ConnectedDevice, DeviceInNet)
 from .disk import DiskType, Disk
 from .groups import Group, AdGroup, MailGroup
+from .license import (License, ComputerLicense, UserLicense,
+                      LicenseWithComputer, LicenseWithUser)
 from .location import Location
 from .mailalias import MailAlias
 from .net import Net, IpStatus

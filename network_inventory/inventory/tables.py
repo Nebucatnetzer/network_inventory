@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Net, Device, Backup, DeviceInNet
+from .models import Net, Device, Backup, DeviceInNet, ComputerLicense, UserLicense
 from django_tables2.utils import A
 
 
@@ -9,6 +9,7 @@ class CustomersTable(tables.Table):
     computers = tables.LinkColumn('computers', text='Computers', args=[A('pk')])
     devices = tables.LinkColumn('devices', text='Devices', args=[A('pk')])
     backups = tables.LinkColumn('backups', text='Backups', args=[A('pk')])
+    licenses = tables.LinkColumn('licenses', text='Licenses', args=[A('pk')])
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -64,3 +65,25 @@ class NetDetailTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = DeviceInNet
+
+
+class UserLicensesTable(tables.Table):
+    id = tables.Column(visible=False)
+    license_ptr = tables.Column(visible=False)
+    customer = tables.Column('Customer', linkify=True)
+    used_licenses = tables.Column()
+
+    class Meta:
+        template_name = 'django_tables2/semantic.html'
+        model = UserLicense
+
+
+class ComputerLicensesTable(tables.Table):
+    id = tables.Column(visible=False)
+    license_ptr = tables.Column(visible=False)
+    customer = tables.Column('Customer', linkify=True)
+    used_licenses = tables.Column()
+
+    class Meta:
+        template_name = 'django_tables2/semantic.html'
+        model = ComputerLicense

@@ -21,5 +21,7 @@ urlpatterns = [
     path('net/<int:pk>/', views.net_detail_view, name='net'),
     path('backup/<int:pk>/', views.backup_detail_view, name='backup'),
     path('computers/all/', views.ComputersFilterView.as_view(),
-         name='all_computers')
+         name='all_computers'),
+    path('customer/<int:pk>/licenses/', views.licenses_table_view,
+         name='licenses'),
  ]
