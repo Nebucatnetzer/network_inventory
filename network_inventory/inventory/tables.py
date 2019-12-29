@@ -49,6 +49,7 @@ class NetsTable(tables.Table):
 class BackupsTable(tables.Table):
     name = tables.Column('backup', linkify=True)
     computer = tables.Column('computer', linkify=True)
+    target_device = tables.ManyToManyColumn(linkify_item=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
