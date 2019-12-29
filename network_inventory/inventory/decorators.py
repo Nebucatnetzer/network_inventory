@@ -6,9 +6,8 @@ from .models import Computer, Customer, Device, ConnectedDevice, Net
 def computer_view_permission(old_fuction):
     def new_function(request, pk, *args, **kwargs):
         computer = get_object_or_404(Computer, pk=pk)
-        customer = Customer.objects.get(pk=computer.customer.pk)
         user = request.user
-        if user.has_perm('inventory.view_customer', customer):
+        if user.has_perm('inventory.view_customer', computer.customer):
             return old_fuction(request, pk)
         else:
             return HttpResponseForbidden(
@@ -20,9 +19,8 @@ def computer_view_permission(old_fuction):
 def device_view_permission(old_function):
     def new_function(request, pk, *args, **kwargs):
         device = get_object_or_404(Device, pk=pk)
-        customer = Customer.objects.get(pk=device.customer.pk)
         user = request.user
-        if user.has_perm('inventory.view_customer', customer):
+        if user.has_perm('inventory.view_customer', device.customer):
             return old_function(request, pk)
         else:
             return HttpResponseForbidden(
@@ -34,9 +32,8 @@ def device_view_permission(old_function):
 def connect_device_view_permission(old_function):
     def new_function(request, pk, *args, **kwargs):
         device = get_object_or_404(ConnectedDevice, pk=pk)
-        customer = Customer.objects.get(pk=device.customer.pk)
         user = request.user
-        if user.has_perm('inventory.view_customer', customer):
+        if user.has_perm('inventory.view_customer', device.customer):
             return old_function(request, pk)
         else:
             return HttpResponseForbidden(
@@ -61,9 +58,14 @@ def customer_view_permission(old_function):
 def net_view_permission(old_fuction):
     def new_function(request, pk, *args, **kwargs):
         net = get_object_or_404(Net, pk=pk)
-        customer = Customer.objects.get(pk=net.customer.pk)
         user = request.user
-        if user.has_perm('inventory.view_customer', customer):
+        if user.has_perm('inventory.view_customer', net.customer):
+            return old_fuction(request, pk)
+        else:
+            return HttpResponseForbidden(
+                "You're not allowed to access this device."
+                )
+    return new_function
             return old_fuction(request, pk)
         else:
             return HttpResponseForbidden(
