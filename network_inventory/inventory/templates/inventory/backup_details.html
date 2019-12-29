@@ -21,10 +21,6 @@
             <td>{{ backup.software }}</td>
         </tr>
         <tr>
-            <th><b>Target Device:</b></th>
-            <td>{{ backup.target_device.device }}</td>
-        </tr>
-        <tr>
             <th><b>Exec Time:</b></th>
             <td>{{ backup.exec_time }}</td>
         </tr>
@@ -33,6 +29,25 @@
             <td>{{ backup.exec_day }}</td>
         </tr>
     </table>
+        {% if target_device_list %}
+        <div class="card">
+        <div class="content">
+        <div class="header">Target Devices</div>
+        <table class="ui celled table">
+        {% for device in target_device_list %}
+        <tr>
+            <th><b>Target Device:</b></th>
+            <td><a href="{% url 'computer' device.device.id %}">{{ device.device }}</a></td>
+        </tr>
+        <tr>
+            <th><b>Target Path:</b></th>
+            <td>{{ device.target_path }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        </div>
+        </div>
+        {% endif %}
     </div>
     </div>
 </div>

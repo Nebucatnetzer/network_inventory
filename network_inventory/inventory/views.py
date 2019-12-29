@@ -17,7 +17,7 @@ from .decorators import (computer_view_permission, customer_view_permission,
 from .models import (Device, Computer, ComputerRamRelation,
                      ComputerDiskRelation, ComputerCpuRelation,
                      ComputerSoftwareRelation, Customer, Net, Raid,
-                     Backup, DeviceInNet)
+                     Backup, DeviceInNet, TargetDevice)
 from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
                      BackupsTable, NetDetailTable)
 from .filters import ComputerFilter
@@ -116,7 +116,10 @@ def backups_table_view(request, pk):
 @backup_view_permission
 def backup_detail_view(request, pk):
     backup = get_object_or_404(Backup, pk=pk)
-    return render(request, 'inventory/backup_details.html', {'backup': backup})
+    target_device_list = TargetDevice.objects.filter(backup=backup)
+    return render(request, 'inventory/backup_details.html',
+                  {'backup': backup,
+                   'target_device_list': target_device_list})
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
