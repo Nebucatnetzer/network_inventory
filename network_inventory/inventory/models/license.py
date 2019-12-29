@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
 from .companies import Customer
 from .computer import Computer
 from .user import User
@@ -45,6 +47,10 @@ class LicenseWithUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     license = models.ForeignKey(UserLicense, on_delete=models.CASCADE)
 
+    def clean(self):
+        if self.license.max_allowed_computers < self.license.used_licenses:
+            raise ValidationError("You've used all available licenses.")
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['user', 'license'],
@@ -55,6 +61,10 @@ class LicenseWithUser(models.Model):
 class LicenseWithComputer(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     license = models.ForeignKey(ComputerLicense, on_delete=models.CASCADE)
+
+    def clean(self):
+        if self.license.max_allowed_computers < self.license.used_licenses:
+            raise ValidationError("You've used all available licenses.")
 
     class Meta:
         constraints = [
