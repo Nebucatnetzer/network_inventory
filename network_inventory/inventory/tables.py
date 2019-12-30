@@ -1,6 +1,13 @@
 import django_tables2 as tables
-from .models import Net, Device, Backup, DeviceInNet, ComputerLicense, UserLicense
 from django_tables2.utils import A
+
+from .models import Backup
+from .models import ComputerLicense
+from .models import Device
+from .models import DeviceInNet
+from .models import Net
+from .models import User
+from .models import UserLicense
 
 
 class CustomersTable(tables.Table):
