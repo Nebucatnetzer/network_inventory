@@ -53,7 +53,8 @@ def test_customer_license_table_no_permission(create_admin_user):
 def test_customer_license_table_multiple_licenses(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
-    user = mixer.blend('inventory.User')
+    user1 = mixer.blend('inventory.User')
+    user2 = mixer.blend('inventory.User')
     client = Client()
     client.login(username="novartis-admin", password="password")
     license1 = mixer.blend('inventory.UserLicense', customer=customer,
@@ -62,7 +63,8 @@ def test_customer_license_table_multiple_licenses(create_admin_user):
     license2 = mixer.blend('inventory.UserLicense', customer=customer,
                            software=mixer.SELECT, key=mixer.RANDOM,
                            max_allowed_users=mixer.RANDOM)
-    mixer.blend('inventory.LicenseWithUser', user=user, license=mixer.SELECT)
+    mixer.blend('inventory.LicenseWithUser', user=user1, license=license1)
+    mixer.blend('inventory.LicenseWithUser', user=user2, license=license2)
     response = client.get('/customer/' + str(customer.id) + '/licenses/')
     assert (response.status_code == 200
             and helper.in_content(response, license1.software)
