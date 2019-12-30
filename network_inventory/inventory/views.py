@@ -1,26 +1,44 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 from django.views.generic import DetailView
 
-from guardian.shortcuts import get_objects_for_user
-from guardian.mixins import PermissionRequiredMixin
-
+from django_filters.views import FilterView
 from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
+from guardian.mixins import PermissionRequiredMixin
+from guardian.shortcuts import get_objects_for_user
 
-from django_filters.views import FilterView
-
-from .decorators import (computer_view_permission, customer_view_permission,
-                         net_view_permission, device_view_permission,
-                         backup_view_permission)
-from .models import (Device, Computer, ComputerRamRelation,
-                     ComputerDiskRelation, ComputerCpuRelation,
-                     ComputerSoftwareRelation, Customer, Net, Raid,
-                     Backup, DeviceInNet, TargetDevice, UserLicense, ComputerLicense)
-from .tables import (CustomersTable, ComputersTable, DevicesTable, NetsTable,
-                     BackupsTable, NetDetailTable, UserLicensesTable, ComputerLicensesTable)
+from .decorators import backup_view_permission
+from .decorators import computer_view_permission
+from .decorators import customer_view_permission
+from .decorators import device_view_permission
+from .decorators import net_view_permission
 from .filters import ComputerFilter
+from .models import Backup
+from .models import Computer
+from .models import ComputerCpuRelation
+from .models import ComputerDiskRelation
+from .models import ComputerLicense
+from .models import ComputerRamRelation
+from .models import ComputerSoftwareRelation
+from .models import Customer
+from .models import Device
+from .models import DeviceInNet
+from .models import Net
+from .models import Raid
+from .models import TargetDevice
+from .models import User
+from .models import UserLicense
+from .tables import BackupsTable
+from .tables import ComputerLicensesTable
+from .tables import ComputersTable
+from .tables import CustomersTable
+from .tables import DevicesTable
+from .tables import NetDetailTable
+from .tables import NetsTable
+from .tables import UserLicensesTable
 
 
 @login_required
