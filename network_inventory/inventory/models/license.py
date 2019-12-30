@@ -47,10 +47,6 @@ class LicenseWithUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     license = models.ForeignKey(UserLicense, on_delete=models.CASCADE)
 
-    def clean(self):
-        if self.license.max_allowed_users < self.license.used_licenses:
-            raise ValidationError("You've used all available licenses.")
-
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['user', 'license'],
@@ -61,10 +57,6 @@ class LicenseWithUser(models.Model):
 class LicenseWithComputer(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     license = models.ForeignKey(ComputerLicense, on_delete=models.CASCADE)
-
-    def clean(self):
-        if self.license.max_allowed_computers < self.license.used_licenses:
-            raise ValidationError("You've used all available licenses.")
 
     class Meta:
         constraints = [
