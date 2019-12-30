@@ -83,6 +83,7 @@ class UserLicensesTable(tables.Table):
     license_ptr = tables.Column(visible=False)
     customer = tables.Column('Customer', linkify=True)
     used_licenses = tables.Column()
+    user = tables.ManyToManyColumn()
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -94,6 +95,7 @@ class ComputerLicensesTable(tables.Table):
     license_ptr = tables.Column(visible=False)
     customer = tables.Column('Customer', linkify=True)
     used_licenses = tables.Column()
+    computer = tables.ManyToManyColumn(linkify_item=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
