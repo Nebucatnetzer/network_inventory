@@ -24,4 +24,6 @@ urlpatterns = [
          name='all_computers'),
     path('customer/<int:pk>/licenses/', views.licenses_table_view,
          name='licenses'),
+    path('customer/<int:pk>/users/', views.users_table_view,
+         name='users'),
  ]

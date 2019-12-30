@@ -54,7 +54,11 @@ def test_customer_list_view(create_admin_user):
             and helper.in_content(response,
                                   "/customer/"
                                   + str(customer.id)
-                                  + "/licenses/"))
+                                  + "/licenses/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/users/"))
 
 
 def test_customer_list_view_multiple_customers(create_admin_user):
@@ -87,6 +91,10 @@ def test_customer_list_view_multiple_customers(create_admin_user):
                                   "/customer/"
                                   + str(customer1.id)
                                   + "/licenses/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/users/")
             and helper.in_content(response, customer2)
             and helper.in_content(response,
                                   "/customer/"
@@ -107,5 +115,9 @@ def test_customer_list_view_multiple_customers(create_admin_user):
             and helper.in_content(response,
                                   "/customer/"
                                   + str(customer2.id)
-                                  + "/licenses/"))
+                                  + "/licenses/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/users/"))
 

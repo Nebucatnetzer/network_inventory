@@ -10,6 +10,7 @@ class CustomersTable(tables.Table):
     devices = tables.LinkColumn('devices', text='Devices', args=[A('pk')])
     backups = tables.LinkColumn('backups', text='Backups', args=[A('pk')])
     licenses = tables.LinkColumn('licenses', text='Licenses', args=[A('pk')])
+    users = tables.LinkColumn('users', text='Users', args=[A('pk')])
 
     class Meta:
         template_name = 'django_tables2/semantic.html'

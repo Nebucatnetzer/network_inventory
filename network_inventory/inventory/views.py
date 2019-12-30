@@ -146,3 +146,9 @@ def licenses_table_view(request, pk):
     RequestConfig(request).configure(computer_licenses)
     return render(request, 'inventory/license_list.html', {'user_licenses': user_licenses,
                                                            'computer_licenses': computer_licenses})
+
+
+@login_required
+@customer_view_permission
+def users_table_view(request, pk):
+    pass
