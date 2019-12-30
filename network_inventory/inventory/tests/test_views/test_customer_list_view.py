@@ -34,7 +34,27 @@ def test_customer_list_view(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/')
     assert (response.status_code == 200
-            and helper.in_content(response, customer))
+            and helper.in_content(response, customer)
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/nets/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/computers/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/devices/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/backups/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer.id)
+                                  + "/licenses/"))
 
 
 def test_customer_list_view_multiple_customers(create_admin_user):
@@ -47,6 +67,45 @@ def test_customer_list_view_multiple_customers(create_admin_user):
     response = client.get('/')
     assert (response.status_code == 200
             and helper.in_content(response, customer1)
-            and helper.in_content(response, customer1.id)
-            and helper.in_content(response, customer1)
-            and helper.in_content(response, customer2.id))
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/nets/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/computers/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/devices/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/backups/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer1.id)
+                                  + "/licenses/")
+            and helper.in_content(response, customer2)
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer2.id)
+                                  + "/nets/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer2.id)
+                                  + "/computers/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer2.id)
+                                  + "/devices/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer2.id)
+                                  + "/backups/")
+            and helper.in_content(response,
+                                  "/customer/"
+                                  + str(customer2.id)
+                                  + "/licenses/"))
+
