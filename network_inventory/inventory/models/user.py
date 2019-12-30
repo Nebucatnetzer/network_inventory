@@ -17,7 +17,7 @@ class User(models.Model):
     mail_groups = models.ManyToManyField(MailGroup, through='UserInMailGroup')
 
     def __str__(self):
-        return self.name
+        return self.name + " " + self.first_name
 
 
 class UserInAdGroup(models.Model):
