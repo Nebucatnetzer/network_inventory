@@ -17,10 +17,6 @@ class License(models.Model):
     def __str__(self):
         return str(self.customer) + ": " + str(self.software)
 
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('license', args=[str(self.id)])
-
     class Meta:
         abstract = True
 
