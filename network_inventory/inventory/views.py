@@ -39,6 +39,7 @@ from .tables import DevicesTable
 from .tables import NetDetailTable
 from .tables import NetsTable
 from .tables import UserLicensesTable
+from .tables import UsersTable
 
 
 @login_required
@@ -172,4 +173,6 @@ def licenses_table_view(request, pk):
 @login_required
 @customer_view_permission
 def users_table_view(request, pk):
-    pass
+    table = UsersTable(User.objects.filter(customer=pk))
+    RequestConfig(request).configure(table)
+    return render(request, 'inventory/user_list.html', {'users': table})

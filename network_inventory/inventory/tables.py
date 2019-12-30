@@ -98,3 +98,14 @@ class ComputerLicensesTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = ComputerLicense
+
+
+class UsersTable(tables.Table):
+    id = tables.Column(visible=False)
+    customer = tables.Column('Customer', linkify=True)
+    ad_groups = tables.ManyToManyColumn()
+    mail_groups = tables.ManyToManyColumn()
+
+    class Meta:
+        template_name = 'django_tables2/semantic.html'
+        model = User
