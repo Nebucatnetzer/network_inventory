@@ -61,5 +61,5 @@ def test_customer_user_table_multiple_users(create_admin_user):
     user2 = mixer.blend('inventory.User', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/users/')
     assert (response.status_code == 200
-            and helper.in_content(response, user1)
-            and helper.in_content(response, user2))
+            and helper.in_content(response, user1.name)
+            and helper.in_content(response, user2.name))
