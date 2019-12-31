@@ -1,6 +1,12 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
-from .models import Backup, Computer, Customer, Device, ConnectedDevice, Net
+from .models import Backup
+from .models import Computer
+from .models import Customer
+from .models import Device
+from .models import ConnectedDevice
+from .models import Net
+from .models import User
 
 
 def computer_view_permission(old_fuction):
