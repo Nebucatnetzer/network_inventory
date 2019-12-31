@@ -20,9 +20,16 @@ def test_customer_user_table(create_admin_user):
     client = Client()
     client.login(username="novartis-admin", password="password")
     user = mixer.blend('inventory.User', customer=mixer.SELECT)
+    ad_group = mixer.blend('inventory.AdGroup')
+    mail_group = mixer.blend('inventory.MailGroup')
+    mixer.blend('inventory.UserInAdGroup', user=user, group=ad_group)
+    mixer.blend('inventory.UserInMailGroup', user=user, group=mail_group)
     response = client.get('/customer/' + str(customer.id) + '/users/')
     assert (response.status_code == 200
-            and helper.in_content(response, user))
+            and helper.in_content(response, user.name)
+            and helper.in_content(response, ad_group)
+            and helper.in_content(response, mail_group)
+            and helper.in_content(response, user.primary_mail))
 
 
 def test_customer_user_table_no_user(create_admin_user):
