@@ -39,7 +39,7 @@ def test_customer_user_table_no_user(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/users/')
     assert (response.status_code == 200
-            and helper.not_in_content(response, "Novartis PC"))
+            and helper.not_in_content(response, customer))
 
 
 def test_customer_user_table_no_permission(create_admin_user):
