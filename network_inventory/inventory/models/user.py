@@ -19,6 +19,10 @@ class User(models.Model):
     def __str__(self):
         return self.name + " " + self.first_name
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('user', args=[str(self.id)])
+
 
 class UserInAdGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
