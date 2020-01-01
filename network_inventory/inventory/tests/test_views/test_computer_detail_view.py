@@ -49,7 +49,9 @@ def test_computer_detail_view_raid_relation(create_admin_user):
     computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
     raid_type = mixer.blend('inventory.RaidType')
     disk = mixer.blend('inventory.Disk')
-    raid = mixer.blend('inventory.Raid', computer=computer, raid_type=raid_type)
+    raid = mixer.blend('inventory.Raid',
+                       computer=computer,
+                       raid_type=raid_type)
     mixer.blend('inventory.DisksInRaid', raid=raid, disk=disk)
     client = Client()
     client.login(username="novartis-admin", password="password")
