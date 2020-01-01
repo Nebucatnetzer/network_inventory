@@ -36,7 +36,7 @@ class ComputersTable(tables.Table):
     owner = tables.Column()
     manufacturer = tables.Column()
     location = tables.Column()
-    user = tables.Column()
+    user = tables.Column('User', linkify=True)
     installation_date = tables.Column()
     os = tables.Column()
 
@@ -89,7 +89,7 @@ class UserLicensesTable(tables.Table):
     license_ptr = tables.Column(visible=False)
     customer = tables.Column('Customer', linkify=True)
     used_licenses = tables.Column()
-    user = tables.ManyToManyColumn()
+    user = tables.ManyToManyColumn(linkify_item=True)
 
     class Meta:
         template_name = 'django_tables2/semantic.html'
@@ -110,6 +110,7 @@ class ComputerLicensesTable(tables.Table):
 
 class UsersTable(tables.Table):
     id = tables.Column(visible=False)
+    name = tables.Column('User', linkify=True)
     customer = tables.Column('Customer', linkify=True)
     ad_groups = tables.ManyToManyColumn()
     mail_groups = tables.ManyToManyColumn()
