@@ -9,7 +9,7 @@ class NotificationType(Category):
 class Notification(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    recipiant = models.EmailField()
+    recipient = models.EmailField()
     notification_type = models.ForeignKey(NotificationType, models.SET_NULL,
                                           blank=True, null=True)
 
