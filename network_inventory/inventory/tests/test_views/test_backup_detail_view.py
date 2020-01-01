@@ -57,3 +57,18 @@ def test_backup_detail_view_with_target_device(create_admin_user):
     assert (response.status_code == 200
             and helper.in_content(response, backup)
             and helper.in_content(response, target_computer))
+
+
+def test_backup_detail_view_with_notification(create_admin_user):
+    create_admin_user()
+    mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    backup = mixer.blend('inventory.Backup', computer=mixer.SELECT)
+    notification = mixer.blend('inventory.Notification')
+    mixer.blend('inventory.NotificationFromBackup',
+                backup=backup,
+                notification=notification)
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/backup/' + str(backup.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, notification))

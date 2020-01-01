@@ -50,5 +50,33 @@
     </div>
     </div>
     {% endif %}
+    {% if notifications %}
+    <div class="card">
+    <div class="content">
+    <div class="header">Notifications</div>
+    <table class="ui celled table">
+    {% for notification in notifications %}
+    <tr>
+        <td><b>Name:</b></td>
+        <td>{{ notification.notification }}</td>
+    </tr>
+    <tr>
+        <td><b>Description:</b></td>
+        <td>{{ notification.notification.description }}</td>
+    </tr>
+    <tr>
+        <td><b>Recipient:</b></td>
+        <td>{{ notification.notification.recipient }}</td>
+    </tr>
+    <tr>
+        <td><b>Type:</b></td>
+        <td>{{ notification.notification.notification_type }}</td>
+    </tr>
+
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

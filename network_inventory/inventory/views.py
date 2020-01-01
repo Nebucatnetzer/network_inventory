@@ -30,6 +30,7 @@ from .models import DeviceInNet
 from .models import LicenseWithUser
 from .models import MailAlias
 from .models import Net
+from .models import NotificationFromBackup
 from .models import Raid
 from .models import TargetDevice
 from .models import User
@@ -141,9 +142,11 @@ def backups_table_view(request, pk):
 def backup_detail_view(request, pk):
     backup = get_object_or_404(Backup, pk=pk)
     target_device_list = TargetDevice.objects.filter(backup=backup)
+    notifications = NotificationFromBackup.objects.filter(backup=backup)
     return render(request, 'inventory/backup_details.html',
                   {'backup': backup,
-                   'target_device_list': target_device_list})
+                   'target_device_list': target_device_list,
+                   'notifications': notifications})
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
