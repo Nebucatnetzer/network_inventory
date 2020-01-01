@@ -33,6 +33,7 @@ from .models import (
     Net,
     Notification,
     NotificationType,
+    NotificationFromBackup,
     OperatingSystem,
     Owner,
     Raid,
@@ -338,8 +339,14 @@ class TargetDeviceInLine(admin.StackedInline):
     verbose_name_plural = 'Target Devices'
 
 
+class NotificationForBackupInLine(admin.StackedInline):
+    model = NotificationFromBackup
+    extra = 0
+    verbose_name_plural = 'Notifications'
+
+
 class BackupAdmin(admin.ModelAdmin):
-    inlines = (TargetDeviceInLine,)
+    inlines = (TargetDeviceInLine, NotificationForBackupInLine)
 
 
 class UserLicenseAdmin(admin.ModelAdmin):

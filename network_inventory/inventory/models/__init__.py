@@ -1,4 +1,4 @@
-from .backup import Backup, BackupMethod, TargetDevice
+from .backup import Backup, BackupMethod, TargetDevice, NotificationFromBackup
 from .calendar import DayOfMonth, Month, Weekday
 from .category import Category
 from .companies import Company, Customer, DeviceManufacturer, Owner
