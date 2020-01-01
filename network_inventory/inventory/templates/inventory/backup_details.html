@@ -8,23 +8,23 @@
     <div class="description"><p>{{ backup.description }}</p></div>
     <table class="ui celled table">
         <tr>
-            <th><b>Computer:</b></th>
+            <td><b>Computer:</b></td>
             <td><a href="{% url 'computer' backup.computer.id %}">{{ backup.computer }}</a></td>
         </tr>
         <tr>
-            <th><b>Backup Method:</b></th>
+            <td><b>Backup Method:</b></td>
             <td>{{ backup.method }}</td>
         </tr>
         <tr>
-            <th><b>Backup Software:</b></th>
+            <td><b>Backup Software:</b></td>
             <td>{{ backup.software }}</td>
         </tr>
         <tr>
-            <th><b>Exec Time:</b></th>
+            <td><b>Exec Time:</b></td>
             <td>{{ backup.exec_time }}</td>
         </tr>
         <tr>
-            <th><b>Exec Day:</b></th>
+            <td><b>Exec Day:</b></td>
             <td>{{ backup.exec_day }}</td>
         </tr>
     </table>
