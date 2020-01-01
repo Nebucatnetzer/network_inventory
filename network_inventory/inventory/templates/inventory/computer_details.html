@@ -1,5 +1,5 @@
 {% extends "inventory/base.html" %}
-{% block section_title %}{{ computer.name }}{% endblock %}
+{% block section_title %}{{ computer }}{% endblock %}
 {% block content %}
 <div class="ui cards">
     <div class="card">
@@ -35,10 +35,12 @@
             <th><b>Location:</b></th>
             <td>{{ computer.location }}</td>
         </tr>
+        {% if computer.user %}
         <tr>
             <th><b>User:</b></th>
-            <td>{{ computer.user }}</td>
+            <td><a href="{% url 'user' computer.user.id %}">{{ computer.user }}</a></td>
         </tr>
+        {% endif %}
         <tr>
             <th><b>Installation Date:</b></th>
             <td>{{ computer.installation_date }}</td>
