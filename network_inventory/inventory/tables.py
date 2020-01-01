@@ -49,7 +49,7 @@ class DevicesTable(tables.Table):
 
 class NetsTable(tables.Table):
     id = tables.Column(visible=False)
-    name = tables.Column('net', linkify=True)
+    name = tables.Column('Net', linkify=True)
     customer = tables.Column('Customer', linkify=True)
 
     class Meta:
