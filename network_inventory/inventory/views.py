@@ -65,7 +65,6 @@ def computer_detail_view(request, pk):
     cpu_list = ComputerCpuRelation.objects.filter(computer=pk)
     software_list = ComputerSoftwareRelation.objects.filter(computer=pk)
     raid_relations = Raid.objects.filter(computer=pk)
-    raid_relations = Raid.objects.filter(computer=pk)
     backup_list = Backup.objects.filter(computer=pk)
     context = {'computer': computer,
                'disks_list': disks_list,
