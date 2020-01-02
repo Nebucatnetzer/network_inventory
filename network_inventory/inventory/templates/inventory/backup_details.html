@@ -54,8 +54,8 @@
     <div class="card">
     <div class="content">
     <div class="header">Notifications</div>
-    <table class="ui celled table">
     {% for notification in notifications %}
+    <table class="ui celled table">
     <tr>
         <td><b>Name:</b></td>
         <td>{{ notification.notification }}</td>
@@ -73,8 +73,8 @@
         <td>{{ notification.notification.notification_type }}</td>
     </tr>
 
-    {% endfor %}
     </table>
+    {% endfor %}
     </div>
     </div>
     {% endif %}
