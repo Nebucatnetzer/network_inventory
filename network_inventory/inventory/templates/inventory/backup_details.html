@@ -35,8 +35,8 @@
     <div class="card">
     <div class="content">
     <div class="header">Target Devices</div>
-    <table class="ui celled table">
     {% for device in target_device_list %}
+    <table class="ui celled table">
     <tr>
         <td><b>Target Device:</b></td>
         <td><a href="{% url 'computer' device.device.id %}">{{ device.device }}</a></td>
@@ -45,8 +45,8 @@
         <td><b>Target Path:</b></td>
         <td>{{ device.target_path }}</td>
     </tr>
-    {% endfor %}
     </table>
+    {% endfor %}
     </div>
     </div>
     {% endif %}
