@@ -93,32 +93,33 @@
     {% if cpu_list or ram_list or disks_list or raid_disk_pairs or computer.host %}
     <div class="card">
     <div class="content">
+    {% if cpu_list or ram_list or disks_list or computer.host %}
     <div class="header">Hardware</div>
     <table class="ui celled table">
+    {% if cpu_list %}
         <tr>
             <td><b>CPUs:</b></td>
             <td>
-    {% if cpu_list %}
             {% for cpu in cpu_list %}
                 {{ cpu.amount }}x {{ cpu.cpu }}<br>
             {% endfor %}
             </td>
         </tr>
     {% endif %}
+    {% if ram_list %}
         <tr>
         <td><b>RAM Modules:</b></td>
         <td>
-    {% if ram_list %}
             {% for module in ram_list %}
                 {{ module.amount }}x {{ module.ram }}<br>
             {% endfor %}
         </td>
     </tr>
     {% endif %}
+    {% if disks_list %}
     <tr>
     <td><b>Disks:</b></td>
     <td>
-    {% if disks_list %}
             {% for disk in disks_list %}
                 {{ disk.amount }}x {{ disk.disk }}<br>
             {% endfor %}
@@ -126,6 +127,7 @@
     </tr>
     {% endif %}
     </table>
+    {% endif %}
 
     {% if raid_disk_pairs %}
     <div class="header">RAID</div>
