@@ -116,9 +116,9 @@
     {% endif %}
     </table>
 
-    {% if raid_relations %}
+    {% if raid_disk_pairs %}
     <div class="header">RAID</div>
-    {% for raid in raid_relations %}
+    {% for raid, disks in raid_disk_pairs.items %}
     <table class="ui celled table">
         <tr>
             <th><b>Type:</b></th>
@@ -128,6 +128,18 @@
             <th><b>Usable Space</b></th>
             <td>{{ raid.usable_space}}</td>
         </tr>
+        {% if disks %}
+        {% for disk in disks %}
+        <tr>
+            <td><b>Disk Type</b></td>
+            <td>{{ disk.disk }}</td>
+        </tr>
+        <tr>
+            <td><b>Amount</b></td>
+            <td>{{ disk.disk_amount }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
     </table>
     {% endfor %}
     {% endif %}
