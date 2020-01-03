@@ -8,45 +8,45 @@
     <div class="description"><p>{{ computer.description }}</p></div>
     <table class="ui celled table">
         <tr>
-            <th><b>OS:</b></th>
+            <td><b>OS:</b></td>
             <td>{{ computer.os }}</td>
         </tr>
         <tr>
-            <th><b>Serial Number:</b></th>
+            <td><b>Serial Number:</b></td>
             <td><code>{{ computer.serialnumber }}</code></td>
         </tr>
         <tr>
-            <th><b>Category:</b></th>
+            <td><b>Category:</b></td>
             <td>{{ computer.category }}</td>
         </tr>
         <tr>
-            <th><b>Owner:</b></th>
+            <td><b>Owner:</b></td>
             <td>{{ computer.owner }}</td>
         </tr>
         <tr>
-            <th><b>Customer:</b></th>
+            <td><b>Customer:</b></td>
             <td><a href="{% url 'customer' computer.customer.id %}">{{ computer.customer }}</a></td>
         </tr>
         <tr>
-            <th><b>Manufacturer:</b></th>
+            <td><b>Manufacturer:</b></td>
             <td>{{ computer.manufacturer }}</td>
         </tr>
         <tr>
-            <th><b>Location:</b></th>
+            <td><b>Location:</b></td>
             <td>{{ computer.location }}</td>
         </tr>
         {% if computer.user %}
         <tr>
-            <th><b>User:</b></th>
+            <td><b>User:</b></td>
             <td><a href="{% url 'user' computer.user.id %}">{{ computer.user }}</a></td>
         </tr>
         {% endif %}
         <tr>
-            <th><b>Installation Date:</b></th>
+            <td><b>Installation Date:</b></td>
             <td>{{ computer.installation_date }}</td>
         </tr>
         <tr>
-            <th><b>IPs:</b></th>
+            <td><b>IPs:</b></td>
             <td>
                 {% for net_id, ip in computer.ips.items %}
                     <a href="{% url 'net' net_id %}">{{ip}}</a><br>
@@ -85,7 +85,7 @@
     <div class="header">Hardware</div>
     <table class="ui celled table">
         <tr>
-            <th><b>CPUs:</b></th>
+            <td><b>CPUs:</b></td>
             <td>
     {% if cpu_list %}
             {% for cpu in cpu_list %}
@@ -95,7 +95,7 @@
         </tr>
     {% endif %}
         <tr>
-        <th><b>RAM Modules:</b></th>
+        <td><b>RAM Modules:</b></td>
         <td>
     {% if ram_list %}
             {% for module in ram_list %}
@@ -105,7 +105,7 @@
     </tr>
     {% endif %}
     <tr>
-    <th><b>Disks:</b></th>
+    <td><b>Disks:</b></td>
     <td>
     {% if disks_list %}
             {% for disk in disks_list %}
@@ -121,12 +121,12 @@
     {% for raid, disks in raid_disk_pairs.items %}
     <table class="ui celled table">
         <tr>
-            <th><b>Type:</b></th>
+            <td><b>Type:</b></td>
             <td>{{ raid.raid_type }}</td>
         </tr>
         <tr>
-            <th><b>Usable Space</b></th>
             <td>{{ raid.usable_space}}</td>
+            <td><b>Usable Space</b></td>
         </tr>
         {% if disks %}
         {% for disk in disks %}
