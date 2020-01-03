@@ -28,6 +28,7 @@ from .models import Customer
 from .models import Device
 from .models import DeviceInNet
 from .models import DisksInRaid
+from .models import LicenseWithComputer
 from .models import LicenseWithUser
 from .models import MailAlias
 from .models import Net
@@ -65,6 +66,7 @@ def computer_detail_view(request, pk):
     ram_list = ComputerRamRelation.objects.filter(computer=pk)
     cpu_list = ComputerCpuRelation.objects.filter(computer=pk)
     software_list = ComputerSoftwareRelation.objects.filter(computer=pk)
+    licenses = LicenseWithComputer.objects.filter(computer=pk)
     raid_disk_pairs = {}
     for raid in Raid.objects.filter(computer=pk):
         raid_disk_pairs[raid] = DisksInRaid.objects.filter(raid=raid)
@@ -75,7 +77,8 @@ def computer_detail_view(request, pk):
                'cpu_list': cpu_list,
                'software_list': software_list,
                'raid_disk_pairs': raid_disk_pairs,
-               'backup_list': backup_list}
+               'backup_list': backup_list,
+               'licenses': licenses}
     return render(request, 'inventory/computer_details.html', context)
 
 
