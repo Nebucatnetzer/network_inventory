@@ -1,5 +1,4 @@
 #!/bin/bash
-cd network_inventory
 if [ -f ./.second_run ]; then
     python manage.py makemigrations
     python manage.py migrate
