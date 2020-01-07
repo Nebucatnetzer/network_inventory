@@ -6,7 +6,7 @@ docker:
 	docker-compose up
 
 test:
-	docker-compose run web pytest -n 4 network_inventory/ --nomigrations --cov=. --cov-report=html
+	docker-compose run web pytest -n 4 --nomigrations --cov=. --cov-report=html
 
 local:
 	python3 -m venv venv
@@ -19,5 +19,5 @@ clean:
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm -rf htmlcov/
-	sudo rm network_inventory/.second_run
+	sudo rm -f .second_run
 	docker-compose down -v --rmi local

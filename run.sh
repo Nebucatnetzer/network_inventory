@@ -1,10 +1,10 @@
 #!/bin/bash
-cd network_inventory
 if [ -f ./.second_run ]; then
     sleep 2
     python manage.py makemigrations
     python manage.py migrate
 else
+    python manage.py makemigrations inventory
     python manage.py makemigrations
     python manage.py migrate
     python manage.py loaddata inventory
