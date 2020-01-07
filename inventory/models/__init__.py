@@ -1,6 +1,4 @@
 from .backup import Backup, BackupMethod, TargetDevice, NotificationFromBackup
-from .calendar import DayOfMonth, Month, Weekday
-from .category import Category
 from .computer import (Computer, ComputerCpuRelation, ComputerDiskRelation,
                        ComputerRamRelation,
                        ComputerSoftwareRelation)
@@ -19,6 +17,5 @@ from .os import OperatingSystem
 from .raid import DisksInRaid, RaidType, Raid
 from .ram import RamType, Ram
 from .software import SoftwareArchitecture, SoftwareCategory, Software
-from .time import HoursInDay, MinutesInHour
 from .user import User, UserInAdGroup, UserInMailGroup
 from .warranty import Warranty, WarrantyType

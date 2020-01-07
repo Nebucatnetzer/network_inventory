@@ -1,6 +1,5 @@
 from django.db import models
-from core.models import Company
-from .category import Category
+from core.models import Category, Company
 
 
 class CpuArchitecture(Category):

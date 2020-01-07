@@ -1,5 +1,6 @@
 from django.db import models
-from .category import Category
+
+from core.models import Category
 
 
 class DiskType(Category):

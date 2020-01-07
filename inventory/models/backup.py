@@ -1,6 +1,7 @@
 from django.db import models
-from .calendar import Weekday
-from .category import Category
+
+from core.models import Category, Weekday
+
 from .computer import Computer
 from .notification import Notification
 from .software import Software

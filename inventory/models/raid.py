@@ -1,6 +1,8 @@
 from django.db import models
+
+from core.models import Category
+
 from .disk import Disk
-from .category import Category
 from .computer import Computer
 
 

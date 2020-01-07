@@ -1,6 +1,6 @@
 from django.db import models
 from customer.models import Customer
-from .category import Category
+from core.models import Category
 
 
 class IpStatus(Category):
