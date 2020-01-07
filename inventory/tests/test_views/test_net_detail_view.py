@@ -5,7 +5,7 @@ from django.test import Client
 
 from inventory.models import DeviceInNet
 
-import helper
+from core.tests import helper
 
 pytestmark = pytest.mark.django_db
 

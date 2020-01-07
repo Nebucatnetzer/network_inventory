@@ -3,7 +3,7 @@ import pytest
 from django.test import Client
 from mixer.backend.django import mixer
 
-import helper
+from core.tests import helper
 from customer.models import Customer
 
 pytestmark = pytest.mark.django_db
