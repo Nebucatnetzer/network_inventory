@@ -4,7 +4,7 @@ from mixer.backend.django import mixer
 from django.test import Client
 from django.contrib.auth import get_user_model
 
-import helper
+from core.tests import helper
 
 pytestmark = pytest.mark.django_db
 

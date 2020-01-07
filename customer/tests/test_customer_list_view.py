@@ -6,7 +6,7 @@ from guardian.shortcuts import assign_perm
 
 from mixer.backend.django import mixer
 
-import helper
+from core.tests import helper
 
 pytestmark = pytest.mark.django_db
 
