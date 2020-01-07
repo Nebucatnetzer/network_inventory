@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'customer.apps.CustomerConfig',
     'inventory.apps.InventoryConfig',
     'guardian',
     'django_tables2',
