@@ -19,5 +19,5 @@ clean:
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm -rf htmlcov/
-	sudo rm network_inventory/.second_run
+	sudo rm -f .second_run
 	docker-compose down -v --rmi local
