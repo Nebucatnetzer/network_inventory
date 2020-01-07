@@ -19,6 +19,7 @@ from django.urls import path
 
 urlpatterns = [
     url(r'', include('inventory.urls')),
+    url(r'', include('customer.urls')),
     path('admin/', admin.site.urls),
     url(r'^_nested_admin/', include('nested_admin.urls')),
 ]

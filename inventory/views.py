@@ -2,19 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.views.generic import DetailView
 
 from django_filters.views import FilterView
 from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
-from guardian.mixins import PermissionRequiredMixin
 from guardian.shortcuts import get_objects_for_user
 
 from customer.models import Customer
+from customer.decorators import customer_view_permission
 
 from .decorators import backup_view_permission
 from .decorators import computer_view_permission
-from .decorators import customer_view_permission
 from .decorators import device_view_permission
 from .decorators import net_view_permission
 from .decorators import user_view_permission
@@ -43,7 +41,6 @@ from .models import UserLicense
 from .tables import BackupsTable
 from .tables import ComputerLicensesTable
 from .tables import ComputersTable
-from .tables import CustomersTable
 from .tables import DevicesTable
 from .tables import NetDetailTable
 from .tables import NetsTable
@@ -81,22 +78,6 @@ def computer_detail_view(request, pk):
                'backup_list': backup_list,
                'licenses': licenses}
     return render(request, 'inventory/computer_details.html', context)
-
-
-class CustomerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    model = Customer
-    template_name = 'inventory/customer_details.html'
-    permission_required = 'view_customer'
-
-
-@login_required
-def customers_table_view(request):
-    table = CustomersTable(
-        get_objects_for_user(request.user,
-                             'customer.view_customer',
-                             klass=Customer))
-    RequestConfig(request).configure(table)
-    return render(request, 'inventory/customer_list.html', {'customers': table})
 
 
 @login_required
