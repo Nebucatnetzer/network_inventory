@@ -73,7 +73,7 @@ def test_computer_detail_view_cpu_relation(create_admin_user):
 
 def test_computer_detail_view_no_permission(create_admin_user):
     create_admin_user()
-    customer = mixer.blend('inventory.Customer')
+    customer = mixer.blend('customer.Customer')
     computer = mixer.blend('inventory.Computer', customer=customer)
     client = Client()
     client.login(username="novartis-admin", password="password")

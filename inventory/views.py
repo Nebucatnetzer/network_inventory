@@ -10,6 +10,8 @@ from django_tables2.views import SingleTableMixin
 from guardian.mixins import PermissionRequiredMixin
 from guardian.shortcuts import get_objects_for_user
 
+from customer.models import Customer
+
 from .decorators import backup_view_permission
 from .decorators import computer_view_permission
 from .decorators import customer_view_permission
@@ -24,7 +26,6 @@ from .models import ComputerDiskRelation
 from .models import ComputerLicense
 from .models import ComputerRamRelation
 from .models import ComputerSoftwareRelation
-from .models import Customer
 from .models import Device
 from .models import DeviceInNet
 from .models import DisksInRaid
@@ -92,7 +93,7 @@ class CustomerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView
 def customers_table_view(request):
     table = CustomersTable(
         get_objects_for_user(request.user,
-                             'inventory.view_customer',
+                             'customer.view_customer',
                              klass=Customer))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/customer_list.html', {'customers': table})
@@ -163,7 +164,7 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
 
     def get_queryset(self):
         customers = get_objects_for_user(self.request.user,
-                                         'inventory.view_customer',
+                                         'customer.view_customer',
                                          klass=Customer)
         results = Computer.objects.filter(customer__in=customers)
         return results

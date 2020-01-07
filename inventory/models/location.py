@@ -1,5 +1,5 @@
 from django.db import models
-from .companies import Customer
+from customer.models import Customer
 
 
 class Location(models.Model):

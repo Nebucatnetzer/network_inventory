@@ -1,5 +1,4 @@
 from django.contrib import admin
-from guardian.admin import GuardedModelAdmin
 import nested_admin
 
 from .models import (
@@ -16,7 +15,6 @@ from .models import (
     Cpu,
     CpuArchitecture,
     CpuManufacturer,
-    Customer,
     Device,
     DeviceCategory,
     DeviceInNet,
@@ -35,7 +33,6 @@ from .models import (
     NotificationType,
     NotificationFromBackup,
     OperatingSystem,
-    Owner,
     Raid,
     RaidType,
     Ram,
@@ -51,10 +48,6 @@ from .models import (
     Warranty,
     WarrantyType
 )
-
-
-class CustomerAdmin(GuardedModelAdmin):
-    pass
 
 
 class CpuAdmin(admin.ModelAdmin):
@@ -370,7 +363,6 @@ admin.site.register(ConnectedDevice)
 admin.site.register(Cpu, CpuAdmin)
 admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
-admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Device)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
@@ -387,7 +379,6 @@ admin.site.register(Net)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(NotificationType, NotificationTypeAdmin)
 admin.site.register(OperatingSystem, OperatingSystemAdmin)
-admin.site.register(Owner)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
 admin.site.register(RamType, RamTypeAdmin)

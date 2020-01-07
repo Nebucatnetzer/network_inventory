@@ -1,9 +1,16 @@
 from django.db import models
+from core.models import Company
+from customer.models import Customer, Owner
 from .category import Category
-from .companies import Customer, Owner, DeviceManufacturer
 from .location import Location
 from .user import User
 from .net import Net, IpStatus
+
+
+class DeviceManufacturer(Company):
+
+    class Meta:
+        verbose_name_plural = "Device Manufacturers"
 
 
 class DeviceCategory(Category):

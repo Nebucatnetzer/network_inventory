@@ -91,7 +91,7 @@ def test_user_detail_view_computer(create_admin_user):
 
 def test_user_detail_view_no_permission(create_admin_user):
     create_admin_user()
-    customer = mixer.blend('inventory.Customer')
+    customer = mixer.blend('customer.Customer')
     user = mixer.blend('inventory.User', customer=customer)
     client = Client()
     client.login(username="novartis-admin", password="password")

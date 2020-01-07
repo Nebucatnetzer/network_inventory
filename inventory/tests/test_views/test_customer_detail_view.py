@@ -37,7 +37,7 @@ def test_customer_detail_view_no_permissions():
     User.objects.create_user("novartis-admin", "admin@novartis.com",
                              "password", is_staff=True)
     client = Client()
-    customer = mixer.blend('inventory.Customer')
+    customer = mixer.blend('customer.Customer')
     client.login(username="novartis-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/')
     assert response.status_code == 302 and 'login' in response.url

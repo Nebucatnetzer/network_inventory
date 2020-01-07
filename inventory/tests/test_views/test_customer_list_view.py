@@ -2,7 +2,6 @@ import pytest
 
 from django.test import Client
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from guardian.shortcuts import assign_perm
 
 from mixer.backend.django import mixer
@@ -64,7 +63,7 @@ def test_customer_list_view(create_admin_user):
 def test_customer_list_view_multiple_customers(create_admin_user):
     fixture = create_admin_user()
     customer1 = fixture['customer']
-    customer2 = mixer.blend('inventory.Customer')
+    customer2 = mixer.blend('customer.Customer')
     assign_perm('view_customer', fixture['admin'], customer2)
     client = Client()
     client.login(username="novartis-admin", password="password")

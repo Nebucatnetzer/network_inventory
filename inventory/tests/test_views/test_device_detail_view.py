@@ -16,7 +16,7 @@ def test_device_detail_view_not_logged_in():
 def test_device_detail_view(create_admin_user):
     fixture = create_admin_user()
     mixer.blend('inventory.DeviceCategory')
-    mixer.blend('inventory.Owner')
+    mixer.blend('customer.Owner')
     mixer.blend('inventory.Location')
     device = mixer.blend('inventory.Device',
                          customer=fixture['customer'],
@@ -47,7 +47,7 @@ def test_device_detail_view_not_found(create_admin_user):
 
 def test_device_detail_view_no_permission(create_admin_user):
     create_admin_user()
-    customer = mixer.blend('inventory.Customer')
+    customer = mixer.blend('customer.Customer')
     device = mixer.blend('inventory.Device', customer=customer)
     client = Client()
     client.login(username="novartis-admin", password="password")

@@ -13,7 +13,7 @@ pytestmark = pytest.mark.django_db
 def test_net_detail_view_no_permission(create_admin_user):
     create_admin_user()
     net = mixer.blend('inventory.Net')
-    customer = mixer.blend('inventory.Customer')
+    customer = mixer.blend('customer.Customer')
     device = mixer.blend('inventory.Computer', customer=customer)
     mixer.blend('inventory.DeviceInNet',
                 device=device,

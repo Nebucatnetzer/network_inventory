@@ -19,7 +19,7 @@ def create_admin_user():
         User = get_user_model()
         admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
                                          "password", is_staff=True)
-        customer = mixer.blend('inventory.Customer')
+        customer = mixer.blend('customer.Customer')
         group = Group.objects.create(name="Novartis Admin")
         admin.groups.add(group)
         assign_perm('view_customer', admin, customer)
