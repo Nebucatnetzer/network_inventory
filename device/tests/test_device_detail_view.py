@@ -17,7 +17,7 @@ def test_device_detail_view(create_admin_user):
     fixture = create_admin_user()
     mixer.blend('inventory.DeviceCategory')
     mixer.blend('customer.Owner')
-    mixer.blend('inventory.Location')
+    mixer.blend('customer.Location')
     device = mixer.blend('inventory.Device',
                          customer=fixture['customer'],
                          owner=mixer.SELECT,

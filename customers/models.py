@@ -22,3 +22,11 @@ class DeviceManufacturer(Company):
 
     class Meta:
         verbose_name_plural = "Device Manufacturers"
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
