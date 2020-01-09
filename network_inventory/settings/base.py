@@ -22,19 +22,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
+    'core.apps.CoreConfig',
+    'customers.apps.CustomersConfig',
+    'devices.apps.DevicesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'core.apps.CoreConfig',
-    'customer.apps.CustomerConfig',
-    'inventory.apps.InventoryConfig',
-    'guardian',
-    'django_tables2',
     'django_filters',
+    'django_tables2',
+    'guardian',
+    'inventory.apps.InventoryConfig',
     'nested_admin',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
