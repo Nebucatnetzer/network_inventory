@@ -1,9 +1,8 @@
 from django.db import models
-from django.core.exceptions import ValidationError
 
-from customer.models import Customer
+from customers.models import Customer
 from .computer import Computer
-from .user import User
+from users.models import User
 from .software import Software
 
 

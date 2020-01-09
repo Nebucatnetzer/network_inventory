@@ -1,8 +1,9 @@
 from django.contrib import admin
 import nested_admin
 
+from devices.models import DeviceInNet
+
 from .models import (
-    AdGroup,
     Backup,
     BackupMethod,
     Computer,
@@ -11,24 +12,14 @@ from .models import (
     ComputerLicense,
     ComputerRamRelation,
     ComputerSoftwareRelation,
-    ConnectedDevice,
     Cpu,
     CpuArchitecture,
     CpuManufacturer,
-    Device,
-    DeviceCategory,
-    DeviceInNet,
-    DeviceManufacturer,
     Disk,
     DiskType,
     DisksInRaid,
-    IpStatus,
     LicenseWithComputer,
     LicenseWithUser,
-    Location,
-    MailAlias,
-    MailGroup,
-    Net,
     Notification,
     NotificationType,
     NotificationFromBackup,
@@ -41,9 +32,6 @@ from .models import (
     SoftwareArchitecture,
     SoftwareCategory,
     TargetDevice,
-    User,
-    UserInAdGroup,
-    UserInMailGroup,
     UserLicense,
     Warranty,
     WarrantyType
@@ -82,22 +70,6 @@ class CpuManufacturerAdmin(admin.ModelAdmin):
         return {}
 
 
-class DeviceCategoryAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class DeviceManufacturerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class IpStatusAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -107,22 +79,6 @@ class IpStatusAdmin(admin.ModelAdmin):
 
 
 class LicenseWithComputerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class LicenseWithUserAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class MailAliasAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -210,22 +166,6 @@ class RamTypeAdmin(admin.ModelAdmin):
         return {}
 
 
-class UserInAdGroupAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class UserInMailGroupAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class WarrantyTypeAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -297,35 +237,6 @@ class ComputerAdmin(nested_admin.NestedModelAdmin):
                DeviceInNetInline, LicenseWithComputerInLine)
 
 
-class AdGroupInLine(admin.StackedInline):
-    model = UserInAdGroup
-    extra = 0
-    verbose_name_plural = 'AD Groups'
-
-
-class LicenseWithUserInLine(admin.StackedInline):
-    model = LicenseWithUser
-    extra = 0
-    verbose_name_plural = 'Licenses'
-
-
-class MailGroupInLine(admin.StackedInline):
-    model = UserInMailGroup
-    extra = 0
-    verbose_name_plural = 'Mail Groups'
-
-
-class MailAliasInLine(admin.StackedInline):
-    model = MailAlias
-    extra = 0
-    verbose_name_plural = 'Mail Aliases'
-
-
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('name', 'customer', 'enabled')
-    inlines = (AdGroupInLine, MailGroupInLine, MailAliasInLine, LicenseWithUserInLine)
-
-
 class TargetDeviceInLine(admin.StackedInline):
     model = TargetDevice
     extra = 0
@@ -354,28 +265,16 @@ class ComputerLicenseAdmin(admin.ModelAdmin):
     verbose_name_plural = 'Computer Licenses'
 
 
-admin.site.register(AdGroup)
 admin.site.register(Backup, BackupAdmin)
 admin.site.register(BackupMethod, BackupMethodAdmin)
 admin.site.register(Computer, ComputerAdmin)
 admin.site.register(ComputerLicense, ComputerLicenseAdmin)
-admin.site.register(ConnectedDevice)
 admin.site.register(Cpu, CpuAdmin)
 admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
-admin.site.register(Device)
-admin.site.register(DeviceCategory, DeviceCategoryAdmin)
-admin.site.register(DeviceInNet)
-admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
-admin.site.register(IpStatus, IpStatusAdmin)
 admin.site.register(LicenseWithComputer, LicenseWithComputerAdmin)
-admin.site.register(LicenseWithUser, LicenseWithUserAdmin)
-admin.site.register(Location)
-admin.site.register(MailAlias, MailAliasAdmin)
-admin.site.register(MailGroup)
-admin.site.register(Net)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(NotificationType, NotificationTypeAdmin)
 admin.site.register(OperatingSystem, OperatingSystemAdmin)
@@ -386,10 +285,6 @@ admin.site.register(Software)
 admin.site.register(SoftwareArchitecture, SoftwareArchitectureAdmin)
 admin.site.register(SoftwareCategory, SoftwareCategoryAdmin)
 admin.site.register(TargetDevice, TargetDeviceAdmin)
-admin.site.register(User, UserAdmin)
-admin.site.register(UserInAdGroup, UserInAdGroupAdmin)
-admin.site.register(UserInMailGroup, UserInMailGroupAdmin)
 admin.site.register(UserLicense, UserLicenseAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)
-

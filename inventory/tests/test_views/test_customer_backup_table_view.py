@@ -5,7 +5,7 @@ from django.test import Client
 
 from core.tests import helper
 
-from customer.models import Customer
+from customers.models import Customer
 
 pytestmark = pytest.mark.django_db
 

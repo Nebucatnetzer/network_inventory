@@ -1,8 +1,8 @@
 from django.db import models
 from core.models import Category, Company
-from customer.models import Customer, Owner
-from customer.models import Location
-from inventory.models import User, Net, IpStatus
+from customers.models import Customer, Owner, Location
+from users.models import User
+from nets.models import Net, IpStatus
 
 
 class DeviceManufacturer(Company):

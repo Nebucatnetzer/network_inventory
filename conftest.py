@@ -10,7 +10,10 @@ from guardian.shortcuts import assign_perm
 @pytest.fixture(scope='session')
 def django_db_setup(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
+        call_command('loaddata', 'core.yaml')
+        call_command('loaddata', 'devices.yaml')
         call_command('loaddata', 'inventory.yaml')
+        call_command('loaddata', 'nets.yaml')
 
 
 @pytest.fixture
@@ -19,7 +22,7 @@ def create_admin_user():
         User = get_user_model()
         admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
                                          "password", is_staff=True)
-        customer = mixer.blend('customer.Customer')
+        customer = mixer.blend('customers.Customer')
         group = Group.objects.create(name="Novartis Admin")
         admin.groups.add(group)
         assign_perm('view_customer', admin, customer)

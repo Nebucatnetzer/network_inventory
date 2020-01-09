@@ -4,7 +4,7 @@ from django.test import Client
 from mixer.backend.django import mixer
 
 from core.tests import helper
-from customer.models import Customer
+from customers.models import Customer
 
 
 pytestmark = pytest.mark.django_db
@@ -53,8 +53,8 @@ def test_customer_license_table_no_permission(create_admin_user):
 def test_customer_license_table_multiple_licenses(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
-    user1 = mixer.blend('inventory.User')
-    user2 = mixer.blend('inventory.User')
+    user1 = mixer.blend('users.User')
+    user2 = mixer.blend('users.User')
     client = Client()
     client.login(username="novartis-admin", password="password")
     license1 = mixer.blend('inventory.UserLicense', customer=customer,

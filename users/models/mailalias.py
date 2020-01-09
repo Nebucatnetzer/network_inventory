@@ -1,5 +1,5 @@
 from django.db import models
-from .user import User
+from users.models import User
 
 
 class MailAlias(models.Model):

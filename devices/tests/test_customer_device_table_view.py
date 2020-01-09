@@ -4,7 +4,7 @@ from django.test import Client
 from mixer.backend.django import mixer
 
 from core.tests import helper
-from customer.models import Customer
+from customers.models import Customer
 
 pytestmark = pytest.mark.django_db
 
@@ -19,7 +19,7 @@ def test_customer_device_table(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
-    device = mixer.blend('inventory.Device', customer=mixer.SELECT)
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert (response.status_code == 200
             and helper.in_content(response, device))
@@ -40,7 +40,7 @@ def test_customer_device_table_no_permission(create_admin_user):
     customer = Customer.objects.create(name='Nestle')
     client = Client()
     client.login(username="novartis-admin", password="password")
-    mixer.blend('inventory.Device', customer=customer)
+    mixer.blend('devices.Device', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert response.status_code == 403
 
@@ -50,8 +50,8 @@ def test_customer_device_table_multiple_devices(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
-    device1 = mixer.blend('inventory.Device', customer=mixer.SELECT)
-    device2 = mixer.blend('inventory.Device', customer=mixer.SELECT)
+    device1 = mixer.blend('devices.Device', customer=mixer.SELECT)
+    device2 = mixer.blend('devices.Device', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert (response.status_code == 200
             and helper.in_content(response, device1)

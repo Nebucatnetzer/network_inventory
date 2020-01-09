@@ -1,0 +1,12 @@
+- model: nets.IpStatus
+  fields:
+    name: "Fixed in Device"
+- model: nets.IpStatus
+  fields:
+    name: Reserved
+- model: nets.IpStatus
+  fields:
+    name: "Fixed in Device + Reserved"
+- model: nets.IpStatus
+  fields:
+    name: Dynamic

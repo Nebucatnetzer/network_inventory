@@ -2,10 +2,6 @@ import django_tables2 as tables
 
 from .models import Backup
 from .models import ComputerLicense
-from .models import Device
-from .models import DeviceInNet
-from .models import Net
-from .models import User
 from .models import UserLicense
 
 
@@ -24,25 +20,6 @@ class ComputersTable(tables.Table):
         template_name = 'django_tables2/semantic.html'
 
 
-class DevicesTable(tables.Table):
-    id = tables.Column(visible=False)
-    name = tables.Column('Device', linkify=True)
-
-    class Meta:
-        template_name = 'django_tables2/semantic.html'
-        model = Device
-
-
-class NetsTable(tables.Table):
-    id = tables.Column(visible=False)
-    name = tables.Column('Net', linkify=True)
-    customer = tables.Column('Customer', linkify=True)
-
-    class Meta:
-        template_name = 'django_tables2/semantic.html'
-        model = Net
-
-
 class BackupsTable(tables.Table):
     id = tables.Column(visible=False)
     name = tables.Column('Backup', linkify=True)
@@ -52,16 +29,6 @@ class BackupsTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = Backup
-
-
-class NetDetailTable(tables.Table):
-    device = tables.Column('Computer', linkify=True)
-    ip = tables.Column()
-    net = tables.Column(visible=False)
-
-    class Meta:
-        template_name = 'django_tables2/semantic.html'
-        model = DeviceInNet
 
 
 class UserLicensesTable(tables.Table):
@@ -86,15 +53,3 @@ class ComputerLicensesTable(tables.Table):
     class Meta:
         template_name = 'django_tables2/semantic.html'
         model = ComputerLicense
-
-
-class UsersTable(tables.Table):
-    id = tables.Column(visible=False)
-    name = tables.Column('User', linkify=True)
-    customer = tables.Column('Customer', linkify=True)
-    ad_groups = tables.ManyToManyColumn()
-    mail_groups = tables.ManyToManyColumn()
-
-    class Meta:
-        template_name = 'django_tables2/semantic.html'
-        model = User

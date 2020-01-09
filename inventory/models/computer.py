@@ -1,6 +1,6 @@
 from django.db import models
 from .cpu import Cpu
-from device.models import ConnectedDevice
+from devices.models import ConnectedDevice
 from .disk import Disk
 from .os import OperatingSystem
 from .ram import Ram

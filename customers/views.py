@@ -15,7 +15,7 @@ from .tables import CustomersTable
 def customers_table_view(request):
     table = CustomersTable(
         get_objects_for_user(request.user,
-                             'customer.view_customer',
+                             'customers.view_customer',
                              klass=Customer))
     RequestConfig(request).configure(table)
     return render(request, 'inventory/customer_list.html', {'customers': table})

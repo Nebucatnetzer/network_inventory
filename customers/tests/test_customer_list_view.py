@@ -63,7 +63,7 @@ def test_customer_list_view(create_admin_user):
 def test_customer_list_view_multiple_customers(create_admin_user):
     fixture = create_admin_user()
     customer1 = fixture['customer']
-    customer2 = mixer.blend('customer.Customer')
+    customer2 = mixer.blend('customers.Customer')
     assign_perm('view_customer', fixture['admin'], customer2)
     client = Client()
     client.login(username="novartis-admin", password="password")

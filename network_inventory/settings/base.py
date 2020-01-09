@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'guardian',
     'inventory.apps.InventoryConfig',
     'nested_admin',
+    'nets.apps.NetsConfig',
     'users.apps.UsersConfig',
 ]
 

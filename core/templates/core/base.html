@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <title>Network Inventory</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="ui container">
+      <a href="{% url 'customers' %}">Home</a> |
+      <a href="{% url 'all_computers' %}">All Computers</a> |
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Logout</a> |
+      {% else %}
+      <a href="{% url 'login' %}" >Login</a> |
+      {% endif %}
+  <h1>{% block section_title %}Device Inventory{% endblock %}</h1>
+  {% block content %}{% endblock %}
+  <footer>
+    {% block footer %}
+    <p class="copyright">Created by Andreas Zweili licensed under GPL v3.0</p>
+    {% endblock %}
+  </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</body>
+</html>

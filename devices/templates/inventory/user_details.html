@@ -1,0 +1,106 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ user }}{% endblock %}
+{% block content %}
+<div class="ui cards">
+    <div class="card">
+    <div class="content">
+    <div class="header">Description</div>
+    <div class="description"><p>{{ user.description }}</p></div>
+    <table class="ui celled table">
+        <tr>
+            <td><b>Customer</b></td>
+            <td><a href="{% url 'customer' user.customer.id %}">{{ user.customer }}</a></td>
+        </tr>
+        <tr>
+            <td><b>AD Login</b></td>
+            <td>{{ user.ad_login }}</td>
+        </tr>
+        <tr>
+            <td><b>AD Password</b></td>
+            <td>{{ user.ad_pw }}</td>
+        </tr>
+        <tr>
+            <td><b>Email Address</b></td>
+            <td>{{ user.ad_login }}</td>
+        </tr>
+        <tr>
+            <td><b>Mail Password</b></td>
+            <td>{{ user.mail_pw }}</td>
+        </tr>
+        <tr>
+            <td><b>User is activ</b></td>
+            <td>{{ user.enabled }}</td>
+        </tr>
+        <tr>
+            <td><b>Comptuers</b></td>
+            <td>
+                {% for computer in computers %}
+                    <a href="{% url 'computer' computer.id %}">{{ computer}}</a>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    </div>
+    </div>
+
+    {% if ad_groups or mail_groups or mail_alias %}
+    <div class="card">
+    <div class="content">
+    {% if mail_alias %}
+    <div class="header">Mail Alias</div>
+    <table class="ui celled table">
+    {% for alias in mail_alias %}
+    <tr>
+    <td>
+    {{ alias }}
+    </td>
+    </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if ad_groups %}
+    <div class="header">AD Groups</div>
+    <table class="ui celled table">
+    {% for group in ad_groups %}
+    <tr>
+        <td>{{ group.group }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if mail_groups %}
+    <div class="header">Mail Groups</div>
+    <table class="ui celled table">
+    <th>Group Name</th>
+    <th>Address</th>
+    {% for group in mail_groups %}
+    <tr>
+        <td>{{ group.group }}</td>
+        <td>{{ group.group.mail_address }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if licenses %}
+    <div class="card">
+    <div class="content">
+    <div class="header">Licenses</div>
+    <table class="ui celled table">
+    {% for license in licenses %}
+    <tr>
+        <td>{{ license.license.software }}</td>
+        <td><code>{{ license.license.key }}</code></td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

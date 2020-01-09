@@ -1,0 +1,82 @@
+{% extends "inventory/base.html" %}
+{% block section_title %}{{ backup.name }}{% endblock %}
+{% block content %}
+<div class="ui cards">
+    <div class="card">
+    <div class="content">
+    <div class="header">Description</div>
+    <div class="description"><p>{{ backup.description }}</p></div>
+    <table class="ui celled table">
+        <tr>
+            <td><b>Computer:</b></td>
+            <td><a href="{% url 'computer' backup.computer.id %}">{{ backup.computer }}</a></td>
+        </tr>
+        <tr>
+            <td><b>Backup Method:</b></td>
+            <td>{{ backup.method }}</td>
+        </tr>
+        <tr>
+            <td><b>Backup Software:</b></td>
+            <td>{{ backup.software }}</td>
+        </tr>
+        <tr>
+            <td><b>Exec Time:</b></td>
+            <td>{{ backup.exec_time }}</td>
+        </tr>
+        <tr>
+            <td><b>Exec Day:</b></td>
+            <td>{{ backup.exec_day }}</td>
+        </tr>
+    </table>
+    </div>
+    </div>
+
+    {% if target_device_list %}
+    <div class="card">
+    <div class="content">
+    <div class="header">Target Devices</div>
+    {% for device in target_device_list %}
+    <table class="ui celled table">
+    <tr>
+        <td><b>Target Device:</b></td>
+        <td><a href="{% url 'computer' device.device.id %}">{{ device.device }}</a></td>
+    </tr>
+    <tr>
+        <td><b>Target Path:</b></td>
+        <td>{{ device.target_path }}</td>
+    </tr>
+    </table>
+    {% endfor %}
+    </div>
+    </div>
+    {% endif %}
+    {% if notifications %}
+    <div class="card">
+    <div class="content">
+    <div class="header">Notifications</div>
+    {% for notification in notifications %}
+    <table class="ui celled table">
+    <tr>
+        <td><b>Name:</b></td>
+        <td>{{ notification.notification }}</td>
+    </tr>
+    <tr>
+        <td><b>Description:</b></td>
+        <td>{{ notification.notification.description }}</td>
+    </tr>
+    <tr>
+        <td><b>Recipient:</b></td>
+        <td>{{ notification.notification.recipient }}</td>
+    </tr>
+    <tr>
+        <td><b>Type:</b></td>
+        <td>{{ notification.notification.notification_type }}</td>
+    </tr>
+
+    </table>
+    {% endfor %}
+    </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

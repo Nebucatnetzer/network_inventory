@@ -1,0 +1,9 @@
+{% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
+{% block section_title %}{{ net.name }}{% endblock %}
+{% block content %}
+{% if net.description %}
+<p>{{ net.description }}</p>
+{% endif %}
+{% render_table table %}
+{% endblock %}

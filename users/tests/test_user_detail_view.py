@@ -15,7 +15,7 @@ def test_user_detail_view_not_logged_in():
 
 def test_user_detail_view(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
@@ -33,9 +33,9 @@ def test_user_detail_view_not_found(create_admin_user):
 
 def test_user_detail_view_ad_group(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
-    group = mixer.blend('inventory.AdGroup')
-    mixer.blend('inventory.UserInAdGroup', user=user, group=group)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
+    group = mixer.blend('users.AdGroup')
+    mixer.blend('users.UserInAdGroup', user=user, group=group)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
@@ -45,9 +45,9 @@ def test_user_detail_view_ad_group(create_admin_user):
 
 def test_user_detail_view_mail_group(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
-    group = mixer.blend('inventory.MailGroup')
-    mixer.blend('inventory.UserInMailGroup', user=user, group=group)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
+    group = mixer.blend('users.MailGroup')
+    mixer.blend('users.UserInMailGroup', user=user, group=group)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
@@ -57,8 +57,8 @@ def test_user_detail_view_mail_group(create_admin_user):
 
 def test_user_detail_view_mail_alias(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
-    mixer.blend('inventory.MailAlias', user=user)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
+    mixer.blend('users.MailAlias', user=user)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
@@ -68,7 +68,7 @@ def test_user_detail_view_mail_alias(create_admin_user):
 
 def test_user_detail_view_license(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
     mixer.blend('inventory.UserLicense', software=mixer.SELECT)
     mixer.blend('inventory.LicenseWithUser', user=user)
     client = Client()
@@ -80,7 +80,7 @@ def test_user_detail_view_license(create_admin_user):
 
 def test_user_detail_view_computer(create_admin_user):
     create_admin_user()
-    user = mixer.blend('inventory.User', customer=mixer.SELECT)
+    user = mixer.blend('users.User', customer=mixer.SELECT)
     computer = mixer.blend('inventory.Computer', user=user)
     client = Client()
     client.login(username="novartis-admin", password="password")
@@ -91,8 +91,8 @@ def test_user_detail_view_computer(create_admin_user):
 
 def test_user_detail_view_no_permission(create_admin_user):
     create_admin_user()
-    customer = mixer.blend('customer.Customer')
-    user = mixer.blend('inventory.User', customer=customer)
+    customer = mixer.blend('customers.Customer')
+    user = mixer.blend('users.User', customer=customer)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')

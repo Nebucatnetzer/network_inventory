@@ -1,0 +1,9 @@
+{% extends "inventory/base.html" %}
+{% load render_table from django_tables2 %}
+{% block section_title %}Licenses{% endblock %}
+{% block content %}
+<h3>User Licenses</h3>
+{% render_table user_licenses %}
+<h3>Computer Licenses</h3>
+{% render_table computer_licenses %}
+{% endblock %}

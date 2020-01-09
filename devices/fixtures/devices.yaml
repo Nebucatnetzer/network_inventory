@@ -1,0 +1,21 @@
+- model: devices.DeviceManufacturer
+  fields:
+    name: Dell
+- model: devices.DeviceManufacturer
+  fields:
+    name: HP
+- model: devices.DeviceManufacturer
+  fields:
+    name: Axxiv
+- model: devices.DeviceManufacturer
+  fields:
+    name: Acer
+- model: devices.DeviceManufacturer
+  fields:
+    name: Asus
+- model: devices.DeviceManufacturer
+  fields:
+    name: Lenovo
+- model: devices.DeviceManufacturer
+  fields:
+    name: Samsung

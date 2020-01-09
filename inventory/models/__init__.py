@@ -6,8 +6,6 @@ from .cpu import CpuArchitecture, CpuManufacturer, Cpu
 from .disk import DiskType, Disk
 from .license import (License, ComputerLicense, UserLicense,
                       LicenseWithComputer, LicenseWithUser)
-from .mailalias import MailAlias
-from .net import Net, IpStatus
 from .notification import Notification, NotificationType
 from .os import OperatingSystem
 from .raid import DisksInRaid, RaidType, Raid

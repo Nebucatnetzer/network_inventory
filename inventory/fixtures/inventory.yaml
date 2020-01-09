@@ -17,28 +17,6 @@
   fields:
     name: ARM64
 
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Dell
-- model: inventory.DeviceManufacturer
-  fields:
-    name: HP
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Axxiv
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Acer
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Asus
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Lenovo
-- model: inventory.DeviceManufacturer
-  fields:
-    name: Samsung
-
 - model: inventory.RamType
   fields:
     name: unkown
@@ -61,19 +39,6 @@
 - model: inventory.DiskType
   fields:
     name: SAS
-
-- model: inventory.IpStatus
-  fields:
-    name: "Fixed in Device"
-- model: inventory.IpStatus
-  fields:
-    name: Reserved
-- model: inventory.IpStatus
-  fields:
-    name: "Fixed in Device + Reserved"
-- model: inventory.IpStatus
-  fields:
-    name: Dynamic
 
 - model: inventory.SoftwareArchitecture
   fields:

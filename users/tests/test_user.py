@@ -5,6 +5,6 @@ pytestmark = pytest.mark.django_db
 
 
 def test_user_reverse_url():
-    user = mixer.blend('inventory.User')
+    user = mixer.blend('users.User')
     assert (user.get_absolute_url()
             == "/user/" + str(user.id) + "/")

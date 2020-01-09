@@ -1,5 +1,5 @@
 from django.db import models
-from customer.models import Customer
+from customers.models import Customer
 from .groups import AdGroup, MailGroup
 
 
