@@ -4,6 +4,7 @@ if [ -f ./.second_run ]; then
     python manage.py makemigrations
     python manage.py migrate
 else
+    python manage.py makemigrations backups
     python manage.py makemigrations core
     python manage.py makemigrations customers
     python manage.py makemigrations devices
@@ -12,6 +13,7 @@ else
     python manage.py makemigrations users
     python manage.py makemigrations
     python manage.py migrate
+    python manage.py loaddata backups
     python manage.py loaddata core
     python manage.py loaddata devices
     python manage.py loaddata inventory
