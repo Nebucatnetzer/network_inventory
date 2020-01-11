@@ -10,6 +10,7 @@ else
     python manage.py makemigrations devices
     python manage.py makemigrations inventory
     python manage.py makemigrations nets
+    python manage.py makemigrations softwares
     python manage.py makemigrations users
     python manage.py makemigrations
     python manage.py migrate
@@ -18,6 +19,7 @@ else
     python manage.py loaddata devices
     python manage.py loaddata inventory
     python manage.py loaddata nets
+    python manage.py loaddata softwares
     python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
     touch .second_run
 fi
