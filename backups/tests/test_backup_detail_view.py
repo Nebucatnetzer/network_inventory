@@ -63,7 +63,7 @@ def test_backup_detail_view_with_notification(create_admin_user):
     create_admin_user()
     mixer.blend('inventory.Computer', customer=mixer.SELECT)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
-    notification = mixer.blend('inventory.Notification')
+    notification = mixer.blend('backups.Notification')
     mixer.blend('backups.NotificationFromBackup',
                 backup=backup,
                 notification=notification)
