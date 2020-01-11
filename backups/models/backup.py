@@ -1,10 +1,9 @@
 from django.db import models
 
 from core.models import Category, Weekday
+from inventory.models import Computer, Software
 
-from .computer import Computer
 from .notification import Notification
-from .software import Software
 
 
 class BackupMethod(Category):
