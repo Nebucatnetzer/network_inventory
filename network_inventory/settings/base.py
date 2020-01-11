@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'nested_admin',
     'nets.apps.NetsConfig',
+    'softwares.apps.SoftwaresConfig',
     'users.apps.UsersConfig',
 ]
 
