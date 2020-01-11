@@ -4,8 +4,6 @@ import nested_admin
 from devices.models import DeviceInNet
 
 from .models import (
-    Backup,
-    BackupMethod,
     Computer,
     ComputerCpuRelation,
     ComputerDiskRelation,
@@ -19,10 +17,6 @@ from .models import (
     DiskType,
     DisksInRaid,
     LicenseWithComputer,
-    LicenseWithUser,
-    Notification,
-    NotificationType,
-    NotificationFromBackup,
     OperatingSystem,
     Raid,
     RaidType,
@@ -31,7 +25,6 @@ from .models import (
     Software,
     SoftwareArchitecture,
     SoftwareCategory,
-    TargetDevice,
     UserLicense,
     Warranty,
     WarrantyType
@@ -47,14 +40,6 @@ class CpuAdmin(admin.ModelAdmin):
 
 
 class CpuArchitectureAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class BackupMethodAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -79,22 +64,6 @@ class IpStatusAdmin(admin.ModelAdmin):
 
 
 class LicenseWithComputerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class NotificationTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class NotificationAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -135,14 +104,6 @@ class SoftwareArchitectureAdmin(admin.ModelAdmin):
 
 
 class SoftwareCategoryAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class TargetDeviceAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -237,22 +198,6 @@ class ComputerAdmin(nested_admin.NestedModelAdmin):
                DeviceInNetInline, LicenseWithComputerInLine)
 
 
-class TargetDeviceInLine(admin.StackedInline):
-    model = TargetDevice
-    extra = 0
-    verbose_name_plural = 'Target Devices'
-
-
-class NotificationForBackupInLine(admin.StackedInline):
-    model = NotificationFromBackup
-    extra = 0
-    verbose_name_plural = 'Notifications'
-
-
-class BackupAdmin(admin.ModelAdmin):
-    inlines = (TargetDeviceInLine, NotificationForBackupInLine)
-
-
 class UserLicenseAdmin(admin.ModelAdmin):
     model = UserLicense
     extra = 0
@@ -265,8 +210,6 @@ class ComputerLicenseAdmin(admin.ModelAdmin):
     verbose_name_plural = 'Computer Licenses'
 
 
-admin.site.register(Backup, BackupAdmin)
-admin.site.register(BackupMethod, BackupMethodAdmin)
 admin.site.register(Computer, ComputerAdmin)
 admin.site.register(ComputerLicense, ComputerLicenseAdmin)
 admin.site.register(Cpu, CpuAdmin)
@@ -275,8 +218,6 @@ admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
 admin.site.register(LicenseWithComputer, LicenseWithComputerAdmin)
-admin.site.register(Notification, NotificationAdmin)
-admin.site.register(NotificationType, NotificationTypeAdmin)
 admin.site.register(OperatingSystem, OperatingSystemAdmin)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
@@ -284,7 +225,6 @@ admin.site.register(RamType, RamTypeAdmin)
 admin.site.register(Software)
 admin.site.register(SoftwareArchitecture, SoftwareArchitectureAdmin)
 admin.site.register(SoftwareCategory, SoftwareCategoryAdmin)
-admin.site.register(TargetDevice, TargetDeviceAdmin)
 admin.site.register(UserLicense, UserLicenseAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)
