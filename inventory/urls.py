@@ -10,6 +10,4 @@ urlpatterns = [
          name='computer'),
     path('computers/all/', views.ComputersFilterView.as_view(),
          name='all_computers'),
-    path('customer/<int:pk>/licenses/', views.licenses_table_view,
-         name='licenses'),
  ]
