@@ -1,0 +1,15 @@
+- model: backups.BackupMethod
+  fields:
+    name: Sync
+- model: backups.BackupMethod
+  fields:
+    name: 'Forward Incremental'
+- model: backups.BackupMethod
+  fields:
+    name: 'Reversed Incremental'
+- model: backups.BackupMethod
+  fields:
+    name: 'Sure Backup'
+- model: backups.BackupMethod
+  fields:
+    name: 'Copy Job'

@@ -390,22 +390,6 @@
     name: 'Panda Antivirus Pro'
     category: '3'
 
-- model: inventory.BackupMethod
-  fields:
-    name: Sync
-- model: inventory.BackupMethod
-  fields:
-    name: 'Forward Incremental'
-- model: inventory.BackupMethod
-  fields:
-    name: 'Reversed Incremental'
-- model: inventory.BackupMethod
-  fields:
-    name: 'Sure Backup'
-- model: inventory.BackupMethod
-  fields:
-    name: 'Copy Job'
--
   model: inventory.Ram
   fields:
     ram_type: 1
