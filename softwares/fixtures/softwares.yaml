@@ -1,0 +1,144 @@
+- model: softwares.SoftwareArchitecture
+  fields:
+    name: "32 Bit"
+- model: softwares.SoftwareArchitecture
+  fields:
+    name: "64 Bit"
+
+-
+  model: softwares.SoftwareCategory
+  fields:
+    name: Office
+-
+  model: softwares.SoftwareCategory
+  fields:
+    name: Backup
+-
+  model: softwares.SoftwareCategory
+  fields:
+    name: Anti-Virus
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2010 Student'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2010 Pro'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2010 Enterprise'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2013 Student'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2013 Pro'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2013 Enterprise'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2016 Home & Business'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2016 Pro'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2016 Enterprise'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 365'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2013 Home & Business'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2010 Home & Business'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: '2007 Microsoft Office System'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2007 Standard'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: 'Office 2019 Home & Business'
+    category: '1'
+-
+  model: softwares.Software
+  fields:
+    name: Veeam
+    category: '2'
+-
+  model: softwares.Software
+  fields:
+    name: 'Backup Exec'
+    category: '2'
+-
+  model: softwares.Software
+  fields:
+    name: Acronis
+    category: '2'
+-
+  model: softwares.Software
+  fields:
+    name: 'Hyper Backup'
+    category: '2'
+-
+  model: softwares.Software
+  fields:
+    name: 'Bit Defender'
+    category: '3'
+-
+  model: softwares.Software
+  fields:
+    name: 'Panda Cloud Pro'
+    category: '3'
+-
+  model: softwares.Software
+  fields:
+    name: 'Panda Cloud Pro Plus'
+    category: '3'
+-
+  model: softwares.Software
+  fields:
+    name: 'Windows Defender'
+    category: '3'
+-
+  model: softwares.Software
+  fields:
+    name: 'Microsoft Security Essentials'
+    category: '3'
+-
+  model: softwares.Software
+  fields:
+    name: 'Panda Antivirus Pro'
+    category: '3'
