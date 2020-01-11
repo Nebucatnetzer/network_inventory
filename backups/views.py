@@ -20,7 +20,7 @@ def backups_table_view(request, pk):
     computers = Computer.objects.filter(customer=pk)
     table = BackupsTable(Backup.objects.filter(computer__in=computers))
     RequestConfig(request).configure(table)
-    return render(request, 'inventory/backup_list.html', {'backups': table})
+    return render(request, 'backups/backup_list.html', {'backups': table})
 
 
 @login_required
@@ -29,7 +29,7 @@ def backup_detail_view(request, pk):
     backup = get_object_or_404(Backup, pk=pk)
     target_device_list = TargetDevice.objects.filter(backup=backup)
     notifications = NotificationFromBackup.objects.filter(backup=backup)
-    return render(request, 'inventory/backup_details.html',
+    return render(request, 'backups/backup_details.html',
                   {'backup': backup,
                    'target_device_list': target_device_list,
                    'notifications': notifications})
