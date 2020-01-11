@@ -8,6 +8,7 @@ from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
 from guardian.shortcuts import get_objects_for_user
 
+from backups.models import Backup
 from customers.models import Customer
 from customers.decorators import customer_view_permission
 
