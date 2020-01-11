@@ -18,10 +18,10 @@ def customers_table_view(request):
                              'customers.view_customer',
                              klass=Customer))
     RequestConfig(request).configure(table)
-    return render(request, 'inventory/customer_list.html', {'customers': table})
+    return render(request, 'customers/customer_list.html', {'customers': table})
 
 
 class CustomerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Customer
-    template_name = 'inventory/customer_details.html'
+    template_name = 'customers/customer_details.html'
     permission_required = 'view_customer'

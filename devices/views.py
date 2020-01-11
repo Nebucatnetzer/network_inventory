@@ -16,7 +16,7 @@ from .tables import DevicesTable
 @device_view_permission
 def device_detail_view(request, pk):
     device = get_object_or_404(Device, pk=pk)
-    return render(request, 'inventory/device_details.html',
+    return render(request, 'devices/device_details.html',
                   {'device': device})
 
 
@@ -25,4 +25,4 @@ def device_detail_view(request, pk):
 def devices_table_view(request, pk):
     table = DevicesTable(Device.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'inventory/device_list.html', {'devices': table})
+    return render(request, 'devices/device_list.html', {'devices': table})
