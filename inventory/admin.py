@@ -7,7 +7,6 @@ from .models import (
     Computer,
     ComputerCpuRelation,
     ComputerDiskRelation,
-    ComputerLicense,
     ComputerRamRelation,
     ComputerSoftwareRelation,
     Cpu,
@@ -25,7 +24,6 @@ from .models import (
     Software,
     SoftwareArchitecture,
     SoftwareCategory,
-    UserLicense,
     Warranty,
     WarrantyType
 )
@@ -198,20 +196,7 @@ class ComputerAdmin(nested_admin.NestedModelAdmin):
                DeviceInNetInline, LicenseWithComputerInLine)
 
 
-class UserLicenseAdmin(admin.ModelAdmin):
-    model = UserLicense
-    extra = 0
-    verbose_name_plural = 'User Licenses'
-
-
-class ComputerLicenseAdmin(admin.ModelAdmin):
-    model = ComputerLicense
-    extra = 0
-    verbose_name_plural = 'Computer Licenses'
-
-
 admin.site.register(Computer, ComputerAdmin)
-admin.site.register(ComputerLicense, ComputerLicenseAdmin)
 admin.site.register(Cpu, CpuAdmin)
 admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
@@ -225,6 +210,5 @@ admin.site.register(RamType, RamTypeAdmin)
 admin.site.register(Software)
 admin.site.register(SoftwareArchitecture, SoftwareArchitectureAdmin)
 admin.site.register(SoftwareCategory, SoftwareCategoryAdmin)
-admin.site.register(UserLicense, UserLicenseAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)
