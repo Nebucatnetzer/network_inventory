@@ -1,5 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from django_tables2 import RequestConfig
+
+from customers.decorators import customer_view_permission
+
+from .models import ComputerLicense
+from .models import UserLicense
+from .tables import ComputerLicensesTable
+from .tables import UserLicensesTable
 # Create your views here.
 
 

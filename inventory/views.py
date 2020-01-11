@@ -17,16 +17,12 @@ from .filters import ComputerFilter
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
-from .models import ComputerLicense
 from .models import ComputerRamRelation
 from .models import ComputerSoftwareRelation
 from .models import DisksInRaid
 from .models import LicenseWithComputer
 from .models import Raid
-from .models import UserLicense
-from .tables import ComputerLicensesTable
 from .tables import ComputersTable
-from .tables import UserLicensesTable
 
 
 @login_required
