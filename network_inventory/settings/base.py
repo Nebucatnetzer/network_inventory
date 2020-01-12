@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'guardian',
     'inventory.apps.InventoryConfig',
+    'licenses.apps.LicensesConfig',
     'nested_admin',
     'nets.apps.NetsConfig',
     'softwares.apps.SoftwaresConfig',
