@@ -20,8 +20,6 @@ from .models import (
     RaidType,
     Ram,
     RamType,
-    Warranty,
-    WarrantyType
 )
 
 
@@ -82,14 +80,6 @@ class DiskTypeAdmin(admin.ModelAdmin):
 
 
 class RamTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class WarrantyTypeAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -169,5 +159,3 @@ admin.site.register(DiskType, DiskTypeAdmin)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
 admin.site.register(RamType, RamTypeAdmin)
-admin.site.register(Warranty)
-admin.site.register(WarrantyType, WarrantyTypeAdmin)

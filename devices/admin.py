@@ -7,6 +7,8 @@ from .models import (
     DeviceCategory,
     DeviceInNet,
     DeviceManufacturer,
+    Warranty,
+    WarrantyType
 )
 
 
@@ -32,8 +34,18 @@ class DeviceInNetInline(nested_admin.NestedStackedInline):
     verbose_name_plural = 'Nets'
 
 
+class WarrantyTypeAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
 admin.site.register(ConnectedDevice)
 admin.site.register(Device)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
 admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)
+admin.site.register(Warranty)
+admin.site.register(WarrantyType, WarrantyTypeAdmin)

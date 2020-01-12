@@ -2,7 +2,7 @@ from django.db import models
 
 from core.models import Category
 
-from devices.models import Device
+from .device import Device
 
 
 class WarrantyType(Category):
