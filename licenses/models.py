@@ -3,7 +3,7 @@ from django.db import models
 from customers.models import Customer
 from inventory.computer import Computer
 from users.models import User
-from .software import Software
+from softwares.models import Software
 
 
 class License(models.Model):

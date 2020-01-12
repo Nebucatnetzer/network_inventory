@@ -11,6 +11,7 @@ from guardian.shortcuts import get_objects_for_user
 from backups.models import Backup
 from customers.models import Customer
 from customers.decorators import customer_view_permission
+from licenses.models import LicenseWithComputer
 
 from .decorators import computer_view_permission
 from .filters import ComputerFilter
@@ -20,7 +21,6 @@ from .models import ComputerDiskRelation
 from .models import ComputerRamRelation
 from .models import ComputerSoftwareRelation
 from .models import DisksInRaid
-from .models import LicenseWithComputer
 from .models import Raid
 from .tables import ComputersTable
 

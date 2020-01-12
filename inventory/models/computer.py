@@ -1,10 +1,13 @@
 from django.db import models
+
+from softwares.models import OperatingSystem
+from softwares.models import Software
+from softwares.models import SoftwareArchitecture
+
 from .cpu import Cpu
 from devices.models import ConnectedDevice
 from .disk import Disk
-from .os import OperatingSystem
 from .ram import Ram
-from .software import Software, SoftwareArchitecture
 
 
 class Computer(ConnectedDevice):
