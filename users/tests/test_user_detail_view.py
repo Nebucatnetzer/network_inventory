@@ -69,8 +69,8 @@ def test_user_detail_view_mail_alias(create_admin_user):
 def test_user_detail_view_license(create_admin_user):
     create_admin_user()
     user = mixer.blend('users.User', customer=mixer.SELECT)
-    mixer.blend('inventory.UserLicense', software=mixer.SELECT)
-    mixer.blend('inventory.LicenseWithUser', user=user)
+    mixer.blend('licenses.UserLicense', software=mixer.SELECT)
+    mixer.blend('licenses.LicenseWithUser', user=user)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
