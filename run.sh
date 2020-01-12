@@ -9,6 +9,7 @@ else
     python manage.py makemigrations customers
     python manage.py makemigrations devices
     python manage.py makemigrations inventory
+    python manage.py makemigrations licenses
     python manage.py makemigrations nets
     python manage.py makemigrations softwares
     python manage.py makemigrations users
