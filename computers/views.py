@@ -29,23 +29,23 @@ from .tables import ComputersTable
 @computer_view_permission
 def computer_detail_view(request, pk):
     computer = get_object_or_404(Computer, pk=pk)
-    disks_list = ComputerDiskRelation.objects.filter(computer=pk)
-    ram_list = ComputerRamRelation.objects.filter(computer=pk)
-    cpu_list = ComputerCpuRelation.objects.filter(computer=pk)
-    software_list = ComputerSoftwareRelation.objects.filter(computer=pk)
-    licenses = LicenseWithComputer.objects.filter(computer=pk)
+    disks_relations = ComputerDiskRelation.objects.filter(computer=pk)
+    ram_relations = ComputerRamRelation.objects.filter(computer=pk)
+    cpu_relations = ComputerCpuRelation.objects.filter(computer=pk)
+    software_relations = ComputerSoftwareRelation.objects.filter(computer=pk)
+    license_list = LicenseWithComputer.objects.filter(computer=pk)
     raid_disk_pairs = {}
     for raid in Raid.objects.filter(computer=pk):
         raid_disk_pairs[raid] = DisksInRaid.objects.filter(raid=raid)
     backup_list = Backup.objects.filter(computer=pk)
     context = {'computer': computer,
-               'disks_list': disks_list,
-               'ram_list': ram_list,
-               'cpu_list': cpu_list,
-               'software_list': software_list,
+               'disks_relations': disks_relations,
+               'ram_relations': ram_relations,
+               'cpu_relations': cpu_relations,
+               'software_relations': software_relations,
                'raid_disk_pairs': raid_disk_pairs,
-               'backup_list': backup_list,
-               'licenses': licenses}
+               'backup_relations': backup_list,
+               'license_list': license_list}
     return render(request, 'computers/computer_details.html', context)
 
 

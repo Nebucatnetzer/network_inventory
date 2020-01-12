@@ -56,21 +56,21 @@
     </table>
     </div>
     </div>
-    {% if software_list or backup_list %}
+    {% if software_relations or backup_relations or license_list %}
     <div class="card">
     <div class="content">
-    {% if software_list %}
+    {% if software_relations %}
     <div class="header">Software</div>
     <ul>
-    {% for software in software_list %}
-        <li>{{ software.software }}</li>
+    {% for relation in software_relations %}
+        <li>{{ relation.software }}</li>
     {% endfor %}
     </ul>
     {% endif %}
-    {% if licenses %}
+    {% if license_list %}
     <div class="header">Licenses</div>
     <table class="ui celled table">
-    {% for license in licenses %}
+    {% for license in license_list %}
     <tr>
         <td>{{ license.license.software }}</td>
         <td><code>{{ license.license.key }}</code></td>
@@ -78,10 +78,10 @@
     {% endfor %}
     </table>
     {% endif %}
-    {% if backup_list %}
+    {% if backup_relations %}
     <div class="header">Backup</div>
     <ul>
-        {% for backup in backup_list %}
+        {% for backup in backup_relations %}
         <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a></li>
         {% endfor %}
     </ul>
@@ -90,37 +90,37 @@
     </div>
     {% endif %}
 
-    {% if cpu_list or ram_list or disks_list or raid_disk_pairs or computer.host %}
+    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs or computer.host %}
     <div class="card">
     <div class="content">
-    {% if cpu_list or ram_list or disks_list or computer.host %}
+    {% if cpu_relations or ram_relations or disks_relations or computer.host %}
     <div class="header">Hardware</div>
     <table class="ui celled table">
-    {% if cpu_list %}
+    {% if cpu_relations %}
         <tr>
             <td><b>CPUs:</b></td>
             <td>
-            {% for cpu in cpu_list %}
+            {% for cpu in cpu_relations %}
                 {{ cpu.amount }}x {{ cpu.cpu }}<br>
             {% endfor %}
             </td>
         </tr>
     {% endif %}
-    {% if ram_list %}
+    {% if ram_relations %}
         <tr>
         <td><b>RAM Modules:</b></td>
         <td>
-            {% for module in ram_list %}
+            {% for module in ram_relations %}
                 {{ module.amount }}x {{ module.ram }}<br>
             {% endfor %}
         </td>
     </tr>
     {% endif %}
-    {% if disks_list %}
+    {% if disks_relations %}
     <tr>
     <td><b>Disks:</b></td>
     <td>
-            {% for disk in disks_list %}
+            {% for disk in disks_relations %}
                 {{ disk.amount }}x {{ disk.disk }}<br>
             {% endfor %}
     </td>
