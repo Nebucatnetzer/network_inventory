@@ -15,15 +15,10 @@ from .models import (
     Disk,
     DiskType,
     DisksInRaid,
-    LicenseWithComputer,
-    OperatingSystem,
     Raid,
     RaidType,
     Ram,
     RamType,
-    Software,
-    SoftwareArchitecture,
-    SoftwareCategory,
     Warranty,
     WarrantyType
 )
@@ -61,22 +56,6 @@ class IpStatusAdmin(admin.ModelAdmin):
         return {}
 
 
-class LicenseWithComputerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class OperatingSystemAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class RamModuleAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
@@ -86,22 +65,6 @@ class RamModuleAdmin(admin.ModelAdmin):
 
 
 class RaidTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class SoftwareArchitectureAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class SoftwareCategoryAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -202,13 +165,8 @@ admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
-admin.site.register(LicenseWithComputer, LicenseWithComputerAdmin)
-admin.site.register(OperatingSystem, OperatingSystemAdmin)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
 admin.site.register(RamType, RamTypeAdmin)
-admin.site.register(Software)
-admin.site.register(SoftwareArchitecture, SoftwareArchitectureAdmin)
-admin.site.register(SoftwareCategory, SoftwareCategoryAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)
