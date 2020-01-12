@@ -1,7 +1,8 @@
 from django.db import models
 
 from core.models import Category, Weekday
-from inventory.models import Computer, Software
+from inventory.models import Computer
+from softwares.models import Software
 
 from .notification import Notification
 

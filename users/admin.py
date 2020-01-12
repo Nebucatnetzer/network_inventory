@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from inventory.models import LicenseWithUser
+from licenses.models import LicenseWithUser
 
 from .models import (
     AdGroup,
