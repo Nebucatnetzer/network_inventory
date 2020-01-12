@@ -2,6 +2,7 @@ from django.contrib import admin
 import nested_admin
 
 from devices.models import DeviceInNet
+from licenses.models import LicenseWithComputer
 
 from .models import (
     Computer,
