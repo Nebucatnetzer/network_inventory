@@ -15,6 +15,7 @@ def django_db_setup(django_db_setup, django_db_blocker):
         call_command('loaddata', 'devices.yaml')
         call_command('loaddata', 'inventory.yaml')
         call_command('loaddata', 'nets.yaml')
+        call_command('loaddata', 'softwares.yaml')
 
 
 @pytest.fixture
