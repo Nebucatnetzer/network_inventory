@@ -21,6 +21,6 @@ def licenses_table_view(request, pk):
     RequestConfig(request).configure(user_licenses)
     RequestConfig(request).configure(computer_licenses)
     return render(request,
-                  'softwares/license_list.html',
+                  'licenses/license_list.html',
                   {'user_licenses': user_licenses,
                    'computer_licenses': computer_licenses})

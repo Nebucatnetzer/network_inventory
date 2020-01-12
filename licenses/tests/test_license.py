@@ -8,17 +8,17 @@ pytestmark = pytest.mark.django_db
 
 def test_license_two_licenses_per_user():
     mixer.blend('users.User')
-    mixer.blend('inventory.UserLicense')
+    mixer.blend('licenses.UserLicense')
     with pytest.raises(IntegrityError):
-        mixer.cycle(2).blend('inventory.LicenseWithUser',
+        mixer.cycle(2).blend('licenses.LicenseWithUser',
                              user=mixer.SELECT,
                              license=mixer.SELECT)
 
 
 def test_license_two_licenses_per_computer():
     mixer.blend('inventory.Computer')
-    mixer.blend('inventory.ComputerLicense')
+    mixer.blend('licenses.ComputerLicense')
     with pytest.raises(IntegrityError):
-        mixer.cycle(2).blend('inventory.LicenseWithComputer',
+        mixer.cycle(2).blend('licenses.LicenseWithComputer',
                              computer=mixer.SELECT,
                              license=mixer.SELECT)
