@@ -62,7 +62,10 @@ class MailAliasInLine(admin.StackedInline):
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('name', 'customer', 'enabled')
-    inlines = (AdGroupInLine, MailGroupInLine, MailAliasInLine, LicenseWithUserInLine)
+    inlines = (AdGroupInLine,
+               MailGroupInLine,
+               MailAliasInLine,
+               LicenseWithUserInLine)
 
 
 admin.site.register(AdGroup)
