@@ -1,134 +1,134 @@
-- model: inventory.CpuManufacturer
+- model: computers.CpuManufacturer
   fields:
     name: Intel
-- model: inventory.CpuManufacturer
+- model: computers.CpuManufacturer
   fields:
     name: AMD
-- model: inventory.CpuArchitecture
+- model: computers.CpuArchitecture
   fields:
     name: x86_64
-- model: inventory.CpuArchitecture
+- model: computers.CpuArchitecture
   fields:
     name: i686
-- model: inventory.CpuArchitecture
+- model: computers.CpuArchitecture
   fields:
     name: ARM
-- model: inventory.CpuArchitecture
+- model: computers.CpuArchitecture
   fields:
     name: ARM64
 
-- model: inventory.RamType
+- model: computers.RamType
   fields:
     name: unkown
-- model: inventory.RamType
+- model: computers.RamType
   fields:
     name: DDR2
-- model: inventory.RamType
+- model: computers.RamType
   fields:
     name: DDR3
-- model: inventory.RamType
+- model: computers.RamType
   fields:
     name: DDR4
 
-- model: inventory.DiskType
+- model: computers.DiskType
   fields:
     name: SSD
-- model: inventory.DiskType
+- model: computers.DiskType
   fields:
     name: HDD
-- model: inventory.DiskType
+- model: computers.DiskType
   fields:
     name: SAS
 
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 0"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 1"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 5"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 6"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 10"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 50"
-- model: inventory.RaidType
+- model: computers.RaidType
   fields:
     name: "RAID 60"
 
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 1
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 2
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 4
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 8
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 16
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 24
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 32
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 64
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 96
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 128
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 256
     ecc: False
 -
-  model: inventory.Ram
+  model: computers.Ram
   fields:
     ram_type: 1
     size_in_gb: 512

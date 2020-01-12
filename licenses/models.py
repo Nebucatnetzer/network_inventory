@@ -1,7 +1,7 @@
 from django.db import models
 
 from customers.models import Customer
-from inventory.models import Computer
+from computers.models import Computer
 from users.models import User
 from softwares.models import Software
 

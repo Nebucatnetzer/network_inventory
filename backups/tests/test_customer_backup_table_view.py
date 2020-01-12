@@ -20,7 +20,7 @@ def test_customer_backup_table(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
-    computer = mixer.blend('inventory.Computer', customer=customer)
+    computer = mixer.blend('computers.Computer', customer=customer)
     backup = mixer.blend('backups.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert (response.status_code == 200
@@ -41,7 +41,7 @@ def test_customer_backup_table_no_permission(create_admin_user):
     customer = Customer.objects.create(name='Nestle')
     client = Client()
     client.login(username="novartis-admin", password="password")
-    computer = mixer.blend('inventory.Computer', customer=customer)
+    computer = mixer.blend('computers.Computer', customer=customer)
     mixer.blend('backups.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')
     assert response.status_code == 403
@@ -52,7 +52,7 @@ def test_customer_backup_table_with_multiple_backups(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="novartis-admin", password="password")
-    computer = mixer.blend('inventory.Computer', customer=customer)
+    computer = mixer.blend('computers.Computer', customer=customer)
     backup1 = mixer.blend('backups.Backup', computer=computer)
     backup2 = mixer.blend('backups.Backup', computer=computer)
     response = client.get('/customer/' + str(customer.id) + '/backups/')

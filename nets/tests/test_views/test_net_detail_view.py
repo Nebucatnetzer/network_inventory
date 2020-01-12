@@ -14,7 +14,7 @@ def test_net_detail_view_no_permission(create_admin_user):
     create_admin_user()
     net = mixer.blend('nets.Net')
     customer = mixer.blend('customers.Customer')
-    device = mixer.blend('inventory.Computer', customer=customer)
+    device = mixer.blend('computers.Computer', customer=customer)
     mixer.blend('devices.DeviceInNet',
                 device=device,
                 net=net,
@@ -28,7 +28,7 @@ def test_net_detail_view_no_permission(create_admin_user):
 def test_net_detail_view(create_admin_user):
     fixture = create_admin_user()
     net = mixer.blend('nets.Net', customer=mixer.SELECT)
-    device = mixer.blend('inventory.Computer', customer=fixture['customer'])
+    device = mixer.blend('computers.Computer', customer=fixture['customer'])
     device_in_net = DeviceInNet.objects.create(device=device,
                                                net=net, ip='10.7.89.101')
     client = Client()

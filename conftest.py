@@ -11,9 +11,9 @@ from guardian.shortcuts import assign_perm
 def django_db_setup(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
         call_command('loaddata', 'backups.yaml')
+        call_command('loaddata', 'computers.yaml')
         call_command('loaddata', 'core.yaml')
         call_command('loaddata', 'devices.yaml')
-        call_command('loaddata', 'inventory.yaml')
         call_command('loaddata', 'nets.yaml')
         call_command('loaddata', 'softwares.yaml')
 

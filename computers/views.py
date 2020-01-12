@@ -46,7 +46,7 @@ def computer_detail_view(request, pk):
                'raid_disk_pairs': raid_disk_pairs,
                'backup_list': backup_list,
                'licenses': licenses}
-    return render(request, 'inventory/computer_details.html', context)
+    return render(request, 'computers/computer_details.html', context)
 
 
 @login_required
@@ -54,13 +54,13 @@ def computer_detail_view(request, pk):
 def computers_table_view(request, pk):
     table = ComputersTable(Computer.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'inventory/computer_list.html', {'computers': table})
+    return render(request, 'computers/computer_list.html', {'computers': table})
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     table_class = ComputersTable
     model = Computer
-    template_name = "inventory/all_computers.html"
+    template_name = "computers/all_computers.html"
 
     filterset_class = ComputerFilter
 

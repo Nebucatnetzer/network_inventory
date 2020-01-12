@@ -15,7 +15,7 @@ def test_backup_detail_view_not_logged_in():
 
 def test_backup_detail_view(create_admin_user):
     create_admin_user()
-    mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    mixer.blend('computers.Computer', customer=mixer.SELECT)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
@@ -37,7 +37,7 @@ def test_customer_computer_table_no_permission(create_admin_user):
     customer = Customer.objects.create(name='Nestle')
     client = Client()
     client.login(username="novartis-admin", password="password")
-    mixer.blend('inventory.Computer', customer=customer)
+    mixer.blend('computers.Computer', customer=customer)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
     response = client.get('/backup/' + str(backup.id) + '/')
     assert response.status_code == 403
@@ -45,8 +45,8 @@ def test_customer_computer_table_no_permission(create_admin_user):
 
 def test_backup_detail_view_with_target_device(create_admin_user):
     create_admin_user()
-    source_computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
-    target_computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    source_computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    target_computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
     backup = mixer.blend('backups.Backup', computer=source_computer,
                          software=mixer.SELECT, method=mixer.SELECT)
     mixer.blend('backups.TargetDevice', device=target_computer,
@@ -61,7 +61,7 @@ def test_backup_detail_view_with_target_device(create_admin_user):
 
 def test_backup_detail_view_with_notification(create_admin_user):
     create_admin_user()
-    mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    mixer.blend('computers.Computer', customer=mixer.SELECT)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
     notification = mixer.blend('backups.Notification')
     mixer.blend('backups.NotificationFromBackup',

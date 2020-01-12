@@ -16,7 +16,7 @@ def test_license_two_licenses_per_user():
 
 
 def test_license_two_licenses_per_computer():
-    mixer.blend('inventory.Computer')
+    mixer.blend('computers.Computer')
     mixer.blend('licenses.ComputerLicense')
     with pytest.raises(IntegrityError):
         mixer.cycle(2).blend('licenses.LicenseWithComputer',

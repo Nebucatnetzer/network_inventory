@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 
 from django_tables2 import RequestConfig
 
-from inventory.models import Computer
+from computers.models import Computer
 from customers.decorators import customer_view_permission
 
 from .decorators import backup_view_permission

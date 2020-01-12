@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = [
     'backups.apps.BackupsConfig',
+    'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
     'customers.apps.CustomersConfig',
     'devices.apps.DevicesConfig',
@@ -35,7 +36,6 @@ INSTALLED_APPS = [
     'django_filters',
     'django_tables2',
     'guardian',
-    'inventory.apps.InventoryConfig',
     'licenses.apps.LicensesConfig',
     'nested_admin',
     'nets.apps.NetsConfig',

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
-from inventory.models import Computer
+from computers.models import Computer
 from licenses.models import LicenseWithUser
 
 from .decorators import user_view_permission

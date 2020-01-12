@@ -23,7 +23,7 @@ def test_computer_list_view_no_computers(create_admin_user):
 
 def test_computer_list_view(create_admin_user):
     create_admin_user()
-    computer = mixer.blend('inventory.Computer', customer=mixer.SELECT)
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computers/all/')

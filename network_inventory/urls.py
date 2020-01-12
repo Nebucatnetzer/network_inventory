@@ -19,10 +19,10 @@ from django.urls import path
 
 urlpatterns = [
     url(r'', include('backups.urls')),
+    url(r'', include('computers.urls')),
     url(r'', include('core.urls')),
     url(r'', include('customers.urls')),
     url(r'', include('devices.urls')),
-    url(r'', include('inventory.urls')),
     url(r'', include('licenses.urls')),
     url(r'', include('nets.urls')),
     url(r'', include('users.urls')),
