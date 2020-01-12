@@ -36,14 +36,6 @@ class UserInMailGroupAdmin(admin.ModelAdmin):
         return {}
 
 
-class LicenseWithUserAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class LicenseWithUserInLine(admin.StackedInline):
     model = LicenseWithUser
     extra = 0
