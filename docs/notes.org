@@ -1,0 +1,193 @@
+#+TITLE: Network Inventory
+:preamble:
+*+author: Andreas Zweili
+:end:
+
+* NEXT Models erstellen
+* NEXT Tabelle erweitern
+* TODO Permissions recherchieren
+* TODO Projekt auf MariaDB umbauen
+
+Wird erst gemacht wenn ich das finale go habe.
+
+* TODO Server mit NGINX aufsetzen
+
+https://linuxconfig.org/how-to-host-django-with-nginx-on-ubuntu-18-04-bionic-beaver-linux
+
+* NEXT [#C] extend the CSS
+
+- A more centered layout would be nice
+- Maybe some colours
+
+* NEXT [#C] calculate the used space on a host
+
+Means calculate the size all the VMs would use if they were thick.
+
+* NEXT [#C] include a RAID calculator
+
+- https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python/
+
+I would like to use this to show the usable space in a RAID system.
+
+* NEXT [#C] Garantiedauer anhand des Service Tags bei Dell abholen
+
+* Must Have
+** Models
+** Views
+*** TODO implement permission decorators currently all the items can get viewed.
+    I either have to implement a decorator for each object type or find a general way.
+    This problem is only related to detail views. The tables and lists have a general way to check the permission.
+    I maybe could get the model name from the url (https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern) and get the object with this function:
+    https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
+*** TODO Add tests for multiple nets and devices
+*** TODO ComputerDetailView, add links to add a relation if it is none
+*** TODO ComputerDetailView, rename variables for the querysets to XXXRelations
+*** TODO CustomerListView, add all the objects (Backup, Software, Users)
+*** TODO implement SoftwareDetailView
+*** TODO implement an overview of all devices which are running out of warranty, maybe this could be shown as well in the CustomerDetailView
+*** TODO make sure that the customer_table is limited to only allowed customers
+*** TODO add a list of assigned users and computers to the license view
+
+** Setup
+*** TODO Server mit NGINX aufsetzen
+- https://linuxconfig.org/how-to-host-django-with-nginx-on-ubuntu-18-04-bionic-beaver-linux
+
+** Various
+*** TODO refactor the project to have a core app. This way I can split the project into multiple apps such as Customer, Computer, Backups etc. and import the shared models from core. This allows me to split the views and tests over multiple apps making the whole thing a bit easier to understand. See the Notability note for more information. https://github.com/netbox-community/netbox/tree/develop/netbox might provide an example
+When doing the refactor I should correct the imports. The current system is very annoying when I add a new object/class.
+*** TODO change the admin url
+*** TODO update the url code: https://docs.djangoproject.com/en/2.1/topics/http/urls/*views-extra-options
+*** TODO implement guardian, this needs to be done for basically every model which lives on a view. E.g. `BackupListView`, `SoftwareListView`. I can’t remember how this should be implemented.  However it might be implemented in the customer table view. The security concept works like this:
+  1. check if the user is logged in
+  2. check if the user is allowed to view the customer, if not return an error
+  3. get all matching objects which the user is allowed to view.
+  Step two can't be replaced by an empty table because we need a customer object to operate on. Therefore it's better to quickly check the customer before we fetch all the other objects from the database.
+*** TODO calculate licence usage for customer
+*** TODO Convert the NETSheet Data file to YML fixtures.
+*** TODO Check tests for response.context[‚table‘] this would allow for tests of the views which check explicitly what gets returned by the view. Might be easier/faster then rendering the whole view.
+*** TODO Create custom user model
+*** TODO Excel Import, könnte allenfalls mit django-excel gelöst werden:
+https://github.com/pyexcel-webwares/django-excel
+*** TODO Have a look at the documentation of django-nested-admin
+*** TODO have a look at django get_related, it might solve a problem for me.
+
+** Licenses
+*** TODO make sure the licenses models are correct. I think manytomany might not be the correct relation since a user should only be attached once to a user license and a computer should only be attached once to a computer license. However a user can stil have many licenses and a license can still have many users.
+*** TODO Implement a license check into all forms so that one can never use more licenses than are available.
+*** TODO It would be great if the application checks automatically if a Software has a License attached to it and if so increases the used licenses counter. Maybe with this: https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
+
+* Nice to Have
+*** TODO a way to track various items. I would be able to use it as a general inventory tool.
+    Maybe this approach would be something:
+    https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
+*** TODO Extend the CSS
+  - A more centered layout would be nice
+  - Maybe some colours
+*** TODO calculate the used space on a host
+    - Means calculate the size all the VMs would use if they were thick.
+*** TODO include a RAID calculator
+  - https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
+  I would like to use this to show the usable space in a RAID system.
+*** TODO  Garantiedauer anhand des Service Tags bei Dell abholen
+*** TODO Move the lists to their own page. Since I have more devices than I thought it would provide a better
+    overview than one big list.
+*** TODO a "to deactivate" feature on users. this way one could mark a user for deactivation and anyone could check if there are users to deactivate.
+*** TODO Search boxes in the views. So that one can search for a customer, a computer or similar in the tables.
+
+* Done
+** DONE Recreate the RM in draw.io
+    The Dia RM is okay but not really that great. Draw.io would give a
+    better result.
+** DONE create multiple requirements files
+** DONE put passwords into environment variables
+** DONE Permissions recherchieren
+** DONE customer tabelle erweitern mit listen
+** DONE Models erstellen
+** DONE Add a Counter to the RAM Modules
+** DONE Create a NET category where a device can live in.
+    This NET Category should display it's IP range, Subnet mask and show
+    it's DHCP range if one is configured.
+** DONE Create class DeviceInNet
+    This class shows the relationship between the device and a NET. An
+    attribute of a DeviceInNet should be an IP address.
+** DONE Create an abstract company class
+** DONE Create Customer and a Manufacturer sub class Those two would be based on
+  the company class. I'm currently not sure how I should handle the case where a
+  company is both a customer and a manufacturer.
+** DONE A text field next to the customer where one can enter additional information which can't be put into the normal documentation.
+** DONE Fix test for net detail view
+** DONE NETs, add a description field, for NETs like HEHImmo it might be nice to
+  have a short description for what it is intendet.
+** DONE ComputerDetailView, add link to SoftwareDetailView
+** DONE implement NETSheet list, this view should give an overview of all the devices in the NET and there current IP Address.
+** DONE implement BackupListView
+** DONE Filter the filter in the AllComputerView so that it only shows the customers the current user is allowed to view
+
+** PROJECT Disks in RAID and RAID have overlapping Felds (disks appear on both). And they don't have the proper relationship. There can be disks from variing sizes in a RAID therefore the relationship between DisksInRaid and RaidInComputer needs to be a manytoone relationship
+
+** DONE fix column name links in customer table they throw an error when one clicks on them.
+** DONE ComputerDetailView, add all properties to the view table
+** DONE implement UserListView
+** DONE implement SoftwareListView, this and the next view would probably better be a License view. Since the software should be available to all devices from all customers. It doesn’t make much sense to add 100 of different Office softwares. Probably a Software model could be attached to a License model.
+** DONE implement UserDetailView
+** DONE Implement the license so that it can get attached to a user when the user gets created. This way they might get less easily forgotten.
+** DONE fix the Makefile so that the fixtures don't get applies twice.
+
+This is already done for the `make local` command but needs fixing in the
+`make` command. However there's a bit more difficult because it runs in Docker
+and with PostgreSQL
+
+* Ressources
+** Class Based Views
+- http://ccbv.co.uk/
+
+** Design
+
+*** Admin themes
+- django-grappelli
+- django-suit
+- django-admin-bootstrapped
+
+** Forms
+- https://django-crispy-forms.readthedocs.io/en/latest/index.html
+- https://stackoverflow.com/questions/25321423/django-create-inline-forms-similar-to-django-admin*25340256
+- https://stackoverflow.com/questions/5171365/django-inline-form-with-custom-forms
+
+** Permissions
+- https://django-guardian.readthedocs.io/en/stable/userguide/assign.html
+- https://github.com/dfunckt/django-rules/blob/master/README.rst
+
+#+begin_src python
+decororator (function) :
+  if user has permission(object.customer):
+    return function
+#+end_src
+
+Maybe it would be possible to add a property to the classes which allows to access the customer of an object like this:
+
+#+begin_src python
+object.customer
+#+end_src
+
+* tables problem
+
+#+begin_src diff
+-from django_tables2.utils import A
++
+
+ class CustomersTable(tables.Table):
+-    name = tables.LinkColumn('customer', args=[A('pk')])
+-    nets = tables.LinkColumn('nets', text='Nets', args=[A('pk')])
+-    computers = tables.LinkColumn('computers', text='Computers', args=[A('pk')])
+-    devices = tables.LinkColumn('devices', text='Devices', args=[A('pk')])
+-    backups = tables.LinkColumn('backups', text='Backups', args=[A('pk')])
++    name = tables.Column(linkify=("customer", [tables.A("pk")]))
++    nets = tables.Column(verbose_name="Nets",
++                         linkify=("nets", [tables.A("pk")]))
++    computers = tables.Column(verbose_name="Computers",
++                              linkify=("computers", [tables.A("pk")]))
++    devices = tables.Column(verbose_name="Devices",
++                            linkify=("devices", [tables.A("pk")]))
++    backups = tables.Column(verbose_name="Backups",
++                            linkify=dict(viewname="backups", args=[tables.A("pk")]))
+#+end_src
