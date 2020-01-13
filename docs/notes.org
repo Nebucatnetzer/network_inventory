@@ -191,3 +191,13 @@ object.customer
 +    backups = tables.Column(verbose_name="Backups",
 +                            linkify=dict(viewname="backups", args=[tables.A("pk")]))
 #+end_src
+* Links to include
+
+- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#id4
+- https://docs.djangoproject.com/en/2.2/ref/request-response/
+- https://duckduckgo.com/?q=django+get_related&t=fpas&ia=qa
+- https://pybit.es/selenium-pytest-and-django.html
+- https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
+- https://stackoverflow.com/questions/54592026/how-to-create-a-custom-mixin-in-django
+- https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern
+- https://stackoverflow.com/questions/6069070/how-to-use-permission-required-decorators-on-django-class-based-views#6069444
