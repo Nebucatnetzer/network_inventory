@@ -1,6 +1,6 @@
 #+TITLE: Network Inventory
 :preamble:
-*+author: Andreas Zweili
+#+author: Andreas Zweili
 :end:
 
 * Vocabulary
