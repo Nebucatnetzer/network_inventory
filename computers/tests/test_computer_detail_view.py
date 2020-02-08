@@ -15,7 +15,8 @@ def test_computer_detail_view_not_logged_in():
 
 def test_computer_detail_view(create_admin_user):
     create_admin_user()
-    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT,
+                           os=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
