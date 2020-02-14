@@ -10,14 +10,9 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/5]
-** TODO Models [0/1]
-*** TODO Hardware Model
-
-I'm currently unsure if I should implement a hardware model. With this model I
-could add the hardware model to a device. Currently this capability is missing.
-
-** TODO Views [0/8]
+* TODO Must Have [1/5]
+** DONE Models [0/0]
+** TODO Views [0/9]
 *** TODO implement permission decorators currently all the items can get viewed.
 
 I either have to implement a decorator for each object type or find a general
@@ -283,6 +278,12 @@ understand. See the Notability note for more information.
 https://github.com/netbox-community/netbox/tree/develop/netbox might provide an
 example When doing the refactor I should correct the imports. The current
 system is very annoying when I add a new object/class.
+
+** DONE Hardware Model
+CLOSED: [2020-02-14 Fri 20:28]
+
+I'm currently unsure if I should implement a hardware model. With this model I
+could add the hardware model to a device. Currently this capability is missing.
 
 * Ressources
 ** Class Based Views
