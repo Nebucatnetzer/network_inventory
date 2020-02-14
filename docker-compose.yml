@@ -5,8 +5,9 @@ services:
     image: postgres
     environment:
       - POSTGRES_DB=network_inventory
+      - POSTGRES_PASSWORD=password
     volumes:
-      - ./db_data:/var/lib/postgresql/data/
+      - ./db_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -14,7 +15,7 @@ services:
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - 8000:8000
     environment:
       - DJANGO_SETTINGS_MODULE=network_inventory.settings.docker
       - DJANGO_DEBUG=True
