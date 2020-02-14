@@ -49,6 +49,17 @@ customers for internal usuage.
 The queryset should only contain results which a users is allowed to see.
 
 *** TODO add a list of assigned users and computers to the license view
+*** TODO Computer-, Device-, ConnectedDevice- AddFrom
+**** TODO Filter Hardware Model to corresponding device manufacturer
+
+When changing the HardwareModel field of a device the dropdown should be
+filtered to the provided DeviceManufacturer.
+
+Currently it could still make sense to make the DeviceManufacturer only
+available through the HardwareModel. This way we wouldn't have to filter the
+HardwareModel dropdown. However we would loose the ability to only select the
+DeviceManufacturer for a device in case we don't know the specific model which
+happens quite often.
 
 ** TODO Setup [0/1]
 *** TODO Server mit NGINX aufsetzen
