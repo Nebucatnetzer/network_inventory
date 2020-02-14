@@ -16,6 +16,7 @@ def test_device_detail_view_not_logged_in():
 def test_device_detail_view(create_admin_user):
     fixture = create_admin_user()
     mixer.blend('devices.DeviceCategory')
+    mixer.blend('devices.HardwareModel')
     mixer.blend('customers.Owner')
     mixer.blend('customers.Location')
     device = mixer.blend('devices.Device',
@@ -23,6 +24,7 @@ def test_device_detail_view(create_admin_user):
                          owner=mixer.SELECT,
                          category=mixer.SELECT,
                          manufacturer=mixer.SELECT,
+                         hardware_model=mixer.SELECT,
                          location=mixer.SELECT)
     client = Client()
     client.login(username="novartis-admin", password="password")
@@ -34,6 +36,7 @@ def test_device_detail_view(create_admin_user):
             and helper.in_content(response, device.owner)
             and helper.in_content(response, device.customer)
             and helper.in_content(response, device.manufacturer)
+            and helper.in_content(response, device.hardware_model)
             and helper.in_content(response, device.location))
 
 

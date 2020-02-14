@@ -7,6 +7,7 @@ from .models import (
     DeviceCategory,
     DeviceInNet,
     DeviceManufacturer,
+    HardwareModel,
     Warranty,
     WarrantyType
 )
@@ -21,6 +22,14 @@ class DeviceCategoryAdmin(admin.ModelAdmin):
 
 
 class DeviceManufacturerAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class HardwareModelAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -47,5 +56,6 @@ admin.site.register(Device)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
 admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)
+admin.site.register(HardwareModel, HardwareModelAdmin)
 admin.site.register(Warranty)
 admin.site.register(WarrantyType, WarrantyTypeAdmin)

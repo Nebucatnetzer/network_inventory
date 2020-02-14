@@ -7,6 +7,7 @@ class ComputersTable(tables.Table):
     serialnumber = tables.Column()
     owner = tables.Column()
     manufacturer = tables.Column()
+    model = tables.Column()
     location = tables.Column()
     user = tables.Column('User', linkify=True)
     installation_date = tables.Column()

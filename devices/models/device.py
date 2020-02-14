@@ -17,16 +17,28 @@ class DeviceCategory(Category):
         verbose_name_plural = "Device Categories"
 
 
+class HardwareModel(models.Model):
+    name = models.CharField(max_length=50)
+    manufacturer = models.ForeignKey(DeviceManufacturer,
+                                     on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 class Device(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     serialnumber = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(DeviceCategory, on_delete=models.SET_NULL,
                                  null=True, blank=True)
-    owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True)
+    owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True,
+                              blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     manufacturer = models.ForeignKey(DeviceManufacturer, models.SET_NULL,
                                      null=True, blank=True)
+    model = models.ForeignKey(HardwareModel, models.SET_NULL, null=True,
+                              blank=True)
     location = models.ForeignKey(Location, models.SET_NULL, null=True,
                                  blank=True)
     user = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)

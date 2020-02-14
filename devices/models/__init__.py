@@ -5,4 +5,5 @@ from .device import (
     DeviceCategory,
     DeviceInNet,
     DeviceManufacturer,
+    HardwareModel,
 )
