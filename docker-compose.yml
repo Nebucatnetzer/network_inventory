@@ -25,3 +25,12 @@ services:
       - "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}"
     depends_on:
       - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - ./network_inventory/static:/home/app/web/static
