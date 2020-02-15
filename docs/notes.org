@@ -10,9 +10,8 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [1/5]
-** DONE Models [0/0]
-** TODO Views [0/9]
+* TODO Must Have [0/3]
+** TODO Views [0/8]
 *** TODO implement permission decorators currently all the items can get viewed.
 
 I either have to implement a decorator for each object type or find a general
@@ -28,15 +27,20 @@ and get the object with this function:
 **** TODO add links to add a relation if it is none
 **** TODO rename variables for the querysets to XXXRelations
 
-*** TODO CustomerListView [0/3]
+*** TODO CustomerListView [2/3]
 
 add all the objects
 
-- [ ] Backup
-- [ ] Software
+- [X] Backup
+- [X] Software
 - [ ] Users
 
 *** TODO implement SoftwareDetailView
+
+I don't remember what the initial idea here was. We could show here
+which customers are using this software. But that is currently a really low
+priority item.
+
 *** TODO implement a warranty overview
 
 This view would show all devices which are running out of warranty, maybe this
@@ -48,7 +52,6 @@ customers for internal usuage.
 
 The queryset should only contain results which a users is allowed to see.
 
-*** TODO add a list of assigned users and computers to the license view
 *** TODO Computer-, Device-, ConnectedDevice- AddFrom
 **** TODO Filter Hardware Model to corresponding device manufacturer
 
@@ -60,13 +63,6 @@ available through the HardwareModel. This way we wouldn't have to filter the
 HardwareModel dropdown. However we would loose the ability to only select the
 DeviceManufacturer for a device in case we don't know the specific model which
 happens quite often.
-
-** TODO Setup [0/1]
-*** TODO Server mit NGINX aufsetzen
-
-- https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/
-- https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
-- https://linuxconfig.org/how-to-host-django-with-nginx-on-ubuntu-18-04-bionic-beaver-linux
 
 ** TODO Various [0/10]
 *** TODO change the admin url
@@ -295,6 +291,15 @@ CLOSED: [2020-02-14 Fri 20:28]
 
 I'm currently unsure if I should implement a hardware model. With this model I
 could add the hardware model to a device. Currently this capability is missing.
+
+** DONE add a list of assigned users and computers to the license view
+CLOSED: [2020-02-15 Sat 18:53]
+** DONE Server mit NGINX aufsetzen
+CLOSED: [2020-02-15 Sat 18:56]
+
+- https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/
+- https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
+- https://linuxconfig.org/how-to-host-django-with-nginx-on-ubuntu-18-04-bionic-beaver-linux
 
 * Ressources
 ** Class Based Views
