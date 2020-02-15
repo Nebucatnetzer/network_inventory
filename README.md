@@ -13,13 +13,15 @@ inventory over my various servers and other network equipment.
    container you'll use Postgres for the database. For the moment there aren't
    any features implemented which require Postgres. However this might change
    in the future and SQlite is not supported for production.
+3. Copy the `.env-example` file to `.env` and change the `POSTGRES_PASSWORD`
+   and `DJANGO_SECRET_KEY` variables to something secure.
 
 ### Local Setup
-3. Run `make local` to create the virtual environment for development.
+4. Run `make local` to create the virtual environment for development.
    You're now all set to start developing.
 
 ### Docker Setup
-3. Run `make` to start the development server. You can access it
+4. Run `make` to start the development server. You can access it
    at   http://localhost:8000 . You're now all set to start developing. \
    If you need to run migrations you can simply restart the Docker container.
 
