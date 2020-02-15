@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static "core/semantic.min.css" %}">
   <title>Network Inventory</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,6 @@
     {% endblock %}
   </footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <script type="text/javascript" src="{% static "core/semantic.min.js" %}"></script>
 </body>
 </html>
