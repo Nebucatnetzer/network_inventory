@@ -4,8 +4,8 @@ services:
   - docker
 
 before_install:
-- docker-compose build
 - cp .env-example .env
+- docker-compose build
 
 script:
 - make test
