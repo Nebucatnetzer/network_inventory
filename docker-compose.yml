@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  db_data:
+
 services:
   db:
     image: postgres
@@ -7,7 +10,7 @@ services:
       - POSTGRES_DB=network_inventory
       - POSTGRES_PASSWORD=password
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data/
 
   web:
     build: .
