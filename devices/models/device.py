@@ -66,13 +66,18 @@ class ConnectedDevice(Device):
     class Meta:
         verbose_name_plural = "Connected Devices"
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('connected_device', args=[str(self.id)])
+
 
 class DeviceInNet(models.Model):
     device = models.ForeignKey(ConnectedDevice, on_delete=models.CASCADE)
     net = models.ForeignKey(Net, on_delete=models.CASCADE)
     ip = models.GenericIPAddressField(verbose_name="IP")
     nic = models.CharField(max_length=50, blank=True, verbose_name="NIC")
-    mac_address = models.CharField(max_length=50, blank=True, verbose_name="MAC Address")
+    mac_address = models.CharField(max_length=50, blank=True,
+                                   verbose_name="MAC Address")
     ip_status = models.ForeignKey(IpStatus, models.SET_NULL, null=True,
                                   blank=True, verbose_name="IP Status")
 

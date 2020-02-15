@@ -18,7 +18,7 @@ def device_view_permission(old_function):
     return new_function
 
 
-def connect_device_view_permission(old_function):
+def connected_device_view_permission(old_function):
     def new_function(request, pk, *args, **kwargs):
         device = get_object_or_404(ConnectedDevice, pk=pk)
         user = request.user

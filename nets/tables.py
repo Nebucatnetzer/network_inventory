@@ -15,7 +15,7 @@ class NetsTable(tables.Table):
 
 
 class NetDetailTable(tables.Table):
-    device = tables.Column('Computer', linkify=True)
+    device = tables.Column(linkify=True)
     ip = tables.Column()
     net = tables.Column(visible=False)
 
