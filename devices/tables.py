@@ -24,7 +24,7 @@ class ConnectedDevicesTable(tables.Table):
 
 
 class WarrantiesTable(tables.Table):
-    customer = tables.Column(linkify=True)
+    customer = tables.Column(linkify=True, orderable=False)
     device = tables.Column(linkify=True)
     valid_from = tables.Column()
     valid_until = tables.Column()
