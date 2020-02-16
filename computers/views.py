@@ -11,6 +11,7 @@ from guardian.shortcuts import get_objects_for_user
 from backups.models import Backup
 from customers.models import Customer
 from customers.decorators import customer_view_permission
+from devices.models import Warranty
 from licenses.models import LicenseWithComputer
 
 from .decorators import computer_view_permission
@@ -30,6 +31,7 @@ from .tables import ComputersTable
 def computer_detail_view(request, pk):
     computer = get_object_or_404(Computer, pk=pk)
     disks_relations = ComputerDiskRelation.objects.filter(computer=pk)
+    warranty_relations = Warranty.objects.filter(device=pk)
     ram_relations = ComputerRamRelation.objects.filter(computer=pk)
     cpu_relations = ComputerCpuRelation.objects.filter(computer=pk)
     software_relations = ComputerSoftwareRelation.objects.filter(computer=pk)
@@ -39,6 +41,7 @@ def computer_detail_view(request, pk):
         raid_disk_pairs[raid] = DisksInRaid.objects.filter(raid=raid)
     backup_list = Backup.objects.filter(computer=pk)
     context = {'computer': computer,
+               'warranty_relations': warranty_relations,
                'disks_relations': disks_relations,
                'ram_relations': ram_relations,
                'cpu_relations': cpu_relations,
