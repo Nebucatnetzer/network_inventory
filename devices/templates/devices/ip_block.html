@@ -1,0 +1,18 @@
+{% if device.ips %}
+    <div class="card">
+    <div class="content">
+    <div class="header">IPs</div>
+    <table class="ui celled table">
+        <tr>
+            <td><b>IPs:</b></td>
+            <td>
+                {% for net_id, ip in device.ips.items %}
+                    <a href="{% url 'net' net_id %}">{{ip}}</a><br>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    </div>
+    </div>
+{% endif %}
+

@@ -1,0 +1,9 @@
+<div class="header">Licenses</div>
+<table class="ui celled table">
+{% for license in license_list %}
+<tr>
+    <td>{{ license.license.software }}</td>
+    <td><code>{{ license.license.key }}</code></td>
+</tr>
+{% endfor %}
+</table>

@@ -1,0 +1,17 @@
+    {% if warranty_relations %}
+    <div class="card">
+    <div class="content">
+    <div class="header">Warranty</div>
+    <table class="ui celled table">
+        <tr>
+            <td><b>Warranty:</b></td>
+            {% for warranty in warranty_relations %}
+            <td>
+                {{ warranty.valid_from }}<br>
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    </div>
+    {% endif %}
