@@ -21,7 +21,7 @@ class Warranty(models.Model):
                                       blank=True, null=True)
 
     def __str__(self):
-        return self.device
+        return str(self.device)
 
     class Meta:
         verbose_name_plural = "Warranties"
