@@ -29,7 +29,7 @@ from .tables import ComputersTable
 @login_required
 @computer_view_permission
 def computer_detail_view(request, pk):
-    computer = get_object_or_404(Computer, pk=pk)
+    device = get_object_or_404(Computer, pk=pk)
     disks_relations = ComputerDiskRelation.objects.filter(computer=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
     ram_relations = ComputerRamRelation.objects.filter(computer=pk)
@@ -40,7 +40,7 @@ def computer_detail_view(request, pk):
     for raid in Raid.objects.filter(computer=pk):
         raid_disk_pairs[raid] = DisksInRaid.objects.filter(raid=raid)
     backup_list = Backup.objects.filter(computer=pk)
-    context = {'computer': computer,
+    context = {'device': device,
                'warranty_relations': warranty_relations,
                'disks_relations': disks_relations,
                'ram_relations': ram_relations,
