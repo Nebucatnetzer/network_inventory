@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import Category
+from core.utils import td_format
 
 from .device import Device
 
@@ -16,7 +17,6 @@ class Warranty(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     valid_from = models.DateField()
     valid_until = models.DateField()
-    duration_in_years = models.IntegerField()
     warranty_type = models.ForeignKey(WarrantyType, models.SET_NULL,
                                       blank=True, null=True)
 
@@ -29,3 +29,9 @@ class Warranty(models.Model):
     @property
     def customer(self):
         return self.device.customer
+
+    @property
+    def duration_in_years(self):
+
+        delta = self.valid_until - self.valid_from
+        return td_format(delta)
