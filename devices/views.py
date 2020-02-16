@@ -13,14 +13,17 @@ from .models import ConnectedDevice
 from .tables import ConnectedDevicesTable
 from .models import Device
 from .tables import DevicesTable
+from .models import Warranty
 
 
 @login_required
 @device_view_permission
 def device_detail_view(request, pk):
     device = get_object_or_404(Device, pk=pk)
+    warranty_relations = Warranty.objects.filter(device=pk)
     return render(request, 'devices/device_details.html',
-                  {'device': device})
+                  {'device': device,
+                   'warranty_relations': warranty_relations})
 
 
 @login_required
@@ -35,8 +38,10 @@ def devices_table_view(request, pk):
 @connected_device_view_permission
 def connected_device_detail_view(request, pk):
     device = get_object_or_404(ConnectedDevice, pk=pk)
+    warranty_relations = Warranty.objects.filter(device=pk)
     return render(request, 'devices/connected_device_details.html',
-                  {'device': device})
+                  {'device': device,
+                   'warranty_relations': warranty_relations})
 
 
 @login_required
