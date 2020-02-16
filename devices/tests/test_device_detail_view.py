@@ -57,3 +57,14 @@ def test_device_detail_view_no_permission(create_admin_user):
     response = client.get('/device/' + str(device.id) + '/')
     assert response.status_code == 403
 
+
+def test_device_detail_view_warranty(create_admin_user):
+    fixture = create_admin_user()
+    device = mixer.blend('devices.Device', customer=fixture['customer'])
+    warranty = mixer.blend('devices.Warranty',
+                           device=device)
+    client = Client()
+    client.login(username="novartis-admin", password="password")
+    response = client.get('/device/' + str(device.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, warranty.duration_in_years))
