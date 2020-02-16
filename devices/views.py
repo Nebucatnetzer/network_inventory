@@ -39,7 +39,7 @@ def devices_table_view(request, pk):
 def connected_device_detail_view(request, pk):
     device = get_object_or_404(ConnectedDevice, pk=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
-    return render(request, 'devices/connected_device_details.html',
+    return render(request, 'devices/device_details.html',
                   {'device': device,
                    'warranty_relations': warranty_relations})
 

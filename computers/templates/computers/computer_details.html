@@ -10,6 +10,10 @@
         {% include "devices/warranty_block.html" %}
     {% endblock %}
 
+    {% block ips %}
+        {% include "devices/ip_block.html" %}
+    {% endblock %}
+
     {% if device.os or software_relations or backup_relations or license_list %}
     <div class="card">
     <div class="content">
