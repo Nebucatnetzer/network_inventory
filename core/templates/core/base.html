@@ -10,6 +10,9 @@
   <div class="ui container">
       <a href="{% url 'customers' %}">Home</a> |
     {% if request.user.is_superuser %}
+      <a href="{% url 'warranties' %}">Warranties</a> |
+    {% endif %}
+    {% if request.user.is_superuser %}
       <a href="{% url 'all_computers' %}">All Computers</a> |
     {% endif %}
       {% if user.is_authenticated %}

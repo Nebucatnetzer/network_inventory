@@ -12,4 +12,5 @@ urlpatterns = [
          views.connected_devices_table_view,
          name='connected_devices'),
     path('device/<int:pk>/', views.device_detail_view, name='device'),
+    path('warranties/', views.warranties_view, name='warranties'),
 ]
