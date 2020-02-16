@@ -11,30 +11,9 @@
   and might have access to only the information related to the devices he owns.
 
 * TODO Must Have [0/3]
-** TODO Views [0/8]
-*** TODO implement permission decorators currently all the items can get viewed.
-
-I either have to implement a decorator for each object type or find a general
-way. This problem is only related to detail views. The tables and lists have a
-general way to check the permission. I maybe could get the model name from the
-url, this Stackoverflow post might help:
-- https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern
-and get the object with this function:
-- https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
-
-*** TODO Add tests for multiple nets and devices
-*** TODO ComputerDetailView [0/2]
+** TODO Views [0/4]
+*** TODO ComputerDetailView [0/1]
 **** TODO add links to add a relation if it is none
-**** TODO rename variables for the querysets to XXXRelations
-
-*** TODO CustomerListView [2/3]
-
-add all the objects
-
-- [X] Backup
-- [X] Software
-- [ ] Users
-
 *** TODO implement SoftwareDetailView
 
 I don't remember what the initial idea here was. We could show here
@@ -48,21 +27,7 @@ could be shown as well in the CustomerDetailView. So that we would've a list
 for the customers to see and one large list which shows the warranties for all
 customers for internal usuage.
 
-*** TODO limit the queryset in the customer_table
-
-The queryset should only contain results which a users is allowed to see.
-
 *** TODO Computer-, Device-, ConnectedDevice- AddFrom
-**** TODO Filter Hardware Model to corresponding device manufacturer
-
-When changing the HardwareModel field of a device the dropdown should be
-filtered to the provided DeviceManufacturer.
-
-Currently it could still make sense to make the DeviceManufacturer only
-available through the HardwareModel. This way we wouldn't have to filter the
-HardwareModel dropdown. However we would loose the ability to only select the
-DeviceManufacturer for a device in case we don't know the specific model which
-happens quite often.
 
 ** TODO Various [0/10]
 *** TODO change the admin url
@@ -128,14 +93,7 @@ I often find myself trying to get related objects. The method select_related
 might help with that:
 - https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
 
-** TODO Licenses [0/3]
-*** TODO make sure the licenses models are correct.
-
-I think manytomany might not be the correct relation since a user should only
-be attached once to a user license and a computer should only be attached once
-to a computer license. However a user can stil have many licenses and a license
-can still have many users.
-
+** TODO Licenses [0/2]
 *** TODO Implement a license check into all forms
 
 This should prevent technicians from assigning licenses which the customer has
@@ -148,7 +106,7 @@ reason why I need this. If so it increases the used licenses counter.
 Maybe with this:
 - https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
 
-* TODO Nice to Have [0/8]
+* TODO Nice to Have [0/9]
 *** TODO allow technicians to add custom fields
 
 This would allow technicians to create custom models without change
@@ -195,6 +153,18 @@ security of the customer.
 *** TODO Add search boxes to the views.
 
 So that one can search for a string in the responding column.
+
+*** TODO Filter Hardware Model to corresponding device manufacturer
+
+When changing the HardwareModel field of a device the dropdown should be
+filtered to the provided DeviceManufacturer.
+
+Currently it could still make sense to make the DeviceManufacturer only
+available through the HardwareModel. This way we wouldn't have to filter the
+HardwareModel dropdown. However we would loose the ability to only select the
+DeviceManufacturer for a device in case we don't know the specific model which
+happens quite often.
+
 
 * Done
 ** DONE Recreate the RM in draw.io
@@ -300,6 +270,44 @@ CLOSED: [2020-02-15 Sat 18:56]
 - https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/
 - https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
 - https://linuxconfig.org/how-to-host-django-with-nginx-on-ubuntu-18-04-bionic-beaver-linux
+
+** DONE CustomerListView [3/3]
+CLOSED: [2020-02-16 Sun 18:45]
+
+add all the objects
+
+- [X] Backup
+- [X] Software
+- [X] Users
+
+** DONE implement permission decorators currently all the items can get viewed.
+CLOSED: [2020-02-16 Sun 18:52]
+
+I either have to implement a decorator for each object type or find a general
+way. This problem is only related to detail views. The tables and lists have a
+general way to check the permission. I maybe could get the model name from the
+url, this Stackoverflow post might help:
+- https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern
+and get the object with this function:
+- https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
+
+** DONE Add tests for multiple nets and devices
+CLOSED: [2020-02-16 Sun 18:52]
+** DONE rename variables for the querysets to XXXRelations
+CLOSED: [2020-02-16 Sun 18:53]
+
+** DONE limit the queryset in the customer_table
+CLOSED: [2020-02-16 Sun 19:13]
+
+The queryset should only contain results which a users is allowed to see.
+
+** DONE make sure the licenses models are correct.
+CLOSED: [2020-02-16 Sun 19:31]
+
+I think manytomany might not be the correct relation since a user should only
+be attached once to a user license and a computer should only be attached once
+to a computer license. However a user can stil have many licenses and a license
+can still have many users.
 
 * Ressources
 ** Class Based Views
