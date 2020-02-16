@@ -2,47 +2,12 @@
 {% block section_title %}{{ device.name }}{% endblock %}
 {% block content %}
 <div class="ui cards">
-    <div class="card">
-    <div class="content">
-    <div class="header">Description</div>
-    <div class="description"><p>{{ device.description }}</p></div>
-    <table class="ui celled table">
-        </tr>
-        <tr>
-            <th><b>Serial Number:</b></th>
-            <td><code>{{ device.serialnumber }}</code></td>
-        </tr>
-        <tr>
-            <th><b>Category:</b></th>
-            <td>{{ device.category }}</td>
-        </tr>
-        <tr>
-            <th><b>Owner:</b></th>
-            <td>{{ device.owner }}</td>
-        </tr>
-        <tr>
-            <th><b>Customer:</b></th>
-            <td><a href="{% url 'customer' device.customer.id %}">{{ device.customer }}</a></td>
-        </tr>
-        <tr>
-            <th><b>Manufacturer:</b></th>
-            <td>{{ device.manufacturer }}</td>
-        </tr>
-        <tr>
-            <th><b>Model:</b></th>
-            <td>{{ device.model }}</td>
-        </tr>
+    {% block device_details %}
+        {% include "devices/connected_device_details_block.html" %}
+    {% endblock %}
 
-        <tr>
-            <th><b>Location:</b></th>
-            <td>{{ device.location }}</td>
-        </tr>
-        <tr>
-            <th><b>Installation Date:</b></th>
-            <td>{{ device.installation_date }}</td>
-        </tr>
-    </table>
-    </div>
-    </div>
+    {% block warranty_details %}
+        {% include "devices/warranty_block.html" %}
+    {% endblock %}
 </div>
 {% endblock %}
