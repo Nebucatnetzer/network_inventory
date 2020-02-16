@@ -2,16 +2,31 @@
     <div class="card">
     <div class="content">
     <div class="header">Warranty</div>
-    <table class="ui celled table">
+        {% for warranty in warranty_relations %}
+        <table class="ui celled table">
         <tr>
-            <td><b>Warranty:</b></td>
-            {% for warranty in warranty_relations %}
-            <td>
-                {{ warranty.valid_from }}<br>
-            </td>
-            {% endfor %}
+        <td><b>Valid From:</b></td>
+        <td>
+            {{ warranty.valid_from }}<br>
+        </td>
+        <tr>
+        <td><b>Valid Until:</b></td>
+        <td>
+            {{ warranty.valid_until }}<br>
+        </td>
+        <tr>
+        <td><b>Duration:</b></td>
+        <td>
+            {{ warranty.duration_in_years }} years<br>
+        </td>
+        <tr>
+        <td><b>Type:</b></td>
+        <td>
+            {{ warranty.warranty_type }}<br>
+        </td>
         </tr>
-    </table>
+        </table>
+        {% endfor %}
     </div>
     </div>
     {% endif %}
