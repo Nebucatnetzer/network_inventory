@@ -90,6 +90,26 @@
     </div>
     {% endif %}
 
+    {% if warranty_relations %}
+    <div class="card">
+    <div class="content">
+    {% if warranty_relations %}
+    <div class="header">Warranty</div>
+    <table class="ui celled table">
+        <tr>
+            <td><b>Warranty:</b></td>
+            {% for warranty in warranty_relations %}
+            <td>
+                {{ warranty.valid_from }}<br>
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    {% endif %}
+    </div>
+    {% endif %}
+
     {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs or computer.host %}
     <div class="card">
     <div class="content">
