@@ -60,7 +60,8 @@ class ConnectedDevice(Device):
         nets = DeviceInNet.objects.filter(device=self.id)
         ip_addresses = {}
         for net in nets:
-            ip_addresses[net.net_id] = net.ip
+            ip = '{}: {}'.format(net.net.name, net.ip)
+            ip_addresses[net.net_id] = ip
         return ip_addresses
 
     class Meta:
