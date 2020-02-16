@@ -1,64 +1,26 @@
 {% extends "core/base.html" %}
-{% block section_title %}{{ computer }}{% endblock %}
+{% block section_title %}{{ device }}{% endblock %}
 {% block content %}
 <div class="ui cards">
+    {% block device_details %}
+        {% include "devices/connected_device_details_block.html" %}
+    {% endblock %}
+
+    {% block warranty %}
+        {% include "devices/warranty_block.html" %}
+    {% endblock %}
+
+    {% if device.os or software_relations or backup_relations or license_list %}
     <div class="card">
     <div class="content">
-    <div class="header">Description</div>
-    <div class="description"><p>{{ computer.description }}</p></div>
-    <table class="ui celled table">
-        <tr>
-            <td><b>OS:</b></td>
-            <td>{{ computer.os }}</td>
-        </tr>
-        <tr>
-            <td><b>Serial Number:</b></td>
-            <td><code>{{ computer.serialnumber }}</code></td>
-        </tr>
-        <tr>
-            <td><b>Category:</b></td>
-            <td>{{ computer.category }}</td>
-        </tr>
-        <tr>
-            <td><b>Owner:</b></td>
-            <td>{{ computer.owner }}</td>
-        </tr>
-        <tr>
-            <td><b>Customer:</b></td>
-            <td><a href="{% url 'customer' computer.customer.id %}">{{ computer.customer }}</a></td>
-        </tr>
-        <tr>
-            <td><b>Manufacturer:</b></td>
-            <td>{{ computer.manufacturer }}</td>
-        </tr>
-        <tr>
-            <td><b>Location:</b></td>
-            <td>{{ computer.location }}</td>
-        </tr>
-        {% if computer.user %}
-        <tr>
-            <td><b>User:</b></td>
-            <td><a href="{% url 'user' computer.user.id %}">{{ computer.user }}</a></td>
-        </tr>
-        {% endif %}
-        <tr>
-            <td><b>Installation Date:</b></td>
-            <td>{{ computer.installation_date }}</td>
-        </tr>
-        <tr>
-            <td><b>IPs:</b></td>
-            <td>
-                {% for net_id, ip in computer.ips.items %}
-                    <a href="{% url 'net' net_id %}">{{ip}}</a><br>
-                {% endfor %}
-            </td>
-        </tr>
-    </table>
-    </div>
-    </div>
-    {% if software_relations or backup_relations or license_list %}
-    <div class="card">
-    <div class="content">
+
+    {% if device.os %}
+    <div class="header">Operating System</div>
+    <ul>
+        <li>{{ device.os }}</li>
+    </ul>
+    {% endif %}
+
     {% if software_relations %}
     <div class="header">Software</div>
     <ul>
@@ -67,17 +29,13 @@
     {% endfor %}
     </ul>
     {% endif %}
+
     {% if license_list %}
-    <div class="header">Licenses</div>
-    <table class="ui celled table">
-    {% for license in license_list %}
-    <tr>
-        <td>{{ license.license.software }}</td>
-        <td><code>{{ license.license.key }}</code></td>
-    </tr>
-    {% endfor %}
-    </table>
+    {% block license %}
+        {% include "licenses/license_block.html" %}
+    {% endblock %}
     {% endif %}
+
     {% if backup_relations %}
     <div class="header">Backup</div>
     <ul>
@@ -90,32 +48,13 @@
     </div>
     {% endif %}
 
-    {% if warranty_relations %}
+    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs or device.host %}
     <div class="card">
     <div class="content">
-    {% if warranty_relations %}
-    <div class="header">Warranty</div>
-    <table class="ui celled table">
-        <tr>
-            <td><b>Warranty:</b></td>
-            {% for warranty in warranty_relations %}
-            <td>
-                {{ warranty.valid_from }}<br>
-            </td>
-            {% endfor %}
-        </tr>
-    </table>
-    </div>
-    {% endif %}
-    </div>
-    {% endif %}
-
-    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs or computer.host %}
-    <div class="card">
-    <div class="content">
-    {% if cpu_relations or ram_relations or disks_relations or computer.host %}
+    {% if cpu_relations or ram_relations or disks_relations or device.host %}
     <div class="header">Hardware</div>
     <table class="ui celled table">
+
     {% if cpu_relations %}
         <tr>
             <td><b>CPUs:</b></td>
@@ -126,6 +65,7 @@
             </td>
         </tr>
     {% endif %}
+
     {% if ram_relations %}
         <tr>
         <td><b>RAM Modules:</b></td>
@@ -136,6 +76,7 @@
         </td>
     </tr>
     {% endif %}
+
     {% if disks_relations %}
     <tr>
     <td><b>Disks:</b></td>
@@ -177,10 +118,10 @@
     {% endfor %}
     {% endif %}
 
-    {% if computer.host %}
+    {% if device.host %}
     <div class="header">Host</div>
     <div class="description">
-            <a href="{% url 'computer' computer.host.id %}">{{ computer.host }}</a>
+            <a href="{% url 'device' device.host.id %}">{{ device.host }}</a>
     </div>
     {% endif %}
     </div>
