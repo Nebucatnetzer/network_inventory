@@ -51,7 +51,11 @@ class WarrantyTypeAdmin(admin.ModelAdmin):
         return {}
 
 
-admin.site.register(ConnectedDevice)
+class ConnectedDeviceAdmin(nested_admin.NestedModelAdmin):
+    inlines = (DeviceInNetInline, )
+
+
+admin.site.register(ConnectedDevice, ConnectedDeviceAdmin)
 admin.site.register(Device)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
