@@ -58,6 +58,6 @@ def connected_devices_table_view(request, pk):
 @login_required
 @superuser_required
 def warranties_view(request):
-    table = WarrantiesTable(Warranty.objects.all().order_by('customer'))
+    table = WarrantiesTable(Warranty.objects.all())
     RequestConfig(request).configure(table)
     return render(request, 'devices/warranties_list.html', {'devices': table})
