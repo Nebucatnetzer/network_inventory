@@ -14,6 +14,5 @@ class ComputersTable(CoreTable):
     installation_date = tables.Column()
     os = tables.Column()
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         pass

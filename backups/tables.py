@@ -11,6 +11,5 @@ class BackupsTable(CoreTable):
     computer = tables.Column('Computer', linkify=True)
     target_device = tables.ManyToManyColumn(linkify_item=True)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = Backup

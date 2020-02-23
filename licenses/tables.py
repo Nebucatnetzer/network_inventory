@@ -13,7 +13,6 @@ class UserLicensesTable(CoreTable):
     used_licenses = tables.Column()
     user = tables.ManyToManyColumn(linkify_item=True)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = UserLicense
 
@@ -25,6 +24,5 @@ class ComputerLicensesTable(CoreTable):
     used_licenses = tables.Column()
     computer = tables.ManyToManyColumn(linkify_item=True)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = ComputerLicense

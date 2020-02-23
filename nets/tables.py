@@ -11,7 +11,6 @@ class NetsTable(CoreTable):
     name = tables.Column('Net', linkify=True)
     customer = tables.Column('Customer', linkify=True)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = Net
 
@@ -21,6 +20,5 @@ class NetDetailTable(CoreTable):
     ip = tables.Column()
     net = tables.Column(visible=False)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = DeviceInNet

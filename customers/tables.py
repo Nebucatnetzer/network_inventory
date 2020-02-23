@@ -23,6 +23,5 @@ class CustomersTable(CoreTable):
     users = tables.LinkColumn('users', text='Users', args=[A('pk')],
                               orderable=False)
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         pass

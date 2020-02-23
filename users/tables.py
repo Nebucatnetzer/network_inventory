@@ -12,6 +12,5 @@ class UsersTable(CoreTable):
     ad_groups = tables.ManyToManyColumn()
     mail_groups = tables.ManyToManyColumn()
 
-        template_name = 'django_tables2/semantic.html'
     class Meta(CoreTable.Meta):
         model = User
