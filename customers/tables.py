@@ -1,8 +1,10 @@
 import django_tables2 as tables
 from django_tables2.utils import A
 
+from core.tables import CoreTable
 
-class CustomersTable(tables.Table):
+
+class CustomersTable(CoreTable):
     name = tables.LinkColumn('customer', args=[A('pk')])
     nets = tables.LinkColumn('nets', text='Nets', args=[A('pk')],
                              orderable=False)
@@ -21,5 +23,6 @@ class CustomersTable(tables.Table):
     users = tables.LinkColumn('users', text='Users', args=[A('pk')],
                               orderable=False)
 
-    class Meta:
         template_name = 'django_tables2/semantic.html'
+    class Meta(CoreTable.Meta):
+        pass
