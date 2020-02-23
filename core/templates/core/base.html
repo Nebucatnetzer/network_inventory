@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" type="text/css" href="{% static "core/semantic.min.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "core/css/bootstrap.min.css" %}">
   <title>Network Inventory</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="ui container">
+  <div class="container">
       <a href="{% url 'customers' %}">Home</a> |
     {% if request.user.is_superuser %}
       <a href="{% url 'warranties' %}">Warranties</a> |
@@ -28,6 +28,8 @@
     {% endblock %}
   </footer>
   </div>
-  <script type="text/javascript" src="{% static "core/semantic.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "core/js/jquery.slim.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "core/js/popper.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "core/js/bootstrap.min.js" %}"></script>
 </body>
 </html>
