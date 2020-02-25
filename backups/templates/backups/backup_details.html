@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col">
-        <div class="card"">
+        <div class="card mt-3">
             <h2 class="card-header">Backup Details</h2>
             <div class="card-body">
                 <p><b>Description</b></p>
@@ -36,7 +36,7 @@
 
     {% if target_device_list %}
     <div class="col">
-        <div class="card"">
+        <div class="card mt-3">
             <h2 class="card-header">Target Devices</h2>
             <div class="card-body">
             {% for device in target_device_list %}
@@ -58,7 +58,7 @@
 
     {% if notifications %}
     <div class="col">
-        <div class="card"">
+        <div class="card mt-3">
             <h2 class="card-header">Notifications</h2>
             <div class="card-body">
                 {% for notification in notifications %}

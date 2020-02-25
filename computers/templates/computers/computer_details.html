@@ -2,19 +2,19 @@
 {% block section_title %}{{ device }}{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col mt-3">
+    <div class="col">
     {% block device_details %}
         {% include "devices/device_details_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col mt-3">
+    <div class="col">
     {% block warranty %}
         {% include "devices/warranty_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col mt-3">
+    <div class="col">
     {% block ips %}
         {% include "devices/ip_block.html" %}
     {% endblock %}
@@ -23,8 +23,8 @@
 
 <div class="row">
     {% if device.os or software_relations or backup_relations or license_list or device.host %}
-    <div class="col mt-3">
-        <div class="card">
+    <div class="col">
+        <div class="card mt-3">
             <div class="card-body">
                 {% if device.host %}
                 <h2>Host</h2>
@@ -69,8 +69,8 @@
     {% endif %}
 
     {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs %}
-    <div class="col mt-3">
-        <div class="card">
+    <div class="col">
+        <div class="card mt-3">
             <h2 class="card-header">Hardware</h2>
             <div class="card-body">
                 {% if cpu_relations or ram_relations or disks_relations or device.host %}
