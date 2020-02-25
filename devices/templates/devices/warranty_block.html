@@ -1,9 +1,8 @@
     {% if warranty_relations %}
-    <div class="card">
-    <div class="content">
-    <div class="header">Warranty</div>
+    <div class="col">
+    <h2>Warranty</h2>
         {% for warranty in warranty_relations %}
-        <table class="ui celled table">
+        <table class="table table-bordered">
         <tr>
         <td><b>Valid From:</b></td>
         <td>
@@ -27,6 +26,5 @@
         </tr>
         </table>
         {% endfor %}
-    </div>
     </div>
     {% endif %}

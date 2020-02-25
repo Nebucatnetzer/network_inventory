@@ -1,8 +1,7 @@
 {% if device.nets %}
-    <div class="card">
-    <div class="content">
-    <div class="header">IPs</div>
-    <table class="ui celled table">
+    <div class="col">
+    <h2>IPs</h2>
+    <table class="table table-bordered">
         {% regroup device.nets by name as nets_list %}
         {% for net in nets_list %}
         <tr>
@@ -15,7 +14,6 @@
         </tr>
         {% endfor %}
     </table>
-    </div>
     </div>
 {% endif %}
 

@@ -1,32 +1,46 @@
 {% extends "core/base.html" %}
 {% block section_title %}{{ device }}{% endblock %}
 {% block content %}
-<div class="ui cards">
+<div class="row">
+    <div class="col">
     {% block device_details %}
         {% include "devices/device_details_block.html" %}
     {% endblock %}
+    </div>
 
+    <div class="col">
     {% block warranty %}
         {% include "devices/warranty_block.html" %}
     {% endblock %}
+    </div>
 
+    <div class="col">
     {% block ips %}
         {% include "devices/ip_block.html" %}
     {% endblock %}
+    </div>
+</div>
 
-    {% if device.os or software_relations or backup_relations or license_list %}
-    <div class="card">
-    <div class="content">
+<div class="row">
+    {% if device.os or software_relations or backup_relations or license_list or device.host %}
+    <div class="col">
+    {% if device.host %}
+    <h2>Host</h2>
+    <ul>
+        <li><a href="{% url 'device' device.host.id %}">{{ device.host }}</a></li>
+    </ul>
+    {% endif %}
+
 
     {% if device.os %}
-    <div class="header">Operating System</div>
+    <h2>Operating System</h2>
     <ul>
         <li>{{ device.os }}</li>
     </ul>
     {% endif %}
 
     {% if software_relations %}
-    <div class="header">Software</div>
+    <h2>Software</h2>
     <ul>
     {% for relation in software_relations %}
         <li>{{ relation.software }}</li>
@@ -41,7 +55,7 @@
     {% endif %}
 
     {% if backup_relations %}
-    <div class="header">Backup</div>
+    <h2>Backup</h2>
     <ul>
         {% for backup in backup_relations %}
         <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a></li>
@@ -49,15 +63,13 @@
     </ul>
     {% endif %}
     </div>
-    </div>
     {% endif %}
 
-    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs or device.host %}
-    <div class="card">
-    <div class="content">
+    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs %}
+    <div class="col">
     {% if cpu_relations or ram_relations or disks_relations or device.host %}
-    <div class="header">Hardware</div>
-    <table class="ui celled table">
+    <h2>Hardware</h2>
+    <table class="table table-bordered">
 
     {% if cpu_relations %}
         <tr>
@@ -95,9 +107,9 @@
     {% endif %}
 
     {% if raid_disk_pairs %}
-    <div class="header">RAID</div>
+    <h2>RAID</h2>
     {% for raid, disks in raid_disk_pairs.items %}
-    <table class="ui celled table">
+    <table class="table table-bordered">
         <tr>
             <td><b>Type:</b></td>
             <td>{{ raid.raid_type }}</td>
@@ -122,15 +134,8 @@
     {% endfor %}
     {% endif %}
 
-    {% if device.host %}
-    <div class="header">Host</div>
-    <div class="description">
-            <a href="{% url 'device' device.host.id %}">{{ device.host }}</a>
-    </div>
     {% endif %}
     </div>
-    </div>
-    {% endif %}
 
 </div>
 {% endblock %}
