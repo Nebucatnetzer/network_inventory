@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 import django_tables2 as tables
 
 from core.tables import CoreTable
@@ -32,3 +34,17 @@ class WarrantiesTable(CoreTable):
 
     class Meta(CoreTable.Meta):
         pass
+
+    def render_valid_until(self, value, column):
+        today = datetime.date(datetime.today())
+        one_year_from_today = (datetime.date(datetime.today() + timedelta(365)))
+
+        if value > one_year_from_today:
+            column.attrs = {'td': {}}
+            return value
+        if value <= today:
+            column.attrs = {'td': {'bgcolor': 'red'}}
+            return value
+        if value <= one_year_from_today:
+            column.attrs = {'td': {'bgcolor': 'orange'}}
+            return value
