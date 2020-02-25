@@ -2,19 +2,19 @@
 {% block section_title %}{{ device.name }}{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col">
+    <div class="col mt-3">
     {% block device_details %}
         {% include "devices/device_details_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col">
+    <div class="col mt-3">
     {% block warranty_details %}
         {% include "devices/warranty_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col">
+    <div class="col mt-3">
     {% block ips %}
         {% include "devices/ip_block.html" %}
     {% endblock %}

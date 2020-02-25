@@ -1,25 +1,27 @@
 {% extends "core/base.html" %}
 {% block section_title %}{{ device }}{% endblock %}
 {% block content %}
-<div class="row row-cols-3">
-    <div class="col">
+<div class="row">
+    <div class="col mt-3">
     {% block device_details %}
         {% include "devices/device_details_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col">
+    <div class="col mt-3">
     {% block warranty %}
         {% include "devices/warranty_block.html" %}
     {% endblock %}
     </div>
 
-    <div class="col">
+    <div class="col mt-3">
     {% block ips %}
         {% include "devices/ip_block.html" %}
     {% endblock %}
     </div>
+</div>
 
+<div class="row">
     {% if device.os or software_relations or backup_relations or license_list or device.host %}
     <div class="col mt-3">
         <div class="card">
