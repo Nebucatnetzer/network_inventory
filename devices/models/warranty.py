@@ -32,6 +32,5 @@ class Warranty(models.Model):
 
     @property
     def duration_in_years(self):
-
         delta = self.valid_until - self.valid_from
         return td_format(delta)
