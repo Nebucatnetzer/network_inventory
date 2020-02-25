@@ -7,8 +7,8 @@
 <p>
     <form action="" method="get" class="form form-inline">
         {% csrf_token %}
-            {% bootstrap_form filter.form %}
-            {% bootstrap_button 'Filter' %}
+        {% bootstrap_form filter.form %}
+        {% bootstrap_button 'Filter' %}
     </form>
 </p>
 {% render_table table %}
