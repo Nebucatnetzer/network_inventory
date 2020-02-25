@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = [
     'backups.apps.BackupsConfig',
+    'bootstrap4',
     'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
     'customers.apps.CustomersConfig',
