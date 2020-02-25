@@ -1,19 +1,21 @@
 {% if device.nets %}
-    <div class="col">
-    <h2>IPs</h2>
-    <table class="table table-bordered">
-        {% regroup device.nets by name as nets_list %}
-        {% for net in nets_list %}
-        <tr>
-            <td><b>{{ net.grouper }}</b></td>
-            <td>
-                {% for ip in net.list %}
-                    <a href="{% url 'net' ip.net_id %}">{{ ip.ip }}</a><br>
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="card">
+    <h2 class="card-header">IPs</h2>
+    <div class="card-body">
+        <table class="table table-bordered">
+            {% regroup device.nets by name as nets_list %}
+            {% for net in nets_list %}
+            <tr>
+                <td><b>{{ net.grouper }}</b></td>
+                <td>
+                    {% for ip in net.list %}
+                        <a href="{% url 'net' ip.net_id %}">{{ ip.ip }}</a><br>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
+</div>
 {% endif %}
 

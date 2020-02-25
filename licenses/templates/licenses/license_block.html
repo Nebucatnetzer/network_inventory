@@ -1,9 +1,9 @@
 <h2>Licenses</h2>
 <table class="table table-bordered">
-{% for license in license_list %}
-<tr>
-    <td>{{ license.license.software }}</td>
-    <td><code>{{ license.license.key }}</code></td>
-</tr>
-{% endfor %}
+    {% for license in license_list %}
+    <tr>
+        <td>{{ license.license.software }}</td>
+        <td><code>{{ license.license.key }}</code></td>
+    </tr>
+    {% endfor %}
 </table>
