@@ -1,4 +1,5 @@
-from django import forms
+import floppyforms.__future__ as forms
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
@@ -78,12 +79,7 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
         return results
 
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
-
 class ComputerCreateForm(forms.ModelForm):
-    installation_date = forms.DateField(widget=DateInput)
     class Meta:
         model = Computer
         fields = [
