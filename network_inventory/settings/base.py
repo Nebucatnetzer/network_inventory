@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
+    'crispy_forms',
     'customers.apps.CustomersConfig',
     'devices.apps.DevicesConfig',
     'django.contrib.admin',
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'django_tables2',
+    'floppyforms',
     'guardian',
     'licenses.apps.LicensesConfig',
     'nested_admin',
@@ -122,3 +124,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

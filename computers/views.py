@@ -1,5 +1,8 @@
+from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
@@ -73,3 +76,35 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
                                          klass=Customer)
         results = Computer.objects.filter(customer__in=customers)
         return results
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class ComputerCreateForm(forms.ModelForm):
+    installation_date = forms.DateField(widget=DateInput)
+    class Meta:
+        model = Computer
+        fields = [
+            'name',
+            'description',
+            'serialnumber',
+            'category',
+            'owner',
+            'customer',
+            'manufacturer',
+            'model',
+            'location',
+            'user',
+            'installation_date',
+        ]
+
+
+class ComputerCreateView(LoginRequiredMixin, CreateView):
+    form_class = ComputerCreateForm
+    template_name = 'computers/computer_create.html'
+
+
+class ComputerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Computer

@@ -3,4 +3,6 @@
 {% block section_title %}List of Computers{% endblock %}
 {% block content %}
 {% render_table computers %}
+
+<a href="{% url 'computer_create' %}">Add Computer</a>
 {% endblock %}

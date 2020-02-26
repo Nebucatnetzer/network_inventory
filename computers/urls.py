@@ -9,4 +9,6 @@ urlpatterns = [
          name='computer'),
     path('computers/all/', views.ComputersFilterView.as_view(),
          name='all_computers'),
+    path('computer/create/', views.ComputerCreateView.as_view(),
+         name='computer_create'),
  ]
