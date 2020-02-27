@@ -1,5 +1,3 @@
-import floppyforms.__future__ as forms
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
@@ -20,6 +18,7 @@ from licenses.models import LicenseWithComputer
 
 from .decorators import computer_view_permission
 from .filters import ComputerFilter
+from .forms import ComputerCreateForm
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -77,24 +76,6 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
                                          klass=Customer)
         results = Computer.objects.filter(customer__in=customers)
         return results
-
-
-class ComputerCreateForm(forms.ModelForm):
-    class Meta:
-        model = Computer
-        fields = [
-            'name',
-            'description',
-            'serialnumber',
-            'category',
-            'owner',
-            'customer',
-            'manufacturer',
-            'model',
-            'location',
-            'user',
-            'installation_date',
-        ]
 
 
 class ComputerCreateView(LoginRequiredMixin, CreateView):
