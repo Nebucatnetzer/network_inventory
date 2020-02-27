@@ -2,7 +2,6 @@
 {% load render_table from django_tables2 %}
 {% block section_title %}List of Computers{% endblock %}
 {% block content %}
+<p><a href="{% url 'computer_create' %}">Add Computer</a></p>
 {% render_table computers %}
-
-<a href="{% url 'computer_create' %}">Add Computer</a>
 {% endblock %}
