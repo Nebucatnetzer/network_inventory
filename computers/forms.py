@@ -12,3 +12,19 @@ class ComputerCreateForm(forms.ModelForm):
         )
 
 
+class ComputerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Computer
+        fields = (
+            'name',
+            'description',
+            'serialnumber',
+            'category',
+            'owner',
+            'customer',
+            'manufacturer',
+            'model',
+            'location',
+            'user',
+            'installation_date',
+        )

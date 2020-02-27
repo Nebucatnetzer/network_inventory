@@ -4,6 +4,7 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.urls import reverse
 
 from django_filters.views import FilterView
 from django_tables2 import RequestConfig
@@ -19,6 +20,7 @@ from licenses.models import LicenseWithComputer
 from .decorators import computer_view_permission
 from .filters import ComputerFilter
 from .forms import ComputerCreateForm
+from .forms import ComputerUpdateForm
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -82,6 +84,11 @@ class ComputerCreateView(LoginRequiredMixin, CreateView):
     form_class = ComputerCreateForm
     template_name = 'computers/computer_create.html'
 
+    def get_success_url(self):
+        return reverse('computer_update', args=(self.object.pk,))
+
 
 class ComputerUpdateView(LoginRequiredMixin, UpdateView):
     model = Computer
+    form_class = ComputerUpdateForm
+    template_name = 'computers/computer_update.html'
