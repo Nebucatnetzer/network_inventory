@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<div class="row">
     {% if device.os or software_relations or backup_relations or license_list or device.host %}
+<div class="row">
     <div class="col">
         <div class="card mt-3">
             <div class="card-body">
@@ -139,7 +139,7 @@
                 {% endif %}
             </div>
         </div>
-    {% endif %}
     </div>
 </div>
+    {% endif %}
 {% endblock %}
