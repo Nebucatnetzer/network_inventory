@@ -9,7 +9,7 @@ urlpatterns = [
          name='computer'),
     path('computers/all/', views.ComputersFilterView.as_view(),
          name='all_computers'),
-    path('computer/create/', views.ComputerCreateView.as_view(),
+    path('create/computer/', views.ComputerCreateView.as_view(),
          name='computer_create'),
     path('update/computer/<int:pk>/', views.ComputerUpdateView.as_view(),
          name='computer_update'),
