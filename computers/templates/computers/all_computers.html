@@ -1,14 +1,13 @@
 {% extends "core/base.html" %}
 {% load render_table from django_tables2 %}
-{% load bootstrap4 %}
 
 {% block section_title %}List of Computers{% endblock %}
 {% block content %}
 <p>
     <form action="" method="get" class="form form-inline">
         {% csrf_token %}
-        {% bootstrap_form filter.form %}
-        {% bootstrap_button 'Filter' %}
+        {{ filter.form.as_p }}
+        <input type="submit" value="Filter" class="btn btn-primary">
     </form>
 </p>
 {% render_table table %}

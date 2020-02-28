@@ -6,7 +6,6 @@ django-guardian
 django-tables2
 django-filter
 django-nested-admin
-django-bootstrap4
 django-floppyforms
 django-crispy-forms
 pytest
