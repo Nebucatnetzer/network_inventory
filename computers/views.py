@@ -62,7 +62,8 @@ def computer_detail_view(request, pk):
 def computers_table_view(request, pk):
     table = ComputersTable(Computer.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'computers/computer_list.html', {'computers': table})
+    return render(request, 'computers/computer_list.html', {'computers': table,
+                                                            'pk': pk,})
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
