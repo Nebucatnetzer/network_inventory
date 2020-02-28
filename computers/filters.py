@@ -6,4 +6,4 @@ from .models import Computer
 class ComputerFilter(FilterSet):
     class Meta:
         model = Computer
-        fields = {"name": ["contains"], "owner": ["exact"]}
+        fields = {"name": ["contains"], "customer": ["exact"]}
