@@ -67,6 +67,11 @@ def computers_table_view(request, pk):
 
 
 class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
+    """
+    A view to show all computer objects in a table.
+    This view is not intended for customers to see but should be limited to
+    admins only
+    """
     table_class = ComputersTable
     model = Computer
     template_name = "computers/all_computers.html"
@@ -82,6 +87,10 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
 
 
 class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
+    """
+    A view to show a ComputerCreateForm after comming from a customers computer
+    table. The customer will be preselected in the form.
+    """
     form_class = ComputerCreateForm
     template_name = 'computers/computer_create.html'
 

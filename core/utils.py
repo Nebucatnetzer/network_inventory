@@ -29,12 +29,23 @@ def td_format(td_object):
 
 
 def get_customers(user):
+    """
+    Returns a queryset of customers the user is allowed to view.
+
+    user : django.contrib.auth.models.User
+    """
     return get_objects_for_user(user,
                                 'customers.view_customer',
                                 klass=Customer)
 
 
 def get_objects(model_name, user):
+    """
+    Returns a queryset of a given model name the user is allowed to view.
+
+    model_name: string
+    user : django.contrib.auth.models.User
+    """
     model_name = model_name.lower()
     customers = get_customers(user)
     app_names = [
