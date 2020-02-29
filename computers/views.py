@@ -81,7 +81,7 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
         return results
 
 
-class ComputerCreateView(LoginRequiredMixin, CreateView):
+class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
     form_class = ComputerCreateForm
     template_name = 'computers/computer_create.html'
 
