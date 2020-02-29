@@ -97,6 +97,15 @@ class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
+    def get_initial(self):
+        """
+        Set the customer dropdown to the customer from the previews view.
+        """
+        customer = get_object_or_404(Customer, id=self.kwargs.get('pk'))
+        return {
+            'customer': customer,
+        }
+
 
 class ComputerUpdateView(LoginRequiredMixin, UpdateView):
     model = Computer
