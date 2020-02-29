@@ -22,8 +22,10 @@ def django_db_setup(django_db_setup, django_db_blocker):
 def create_admin_user():
     def _create_admin_user():
         User = get_user_model()
-        admin = User.objects.create_user("novartis-admin", "admin@novartis.com",
-                                         "password", is_staff=True)
+        admin = User.objects.create_user("novartis-admin",
+                                         "admin@novartis.com",
+                                         "password",
+                                         is_staff=True)
         customer = mixer.blend('customers.Customer')
         group = Group.objects.create(name="Novartis Admin")
         admin.groups.add(group)
