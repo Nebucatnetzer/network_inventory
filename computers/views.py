@@ -90,10 +90,9 @@ class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
 
     def get_form_kwargs(self):
         """
-        Pass the URL variables and the request user to the form.
+        Pass the request user to the form.
         """
         kwargs = super(ComputerCreateFromCustomerView, self).get_form_kwargs()
-        kwargs.update(self.kwargs)
         kwargs.update({'user': self.request.user})
         return kwargs
 
