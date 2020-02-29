@@ -131,4 +131,3 @@ def test_customer_list_view_multiple_customers(create_admin_user):
                                   "/customer/"
                                   + str(customer1.id)
                                   + "/users/"))
-
