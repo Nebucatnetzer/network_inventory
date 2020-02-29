@@ -71,7 +71,8 @@ class ConnectedDevice(Device):
 
     @property
     def nets(self):
-        nets_result = DeviceInNet.objects.filter(device=self.id).order_by('net')
+        nets_result = DeviceInNet.objects.filter(
+            device=self.id).order_by('net')
         nets = []
         for net in nets_result:
             ip_addresses = {}
