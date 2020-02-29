@@ -1,3 +1,8 @@
+from guardian.shortcuts import get_objects_for_user
+
+from customers.models import Customer
+
+
 def td_format(td_object):
     """A helper function to convert time deltas to a human readable format.
        Taken from here."""
@@ -19,3 +24,9 @@ def td_format(td_object):
             strings.append("%s %s%s" % (period_value, period_name, has_s))
 
     return ", ".join(strings)
+
+
+def get_customers(user):
+    return get_objects_for_user(user,
+                                'customers.view_customer',
+                                klass=Customer)
