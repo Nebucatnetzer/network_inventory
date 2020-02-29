@@ -15,10 +15,14 @@ from .tables import CustomersTable
 def customers_table_view(request):
     table = CustomersTable(utils.get_customers(request.user))
     RequestConfig(request).configure(table)
-    return render(request, 'customers/customer_list.html', {'customers': table})
+    return render(request,
+                  'customers/customer_list.html',
+                  {'customers': table})
 
 
-class CustomerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class CustomerDetailView(LoginRequiredMixin,
+                         PermissionRequiredMixin,
+                         DetailView):
     model = Customer
     template_name = 'customers/customer_details.html'
     permission_required = 'view_customer'
