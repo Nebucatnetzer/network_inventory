@@ -2,6 +2,7 @@ import django_tables2 as tables
 
 from core.tables import CoreTable
 
+
 class ComputersTable(CoreTable):
     name = tables.Column('Computer', linkify=True)
     description = tables.Column()
