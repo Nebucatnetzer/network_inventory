@@ -9,8 +9,8 @@ from django.urls import reverse
 from django_filters.views import FilterView
 from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
-from guardian.shortcuts import get_objects_for_user
 
+from core import utils
 from backups.models import Backup
 from customers.models import Customer
 from customers.decorators import customer_view_permission
@@ -79,11 +79,7 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = ComputerFilter
 
     def get_queryset(self):
-        customers = get_objects_for_user(self.request.user,
-                                         'customers.view_customer',
-                                         klass=Customer)
-        results = Computer.objects.filter(customer__in=customers)
-        return results
+        return utils.get_objects("Computer", self.request.user)
 
 
 class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
