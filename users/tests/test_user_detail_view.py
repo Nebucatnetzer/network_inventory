@@ -97,4 +97,3 @@ def test_user_detail_view_no_permission(create_admin_user):
     client.login(username="novartis-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert response.status_code == 403
-
