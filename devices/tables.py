@@ -6,7 +6,6 @@ from core.tables import CoreTable
 
 from .models import ConnectedDevice
 from .models import Device
-from .models import Warranty
 
 
 class DevicesTable(CoreTable):
