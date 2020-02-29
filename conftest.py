@@ -34,4 +34,3 @@ def create_admin_user():
         result['group'] = group
         return result
     return _create_admin_user
-
