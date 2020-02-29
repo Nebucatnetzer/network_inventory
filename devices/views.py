@@ -24,7 +24,8 @@ from .tables import WarrantiesTable
 def device_detail_view(request, pk):
     device = get_object_or_404(Device, pk=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
-    return render(request, 'devices/device_details.html',
+    return render(request,
+                  'devices/device_details.html',
                   {'device': device,
                    'warranty_relations': warranty_relations})
 
@@ -34,7 +35,9 @@ def device_detail_view(request, pk):
 def devices_table_view(request, pk):
     table = DevicesTable(Device.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'devices/device_list.html', {'devices': table})
+    return render(request,
+                  'devices/device_list.html',
+                  {'devices': table})
 
 
 @login_required
@@ -42,7 +45,8 @@ def devices_table_view(request, pk):
 def connected_device_detail_view(request, pk):
     device = get_object_or_404(ConnectedDevice, pk=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
-    return render(request, 'devices/device_details.html',
+    return render(request,
+                  'devices/device_details.html',
                   {'device': device,
                    'warranty_relations': warranty_relations})
 
@@ -52,7 +56,9 @@ def connected_device_detail_view(request, pk):
 def connected_devices_table_view(request, pk):
     table = ConnectedDevicesTable(ConnectedDevice.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'devices/connected_device_list.html', {'devices': table})
+    return render(request,
+                  'devices/connected_device_list.html',
+                  {'devices': table})
 
 
 @login_required
@@ -60,4 +66,6 @@ def connected_devices_table_view(request, pk):
 def warranties_view(request):
     table = WarrantiesTable(Warranty.objects.all())
     RequestConfig(request).configure(table)
-    return render(request, 'devices/warranties_list.html', {'devices': table})
+    return render(request,
+                  'devices/warranties_list.html',
+                  {'devices': table})
