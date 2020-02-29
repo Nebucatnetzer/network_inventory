@@ -1,3 +1,5 @@
+from django.apps import apps
+from django.http import Http404
 from guardian.shortcuts import get_objects_for_user
 
 from customers.models import Customer
@@ -30,3 +32,27 @@ def get_customers(user):
     return get_objects_for_user(user,
                                 'customers.view_customer',
                                 klass=Customer)
+
+
+def get_objects(model_name, user):
+    model_name = model_name.lower()
+    customers = get_customers(user)
+    app_names = [
+        'backups',
+        'computers',
+        'core',
+        'customers',
+        'devices',
+        'licenses',
+        'nets',
+        'softwares',
+        'users',
+    ]
+    try:
+        for name in app_names:
+            app = apps.get_app_config(name)
+            if model_name in app.models:
+                model = app.models[model_name]
+                return model.objects.filter(customer__in=customers)
+    except KeyError:
+        raise Http404("Model ", model_name, " not found.")
