@@ -111,3 +111,11 @@ class ComputerUpdateView(LoginRequiredMixin, UpdateView):
     model = Computer
     form_class = ComputerUpdateForm
     template_name = 'computers/computer_update.html'
+
+    def get_form_kwargs(self):
+        """
+        Pass the request user to the form.
+        """
+        kwargs = super(ComputerUpdateView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
