@@ -59,11 +59,9 @@ def get_objects(model_name, user):
         'softwares',
         'users',
     ]
-    try:
-        for name in app_names:
-            app = apps.get_app_config(name)
-            if model_name in app.models:
-                model = app.models[model_name]
-                return model.objects.filter(customer__in=customers)
-    except KeyError:
+    for name in app_names:
+        app = apps.get_app_config(name)
+        if model_name in app.models:
+            model = app.models[model_name]
+            return model.objects.filter(customer__in=customers)
         raise Http404("Model ", model_name, " not found.")
