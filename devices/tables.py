@@ -36,7 +36,8 @@ class WarrantiesTable(CoreTable):
 
     def render_valid_until(self, value, column):
         today = datetime.date(datetime.today())
-        one_year_from_today = (datetime.date(datetime.today() + timedelta(365)))
+        one_year_from_today = (datetime.date(datetime.today()
+                                             + timedelta(365)))
 
         if value > one_year_from_today:
             column.attrs = {'td': {}}
