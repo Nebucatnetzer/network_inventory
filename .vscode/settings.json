@@ -8,6 +8,7 @@
     "python.linting.enabled": true,
     "python.testing.pytestArgs": [
         ".",
-        "--ds=network_inventory.settings.local"
+        "--ds=network_inventory.settings.local",
+        "-n 4"
     ]
 }
