@@ -5,4 +5,3 @@ class CoreTable(tables.Table):
 
     class Meta:
         attrs = {"class": "table table-hover table-bordered"}
-
