@@ -4,8 +4,8 @@ from django.shortcuts import render
 
 from django_tables2 import RequestConfig
 
-from core.decorators import superuser_required
 from customers.decorators import customer_view_permission
+from core.utils import get_objects
 
 from .decorators import device_view_permission
 from .decorators import connected_device_view_permission
@@ -62,9 +62,8 @@ def connected_devices_table_view(request, pk):
 
 
 @login_required
-@superuser_required
 def warranties_view(request):
-    table = WarrantiesTable(Warranty.objects.all())
+    table = WarrantiesTable(get_objects("Warranty", request.user))
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/warranties_list.html',
