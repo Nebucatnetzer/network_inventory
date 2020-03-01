@@ -1,2 +1,8 @@
 [flake8]
-exclude = *migrations*,__init__.py,*cache*,venv/,manage.py,network_inventory/settings/*
+exclude =
+    *migrations*,
+    __init__.py,
+    *cache*,
+    venv/,
+    manage.py,
+    network_inventory/settings/*
