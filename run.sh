@@ -1,6 +1,7 @@
 #!/bin/bash
 if [ -f ./.second_run ]; then
     sleep 2
+    python manage.py collectstatic --noinput
     python manage.py makemigrations
     python manage.py migrate
 else

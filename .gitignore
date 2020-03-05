@@ -173,3 +173,6 @@ migrations/
 .pytest_cache/
 htmlcov/
 .second_run
+
+network_inventory/network_inventory/static/
+!network_inventory/network_inventory/static/core
