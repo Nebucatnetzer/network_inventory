@@ -19,7 +19,7 @@ def test_customer_license_table(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     license = mixer.blend('licenses.UserLicense', customer=customer,
                           software=mixer.SELECT, key=mixer.RANDOM,
                           max_allowed_users=mixer.RANDOM)
@@ -34,7 +34,7 @@ def test_customer_license_table_no_license(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/licenses/')
     assert (response.status_code == 200
             and helper.not_in_content(response, customer))
@@ -42,9 +42,9 @@ def test_customer_license_table_no_license(create_admin_user):
 
 def test_customer_license_table_no_permission(create_admin_user):
     create_admin_user()
-    customer = Customer.objects.create(name='Nestle')
+    customer = Customer.objects.create(name='Water Corp.')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     mixer.blend('licenses.UserLicense', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/licenses/')
     assert response.status_code == 403
@@ -56,7 +56,7 @@ def test_customer_license_table_multiple_licenses(create_admin_user):
     user1 = mixer.blend('users.User')
     user2 = mixer.blend('users.User')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     license1 = mixer.blend('licenses.UserLicense', customer=customer,
                            software=mixer.SELECT, key=mixer.RANDOM,
                            max_allowed_users=mixer.RANDOM)

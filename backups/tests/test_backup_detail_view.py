@@ -18,7 +18,7 @@ def test_backup_detail_view(create_admin_user):
     mixer.blend('computers.Computer', customer=mixer.SELECT)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/backup/' + str(backup.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, backup))
@@ -27,16 +27,16 @@ def test_backup_detail_view(create_admin_user):
 def test_backup_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/backup/100/')
     assert response.status_code == 404
 
 
 def test_customer_computer_table_no_permission(create_admin_user):
     create_admin_user()
-    customer = Customer.objects.create(name='Nestle')
+    customer = Customer.objects.create(name='Water Corp.')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     mixer.blend('computers.Computer', customer=customer)
     backup = mixer.blend('backups.Backup', computer=mixer.SELECT)
     response = client.get('/backup/' + str(backup.id) + '/')
@@ -52,7 +52,7 @@ def test_backup_detail_view_with_target_device(create_admin_user):
     mixer.blend('backups.TargetDevice', device=target_computer,
                 backup=mixer.SELECT)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/backup/' + str(backup.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, backup)
@@ -68,7 +68,7 @@ def test_backup_detail_view_with_notification(create_admin_user):
                 backup=backup,
                 notification=notification)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/backup/' + str(backup.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, notification))

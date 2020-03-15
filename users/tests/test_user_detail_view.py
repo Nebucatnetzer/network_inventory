@@ -17,7 +17,7 @@ def test_user_detail_view(create_admin_user):
     create_admin_user()
     user = mixer.blend('users.User', customer=mixer.SELECT)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, user))
@@ -26,7 +26,7 @@ def test_user_detail_view(create_admin_user):
 def test_user_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/230/')
     assert response.status_code == 404
 
@@ -37,7 +37,7 @@ def test_user_detail_view_ad_group(create_admin_user):
     group = mixer.blend('users.AdGroup')
     mixer.blend('users.UserInAdGroup', user=user, group=group)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, "AD Groups"))
@@ -49,7 +49,7 @@ def test_user_detail_view_mail_group(create_admin_user):
     group = mixer.blend('users.MailGroup')
     mixer.blend('users.UserInMailGroup', user=user, group=group)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, "Mail Groups"))
@@ -60,7 +60,7 @@ def test_user_detail_view_mail_alias(create_admin_user):
     user = mixer.blend('users.User', customer=mixer.SELECT)
     mixer.blend('users.MailAlias', user=user)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, "Mail Alias"))
@@ -72,7 +72,7 @@ def test_user_detail_view_license(create_admin_user):
     mixer.blend('licenses.UserLicense', software=mixer.SELECT)
     mixer.blend('licenses.LicenseWithUser', user=user)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, "License"))
@@ -83,7 +83,7 @@ def test_user_detail_view_computer(create_admin_user):
     user = mixer.blend('users.User', customer=mixer.SELECT)
     computer = mixer.blend('computers.Computer', user=user)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, computer))
@@ -94,6 +94,6 @@ def test_user_detail_view_no_permission(create_admin_user):
     customer = mixer.blend('customers.Customer')
     user = mixer.blend('users.User', customer=customer)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/user/' + str(user.id) + '/')
     assert response.status_code == 403

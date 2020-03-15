@@ -18,7 +18,7 @@ def test_customer_device_table(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     device = mixer.blend('devices.Device', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert (response.status_code == 200
@@ -29,17 +29,17 @@ def test_customer_device_table_no_device(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert (response.status_code == 200
-            and helper.not_in_content(response, "Novartis PC"))
+            and helper.not_in_content(response, "Pharma Corp. PC"))
 
 
 def test_customer_device_table_no_permission(create_admin_user):
     create_admin_user()
-    customer = Customer.objects.create(name='Nestle')
+    customer = Customer.objects.create(name='Water Corp.')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     mixer.blend('devices.Device', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
     assert response.status_code == 403
@@ -49,7 +49,7 @@ def test_customer_device_table_multiple_devices(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     device1 = mixer.blend('devices.Device', customer=mixer.SELECT)
     device2 = mixer.blend('devices.Device', customer=mixer.SELECT)
     response = client.get('/customer/' + str(customer.id) + '/devices/')
