@@ -3,11 +3,25 @@
 
 {% block section_title %}Edit Computer{% endblock %}
 {% block content %}
-<div class="row">
 <form method="post">
+<div class="row">
     {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Save" class="btn btn-primary">
-</form>
+    <div class="col">
+        <div class="card mt-3">
+            <div class="card-body">
+            {{ form|crispy }}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mt-3">
+            <div class="card-body">
+            {{ computer_formset|crispy }}
+            </div>
+        </div>
+    </div>
 </div>
+<br>
+<input type="submit" value="Save" class="btn btn-primary">
+</form>
 {% endblock %}
