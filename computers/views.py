@@ -22,6 +22,7 @@ from .filters import ComputerFilter
 from .forms import ComputerCreateForm
 from .forms import ComputerFormSet
 from .forms import CpuFormSet
+from .forms import RamFormSet
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -149,21 +150,31 @@ class ComputerUpdateView(LoginRequiredMixin, UpdateView):
                 self.request.POST,
                 instance=self.object)
             context['cpu_formset'].full_clean()
+            context['ram_formset'] = RamFormSet(
+                self.request.POST,
+                instance=self.object)
+            context['ram_formset'].full_clean()
         else:
             context['computer_formset'] = ComputerFormSet(instance=self.object)
             context['cpu_formset'] = CpuFormSet(instance=self.object)
+            context['ram_formset'] = RamFormSet(instance=self.object)
         return context
 
     def form_valid(self, form):
         context = self.get_context_data(form=form)
         computer_formset = context['computer_formset']
         cpu_formset = context['cpu_formset']
-        if computer_formset.is_valid() and cpu_formset.is_valid():
+        ram_formset = context['ram_formset']
+        if (computer_formset.is_valid()
+                and cpu_formset.is_valid()
+                and ram_formset.is_valid()):
             response = super().form_valid(form)
             computer_formset.instance = self.object
             computer_formset.save()
             cpu_formset.instance = self.object
             cpu_formset.save()
+            ram_formset.instance = self.object
+            ram_formset.save()
             return response
         else:
             return super().form_invalid(form)

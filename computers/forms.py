@@ -4,6 +4,7 @@ from core import utils
 
 from computers.models import Computer
 from computers.models import ComputerCpuRelation
+from computers.models import ComputerRamRelation
 from devices.models import Warranty
 
 
@@ -62,6 +63,19 @@ CpuFormSet = forms.inlineformset_factory(Computer,
                                          ComputerCpuRelation,
                                          fields=(
                                              'cpu',
+                                             'computer',
+                                             'amount',
+                                             ),
+                                         exclude=[],
+                                         can_delete=False,
+                                         form=ComputerUpdateForm,
+                                         max_num=1)
+
+
+RamFormSet = forms.inlineformset_factory(Computer,
+                                         ComputerRamRelation,
+                                         fields=(
+                                             'ram',
                                              'computer',
                                              'amount',
                                              ),
