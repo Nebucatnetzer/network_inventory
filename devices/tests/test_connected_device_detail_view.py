@@ -16,7 +16,7 @@ def test_connected_device_detail_view_not_logged_in():
 def test_connected_device_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/connected_device/100/')
     assert response.status_code == 404
 
@@ -27,7 +27,7 @@ def test_connected_device_detail_view_no_permission(create_admin_user):
     connected_device = mixer.blend('devices.ConnectedDevice',
                                    customer=customer)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/connected_device/'
                           + str(connected_device.id)
                           + '/')
@@ -48,7 +48,7 @@ def test_connected_device_detail_view_net_relation(create_admin_user):
                                  net=net2,
                                  ip="10.8.89.100")
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/connected_device/' + str(device.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, device_in_net1.ip)

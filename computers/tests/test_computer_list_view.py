@@ -16,7 +16,7 @@ def test_computer_list_view_not_logged_in():
 def test_computer_list_view_no_computers(create_admin_user):
     create_admin_user()
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/computers/all/')
     assert response.status_code == 200
 
@@ -25,7 +25,7 @@ def test_computer_list_view(create_admin_user):
     create_admin_user()
     computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/computers/all/')
     assert (response.status_code == 200
             and helper.in_content(response, computer))

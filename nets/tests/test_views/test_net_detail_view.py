@@ -20,7 +20,7 @@ def test_net_detail_view_no_permission(create_admin_user):
                 net=net,
                 ip='10.7.89.101')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/net/' + str(net.id) + '/')
     assert (response.status_code == 403)
 
@@ -32,7 +32,7 @@ def test_net_detail_view(create_admin_user):
     device_in_net = DeviceInNet.objects.create(device=device,
                                                net=net, ip='10.7.89.101')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/net/' + str(net.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, net)
@@ -43,6 +43,6 @@ def test_net_detail_view_not_found(create_admin_user):
     create_admin_user()
     mixer.blend('nets.Net')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/net/100/')
     assert response.status_code == 404

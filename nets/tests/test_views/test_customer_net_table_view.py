@@ -18,7 +18,7 @@ def test_customer_net_table_not_logged_in():
 def test_customer_net_table(create_admin_user):
     create_admin_user()
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     net = mixer.blend('nets.Net', customer=mixer.SELECT)
     response = client.get('/customer/' + str(net.customer.id) + '/nets/')
     assert (response.status_code == 200
@@ -29,16 +29,16 @@ def test_customer_net_table_no_net(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/nets/')
     assert response.status_code == 200
 
 
 def test_customer_net_table_no_permission(create_admin_user):
     create_admin_user()
-    customer = Customer.objects.create(name='Nestle')
+    customer = Customer.objects.create(name='Water Corp.')
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     mixer.blend('nets.Net', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/nets/')
     assert response.status_code == 403

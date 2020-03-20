@@ -18,10 +18,10 @@ def test_customer_list_view_not_logged_in():
 
 def test_customer_list_view_no_customer():
     User = get_user_model()
-    User.objects.create_user("novartis-admin", "admin@novartis.com",
+    User.objects.create_user("pharma-admin", "admin@pharma.com",
                              "password", is_staff=True)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/')
     assert response.status_code == 200
 
@@ -30,7 +30,7 @@ def test_customer_list_view(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/')
     assert (response.status_code == 200
             and helper.in_content(response, customer)
@@ -70,7 +70,7 @@ def test_customer_list_view_multiple_customers(create_admin_user):
     customer2 = mixer.blend('customers.Customer')
     assign_perm('view_customer', fixture['admin'], customer2)
     client = Client()
-    client.login(username="novartis-admin", password="password")
+    client.login(username="pharma-admin", password="password")
     response = client.get('/')
     assert (response.status_code == 200
             and helper.in_content(response, customer1)
