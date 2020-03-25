@@ -10,7 +10,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/4]
+* TODO Must Have [0/6]
 ** TODO Views [0/4]
 *** TODO ComputerDetailView [0/1]
 **** TODO add links to add a relation if it is none
@@ -29,7 +29,7 @@ customers for internal usuage.
 
 *** TODO Computer-, Device-, ConnectedDevice- AddFrom
 
-** TODO Various [0/11]
+** TODO Various [0/12]
 *** TODO change the admin url
 
 For security reasons it's recommended to change the name of the admin panel
@@ -77,10 +77,12 @@ template contains logic which can fail.
 It is best practice to create a custom user model to allow future modifications
 to the users without causing problems.
 
-*** TODO Implement an excel import and export
+*** TODO [#C] Implement an excel import and export
 
 might be achieved with this project:
 - https://github.com/pyexcel-webwares/django-excel
+This might be a nice to have feature but the copy button is more important to
+achieve a similar funcition.
 
 *** TODO Have a look at the documentation of django-nested-admin
 
@@ -94,6 +96,9 @@ might help with that:
 - https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
 
 *** TODO Add the warranty to the Device, ConnectedDevice and Computer admin pages
+*** TODO [#A] Add a feature to copy objects
+
+This is a must have for the first release.
 
 ** TODO Licenses [0/2]
 *** TODO Implement a license check into all forms
@@ -114,6 +119,16 @@ Maybe with this:
 The CPU has many required fields but sometimes they don't make sense. For
 example when we have a virtual CPU we usually don't need to know the specific
 frequenzy.
+
+** TODO Backups [0/2]
+*** NEXT Days need to be manytomany
+
+A backup can be run on multiple days
+
+*** NEXT a backup should be able to contain multiple computers
+
+** TODO Groups [0/1]
+*** NEXT Table for groups
 
 * TODO Nice to Have [0/9]
 *** TODO allow technicians to add custom fields
