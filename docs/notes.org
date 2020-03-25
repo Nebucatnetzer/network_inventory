@@ -11,7 +11,7 @@
   and might have access to only the information related to the devices he owns.
 
 * TODO Must Have [0/6]
-** TODO Views [0/4]
+** TODO Views [0/5]
 *** TODO ComputerDetailView [0/1]
 **** TODO add links to add a relation if it is none
 *** TODO implement SoftwareDetailView
@@ -28,6 +28,10 @@ for the customers to see and one large list which shows the warranties for all
 customers for internal usuage.
 
 *** TODO Computer-, Device-, ConnectedDevice- AddFrom
+
+*** NEXT Fix the warranty in the device view
+
+With currently the containers don't disappear fully. Should be easy to fix.
 
 ** TODO Various [0/12]
 *** TODO change the admin url
