@@ -15,6 +15,13 @@ local:
 	pip3 install -r requirements/local.txt; \
 	)
 
+testlocal:
+	( \
+	source venv/bin/activate; \
+	pytest -n 6 --ds=network_inventory.settings.local --nomigrations; \
+	)
+
+
 clean:
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm -f */migrations/0*.py
