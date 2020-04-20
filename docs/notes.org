@@ -10,7 +10,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/3]
+* TODO Must Have [0/5]
 ** TODO Views [0/4]
 *** TODO ComputerDetailView [0/1]
 **** TODO add links to add a relation if it is none
@@ -107,6 +107,18 @@ Add a check to see if a software has a license attached to it. I forgot the
 reason why I need this. If so it increases the used licenses counter.
 Maybe with this:
 - https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
+
+** TODO Computer [0/1]
+*** NEXT the computer is missing a GPU
+
+CAD computers often have sppecial graphics cards which we should be able to
+track.
+
+** TODO NETs [0/1]
+*** NEXT the IP needs to be able to be null
+
+Currently it's always required however when a device is in DHCP mode we can't
+know the IP for sure.
 
 * TODO Nice to Have [0/9]
 *** TODO allow technicians to add custom fields
