@@ -11,7 +11,7 @@
   and might have access to only the information related to the devices he owns.
 
 * TODO Must Have [0/6]
-** TODO Views [0/5]
+** TODO Views [0/4]
 *** TODO ComputerDetailView [0/1]
 **** TODO add links to add a relation if it is none
 *** TODO implement SoftwareDetailView
@@ -20,14 +20,11 @@ I don't remember what the initial idea here was. We could show here
 which customers are using this software. But that is currently a really low
 priority item.
 
-*** TODO implement a warranty overview
+*** TODO AddFrom [0/3]
 
-This view would show all devices which are running out of warranty, maybe this
-could be shown as well in the CustomerDetailView. So that we would've a list
-for the customers to see and one large list which shows the warranties for all
-customers for internal usuage.
-
-*** TODO Computer-, Device-, ConnectedDevice- AddFrom
+- [ ] Computer-
+- [ ] Device-
+- [ ] ConnectedDevice-
 
 *** NEXT Fix the warranty in the device view
 
@@ -337,6 +334,45 @@ be attached once to a user license and a computer should only be attached once
 to a computer license. However a user can stil have many licenses and a license
 can still have many users.
 
+** DONE tables problem
+CLOSED: [2020-04-20 Mo 12:49]
+
+This isn't fully working yet in django_tables2
+https://github.com/jieter/django-tables2/issues/721
+
+#+begin_src diff
+-from django_tables2.utils import A
++
+
+ class CustomersTable(tables.Table):
+-    name = tables.LinkColumn('customer', args=[A('pk')])
+-    nets = tables.LinkColumn('nets', text='Nets', args=[A('pk')])
+-    computers = tables.LinkColumn('computers', text='Computers', args=[A('pk')])
+-    devices = tables.LinkColumn('devices', text='Devices', args=[A('pk')])
+-    backups = tables.LinkColumn('backups', text='Backups', args=[A('pk')])
++    name = tables.Column(linkify=("customer", [tables.A("pk")]))
++    nets = tables.Column(verbose_name="Nets",
++                         linkify=("nets", [tables.A("pk")]))
++    computers = tables.Column(verbose_name="Computers",
++                              linkify=("computers", [tables.A("pk")]))
++    devices = tables.Column(verbose_name="Devices",
++                            linkify=("devices", [tables.A("pk")]))
++    backups = tables.Column(verbose_name="Backups",
++                            linkify=dict(viewname="backups", args=[tables.A("pk")]))
+#+end_src
+
+** DONE implement a warranty overview
+CLOSED: [2020-04-20 Mo 13:31]
+
+2020-04-20
+This is implementend now. I've setup the view so that customers can use the
+view as well and the content gets limited to what they are allowed to see.
+
+This view would show all devices which are running out of warranty, maybe this
+could be shown as well in the CustomerDetailView. So that we would've a list
+for the customers to see and one large list which shows the warranties for all
+customers for internal usuage.
+
 * Ressources
 ** Class Based Views
 
@@ -370,29 +406,6 @@ access the customer of an object like this:
 
 #+begin_src python
 object.customer
-#+end_src
-
-* tables problem
-
-#+begin_src diff
--from django_tables2.utils import A
-+
-
- class CustomersTable(tables.Table):
--    name = tables.LinkColumn('customer', args=[A('pk')])
--    nets = tables.LinkColumn('nets', text='Nets', args=[A('pk')])
--    computers = tables.LinkColumn('computers', text='Computers', args=[A('pk')])
--    devices = tables.LinkColumn('devices', text='Devices', args=[A('pk')])
--    backups = tables.LinkColumn('backups', text='Backups', args=[A('pk')])
-+    name = tables.Column(linkify=("customer", [tables.A("pk")]))
-+    nets = tables.Column(verbose_name="Nets",
-+                         linkify=("nets", [tables.A("pk")]))
-+    computers = tables.Column(verbose_name="Computers",
-+                              linkify=("computers", [tables.A("pk")]))
-+    devices = tables.Column(verbose_name="Devices",
-+                            linkify=("devices", [tables.A("pk")]))
-+    backups = tables.Column(verbose_name="Backups",
-+                            linkify=dict(viewname="backups", args=[tables.A("pk")]))
 #+end_src
 
 * Links to include
