@@ -130,6 +130,16 @@ A backup can be run on multiple days
 
 ** TODO Groups [0/1]
 *** NEXT Table for groups
+*** NEXT the computer is missing a GPU
+
+CAD computers often have sppecial graphics cards which we should be able to
+track.
+
+** TODO NETs [0/1]
+*** NEXT the IP needs to be able to be null
+
+Currently it's always required however when a device is in DHCP mode we can't
+know the IP for sure.
 
 * TODO Nice to Have [0/9]
 *** TODO allow technicians to add custom fields
