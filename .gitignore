@@ -174,5 +174,4 @@ migrations/
 htmlcov/
 .second_run
 
-network_inventory/static/
-!network_inventory/static/core
+/static
