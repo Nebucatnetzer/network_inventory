@@ -44,3 +44,9 @@ supported.
 - **DJANGO_SETTINGS_MODULE** the path to the settings file to use in the
   container. This requires a dotet syntax. The default is
   `network_inventory.settings.docker`.
+
+## Documentation
+
+Currently there isn't a lot of documentation present. I try to document my
+thoughts, tasks and other related information in the [Notes
+file](./docs/notes.org).
