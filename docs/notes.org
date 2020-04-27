@@ -179,8 +179,8 @@ documentation in order to make sure that I'm using it correctly.
 ** NEXT [#B] have a look at django select_related, it might solve a problem for me.
 
 I often find myself trying to get related objects. The method select_related
-might help with that:
-- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
+might help with that [fn:1]:
+-
 
 ** NEXT [#B] Add the warranty to the Device, ConnectedDevice and Computer admin pages
 
@@ -196,8 +196,7 @@ objects. At minimum every object should display the customer it belongs to.
 ** NEXT [#C] allow technicians to add custom fields
 
 This would allow technicians to create custom models without change
-Maybe this approach would be something:
-- https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
+Maybe this approach would be something [fn:2]:
 
 ** NEXT [#C] Extend the CSS
 
@@ -213,14 +212,13 @@ This could help a technician to properly plan ressources on a host.
 
 I would like to use this to show the usable space in a RAID system. Currently
 we enter this information by hand but it would be easier to calculate it
-automatically.
-- https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
+automatically [fn:3].
+-
 
 ** NEXT [#C] Get warranty information from Dell
 
 We sell a lot of Dell devices and it would be nice to use the service tags to
-collect the warranty information directly from Dell. There's an API for that:
-https://www.programmableweb.com/api/dell-warranty-status-rest-api
+collect the warranty information directly from Dell. There's an API for that [fn:4]:
 
 ** NEXT [#C] A "to deactivate" feature on inventory users
 
@@ -248,10 +246,9 @@ For security reasons it's recommended to change the name of the admin panel
 url. This way automated tools can't find it so easy. It only increases the
 security slightly.
 
-** NEXT [#C] update the url code
+** NEXT [#C] update the url code [fn:5]
 
 I'm currently not sure what I wanted to do with this.
-https://docs.djangoproject.com/en/2.2/topics/http/urls/#views-extra-options
 
 ** NEXT [#C] implement guardian
 
@@ -268,8 +265,7 @@ security concept works like this:
 
 ** NEXT [#C] Implement an excel import and export
 
-might be achieved with this project:
-- https://github.com/pyexcel-webwares/django-excel
+might be achieved with the django-excel project [fn:6].
 This might be a nice to have feature but the copy button is more important to
 achieve a similar funcition.
 
@@ -284,10 +280,19 @@ priority item.
 I forgot the reason why I need this. Maybe to show in general if a software has
 any licenses attached to it.
 Add a check to see if a software has a license attached to it.If so it
-increases the used licenses counter. Maybe with this:
-- https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
+increases the used licenses counter. Maybe with this this stackoverflow post
+can help [fn:7].
 
-* Ressources
+* Resources
+
+[fn:7] https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
+[fn:6] https://github.com/pyexcel-webwares/django-excel
+[fn:5] https://docs.djangoproject.com/en/2.2/topics/http/urls/#views-extra-options
+[fn:4] https://www.programmableweb.com/api/dell-warranty-status-rest-api
+[fn:3] https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
+[fn:2] https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
+[fn:1] https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
+
 ** Class Based Views
 
 - http://ccbv.co.uk/
@@ -520,10 +525,10 @@ CLOSED: [2020-04-27 Mo 21:31]
 
 With currently the containers don't disappear fully. Should be easy to fix.
 
-
 ** CANCELLED Move the lists to their own page
 CLOSED: [2020-04-27 Mo 22:15]
 
 Since I have more devices than I thought it would provide a better overview
 than one big list. Forgot again what this exactly means.
+
 
