@@ -10,21 +10,77 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/6]
-** TODO Views [0/4]
-*** TODO ComputerDetailView [0/1]
-**** TODO add links to add a relation if it is none
-*** TODO implement SoftwareDetailView
+* TODO Must Have [0/8]
+** TODO Views [0/2]
+*** NEXT add a button to add a relation            :computer_detail_view:
+
+For the many to many relationships it might be a better idea to add them in a
+separate form. So that the view displays the information but when you want to
+add a new CPU for example it shows a button "Add CPU" which you can click an it
+brings you to a new page where the PC is already preselected and the CPU can
+get selected from a drop down.
+
+*** NEXT implement SoftwareDetailView
 
 I don't remember what the initial idea here was. We could show here
 which customers are using this software. But that is currently a really low
 priority item.
 
-*** TODO AddFrom [0/3]
+** TODO Forms [0/12]
+*** NEXT Computer
+- [ ] Add
+- [ ] Update
+- [ ] Delete
 
-- [ ] Computer-
-- [ ] Device-
-- [ ] ConnectedDevice-
+*** NEXT Device
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT ConnectedDevice
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Customer
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Backup
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT UserLicense
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT DeviceLicense
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Net
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Software
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Users
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Groups
+- [ ] Add
+- [ ] Update
+- [ ] Delete
 
 *** NEXT Fix the warranty in the device view
 
@@ -128,7 +184,7 @@ A backup can be run on multiple days
 
 *** NEXT a backup should be able to contain multiple computers
 
-** TODO Groups [0/1]
+** TODO Groups [0/2]
 *** NEXT Table for groups
 *** NEXT the computer is missing a GPU
 
