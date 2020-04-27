@@ -17,13 +17,19 @@ inventory over my various servers and other network equipment.
    and `DJANGO_SECRET_KEY` variables to something secure.
 
 ### Local Setup
+
+The local setup is mainly intended to run the tests quickly. I recommend that
+you use the Docker setup if you want to interact with the website.
+
 4. Run `make local` to create the virtual environment for development.
    You're now all set to start developing.
 
 ### Docker Setup
-4. Run `make` to start the development server. You can access it
-   at   http://localhost:8000 . You're now all set to start developing. \
-   If you need to run migrations you can simply restart the Docker container.
+
+4. Run `make` to start the production server. You can access it
+   at   http://localhost . You're now all set to start working.
+5. If you want to develop with the Docker setup change the `run` command in the
+   `docker-compose.yml` from `run.sh` to `development.sh`
 
 #### Environment Variables
 
@@ -38,14 +44,3 @@ supported.
 - **DJANGO_SETTINGS_MODULE** the path to the settings file to use in the
   container. This requires a dotet syntax. The default is
   `network_inventory.settings.docker`.
-
-## Todos
-- [ ] Create an Nginx configuration
-- [ ] extend the CSS
-    - A more centered layout would be nice
-    - Maybe some colours
-- [ ] include a RAID calculator
-    - <https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python/>
-      I would like to use this to show the usable space in a RAID system.
-- [ ] calculate the used space on a host
-    Means calculate the size all the VMs would use if they were thick.
