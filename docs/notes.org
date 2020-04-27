@@ -82,10 +82,6 @@ priority item.
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Fix the warranty in the device view
-
-With currently the containers don't disappear fully. Should be easy to fix.
-
 ** TODO Various [0/12]
 *** TODO change the admin url
 
@@ -256,6 +252,52 @@ HardwareModel dropdown. However we would loose the ability to only select the
 DeviceManufacturer for a device in case we don't know the specific model which
 happens quite often.
 
+
+* Ressources
+** Class Based Views
+
+- http://ccbv.co.uk/
+
+** Design
+*** Admin themes
+- django-grappelli
+- django-suit
+- django-admin-bootstrapped
+
+** Forms
+
+- https://django-crispy-forms.readthedocs.io/en/latest/index.html
+- https://stackoverflow.com/questions/25321423/django-create-inline-forms-similar-to-django-admin*25340256
+- https://stackoverflow.com/questions/5171365/django-inline-form-with-custom-forms
+
+** Permissions
+
+- https://django-guardian.readthedocs.io/en/stable/userguide/assign.html
+- https://github.com/dfunckt/django-rules/blob/master/README.rst
+
+#+begin_src python
+decororator (function) :
+  if user has permission(object.customer):
+    return function
+#+end_src
+
+Maybe it would be possible to add a property to the classes which allows to
+access the customer of an object like this:
+
+#+begin_src python
+object.customer
+#+end_src
+
+* Links to include
+
+- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#id4
+- https://docs.djangoproject.com/en/2.2/ref/request-response/
+- https://duckduckgo.com/?q=django+get_related&t=fpas&ia=qa
+- https://pybit.es/selenium-pytest-and-django.html
+- https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
+- https://stackoverflow.com/questions/54592026/how-to-create-a-custom-mixin-in-django
+- https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern
+- https://stackoverflow.com/questions/6069070/how-to-use-permission-required-decorators-on-django-class-based-views#6069444
 
 * Done
 ** DONE Recreate the RM in draw.io
@@ -439,48 +481,9 @@ could be shown as well in the CustomerDetailView. So that we would've a list
 for the customers to see and one large list which shows the warranties for all
 customers for internal usuage.
 
-* Ressources
-** Class Based Views
+** DONE Fix the warranty in the device view
+CLOSED: [2020-04-27 Mo 21:31]
 
-- http://ccbv.co.uk/
+With currently the containers don't disappear fully. Should be easy to fix.
 
-** Design
-*** Admin themes
-- django-grappelli
-- django-suit
-- django-admin-bootstrapped
 
-** Forms
-
-- https://django-crispy-forms.readthedocs.io/en/latest/index.html
-- https://stackoverflow.com/questions/25321423/django-create-inline-forms-similar-to-django-admin*25340256
-- https://stackoverflow.com/questions/5171365/django-inline-form-with-custom-forms
-
-** Permissions
-
-- https://django-guardian.readthedocs.io/en/stable/userguide/assign.html
-- https://github.com/dfunckt/django-rules/blob/master/README.rst
-
-#+begin_src python
-decororator (function) :
-  if user has permission(object.customer):
-    return function
-#+end_src
-
-Maybe it would be possible to add a property to the classes which allows to
-access the customer of an object like this:
-
-#+begin_src python
-object.customer
-#+end_src
-
-* Links to include
-
-- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#id4
-- https://docs.djangoproject.com/en/2.2/ref/request-response/
-- https://duckduckgo.com/?q=django+get_related&t=fpas&ia=qa
-- https://pybit.es/selenium-pytest-and-django.html
-- https://stackoverflow.com/questions/28533174/programatically-accessing-django-models-from-another-app
-- https://stackoverflow.com/questions/54592026/how-to-create-a-custom-mixin-in-django
-- https://stackoverflow.com/questions/58307055/access-django-model-name-from-admin-url-pattern
-- https://stackoverflow.com/questions/6069070/how-to-use-permission-required-decorators-on-django-class-based-views#6069444
