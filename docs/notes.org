@@ -3,16 +3,26 @@
 #+author: Andreas Zweili
 :end:
 
-* Vocabulary
+* Introduction
+** How to work with this file
+
+1. All URLs should get included as footnotes on order to have a cleaner layout.
+2. All tasks need a priority, tasks with a priority higher than C are
+   considered must haves for the 1.0 release. Everything with C or lower is
+   considered a nice to have an might never get implemented.
+3. Once an item changes its status to either DONE or CANCELLED it gets moved to
+   the "Done" heading. CANCELLED items should get an explanation why they were
+   cancelled.
+
+** Vocabulary
 
 - Technician :: An employee working with the inventory tool and full access to
   its information.
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/8]
-** TODO Views [0/2]
-*** NEXT add a button to add a relation            :computer_detail_view:
+* TODO Must Have [0/19]
+** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
 separate form. So that the view displays the information but when you want to
@@ -20,81 +30,230 @@ add a new CPU for example it shows a button "Add CPU" which you can click an it
 brings you to a new page where the PC is already preselected and the CPU can
 get selected from a drop down.
 
-*** NEXT implement SoftwareDetailView
-
-I don't remember what the initial idea here was. We could show here
-which customers are using this software. But that is currently a really low
-priority item.
-
-** TODO Forms [0/12]
-*** NEXT Computer
+** TODO [#A] Forms [0/11]
+*** TODO Computer Forms [0/3]
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Device
+**** NEXT CPU Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT ConnectedDevice
+**** NEXT RAM Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Customer
+**** NEXT Disk Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Backup
+*** TODO Device Forms [0/1]
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT UserLicense
+**** NEXT Warranty Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT DeviceLicense
+*** TODO ConnectedDevice Forms [0/1]
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Net
+**** NEXT DeviceInNet Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Software
+*** NEXT Customer Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Users
+*** NEXT Backup Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-*** NEXT Groups
+*** NEXT UserLicense Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
 
-** TODO Various [0/12]
-*** TODO change the admin url
+*** NEXT DeviceLicense Forms
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Net Forms
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Software Forms
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Users Forms
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+*** NEXT Groups Forms
+- [ ] Add
+- [ ] Update
+- [ ] Delete
+
+** NEXT [#A] cpu reduce required fields                              :model:
+
+The CPU has many required fields but sometimes they don't make sense. For
+example when we have a virtual CPU we usually don't need to know the specific
+frequenzy.
+
+** NEXT [#A] the computer is missing a GPU                           :model:
+
+CAD computers often have sppecial graphics cards which we should be able to
+track.
+
+** NEXT [#A] Days need to be manytomany                              :model:
+
+A backup can be run on multiple days
+
+** NEXT [#A] a backup should be able to contain multiple computers   :model:
+** NEXT [#A] implement view for groups
+** NEXT [#A] the IP needs to be able to be null                      :model:
+
+Currently it's always required however when a device is in DHCP mode we can't
+know the IP for sure.
+
+** NEXT [#A] Add a feature to copy objects
+
+This is a must have for the first release.
+As a user I would like to have a way of quickly copy an object and make some
+adjustments in order to add many objects after another.
+
+** NEXT [#A] Add search boxes to the views.
+
+So that one can search for a string in the responding column.
+
+** NEXT [#A] Create custom user model                                :model:
+
+It is best practice to create a custom user model to allow future modifications
+to the users without causing problems.
+
+** NEXT [#B] Implement a license check into all forms
+
+This should prevent technicians from assigning licenses which the customer has
+already fully used.
+
+** NEXT [#B] calculate licence usage for customer
+
+The view should show the licenses which the customer currently has available
+and how many are already used. In addition it should show a visual warning to
+the technician when the limit is reached.
+
+** NEXT [#B] Convert the NETSheet Data file to YML fixtures.
+
+A lot of this is already done. Only the hardware models are currently missing.
+
+** NEXT [#B] Check tests for response.context[‚table‘]
+
+This would allow for tests of the views which check explicitly what gets
+returned by the view. Might be easier/faster then rendering the whole view.
+
+However for some views it would be better to test the final view because the
+template contains logic which can fail.
+
+** NEXT [#B] Have a look at the documentation of django-nested-admin
+
+I implemented nested-admin currently in a very basic way. I should read the
+documentation in order to make sure that I'm using it correctly.
+
+** NEXT [#B] have a look at django select_related, it might solve a problem for me.
+
+I often find myself trying to get related objects. The method select_related
+might help with that:
+- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
+
+** NEXT [#B] Add the warranty to the Device, ConnectedDevice and Computer admin pages
+
+This is a relationship which a technician should be able to add directly on the
+device and not have to navigate to the warranty option first.
+
+** NEXT [#B] Extend the Admin tables
+
+The admin tables show currently very little information about the various
+objects. At minimum every object should display the customer it belongs to.
+
+* TODO Nice to Have [0/13]
+** NEXT [#C] allow technicians to add custom fields
+
+This would allow technicians to create custom models without change
+Maybe this approach would be something:
+- https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
+
+** NEXT [#C] Extend the CSS
+
+- A more centered layout would be nice
+- Maybe some colours
+
+** NEXT [#C] calculate the used space on a host
+
+Means calculate the size all the VMs would use if they were thick.
+This could help a technician to properly plan ressources on a host.
+
+** NEXT [#C] include a RAID calculator
+
+I would like to use this to show the usable space in a RAID system. Currently
+we enter this information by hand but it would be easier to calculate it
+automatically.
+- https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
+
+** NEXT [#C] Get warranty information from Dell
+
+We sell a lot of Dell devices and it would be nice to use the service tags to
+collect the warranty information directly from Dell. There's an API for that:
+https://www.programmableweb.com/api/dell-warranty-status-rest-api
+
+** NEXT [#C] A "to deactivate" feature on inventory users
+
+This way a technician could mark a user for deactivation and anyone could check
+if there are users to deactivate. This would help if we would've to deactivate
+a user at a certain date. The inventory tool could then show to all technicians
+that the user needs to be deactivated. Then any technician could deactivate the
+user and not just the technician responsible for the customer, increasing the
+security of the customer.
+
+** NEXT [#C] Filter Hardware Model to corresponding device manufacturer
+
+When changing the HardwareModel field of a device the dropdown should be
+filtered to the provided DeviceManufacturer.
+
+Currently it could still make sense to make the DeviceManufacturer only
+available through the HardwareModel. This way we wouldn't have to filter the
+HardwareModel dropdown. However we would loose the ability to only select the
+DeviceManufacturer for a device in case we don't know the specific model which
+happens quite often.
+
+** NEXT [#C] change the admin url
 
 For security reasons it's recommended to change the name of the admin panel
 url. This way automated tools can't find it so easy. It only increases the
 security slightly.
 
-*** TODO update the url code
+** NEXT [#C] update the url code
 
 I'm currently not sure what I wanted to do with this.
 https://docs.djangoproject.com/en/2.2/topics/http/urls/#views-extra-options
 
-*** TODO implement guardian
+** NEXT [#C] implement guardian
 
 This needs to be done for basically every model which lives on a view. E.g.
 ~BackupListView~, ~SoftwareListView~. I can’t remember how this should be
@@ -107,151 +266,26 @@ security concept works like this:
    on. Therefore it's better to quickly check the customer before we fetch all
    the other objects from the database.
 
-*** TODO calculate licence usage for customer
-
-The view should show the licenses which the customer currently has available
-and how many are already used. In addition it should show a visual warning to
-the technician when the limit is reached.
-
-*** TODO Convert the NETSheet Data file to YML fixtures.
-
-A lot of this is already done. Only the hardware models are currently missing.
-
-*** TODO Check tests for response.context[‚table‘]
-
-This would allow for tests of the views which check explicitly what gets
-returned by the view. Might be easier/faster then rendering the whole view.
-
-However for some views it would be better to test the final view because the
-template contains logic which can fail.
-
-*** TODO Create custom user model
-
-It is best practice to create a custom user model to allow future modifications
-to the users without causing problems.
-
-*** TODO [#C] Implement an excel import and export
+** NEXT [#C] Implement an excel import and export
 
 might be achieved with this project:
 - https://github.com/pyexcel-webwares/django-excel
 This might be a nice to have feature but the copy button is more important to
 achieve a similar funcition.
 
-*** TODO Have a look at the documentation of django-nested-admin
+** NEXT [#C] implement SoftwareDetailView
 
-I implemented nested-admin currently in a very basic way. I should read the
-documentation in order to make sure that I'm using it correctly.
+I don't remember what the initial idea here was. We could show here
+which customers are using this software. But that is currently a really low
+priority item.
 
-*** TODO have a look at django select_related, it might solve a problem for me.
+** NEXT [#C] Add a check to see if a software has a license attached to it.
 
-I often find myself trying to get related objects. The method select_related
-might help with that:
-- https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
-
-*** TODO Add the warranty to the Device, ConnectedDevice and Computer admin pages
-*** TODO [#A] Add a feature to copy objects
-
-This is a must have for the first release.
-
-** TODO Licenses [0/2]
-*** TODO Implement a license check into all forms
-
-This should prevent technicians from assigning licenses which the customer has
-already fully used.
-
-*** TODO Add a check to see if a software has a license attached to it.
-
-Add a check to see if a software has a license attached to it. I forgot the
-reason why I need this. If so it increases the used licenses counter.
-Maybe with this:
+I forgot the reason why I need this. Maybe to show in general if a software has
+any licenses attached to it.
+Add a check to see if a software has a license attached to it.If so it
+increases the used licenses counter. Maybe with this:
 - https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
-
-** TODO Computer [0/1]
-*** NEXT cpu reduce required fields
-
-The CPU has many required fields but sometimes they don't make sense. For
-example when we have a virtual CPU we usually don't need to know the specific
-frequenzy.
-
-** TODO Backups [0/2]
-*** NEXT Days need to be manytomany
-
-A backup can be run on multiple days
-
-*** NEXT a backup should be able to contain multiple computers
-
-** TODO Groups [0/2]
-*** NEXT Table for groups
-*** NEXT the computer is missing a GPU
-
-CAD computers often have sppecial graphics cards which we should be able to
-track.
-
-** TODO NETs [0/1]
-*** NEXT the IP needs to be able to be null
-
-Currently it's always required however when a device is in DHCP mode we can't
-know the IP for sure.
-
-* TODO Nice to Have [0/9]
-*** TODO allow technicians to add custom fields
-
-This would allow technicians to create custom models without change
-Maybe this approach would be something:
-- https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
-
-*** TODO Extend the CSS
-
-- A more centered layout would be nice
-- Maybe some colours
-
-*** TODO calculate the used space on a host
-
-Means calculate the size all the VMs would use if they were thick.
-This could help a technician to properly plan ressources on a host.
-
-*** TODO include a RAID calculator
-
-I would like to use this to show the usable space in a RAID system. Currently
-we enter this information by hand but it would be easier to calculate it
-automatically.
-- https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
-
-*** TODO Get warranty information from Dell
-
-We sell a lot of Dell devices and it would be nice to use the service tags to
-collect the warranty information directly from Dell. There's an API for that:
-https://www.programmableweb.com/api/dell-warranty-status-rest-api
-
-*** TODO Move the lists to their own page
-
-Since I have more devices than I thought it would provide a better overview
-than one big list. Forgot again what this exactly means.
-
-*** TODO A "to deactivate" feature on inventory users
-
-This way a technician could mark a user for deactivation and anyone could check
-if there are users to deactivate. This would help if we would've to deactivate
-a user at a certain date. The inventory tool could then show to all technicians
-that the user needs to be deactivated. Then any technician could deactivate the
-user and not just the technician responsible for the customer, increasing the
-security of the customer.
-
-*** TODO Add search boxes to the views.
-
-So that one can search for a string in the responding column.
-
-*** TODO Filter Hardware Model to corresponding device manufacturer
-
-When changing the HardwareModel field of a device the dropdown should be
-filtered to the provided DeviceManufacturer.
-
-Currently it could still make sense to make the DeviceManufacturer only
-available through the HardwareModel. This way we wouldn't have to filter the
-HardwareModel dropdown. However we would loose the ability to only select the
-DeviceManufacturer for a device in case we don't know the specific model which
-happens quite often.
-
 
 * Ressources
 ** Class Based Views
@@ -486,4 +520,10 @@ CLOSED: [2020-04-27 Mo 21:31]
 
 With currently the containers don't disappear fully. Should be easy to fix.
 
+
+** CANCELLED Move the lists to their own page
+CLOSED: [2020-04-27 Mo 22:15]
+
+Since I have more devices than I thought it would provide a better overview
+than one big list. Forgot again what this exactly means.
 
