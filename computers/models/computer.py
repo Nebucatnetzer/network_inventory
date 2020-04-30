@@ -7,6 +7,7 @@ from softwares.models import SoftwareArchitecture
 from .cpu import Cpu
 from devices.models import ConnectedDevice
 from .disk import Disk
+from .gpu import Gpu
 from .ram import Ram
 
 
@@ -15,6 +16,7 @@ class Computer(ConnectedDevice):
                            null=True, verbose_name='OS')
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
     ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
+    gpu = models.ManyToManyField(Gpu, through='ComputerGpuRelation')
     disks = models.ManyToManyField(Disk, through='ComputerDiskRelation')
     software = models.ManyToManyField(Software,
                                       through='ComputerSoftwareRelation')
@@ -80,3 +82,16 @@ class ComputerSoftwareRelation(models.Model):
 
     class Meta:
         verbose_name_plural = "Software on Computer"
+
+
+class ComputerGpuRelation(models.Model):
+    gpu = models.ForeignKey(Gpu, on_delete=models.CASCADE)
+    computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+
+    def __str__(self):
+        return self.computer.name
+
+    class Meta:
+        verbose_name_plural = "GPUs in Computer"
+

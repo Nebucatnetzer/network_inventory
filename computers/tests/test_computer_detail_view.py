@@ -80,3 +80,17 @@ def test_computer_detail_view_no_permission(create_admin_user):
     client.login(username="pharma-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
     assert response.status_code == 403
+
+
+def test_computer_detail_view_gpu_relation(create_admin_user):
+    create_admin_user()
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    gpu = mixer.blend('computers.Gpu', gpu_manufacturer=mixer.SELECT)
+    mixer.blend('computers.ComputerGpuRelation', gpu=gpu, computer=computer)
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/computer/' + str(computer.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, gpu))
+
+
