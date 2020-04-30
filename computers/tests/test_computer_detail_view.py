@@ -63,7 +63,9 @@ def test_computer_detail_view_raid_relation(create_admin_user):
 def test_computer_detail_view_cpu_relation(create_admin_user):
     create_admin_user()
     computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
-    cpu = mixer.blend('computers.Cpu', cpu_typ=mixer.SELECT)
+    cpu = mixer.blend('computers.Cpu',
+                      architecture=mixer.SELECT,
+                      manufacturer=mixer.SELECT)
     mixer.blend('computers.ComputerCpuRelation', cpu=cpu, computer=computer)
     client = Client()
     client.login(username="pharma-admin", password="password")
@@ -80,3 +82,17 @@ def test_computer_detail_view_no_permission(create_admin_user):
     client.login(username="pharma-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
     assert response.status_code == 403
+
+
+def test_computer_detail_view_gpu_relation(create_admin_user):
+    create_admin_user()
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    gpu = mixer.blend('computers.Gpu', manufacturer=mixer.SELECT)
+    mixer.blend('computers.ComputerGpuRelation', gpu=gpu, computer=computer)
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/computer/' + str(computer.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, gpu))
+
+

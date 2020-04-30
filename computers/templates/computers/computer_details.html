@@ -21,8 +21,8 @@
     </div>
 </div>
 
-    {% if device.os or software_relations or backup_relations or license_list or device.host %}
 <div class="row">
+{% if device.os or software_relations or backup_relations or license_list or device.host %}
     <div class="col">
         <div class="card mt-3">
             <div class="card-body">
@@ -68,12 +68,12 @@
     </div>
     {% endif %}
 
-    {% if cpu_relations or ram_relations or disks_relations or raid_disk_pairs %}
+    {% if cpu_relations or gpu_relations or ram_relations or disks_relations or raid_disk_pairs %}
     <div class="col">
         <div class="card mt-3">
             <h2 class="card-header">Hardware</h2>
             <div class="card-body">
-                {% if cpu_relations or ram_relations or disks_relations or device.host %}
+                {% if cpu_relations or gpu_relations or ram_relations or disks_relations or device.host %}
                 <table class="table table-bordered">
                     {% if cpu_relations %}
                     <tr>
@@ -81,6 +81,17 @@
                         <td>
                         {% for cpu in cpu_relations %}
                             {{ cpu.amount }}x {{ cpu.cpu }}<br>
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if gpu_relations %}
+                    <tr>
+                        <td><b>GPUs:</b></td>
+                        <td>
+                        {% for gpu in gpu_relations %}
+                            {{ gpu.amount }}x {{ gpu.gpu }}<br>
                         {% endfor %}
                         </td>
                     </tr>
@@ -141,5 +152,5 @@
         </div>
     </div>
 </div>
-    {% endif %}
+{% endif %}
 {% endblock %}

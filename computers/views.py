@@ -26,6 +26,7 @@ from .forms import RamFormSet
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
+from .models import ComputerGpuRelation
 from .models import ComputerRamRelation
 from .models import ComputerSoftwareRelation
 from .models import DisksInRaid
@@ -41,6 +42,7 @@ def computer_detail_view(request, pk):
     warranty_relations = Warranty.objects.filter(device=pk)
     ram_relations = ComputerRamRelation.objects.filter(computer=pk)
     cpu_relations = ComputerCpuRelation.objects.filter(computer=pk)
+    gpu_relations = ComputerGpuRelation.objects.filter(computer=pk)
     software_relations = ComputerSoftwareRelation.objects.filter(computer=pk)
     license_list = LicenseWithComputer.objects.filter(computer=pk)
     raid_disk_pairs = {}
@@ -52,6 +54,7 @@ def computer_detail_view(request, pk):
                'disks_relations': disks_relations,
                'ram_relations': ram_relations,
                'cpu_relations': cpu_relations,
+               'gpu_relations': gpu_relations,
                'software_relations': software_relations,
                'raid_disk_pairs': raid_disk_pairs,
                'backup_relations': backup_list,

@@ -17,6 +17,16 @@
   fields:
     name: ARM64
 
+- model: computers.GpuManufacturer
+  fields:
+    name: Intel
+- model: computers.GpuManufacturer
+  fields:
+    name: AMD
+- model: computers.GpuManufacturer
+  fields:
+    name: Nvidia
+
 - model: computers.RamType
   fields:
     name: unkown

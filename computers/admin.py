@@ -8,6 +8,7 @@ from .models import (
     Computer,
     ComputerCpuRelation,
     ComputerDiskRelation,
+    ComputerGpuRelation,
     ComputerRamRelation,
     ComputerSoftwareRelation,
     Cpu,
@@ -16,6 +17,8 @@ from .models import (
     Disk,
     DiskType,
     DisksInRaid,
+    Gpu,
+    GpuManufacturer,
     Raid,
     RaidType,
     Ram,
@@ -40,6 +43,22 @@ class CpuArchitectureAdmin(admin.ModelAdmin):
 
 
 class CpuManufacturerAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class GpuAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+
+class GpuManufacturerAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
@@ -125,6 +144,12 @@ class CpusInLine(nested_admin.NestedStackedInline):
     verbose_name_plural = 'CPUs'
 
 
+class GpusInLine(nested_admin.NestedStackedInline):
+    model = ComputerGpuRelation
+    extra = 0
+    verbose_name_plural = 'GPUs'
+
+
 class RaidInLine(nested_admin.NestedStackedInline):
     model = Raid
     extra = 0
@@ -146,8 +171,8 @@ class LicenseWithComputerInLine(nested_admin.NestedStackedInline):
 
 class ComputerAdmin(nested_admin.NestedModelAdmin):
     list_display = ('name', 'host')
-    inlines = (SoftwareInLine, CpusInLine, RamInLine, DiskInLine, RaidInLine,
-               DeviceInNetInline, LicenseWithComputerInLine)
+    inlines = (SoftwareInLine, CpusInLine, GpusInLine, RamInLine, DiskInLine,
+               RaidInLine, DeviceInNetInline, LicenseWithComputerInLine)
 
 
 admin.site.register(Computer, ComputerAdmin)
@@ -156,6 +181,8 @@ admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
 admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
 admin.site.register(Disk)
 admin.site.register(DiskType, DiskTypeAdmin)
+admin.site.register(Gpu, GpuAdmin)
+admin.site.register(GpuManufacturer, GpuManufacturerAdmin)
 admin.site.register(RaidType, RaidTypeAdmin)
 admin.site.register(Ram, RamModuleAdmin)
 admin.site.register(RamType, RamTypeAdmin)
