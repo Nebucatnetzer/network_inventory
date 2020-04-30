@@ -93,7 +93,7 @@ class ConnectedDevice(Device):
 class DeviceInNet(models.Model):
     device = models.ForeignKey(ConnectedDevice, on_delete=models.CASCADE)
     net = models.ForeignKey(Net, on_delete=models.CASCADE)
-    ip = models.GenericIPAddressField(verbose_name="IP")
+    ip = models.GenericIPAddressField(verbose_name="IP", blank=True, null=True)
     nic = models.CharField(max_length=50, blank=True, verbose_name="NIC")
     mac_address = models.CharField(max_length=50,
                                    blank=True,
