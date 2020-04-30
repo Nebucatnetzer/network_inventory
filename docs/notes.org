@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/19]
+* TODO Must Have [0/17]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -110,17 +110,6 @@ get selected from a drop down.
 - [ ] Add
 - [ ] Update
 - [ ] Delete
-
-** NEXT [#A] cpu reduce required fields                              :model:
-
-The CPU has many required fields but sometimes they don't make sense. For
-example when we have a virtual CPU we usually don't need to know the specific
-frequenzy.
-
-** NEXT [#A] the computer is missing a GPU                           :model:
-
-CAD computers often have sppecial graphics cards which we should be able to
-track.
 
 ** NEXT [#A] Days need to be manytomany                              :model:
 
@@ -531,4 +520,17 @@ CLOSED: [2020-04-27 Mo 22:15]
 Since I have more devices than I thought it would provide a better overview
 than one big list. Forgot again what this exactly means.
 
+
+** DONE [#A] cpu reduce required fields                              :model:
+CLOSED: [2020-04-30 Do 14:54]
+
+The CPU has many required fields but sometimes they don't make sense. For
+example when we have a virtual CPU we usually don't need to know the specific
+frequenzy.
+
+** DONE [#A] the computer is missing a GPU                           :model:
+CLOSED: [2020-04-30 Do 15:45]
+
+CAD computers often have sppecial graphics cards which we should be able to
+track.
 
