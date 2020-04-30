@@ -3,6 +3,7 @@ from mixer.backend.django import mixer
 from django.test import Client
 
 from core.tests import helper
+from core.models import Weekday
 from customers.models import Customer
 
 pytestmark = pytest.mark.django_db
@@ -72,3 +73,20 @@ def test_backup_detail_view_with_notification(create_admin_user):
     response = client.get('/backup/' + str(backup.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, notification))
+
+
+def test_backup_detail_view_with_day_relation(create_admin_user):
+    create_admin_user()
+    mixer.blend('computers.Computer', customer=mixer.SELECT)
+    monday = Weekday.objects.filter(name="Monday")
+    wednesday = Weekday.objects.filter(name="Wednesday")
+    backup = mixer.blend('backups.Backup',
+                         computer=mixer.SELECT)
+    backup.exec_days.add(monday[0])
+    backup.exec_days.add(wednesday[0])
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/backup/' + str(backup.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, monday[0])
+            and helper.in_content(response, wednesday[0]))

@@ -27,7 +27,9 @@
                     </tr>
                     <tr>
                         <td><b>Exec Day:</b></td>
-                        <td>{{ backup.exec_day }}</td>
+                        <td>
+                            {% for backup in backup.exec_days.all %}{{ backup }}<br/>{% endfor %}
+                        </td>
                     </tr>
                 </table>
             </div>

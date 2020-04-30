@@ -24,8 +24,7 @@ class Backup(models.Model):
                                  null=True)
     source_path = models.CharField(max_length=200, blank=True)
     exec_time = models.TimeField()
-    exec_day = models.ForeignKey(Weekday, models.SET_NULL, blank=True,
-                                 null=True)
+    exec_days = models.ManyToManyField(Weekday)
     target_device = models.ManyToManyField(Computer, through='TargetDevice')
 
     def __str__(self):
