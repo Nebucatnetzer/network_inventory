@@ -105,7 +105,7 @@ class DeviceInNet(models.Model):
                                   verbose_name="IP Status")
 
     def __str__(self):
-        return self.ip
+        return "{}: {}".format(self.ip, self.ip_status)
 
     class Meta:
         verbose_name_plural = "Devices in Net"
