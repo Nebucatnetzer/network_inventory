@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/16]
+* TODO Must Have [0/15]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -118,11 +118,6 @@ Maybe with this I can limit the number of times a relation can be added.
 
 ** NEXT [#A] a backup should be able to contain multiple computers   :model:
 ** NEXT [#A] implement view for groups
-** NEXT [#A] the IP needs to be able to be null                      :model:
-
-Currently it's always required however when a device is in DHCP mode we can't
-know the IP for sure.
-
 ** NEXT [#A] Add a feature to copy objects
 
 This is a must have for the first release.
@@ -545,4 +540,10 @@ track.
 CLOSED: [2020-04-30 Do 19:21]
 
 A backup can be run on multiple days
+
+** DONE [#A] the IP needs to be able to be null                      :model:
+CLOSED: [2020-04-30 Do 20:33]
+
+Currently it's always required however when a device is in DHCP mode we can't
+know the IP for sure.
 
