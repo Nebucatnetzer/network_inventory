@@ -87,7 +87,7 @@ def test_computer_detail_view_no_permission(create_admin_user):
 def test_computer_detail_view_gpu_relation(create_admin_user):
     create_admin_user()
     computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
-    gpu = mixer.blend('computers.Gpu', gpu_manufacturer=mixer.SELECT)
+    gpu = mixer.blend('computers.Gpu', manufacturer=mixer.SELECT)
     mixer.blend('computers.ComputerGpuRelation', gpu=gpu, computer=computer)
     client = Client()
     client.login(username="pharma-admin", password="password")
