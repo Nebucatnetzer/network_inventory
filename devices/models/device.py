@@ -77,7 +77,7 @@ class ConnectedDevice(Device):
         for net in nets_result:
             ip_addresses = {}
             ip_addresses['net_id'] = net.net.id
-            ip_addresses['ip'] = net.ip
+            ip_addresses['ip'] = "{}: {}".format(net.ip, net.ip_status)
             ip_addresses['name'] = net.net.name
             nets.append(ip_addresses)
         return nets
