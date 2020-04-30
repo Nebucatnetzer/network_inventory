@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/17]
+* TODO Must Have [0/16]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -29,6 +29,11 @@ separate form. So that the view displays the information but when you want to
 add a new CPU for example it shows a button "Add CPU" which you can click an it
 brings you to a new page where the PC is already preselected and the CPU can
 get selected from a drop down.
+
+The update form currently adds a new relation every time I update. The idea
+above would be an easy solution. Another option to try out might be the
+MultipleChoice field[fn:8].
+Maybe with this I can limit the number of times a relation can be added.
 
 ** TODO [#A] Forms [0/11]
 *** TODO Computer Forms [0/3]
@@ -111,10 +116,6 @@ get selected from a drop down.
 - [ ] Update
 - [ ] Delete
 
-** NEXT [#A] Days need to be manytomany                              :model:
-
-A backup can be run on multiple days
-
 ** NEXT [#A] a backup should be able to contain multiple computers   :model:
 ** NEXT [#A] implement view for groups
 ** NEXT [#A] the IP needs to be able to be null                      :model:
@@ -181,7 +182,7 @@ device and not have to navigate to the warranty option first.
 The admin tables show currently very little information about the various
 objects. At minimum every object should display the customer it belongs to.
 
-* TODO Nice to Have [0/13]
+* TODO Nice to Have [0/14]
 ** NEXT [#C] allow technicians to add custom fields
 
 This would allow technicians to create custom models without change
@@ -272,8 +273,14 @@ Add a check to see if a software has a license attached to it.If so it
 increases the used licenses counter. Maybe with this this stackoverflow post
 can help [fn:7].
 
+** NEXT [#C] Implement the .all command in templates
+
+This stackoverflow post should help [fn:9]
+
 * Resources
 
+[fn:9] https://stackoverflow.com/questions/4270330/django-show-a-manytomanyfield-in-a-template
+[fn:8] https://docs.djangoproject.com/en/3.0/ref/forms/fields/#multiplechoicefield
 [fn:7] https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
 [fn:6] https://github.com/pyexcel-webwares/django-excel
 [fn:5] https://docs.djangoproject.com/en/2.2/topics/http/urls/#views-extra-options
@@ -533,4 +540,9 @@ CLOSED: [2020-04-30 Do 15:45]
 
 CAD computers often have sppecial graphics cards which we should be able to
 track.
+
+** DONE [#A] Days need to be manytomany                              :model:
+CLOSED: [2020-04-30 Do 19:21]
+
+A backup can be run on multiple days
 
