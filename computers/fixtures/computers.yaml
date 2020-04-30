@@ -40,6 +40,18 @@
   fields:
     name: SAS
 
+- model: computers.Cpu
+  fields:
+    name: Generic Intel CPU
+    manufacturer: 1
+    hyper_threading: 0
+
+- model: computers.Cpu
+  fields:
+    name: Generic AMD CPU
+    manufacturer: 2
+    hyper_threading: 0
+
 - model: computers.RaidType
   fields:
     name: "RAID 0"
