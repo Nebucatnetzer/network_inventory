@@ -17,9 +17,10 @@ class CpuManufacturer(Company):
 class Cpu(models.Model):
     name = models.CharField(max_length=50)
     manufacturer = models.ForeignKey(CpuManufacturer, on_delete=models.CASCADE)
-    number_of_cores = models.IntegerField()
-    frequency = models.FloatField()
-    architecture = models.ForeignKey(CpuArchitecture, on_delete=models.CASCADE)
+    number_of_cores = models.IntegerField(null=True, blank=True)
+    frequency = models.FloatField(null=True, blank=True)
+    architecture = models.ForeignKey(CpuArchitecture, models.SET_NULL,
+                                     blank=True, null=True, )
     hyper_threading = models.BooleanField()
 
     def __str__(self):
