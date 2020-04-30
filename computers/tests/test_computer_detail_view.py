@@ -63,7 +63,9 @@ def test_computer_detail_view_raid_relation(create_admin_user):
 def test_computer_detail_view_cpu_relation(create_admin_user):
     create_admin_user()
     computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
-    cpu = mixer.blend('computers.Cpu', cpu_typ=mixer.SELECT)
+    cpu = mixer.blend('computers.Cpu',
+                      architecture=mixer.SELECT,
+                      manufacturer=mixer.SELECT)
     mixer.blend('computers.ComputerCpuRelation', cpu=cpu, computer=computer)
     client = Client()
     client.login(username="pharma-admin", password="password")
