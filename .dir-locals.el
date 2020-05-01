@@ -4,4 +4,5 @@
 ((python-mode
   (pyvenv-activate . "~/git_repos/projects/network_inventory/venv/")
   (eval progn
-        (setenv "DJANGO_SETTINGS_MODULE" "network_inventory.settings.local"))))
+        (setenv "DJANGO_SETTINGS_MODULE" "network_inventory.settings.local")
+        (setenv "PYTEST_ADDOPTS" "-n 4 --nomigrations"))))
