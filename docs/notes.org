@@ -37,8 +37,8 @@ Maybe with this I can limit the number of times a relation can be added.
 
 ** TODO [#A] Forms [0/11]
 *** TODO Computer Forms [0/3]
-- [ ] Add
-- [ ] Update
+- [X] Add
+- [X] Update
 - [ ] Delete
 
 **** NEXT CPU Forms
@@ -57,18 +57,18 @@ Maybe with this I can limit the number of times a relation can be added.
 - [ ] Delete
 
 *** TODO Device Forms [0/1]
-- [ ] Add
-- [ ] Update
+- [X] Add
+- [X] Update
 - [ ] Delete
 
 **** NEXT Warranty Forms
-- [ ] Add
+- [X] Add
 - [ ] Update
 - [ ] Delete
 
 *** TODO ConnectedDevice Forms [0/1]
-- [ ] Add
-- [ ] Update
+- [X] Add
+- [X] Update
 - [ ] Delete
 
 **** NEXT DeviceInNet Forms
