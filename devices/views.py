@@ -17,6 +17,7 @@ from .decorators import connected_device_view_permission
 
 from .forms import DeviceCreateForm
 from .forms import DeviceUpdateForm
+from .forms import WarrantyCreateForm
 
 from .models import ConnectedDevice
 from .models import Device
@@ -35,7 +36,8 @@ def device_detail_view(request, pk):
     return render(request,
                   'devices/device_details.html',
                   {'device': device,
-                   'warranty_relations': warranty_relations})
+                   'warranty_relations': warranty_relations,
+                   'pk': pk})
 
 
 @login_required
@@ -57,7 +59,8 @@ def connected_device_detail_view(request, pk):
     return render(request,
                   'devices/device_details.html',
                   {'device': device,
-                   'warranty_relations': warranty_relations})
+                   'warranty_relations': warranty_relations,
+                   'pk': pk})
 
 
 @login_required
@@ -112,3 +115,23 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
     model = Device
     form_class = DeviceUpdateForm
     template_name = 'devices/device_update.html'
+
+
+class WarrantyCreateView(LoginRequiredMixin, CreateView):
+    model = Warranty
+    form_class = WarrantyCreateForm
+    template_name = 'devices/warranty_create.html'
+
+    def get_success_url(self):
+        return reverse('device', args=(self.kwargs.get('pk'),))
+
+    def get_initial(self):
+        """
+        Set the device and customer dropdown to the device from the previous
+        view and the customer related to the device.
+        """
+        self.device = get_object_or_404(Device, id=self.kwargs.get('pk'))
+        return {
+            'device': self.device,
+            'customer': self.device.customer,
+        }

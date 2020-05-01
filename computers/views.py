@@ -58,7 +58,8 @@ def computer_detail_view(request, pk):
                'software_relations': software_relations,
                'raid_disk_pairs': raid_disk_pairs,
                'backup_relations': backup_list,
-               'license_list': license_list}
+               'license_list': license_list,
+               'pk': pk}
     return render(request, 'computers/computer_details.html', context)
 
 

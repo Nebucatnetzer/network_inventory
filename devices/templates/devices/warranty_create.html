@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block section_title %}Add Warranty{% endblock %}
+{% block content %}
+<div class="row">
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Save" class="btn btn-primary">
+</form>
+</div>
+{% endblock %}
