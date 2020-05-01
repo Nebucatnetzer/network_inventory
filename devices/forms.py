@@ -30,17 +30,6 @@ class DeviceUpdateForm(forms.ModelForm):
         fields = '__all__'
 
 
-WarrantyFormSet = forms.inlineformset_factory(Device,
-                                              Warranty,
-                                              fields=(
-                                                   'valid_from',
-                                                   'valid_until',
-                                                   'warranty_type',
-                                               ),
-                                              exclude=[],
-                                              can_delete=False,
-                                              form=DeviceUpdateForm,
-                                              max_num=1)
 class WarrantyCreateForm(forms.ModelForm):
     class Meta:
         model = Warranty
