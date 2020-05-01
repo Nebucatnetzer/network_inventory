@@ -1,6 +1,13 @@
 {% extends "core/base.html" %}
 {% block section_title %}{{ device.name }}{% endblock %}
 {% block content %}
+<div class="row mb-3">
+    <div class="col">
+        <form action="{% url 'device_update' pk %}">
+            <input type="submit" value="Edit Device" class="btn btn-primary">
+        </form>
+    </div>
+</div>
 <div class="row">
     <div class="col mt-3">
     {% block device_details %}
