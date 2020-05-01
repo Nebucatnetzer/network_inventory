@@ -15,6 +15,10 @@ class DeviceCreateForm(forms.ModelForm):
         )
 
     def __init__(self, user=None, *args, **kwargs):
+        """
+        If the user is not a superuser it's always assigned to a customer which
+        we can use to assign to the field.
+        """
         super(DeviceCreateForm, self).__init__(*args, **kwargs)
         if not user.is_superuser:
             self.fields['customer'].queryset = utils.get_customers(user)
