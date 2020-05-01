@@ -4,6 +4,7 @@ from mixer.backend.django import mixer
 from django.test import Client
 
 from core.tests import helper
+from nets.models import IpStatus
 
 pytestmark = pytest.mark.django_db
 
@@ -53,3 +54,20 @@ def test_connected_device_detail_view_net_relation(create_admin_user):
     assert (response.status_code == 200
             and helper.in_content(response, device_in_net1.ip)
             and helper.in_content(response, device_in_net2.ip))
+
+
+def test_connected_device_detail_view_net_dhcp_relation(create_admin_user):
+    create_admin_user()
+    device = mixer.blend('devices.ConnectedDevice', customer=mixer.SELECT)
+    net1 = mixer.blend('nets.Net', customer=mixer.SELECT)
+    ip_status = IpStatus.objects.filter(name="Dynamic")
+    device_in_net1 = mixer.blend('devices.DeviceInNet',
+                                 device=device,
+                                 net=net1,
+                                 ip_status=ip_status[0],
+                                 ip="")
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/connected_device/' + str(device.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, device_in_net1.ip_status))
