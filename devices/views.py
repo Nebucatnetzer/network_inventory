@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
+from django.views.generic import UpdateView
 
 from django_tables2 import RequestConfig
 
@@ -14,6 +16,8 @@ from .decorators import device_view_permission
 from .decorators import connected_device_view_permission
 
 from .forms import DeviceCreateForm
+from .forms import DeviceUpdateForm
+
 from .models import ConnectedDevice
 from .models import Device
 from .models import Warranty
@@ -102,3 +106,9 @@ class DeviceCreateFromCustomerView(LoginRequiredMixin, CreateView):
         return {
             'customer': customer,
         }
+
+
+class DeviceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Device
+    form_class = DeviceUpdateForm
+    template_name = 'devices/device_update.html'

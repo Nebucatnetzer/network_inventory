@@ -15,5 +15,8 @@ urlpatterns = [
     path('customer/<int:pk>/create/device/',
          views.DeviceCreateFromCustomerView.as_view(),
          name='device_create'),
+    path('update/device/<int:pk>/',
+         views.DeviceUpdateView.as_view(),
+         name='device_update'),
     path('warranties/', views.warranties_view, name='warranties'),
 ]
