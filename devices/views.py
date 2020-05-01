@@ -70,7 +70,8 @@ def connected_devices_table_view(request, pk):
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/connected_device_list.html',
-                  {'devices': table})
+                  {'devices': table,
+                   'pk': pk})
 
 
 @login_required
