@@ -43,12 +43,6 @@ class ComputerUpdateForm(forms.ModelForm):
             'installation_date',
         )
 
-    # def __init__(self, user=None, *args, **kwargs):
-    #     super(ComputerUpdateForm, self).__init__(*args, **kwargs)
-    #     if not user.is_superuser:
-    #         self.fields['customer'].queryset = utils.get_customers(user)
-    #         self.fields['user'].queryset = utils.get_objects("User", user)
-
 
 ComputerFormSet = forms.inlineformset_factory(Computer,
                                               Warranty,
