@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/15]
+* TODO Must Have [0/16]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -177,7 +177,15 @@ device and not have to navigate to the warranty option first.
 The admin tables show currently very little information about the various
 objects. At minimum every object should display the customer it belongs to.
 
-* TODO Nice to Have [0/14]
+** NEXT [#B] Show all models in the admin interface
+
+Currently I'm hiding a lot of models from the admin interace to make it look a
+bit nicer. However for the production site we want to work mostly on the
+frontend. The admin page should then become really what it is. An admin
+inteface so that we can delete or add models which currently don't have a
+frontend interface.
+
+* TODO Nice to Have [0/15]
 ** NEXT [#C] allow technicians to add custom fields
 
 This would allow technicians to create custom models without change
@@ -272,16 +280,33 @@ can help [fn:7].
 
 This stackoverflow post should help [fn:9]
 
+** NEXT [#C] Inline Formfields like in the admin interface
+
+If already found various Github projects which might serves as an
+example[fn:10] [fn:11]
+
 * Resources
 
+[fn:11] https://gist.github.com/neara/6209563
+
+[fn:10] https://github.com/timhughes/django-cbv-inline-formset
+
 [fn:9] https://stackoverflow.com/questions/4270330/django-show-a-manytomanyfield-in-a-template
+
 [fn:8] https://docs.djangoproject.com/en/3.0/ref/forms/fields/#multiplechoicefield
+
 [fn:7] https://stackoverflow.com/questions/23059088/manytomany-field-check-if-relation-exists
+
 [fn:6] https://github.com/pyexcel-webwares/django-excel
+
 [fn:5] https://docs.djangoproject.com/en/2.2/topics/http/urls/#views-extra-options
+
 [fn:4] https://www.programmableweb.com/api/dell-warranty-status-rest-api
+
 [fn:3] https://thoughtworksnc.com/2017/08/30/writing-a-raid-calculator-in-python
+
 [fn:2] https://stackoverflow.com/questions/34907014/django-allow-user-to-add-fields-to-model
+
 [fn:1] https://docs.djangoproject.com/en/2.2/ref/models/querysets/#select-related
 
 ** Class Based Views
