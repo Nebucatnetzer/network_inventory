@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/16]
+* TODO Must Have [0/17]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -127,6 +127,11 @@ adjustments in order to add many objects after another.
 ** NEXT [#A] Add search boxes to the views.
 
 So that one can search for a string in the responding column.
+
+** NEXT [#A] Fix the table for the connected devices
+
+Currently there is a column for "Device_ptr" I have no idea where that came
+from.
 
 ** NEXT [#A] Create custom user model                                :model:
 
