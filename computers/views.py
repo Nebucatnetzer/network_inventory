@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
-from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
 
 from django_filters.views import FilterView
 from django_tables2 import RequestConfig
