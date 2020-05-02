@@ -35,7 +35,7 @@ above would be an easy solution. Another option to try out might be the
 MultipleChoice field[fn:8].
 Maybe with this I can limit the number of times a relation can be added.
 
-** TODO [#A] Forms [0/11]
+** TODO [#A] Forms [0/12]
 *** TODO Computer Forms [0/3]
 - [X] Add
 - [X] Update
@@ -115,6 +115,13 @@ Maybe with this I can limit the number of times a relation can be added.
 - [ ] Add
 - [ ] Update
 - [ ] Delete
+
+*** NEXT Limit the dropdowns in update views
+
+When a user edits an object he should only be able to select objects from the
+dropdowns he's allowed to view.
+Meaning that we have to limit every dropdown in an update view to the customer
+he's allowed to see.
 
 ** NEXT [#A] a backup should be able to contain multiple computers   :model:
 ** NEXT [#A] implement view for groups
