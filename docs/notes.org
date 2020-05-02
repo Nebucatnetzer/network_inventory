@@ -123,6 +123,8 @@ dropdowns he's allowed to view.
 Meaning that we have to limit every dropdown in an update view to the customer
 he's allowed to see.
 
+We can use the get_objects helper function in core.utils.
+
 ** NEXT [#A] a backup should be able to contain multiple computers   :model:
 ** NEXT [#A] implement view for groups
 ** NEXT [#A] Add a feature to copy objects
