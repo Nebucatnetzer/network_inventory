@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row mb-3">
     <div class="col">
-        <form action="{% url 'device_create' pk %}">
+        <form action="{% url 'device_create' pk %}">{% csrf_token %}
             <input type="submit" value="Add Device" class="btn btn-primary">
         </form>
     </div>
