@@ -119,6 +119,13 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'devices/device_update.html'
 
 
+class DeviceDeleteView(LoginRequiredMixin, DeleteView):
+    model = Device
+
+    def get_success_url(self):
+        return reverse('devices', args=(self.object.customer.pk,))
+
+
 class WarrantyCreateView(LoginRequiredMixin, CreateView):
     model = Warranty
     form_class = WarrantyCreateForm
