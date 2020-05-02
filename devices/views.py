@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 
 from django_tables2 import RequestConfig
 
@@ -136,3 +137,10 @@ class WarrantyCreateView(LoginRequiredMixin, CreateView):
             'device': self.device,
             'customer': self.device.customer,
         }
+
+
+class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
+    model = Warranty
+
+    def get_success_url(self):
+        return reverse('device', args=(self.object.device.pk,))
