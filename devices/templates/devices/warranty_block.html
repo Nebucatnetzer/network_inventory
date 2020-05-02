@@ -1,13 +1,6 @@
 <div class="card mt-3">
-    <h2 class="card-header">Warranty</h2>
+    <h2 class="card-header">Warranty <a href="{% url 'warranty_create' pk %}" class="add" title="Edit" data-toggle="tooltip"><i class="material-icons">add</i></a></h2>
     <div class="card-body">
-        <div class="row mb-3">
-            <div class="col">
-                <form action="{% url 'warranty_create' pk %}">
-                    <input type="submit" value="Add Warranty" class="btn btn-primary">
-                </form>
-            </div>
-        </div>
         {% if warranty_relations %}
         {% for warranty in warranty_relations %}
         <table class="table table-bordered">
