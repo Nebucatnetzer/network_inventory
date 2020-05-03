@@ -59,19 +59,6 @@ class Device(models.Model):
     installation_date = models.DateField(null=True, blank=True)
     net = models.ManyToManyField(Net, through='DeviceInNet')
 
-    @property
-    def nets(self):
-        nets_result = DeviceInNet.objects.filter(
-            device=self.id).order_by('net')
-        nets = []
-        for net in nets_result:
-            ip_addresses = {}
-            ip_addresses['net_id'] = net.net.id
-            ip_addresses['ip'] = str(net)
-            ip_addresses['name'] = net.net.name
-            nets.append(ip_addresses)
-        return nets
-
     def __str__(self):
         return self.name
 
