@@ -11,6 +11,7 @@
                 </td>
                 <td>
                     <a href="{% url 'device_in_net_update' net.pk %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                    <a href="{% url 'device_in_net_delete' net.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
             {% endfor %}

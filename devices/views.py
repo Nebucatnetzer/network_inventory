@@ -170,3 +170,9 @@ class DeviceInNetUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('device', args=(self.object.device.pk,))
 
 
+class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
+    model = DeviceInNet
+    template_name = 'devices/device_in_net_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('device', args=(self.object.device.pk,))
