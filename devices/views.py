@@ -14,7 +14,6 @@ from customers.models import Customer
 from core.utils import get_objects
 
 from .decorators import device_view_permission
-from .decorators import connected_device_view_permission
 
 from .forms import DeviceCreateForm
 from .forms import DeviceInNetCreateForm
@@ -22,12 +21,10 @@ from .forms import DeviceUpdateForm
 from .forms import WarrantyCreateForm
 from .forms import WarrantyUpdateForm
 
-from .models import ConnectedDevice
 from .models import Device
 from .models import DeviceInNet
 from .models import Warranty
 
-from .tables import ConnectedDevicesTable
 from .tables import DevicesTable
 from .tables import WarrantiesTable
 
@@ -51,29 +48,6 @@ def devices_table_view(request, pk):
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/device_list.html',
-                  {'devices': table,
-                   'pk': pk})
-
-
-@login_required
-@connected_device_view_permission
-def connected_device_detail_view(request, pk):
-    device = get_object_or_404(ConnectedDevice, pk=pk)
-    warranty_relations = Warranty.objects.filter(device=pk)
-    return render(request,
-                  'devices/device_details.html',
-                  {'device': device,
-                   'warranty_relations': warranty_relations,
-                   'pk': pk})
-
-
-@login_required
-@customer_view_permission
-def connected_devices_table_view(request, pk):
-    table = ConnectedDevicesTable(ConnectedDevice.objects.filter(customer=pk))
-    RequestConfig(request).configure(table)
-    return render(request,
-                  'devices/connected_device_list.html',
                   {'devices': table,
                    'pk': pk})
 
@@ -178,7 +152,7 @@ class DeviceInNetCreateView(LoginRequiredMixin, CreateView):
         Set the device and customer dropdown to the device from the previous
         view and the customer related to the device.
         """
-        self.device = get_object_or_404(ConnectedDevice, id=self.kwargs.get('pk'))
+        self.device = get_object_or_404(Device, id=self.kwargs.get('pk'))
         return {
             'device': self.device,
         }

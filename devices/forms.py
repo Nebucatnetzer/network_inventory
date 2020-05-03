@@ -32,6 +32,7 @@ class DeviceUpdateForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = '__all__'
+        exclude = ('net',)
 
 
 class WarrantyCreateForm(forms.ModelForm):

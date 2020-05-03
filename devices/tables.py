@@ -4,7 +4,6 @@ import django_tables2 as tables
 
 from core.tables import CoreTable
 
-from .models import ConnectedDevice
 from .models import Device
 
 
@@ -14,14 +13,6 @@ class DevicesTable(CoreTable):
 
     class Meta(CoreTable.Meta):
         model = Device
-
-
-class ConnectedDevicesTable(CoreTable):
-    id = tables.Column(visible=False)
-    name = tables.Column('ConnectedDevice', linkify=True)
-
-    class Meta(CoreTable.Meta):
-        model = ConnectedDevice
 
 
 class WarrantiesTable(CoreTable):

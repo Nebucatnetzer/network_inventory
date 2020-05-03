@@ -57,16 +57,6 @@ class Device(models.Model):
                              null=True,
                              blank=True)
     installation_date = models.DateField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('device', args=[str(self.id)])
-
-
-class ConnectedDevice(Device):
     net = models.ManyToManyField(Net, through='DeviceInNet')
 
     @property
@@ -82,16 +72,16 @@ class ConnectedDevice(Device):
             nets.append(ip_addresses)
         return nets
 
-    class Meta:
-        verbose_name_plural = "Connected Devices"
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('connected_device', args=[str(self.id)])
+        return reverse('device', args=[str(self.id)])
 
 
 class DeviceInNet(models.Model):
-    device = models.ForeignKey(ConnectedDevice, on_delete=models.CASCADE)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
     net = models.ForeignKey(Net, on_delete=models.CASCADE)
     ip = models.GenericIPAddressField(verbose_name="IP", blank=True, null=True)
     nic = models.CharField(max_length=50, blank=True, verbose_name="NIC")

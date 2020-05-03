@@ -15,10 +15,6 @@ class CustomersTable(CoreTable):
                                   text='Computers',
                                   args=[A('pk')],
                                   orderable=False)
-    connected_devices = tables.LinkColumn('connected_devices',
-                                          text='Connected Devices',
-                                          args=[A('pk')],
-                                          orderable=False)
     devices = tables.LinkColumn('devices',
                                 text='Devices',
                                 args=[A('pk')],

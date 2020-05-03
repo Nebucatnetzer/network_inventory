@@ -2,7 +2,6 @@ from django.contrib import admin
 import nested_admin
 
 from .models import (
-    ConnectedDevice,
     Device,
     DeviceCategory,
     DeviceInNet,
@@ -51,12 +50,11 @@ class WarrantyTypeAdmin(admin.ModelAdmin):
         return {}
 
 
-class ConnectedDeviceAdmin(nested_admin.NestedModelAdmin):
+class DeviceAdmin(nested_admin.NestedModelAdmin):
     inlines = (DeviceInNetInline, )
 
 
-admin.site.register(ConnectedDevice, ConnectedDeviceAdmin)
-admin.site.register(Device)
+admin.site.register(Device, DeviceAdmin)
 admin.site.register(DeviceCategory, DeviceCategoryAdmin)
 admin.site.register(DeviceInNet)
 admin.site.register(DeviceManufacturer, DeviceManufacturerAdmin)

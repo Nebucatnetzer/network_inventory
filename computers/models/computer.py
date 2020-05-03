@@ -5,13 +5,13 @@ from softwares.models import Software
 from softwares.models import SoftwareArchitecture
 
 from .cpu import Cpu
-from devices.models import ConnectedDevice
+from devices.models import Device
 from .disk import Disk
 from .gpu import Gpu
 from .ram import Ram
 
 
-class Computer(ConnectedDevice):
+class Computer(Device):
     os = models.ForeignKey(OperatingSystem, models.SET_NULL, blank=True,
                            null=True, verbose_name='OS')
     cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
