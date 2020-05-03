@@ -17,12 +17,14 @@ from .decorators import device_view_permission
 from .decorators import connected_device_view_permission
 
 from .forms import DeviceCreateForm
+from .forms import DeviceInNetCreateForm
 from .forms import DeviceUpdateForm
 from .forms import WarrantyCreateForm
 from .forms import WarrantyUpdateForm
 
 from .models import ConnectedDevice
 from .models import Device
+from .models import DeviceInNet
 from .models import Warranty
 
 from .tables import ConnectedDevicesTable
@@ -161,3 +163,23 @@ class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('device', args=(self.object.device.pk,))
+
+
+class DeviceInNetCreateView(LoginRequiredMixin, CreateView):
+    model = DeviceInNet
+    form_class = DeviceInNetCreateForm
+    template_name = 'devices/device_in_net_create.html'
+
+    def get_success_url(self):
+        return reverse('device', args=(self.kwargs.get('pk'),))
+
+    def get_initial(self):
+        """
+        Set the device and customer dropdown to the device from the previous
+        view and the customer related to the device.
+        """
+        self.device = get_object_or_404(ConnectedDevice, id=self.kwargs.get('pk'))
+        return {
+            'device': self.device,
+        }
+
