@@ -1,8 +1,8 @@
-{% if device.nets %}
 <div class="card mt-3">
-    <h2 class="card-header">IPs</h2>
+    <h2 class="card-header">IPs <a href="{% url 'device_in_net_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></h2>
     <div class="card-body">
         <table class="table table-bordered">
+            {% if device.nets %}
             {% regroup device.nets by name as nets_list %}
             {% for net in nets_list %}
             <tr>
@@ -14,8 +14,8 @@
                 </td>
             </tr>
             {% endfor %}
+            {% endif %}
         </table>
     </div>
 </div>
-{% endif %}
 
