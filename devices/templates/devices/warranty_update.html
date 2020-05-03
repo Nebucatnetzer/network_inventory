@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block section_title %}Edit Warranty{% endblock %}
+{% block content %}
+<form method="post">
+<div class="row">
+    {% csrf_token %}
+    <div class="col">
+        <div class="card mt-3">
+            <div class="card-body">
+            {{ form|crispy }}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<input type="submit" value="Save" class="btn btn-primary">
+</form>
+{% endblock %}

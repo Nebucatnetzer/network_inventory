@@ -34,3 +34,12 @@ class WarrantyCreateForm(forms.ModelForm):
     class Meta:
         model = Warranty
         fields = '__all__'
+
+
+class WarrantyUpdateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = Warranty
+        fields = '__all__'

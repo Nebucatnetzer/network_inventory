@@ -19,6 +19,7 @@ from .decorators import connected_device_view_permission
 from .forms import DeviceCreateForm
 from .forms import DeviceUpdateForm
 from .forms import WarrantyCreateForm
+from .forms import WarrantyUpdateForm
 
 from .models import ConnectedDevice
 from .models import Device
@@ -144,6 +145,15 @@ class WarrantyCreateView(LoginRequiredMixin, CreateView):
             'device': self.device,
             'customer': self.device.customer,
         }
+
+
+class WarrantyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Warranty
+    form_class = WarrantyUpdateForm
+    template_name = 'devices/warranty_update.html'
+
+    def get_success_url(self):
+        return reverse('device', args=(self.object.device.pk,))
 
 
 class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
