@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/17]
+* TODO Must Have [0/16]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -180,11 +180,6 @@ documentation in order to make sure that I'm using it correctly.
 I often find myself trying to get related objects. The method select_related
 might help with that [fn:1]:
 -
-
-** NEXT [#B] Add the warranty to the Device, ConnectedDevice and Computer admin pages
-
-This is a relationship which a technician should be able to add directly on the
-device and not have to navigate to the warranty option first.
 
 ** NEXT [#B] Extend the Admin tables
 
@@ -586,3 +581,8 @@ CLOSED: [2020-04-30 Do 20:33]
 Currently it's always required however when a device is in DHCP mode we can't
 know the IP for sure.
 
+** DONE [#B] Add the warranty to the Device, ConnectedDevice and Computer admin pages
+CLOSED: [2020-05-03 So 19:32]
+
+This is a relationship which a technician should be able to add directly on the
+device and not have to navigate to the warranty option first.
