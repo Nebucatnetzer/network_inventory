@@ -7,7 +7,7 @@
             <tr>
                 <td><b>{{ net.net }}</b></td>
                 <td>
-                    <a href="{% url 'net' net.net.pk %}">{{ net.ip }}</a><br>
+                    <a href="{% url 'net' net.net.pk %}">{{ net }}</a><br>
                 </td>
                 <td>
                     <a href="{% url 'device_in_net_update' net.pk %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
