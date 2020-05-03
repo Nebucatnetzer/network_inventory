@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/18]
+* TODO Must Have [0/17]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -35,7 +35,7 @@ above would be an easy solution. Another option to try out might be the
 MultipleChoice field[fn:8].
 Maybe with this I can limit the number of times a relation can be added.
 
-** TODO [#A] Forms [0/12]
+** TODO [#A] Forms [0/10]
 *** TODO Computer Forms [0/3]
 - [X] Add
 - [X] Update
@@ -52,26 +52,6 @@ Maybe with this I can limit the number of times a relation can be added.
 - [ ] Delete
 
 **** NEXT Disk Forms
-- [ ] Add
-- [ ] Update
-- [ ] Delete
-
-*** TODO Device Forms [0/1]
-- [X] Add
-- [X] Update
-- [ ] Delete
-
-**** NEXT Warranty Forms
-- [X] Add
-- [ ] Update
-- [X] Delete
-
-*** TODO ConnectedDevice Forms [0/1]
-- [X] Add
-- [X] Update
-- [ ] Delete
-
-**** NEXT DeviceInNet Forms
 - [ ] Add
 - [ ] Update
 - [ ] Delete
@@ -121,7 +101,7 @@ Maybe with this I can limit the number of times a relation can be added.
 When a user edits an object he should only be able to select objects from the
 dropdowns he's allowed to view.
 Meaning that we have to limit every dropdown in an update view to the customer
-he's allowed to see.
+he's allowed to see. Like only the Nets or Users related to that customer.
 
 We can use the get_objects helper function in core.utils.
 
@@ -146,16 +126,6 @@ from.
 
 It is best practice to create a custom user model to allow future modifications
 to the users without causing problems.
-
-** NEXT [#A] check if the connected device and device model could get merged :model:
-
-When using the forms for warranties and net relations they both point to
-different models but use the same logic so they always go back to the device
-details.
-
-However it's nice to differentiate between the connected device and the device
-in the forms. So that one only can select the connected devices in the
-dropdown. However the line between a connected device and a device is very thin.
 
 ** NEXT [#B] Implement a license check into all forms
 
@@ -600,3 +570,32 @@ CLOSED: [2020-05-03 So 19:32]
 
 This is a relationship which a technician should be able to add directly on the
 device and not have to navigate to the warranty option first.
+** DONE [#A] check if the connected device and device model could get merged :model:
+CLOSED: [2020-05-03 So 22:19]
+
+When using the forms for warranties and net relations they both point to
+different models but use the same logic so they always go back to the device
+details.
+
+However it's nice to differentiate between the connected device and the device
+in the forms. So that one only can select the connected devices in the
+dropdown. However the line between a connected device and a device is very thin.
+
+** DONE Device Forms [2/2]
+CLOSED: [2020-05-03 So 22:20]
+- [X] Add
+- [X] Update
+- [X] Delete
+
+*** DONE Warranty Forms
+CLOSED: [2020-05-03 So 22:19]
+- [X] Add
+- [X] Update
+- [X] Delete
+
+*** DONE DeviceInNet Forms
+CLOSED: [2020-05-03 So 22:19]
+- [X] Add
+- [X] Update
+- [X] Delete
+
