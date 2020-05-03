@@ -25,5 +25,8 @@ urlpatterns = [
     path('device/<int:pk>/add/device-in-net/',
          views.DeviceInNetCreateView.as_view(),
          name='device_in_net_create'),
+    path('update/device-in-net/<int:pk>/',
+         views.DeviceInNetUpdateView.as_view(),
+         name='device_in_net_update'),
     path('warranties/', views.warranties_view, name='warranties'),
 ]

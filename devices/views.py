@@ -17,6 +17,7 @@ from .decorators import device_view_permission
 
 from .forms import DeviceCreateForm
 from .forms import DeviceInNetCreateForm
+from .forms import DeviceInNetUpdateForm
 from .forms import DeviceUpdateForm
 from .forms import WarrantyCreateForm
 from .forms import WarrantyUpdateForm
@@ -158,4 +159,14 @@ class DeviceInNetCreateView(LoginRequiredMixin, CreateView):
         return {
             'device': self.device,
         }
+
+
+class DeviceInNetUpdateView(LoginRequiredMixin, UpdateView):
+    model = DeviceInNet
+    form_class = DeviceInNetUpdateForm
+    template_name = 'devices/device_in_net_update.html'
+
+    def get_success_url(self):
+        return reverse('device', args=(self.object.device.pk,))
+
 

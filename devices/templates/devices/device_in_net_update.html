@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block section_title %}Edit Device in Net{% endblock %}
+{% block content %}
+<form method="post">
+<div class="row">
+    {% csrf_token %}
+    <div class="col">
+        <div class="card mt-3">
+            <div class="card-body">
+            {{ form|crispy }}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<input type="submit" value="Save" class="btn btn-primary">
+<a href="{{ view.get_success_url }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

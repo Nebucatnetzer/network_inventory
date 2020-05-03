@@ -60,3 +60,12 @@ class DeviceInNetCreateForm(forms.ModelForm):
     class Meta:
         model = DeviceInNet
         fields = '__all__'
+
+
+class DeviceInNetUpdateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = DeviceInNet
+        fields = '__all__'
