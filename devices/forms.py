@@ -3,6 +3,7 @@ import floppyforms.__future__ as forms
 from core import utils
 
 from devices.models import Device
+from devices.models import DeviceInNet
 from devices.models import Warranty
 
 
@@ -48,4 +49,13 @@ class WarrantyUpdateForm(forms.ModelForm):
     """
     class Meta:
         model = Warranty
+        fields = '__all__'
+
+
+class DeviceInNetCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = DeviceInNet
         fields = '__all__'
