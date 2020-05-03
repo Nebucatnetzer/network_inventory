@@ -34,10 +34,12 @@ from .tables import WarrantiesTable
 def device_detail_view(request, pk):
     device = get_object_or_404(Device, pk=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
+    net_relations = DeviceInNet.objects.filter(device=pk)
     return render(request,
                   'devices/device_details.html',
                   {'device': device,
                    'warranty_relations': warranty_relations,
+                   'net_relations': net_relations,
                    'pk': pk})
 
 

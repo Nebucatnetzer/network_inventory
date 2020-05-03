@@ -2,15 +2,15 @@
     <h2 class="card-header">IPs <a href="{% url 'device_in_net_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></h2>
     <div class="card-body">
         <table class="table table-bordered">
-            {% if device.nets %}
-            {% regroup device.nets by name as nets_list %}
-            {% for net in nets_list %}
+            {% if net_relations %}
+            {% for net in net_relations %}
             <tr>
-                <td><b>{{ net.grouper }}</b></td>
+                <td><b>{{ net.net }}</b></td>
                 <td>
-                    {% for ip in net.list %}
-                        <a href="{% url 'net' ip.net_id %}">{{ ip.ip }}</a><br>
-                    {% endfor %}
+                    <a href="{% url 'net' net.net.pk %}">{{ net.ip }}</a><br>
+                </td>
+                <td>
+                    <a href="{% url 'device_in_net_update' net.pk %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
                 </td>
             </tr>
             {% endfor %}

@@ -14,6 +14,7 @@ from core import utils
 from backups.models import Backup
 from customers.models import Customer
 from customers.decorators import customer_view_permission
+from devices.models import DeviceInNet
 from devices.models import Warranty
 from licenses.models import LicenseWithComputer
 
@@ -45,6 +46,7 @@ def computer_detail_view(request, pk):
     gpu_relations = ComputerGpuRelation.objects.filter(computer=pk)
     software_relations = ComputerSoftwareRelation.objects.filter(computer=pk)
     license_list = LicenseWithComputer.objects.filter(computer=pk)
+    net_relations = DeviceInNet.objects.filter(device=pk)
     raid_disk_pairs = {}
     for raid in Raid.objects.filter(computer=pk):
         raid_disk_pairs[raid] = DisksInRaid.objects.filter(raid=raid)
@@ -59,6 +61,7 @@ def computer_detail_view(request, pk):
                'raid_disk_pairs': raid_disk_pairs,
                'backup_relations': backup_list,
                'license_list': license_list,
+               'net_relations': net_relations,
                'pk': pk}
     return render(request, 'computers/computer_details.html', context)
 
