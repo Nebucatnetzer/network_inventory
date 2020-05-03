@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <h2 class="card-header">Warranty <a href="{% url 'warranty_create' pk %}" class="add" title="Edit" data-toggle="tooltip"><i class="material-icons">add</i></a></h2>
+    <h2 class="card-header">Warranty <a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></h2>
     <div class="card-body">
         {% if warranty_relations %}
         {% for warranty in warranty_relations %}
