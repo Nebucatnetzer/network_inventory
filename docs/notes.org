@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/16]
+* TODO Must Have [0/18]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -64,7 +64,7 @@ Maybe with this I can limit the number of times a relation can be added.
 **** NEXT Warranty Forms
 - [X] Add
 - [ ] Update
-- [ ] Delete
+- [X] Delete
 
 *** TODO ConnectedDevice Forms [0/1]
 - [X] Add
@@ -147,6 +147,16 @@ from.
 It is best practice to create a custom user model to allow future modifications
 to the users without causing problems.
 
+** NEXT [#A] check if the connected device and device model could get merged :model:
+
+When using the forms for warranties and net relations they both point to
+different models but use the same logic so they always go back to the device
+details.
+
+However it's nice to differentiate between the connected device and the device
+in the forms. So that one only can select the connected devices in the
+dropdown. However the line between a connected device and a device is very thin.
+
 ** NEXT [#B] Implement a license check into all forms
 
 This should prevent technicians from assigning licenses which the customer has
@@ -193,6 +203,10 @@ bit nicer. However for the production site we want to work mostly on the
 frontend. The admin page should then become really what it is. An admin
 inteface so that we can delete or add models which currently don't have a
 frontend interface.
+
+** NEXT [#B] In the warranty form validate the date inputs
+
+The starting date shouldn't be allowed to be newer than the end date.
 
 * TODO Nice to Have [0/15]
 ** NEXT [#C] allow technicians to add custom fields
