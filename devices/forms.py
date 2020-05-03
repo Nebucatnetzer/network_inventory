@@ -25,12 +25,18 @@ class DeviceCreateForm(forms.ModelForm):
 
 
 class DeviceUpdateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
     class Meta:
         model = Device
         fields = '__all__'
 
 
 class WarrantyCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
     class Meta:
         model = Warranty
         fields = '__all__'
