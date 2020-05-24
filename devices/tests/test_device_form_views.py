@@ -49,3 +49,23 @@ def test_device_update_view(create_admin_user):
     assert response.status_code == 302
     device.refresh_from_db()
     assert device.name == data['name']
+
+
+def test_warranty_create_view(create_admin_user):
+    fixture = create_admin_user()
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    data = {
+        'customer': device.customer.id,
+        'device': device.id,
+        'valid_from': '2020-05-24',
+        'valid_until': '2020-05-25',
+        'warranty_type': ''
+    }
+    request = RequestFactory().post('/', data=data)
+    request.user = fixture['admin']
+    response = views.WarrantyCreateView.as_view()(
+        request,
+        pk=fixture['customer'].id)
+    assert response.status_code == 302
+
+
