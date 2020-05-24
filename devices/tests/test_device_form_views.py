@@ -27,3 +27,25 @@ def test_device_delete_view(create_admin_user):
     request.user = fixture['admin']
     response = views.DeviceDeleteView.as_view()(request, pk=device.pk)
     assert response.status_code == 302
+
+
+def test_device_update_view(create_admin_user):
+    fixture = create_admin_user()
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    data = {'name': 'Foo',
+            'description': '',
+            'serialnumber': '',
+            'category': '',
+            'owner': '',
+            'customer': device.customer.id,
+            'manufacturer': '',
+            'model': '',
+            'location': '',
+            'user': '',
+            'installation_date': ''}
+    request = RequestFactory().post('/', data=data)
+    request.user = fixture['admin']
+    response = views.DeviceUpdateView.as_view()(request, pk=device.pk)
+    assert response.status_code == 302
+    device.refresh_from_db()
+    assert device.name == data['name']
