@@ -98,6 +98,9 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
     form_class = DeviceUpdateForm
     template_name = 'devices/device_update.html'
 
+    def get_success_url(self):
+        return reverse('device', args=(self.object.pk,))
+
 
 class DeviceDeleteView(LoginRequiredMixin, DeleteView):
     model = Device
