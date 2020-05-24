@@ -1,11 +1,8 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404
 from django.test import RequestFactory
 from mixer.backend.django import mixer
 
 import pytest
 
-from devices import models
 from devices import views
 
 
@@ -30,5 +27,3 @@ def test_device_delete_view(create_admin_user):
     request.user = fixture['admin']
     response = views.DeviceDeleteView.as_view()(request, pk=device.pk)
     assert response.status_code == 302
-    with pytest.raises(Http404):
-        get_object_or_404(models.Device, pk=device.pk)
