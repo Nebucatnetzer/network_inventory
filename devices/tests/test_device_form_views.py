@@ -1,9 +1,7 @@
-from django.test import RequestFactory
+from django.test import Client
 from mixer.backend.django import mixer
 
 import pytest
-
-from devices import views
 
 
 pytestmark = pytest.mark.django_db
@@ -11,26 +9,28 @@ pytestmark = pytest.mark.django_db
 
 def test_device_create_view(create_admin_user):
     fixture = create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
     data = {'name': 'Test Device',
             'customer': fixture['customer'].id}
-    request = RequestFactory().post('/', data=data)
-    request.user = fixture['admin']
-    response = views.DeviceCreateFromCustomerView.as_view()(
-        request, pk=fixture['customer'].id)
+    url = '/customer/{}/create/device/'.format(fixture['customer'].id)
+    response = client.post(url, data)
     assert response.status_code == 302
 
 
 def test_device_delete_view(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
     device = mixer.blend('devices.Device')
-    request = RequestFactory().post('/')
-    request.user = fixture['admin']
-    response = views.DeviceDeleteView.as_view()(request, pk=device.pk)
+    response = client.post('/delete/device/{}/'.format(device.pk))
     assert response.status_code == 302
 
 
 def test_device_update_view(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
     device = mixer.blend('devices.Device', customer=mixer.SELECT)
     data = {'name': 'Foo',
             'description': '',
@@ -43,16 +43,16 @@ def test_device_update_view(create_admin_user):
             'location': '',
             'user': '',
             'installation_date': ''}
-    request = RequestFactory().post('/', data=data)
-    request.user = fixture['admin']
-    response = views.DeviceUpdateView.as_view()(request, pk=device.pk)
+    response = client.post('/update/device/{}/'.format(device.pk), data)
     assert response.status_code == 302
     device.refresh_from_db()
     assert device.name == data['name']
 
 
 def test_warranty_create_view(create_admin_user):
-    fixture = create_admin_user()
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
     device = mixer.blend('devices.Device', customer=mixer.SELECT)
     data = {
         'customer': device.customer.id,
@@ -61,11 +61,6 @@ def test_warranty_create_view(create_admin_user):
         'valid_until': '2020-05-25',
         'warranty_type': ''
     }
-    request = RequestFactory().post('/', data=data)
-    request.user = fixture['admin']
-    response = views.WarrantyCreateView.as_view()(
-        request,
-        pk=fixture['customer'].id)
+    url = '/device/{}/add/warranty/'.format(device.id)
+    response = client.post(url, data)
     assert response.status_code == 302
-
-
