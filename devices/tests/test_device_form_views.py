@@ -87,3 +87,16 @@ def test_warranty_update_view(create_admin_user):
     assert response.status_code == 302
     warranty.refresh_from_db()
     assert warranty.valid_from == date_from
+
+
+def test_warranty_delete_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    warranty = mixer.blend('devices.Warranty',
+                           customer=device.customer,
+                           device=device)
+    url = '/delete/warranty/{}/'.format(warranty.id)
+    response = client.post(url)
+    assert response.status_code == 302
