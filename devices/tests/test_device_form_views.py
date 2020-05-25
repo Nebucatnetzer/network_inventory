@@ -1,6 +1,7 @@
+from datetime import datetime
+
 from django.test import Client
 from mixer.backend.django import mixer
-
 import pytest
 
 
@@ -64,3 +65,25 @@ def test_warranty_create_view(create_admin_user):
     url = '/device/{}/add/warranty/'.format(device.id)
     response = client.post(url, data)
     assert response.status_code == 302
+
+
+def test_warranty_update_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    warranty = mixer.blend('devices.Warranty',
+                           customer=device.customer,
+                           device=device)
+    data = {
+        'customer': device.customer.id,
+        'device': device.id,
+        'valid_from': '2020-05-24',
+        'valid_until': '2020-05-25',
+        'warranty_type': ''
+    }
+    response = client.post('/update/warranty/{}/'.format(warranty.pk), data)
+    date_from = datetime.strptime(data['valid_from'], "%Y-%m-%d").date()
+    assert response.status_code == 302
+    warranty.refresh_from_db()
+    assert warranty.valid_from == date_from
