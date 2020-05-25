@@ -119,3 +119,28 @@ def test_device_in_net_create_view(create_admin_user):
     url = '/device/{}/add/device-in-net/'.format(device.id)
     response = client.post(url, data)
     assert response.status_code == 302
+
+
+def test_device_in_net_update_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    net = mixer.blend('nets.Net', customer=device.customer)
+    device_in_net = mixer.blend('devices.DeviceInNet',
+                                customer=device.customer,
+                                device=device,
+                                net=net)
+    data = {
+        'device': device.id,
+        'net': net.id,
+        'ip': '192.168.1.20',
+        'nic': '',
+        'mac_address': '',
+        'ip_status': '1'
+    }
+    response = client.post(
+        '/update/device-in-net/{}/'.format(device_in_net.pk), data)
+    assert response.status_code == 302
+    device_in_net.refresh_from_db()
+    assert device_in_net.ip == data['ip']
