@@ -100,3 +100,22 @@ def test_warranty_delete_view(create_admin_user):
     url = '/delete/warranty/{}/'.format(warranty.id)
     response = client.post(url)
     assert response.status_code == 302
+
+
+def test_device_in_net_create_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    net = mixer.blend('nets.Net', customer=device.customer)
+    data = {
+        'device': device.id,
+        'net': net.id,
+        'ip': '192.168.1.20',
+        'nic': '',
+        'mac_address': '',
+        'ip_status': '1'
+    }
+    url = '/device/{}/add/device-in-net/'.format(device.id)
+    response = client.post(url, data)
+    assert response.status_code == 302
