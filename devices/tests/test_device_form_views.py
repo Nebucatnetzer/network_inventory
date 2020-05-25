@@ -144,3 +144,18 @@ def test_device_in_net_update_view(create_admin_user):
     assert response.status_code == 302
     device_in_net.refresh_from_db()
     assert device_in_net.ip == data['ip']
+
+
+def test_device_in_net_delete_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    net = mixer.blend('nets.Net', customer=device.customer)
+    device_in_net = mixer.blend('devices.DeviceInNet',
+                                customer=device.customer,
+                                device=device,
+                                net=net)
+    url = '/delete/device-in-net/{}/'.format(device_in_net.id)
+    response = client.post(url)
+    assert response.status_code == 302
