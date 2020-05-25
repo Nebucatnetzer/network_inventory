@@ -26,7 +26,7 @@ class UserLicense(License):
 
     @property
     def used_licenses(self):
-        return LicenseWithUser.objects.filter(pk=self.id).count()
+        return LicenseWithUser.objects.filter(license=self).count()
 
 
 class ComputerLicense(License):
