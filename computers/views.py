@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 
 from django_filters.views import FilterView
 from django_tables2 import RequestConfig
@@ -125,3 +126,12 @@ class ComputerUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.pk,))
+
+
+class ComputerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Computer
+
+    def get_success_url(self):
+        return reverse('computers', args=(self.object.customer.pk,))
+
+

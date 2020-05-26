@@ -18,4 +18,6 @@ urlpatterns = [
     path('update/computer/<int:pk>/',
          views.ComputerUpdateView.as_view(),
          name='computer_update'),
+    path('delete/computer/<int:pk>/', views.ComputerDeleteView.as_view(),
+         name='computer_delete'),
  ]
