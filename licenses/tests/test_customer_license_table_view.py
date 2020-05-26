@@ -19,15 +19,30 @@ def test_customer_license_table(create_admin_user):
     fixture = create_admin_user()
     customer = fixture['customer']
     client = Client()
+    user = mixer.blend('users.User')
+    computer = mixer.blend('computers.Computer')
     client.login(username="pharma-admin", password="password")
-    license = mixer.blend('licenses.UserLicense', customer=customer,
-                          software=mixer.SELECT, key=mixer.RANDOM,
-                          max_allowed_users=mixer.RANDOM)
-    response = client.get('/customer/' + str(customer.id) + '/licenses/')
+    user_license = mixer.blend('licenses.UserLicense', customer=customer,
+                               software=mixer.SELECT, key=mixer.RANDOM,
+                               max_allowed_users=mixer.RANDOM)
+    computer_license = mixer.blend('licenses.ComputerLicense',
+                                   customer=customer,
+                                   software=mixer.SELECT, key=mixer.RANDOM,
+                                   max_allowed_computers=mixer.RANDOM)
+    mixer.blend('licenses.LicenseWithUser', user=user, license=user_license)
+    mixer.blend('licenses.LicenseWithComputer',
+                computer=computer,
+                license=computer_license)
+    url = '/customer/{}/licenses/'.format(customer.id)
+    response = client.get(url)
     assert (response.status_code == 200
-            and helper.in_content(response, license.software)
-            and helper.in_content(response, license.key)
-            and helper.in_content(response, license.max_allowed_users))
+            and helper.in_content(response, user_license.software)
+            and helper.in_content(response, user_license.key)
+            and helper.in_content(response, user_license.max_allowed_users)
+            and helper.in_content(response, computer_license.software)
+            and helper.in_content(response, computer_license.key)
+            and helper.in_content(
+                response, computer_license.max_allowed_computers))
 
 
 def test_customer_license_table_no_license(create_admin_user):
