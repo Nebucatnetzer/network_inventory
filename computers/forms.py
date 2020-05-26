@@ -3,9 +3,6 @@ import floppyforms.__future__ as forms
 from core import utils
 
 from computers.models import Computer
-from computers.models import ComputerCpuRelation
-from computers.models import ComputerRamRelation
-from devices.models import Warranty
 
 
 class ComputerCreateForm(forms.ModelForm):
@@ -27,57 +24,10 @@ class ComputerCreateForm(forms.ModelForm):
 
 
 class ComputerUpdateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
     class Meta:
         model = Computer
-        fields = (
-            'name',
-            'description',
-            'serialnumber',
-            'category',
-            'owner',
-            'customer',
-            'manufacturer',
-            'model',
-            'location',
-            'user',
-            'installation_date',
-        )
-
-
-ComputerFormSet = forms.inlineformset_factory(Computer,
-                                              Warranty,
-                                              fields=(
-                                                   'valid_from',
-                                                   'valid_until',
-                                                   'warranty_type',
-                                               ),
-                                              exclude=[],
-                                              can_delete=False,
-                                              form=ComputerUpdateForm,
-                                              max_num=1)
-
-
-CpuFormSet = forms.inlineformset_factory(Computer,
-                                         ComputerCpuRelation,
-                                         fields=(
-                                             'cpu',
-                                             'computer',
-                                             'amount',
-                                             ),
-                                         exclude=[],
-                                         can_delete=False,
-                                         form=ComputerUpdateForm,
-                                         max_num=1)
-
-
-RamFormSet = forms.inlineformset_factory(Computer,
-                                         ComputerRamRelation,
-                                         fields=(
-                                             'ram',
-                                             'computer',
-                                             'amount',
-                                             ),
-                                         exclude=[],
-                                         can_delete=False,
-                                         form=ComputerUpdateForm,
-                                         max_num=1)
+        fields = '__all__'
+        exclude = ('net', 'cpu', 'ram', 'gpu', 'disks', 'software')

@@ -21,9 +21,7 @@ from licenses.models import LicenseWithComputer
 from .decorators import computer_view_permission
 from .filters import ComputerFilter
 from .forms import ComputerCreateForm
-from .forms import ComputerFormSet
-from .forms import CpuFormSet
-from .forms import RamFormSet
+from .forms import ComputerUpdateForm
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -122,66 +120,8 @@ class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
 
 class ComputerUpdateView(LoginRequiredMixin, UpdateView):
     model = Computer
-    fields = (
-        'name',
-        'description',
-        'serialnumber',
-        'category',
-        'owner',
-        'customer',
-        'manufacturer',
-        'model',
-        'location',
-        'user',
-        'installation_date',
-        'os',
-    )
+    form_class = ComputerUpdateForm
     template_name = 'computers/computer_update.html'
 
-    # def get_form_kwargs(self):
-    #     """
-    #     Pass the request user to the form.
-    #     """
-    #     kwargs = super(ComputerUpdateView, self).get_form_kwargs()
-    #     kwargs.update({'user': self.request.user})
-    #     return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super(ComputerUpdateView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            context['computer_formset'] = ComputerFormSet(
-                self.request.POST,
-                instance=self.object)
-            context['computer_formset'].full_clean()
-            context['cpu_formset'] = CpuFormSet(
-                self.request.POST,
-                instance=self.object)
-            context['cpu_formset'].full_clean()
-            context['ram_formset'] = RamFormSet(
-                self.request.POST,
-                instance=self.object)
-            context['ram_formset'].full_clean()
-        else:
-            context['computer_formset'] = ComputerFormSet(instance=self.object)
-            context['cpu_formset'] = CpuFormSet(instance=self.object)
-            context['ram_formset'] = RamFormSet(instance=self.object)
-        return context
-
-    def form_valid(self, form):
-        context = self.get_context_data(form=form)
-        computer_formset = context['computer_formset']
-        cpu_formset = context['cpu_formset']
-        ram_formset = context['ram_formset']
-        if (computer_formset.is_valid()
-                and cpu_formset.is_valid()
-                and ram_formset.is_valid()):
-            response = super().form_valid(form)
-            computer_formset.instance = self.object
-            computer_formset.save()
-            cpu_formset.instance = self.object
-            cpu_formset.save()
-            ram_formset.instance = self.object
-            ram_formset.save()
-            return response
-        else:
-            return super().form_invalid(form)
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.pk,))
