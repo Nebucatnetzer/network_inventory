@@ -27,6 +27,24 @@ def test_warranties_no_warranties_found(create_admin_user):
             and helper.not_in_content(response, warranty.customer))
 
 
+def test_warranties_view_plenty_of_time(create_admin_user):
+    fixture = create_admin_user()
+    user = fixture['admin']
+    user.save()
+    device = mixer.blend('devices.Device', customer=fixture['customer'])
+    more_than_one_year = (datetime.date(datetime.today() + timedelta(400)))
+    mixer.blend('devices.Warranty',
+                device=device,
+                valid_until=more_than_one_year)
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/warranties/')
+    # Problems with the bgcolor attribute prevent the use of helper.in_content
+    assert (response.status_code == 200
+            and ('bgcolor="orange"' not in response.content.decode('utf8'))
+            and ('bgcolor="red"' not in response.content.decode('utf8')))
+
+
 def test_warranties_view_warranty_expired(create_admin_user):
     fixture = create_admin_user()
     device = mixer.blend('devices.Device', customer=fixture['customer'])
