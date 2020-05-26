@@ -7,8 +7,8 @@ services:
   db:
     image: postgres
     environment:
-      - "POSTGRES_DB=${POSTGRES_DB}"
-      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
+      - POSTGRES_DB
+      - POSTGRES_PASSWORD
     volumes:
       - db_data:/var/lib/postgresql/data/
 
@@ -20,9 +20,9 @@ services:
     ports:
       - 8000:8000
     environment:
-      - "DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}"
-      - "DJANGO_DEBUG=${DJANGO_DEBUG}"
-      - "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}"
+      - DJANGO_SETTINGS_MODULE
+      - DJANGO_DEBUG
+      - DJANGO_SECRET_KEY
     depends_on:
       - db
 
