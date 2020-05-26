@@ -35,7 +35,7 @@ above would be an easy solution. Another option to try out might be the
 MultipleChoice field[fn:8].
 Maybe with this I can limit the number of times a relation can be added.
 
-** TODO [#A] Forms [0/11]
+** TODO [#A] Forms [0/12]
 *** TODO Computer Forms [0/3]
 - [X] Add
 - [X] Update
@@ -106,6 +106,10 @@ he's allowed to see. Like only the Nets or Users related to that customer.
 We can use the get_objects helper function in core.utils.
 
 *** NEXT Limit the customer views to superusers
+
+*** NEXT Add + button for nets in the DeviceInNet form
+
+This way we can quickly add a net when we want to add an IP to a device.
 
 ** NEXT [#A] a backup should be able to contain multiple computers   :model:
 ** NEXT [#A] implement view for groups
