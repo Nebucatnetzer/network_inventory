@@ -17,7 +17,7 @@ class Raid(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "RAIDs in Computer"
