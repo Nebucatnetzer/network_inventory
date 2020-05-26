@@ -52,6 +52,7 @@ def test_warranties_view_warranty_expired(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get('/warranties/')
+    # Problems with the bgcolor attribute prevent the use of helper.in_content
     assert (response.status_code == 200
             and ('bgcolor="red"' in response.content.decode('utf8')))
 
@@ -68,5 +69,6 @@ def test_warranties_view_warranty_one_year_till_expiration(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get('/warranties/')
+    # Problems with the bgcolor attribute prevent the use of helper.in_content
     assert (response.status_code == 200
             and ('bgcolor="orange"' in response.content.decode('utf8')))
