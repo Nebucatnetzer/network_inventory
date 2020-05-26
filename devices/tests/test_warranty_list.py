@@ -41,7 +41,6 @@ def test_warranties_view_warranty_expired(create_admin_user):
 def test_warranties_view_warranty_one_year_till_expiration(create_admin_user):
     fixture = create_admin_user()
     user = fixture['admin']
-    user.is_superuser = True
     user.save()
     device = mixer.blend('devices.Device', customer=fixture['customer'])
     not_one_year_more = (datetime.date(datetime.today() + timedelta(200)))
