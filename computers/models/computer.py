@@ -41,7 +41,7 @@ class ComputerCpuRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "CPUs in Computer"
@@ -53,7 +53,7 @@ class ComputerRamRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "RAM Modules in Computer"
@@ -65,7 +65,7 @@ class ComputerDiskRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "Disks in Computer"
@@ -78,7 +78,7 @@ class ComputerSoftwareRelation(models.Model):
                                      blank=True, null=True)
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "Software on Computer"
@@ -90,7 +90,7 @@ class ComputerGpuRelation(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.computer.name
+        return str(self.computer)
 
     class Meta:
         verbose_name_plural = "GPUs in Computer"
