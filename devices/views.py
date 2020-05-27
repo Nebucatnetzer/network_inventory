@@ -99,7 +99,7 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'devices/device_update.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.object.pk,))
+        return self.request.POST.get('previous_page')
 
 
 class DeviceDeleteView(LoginRequiredMixin, DeleteView):
