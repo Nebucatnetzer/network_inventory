@@ -32,7 +32,7 @@ def test_computer_update_form(create_admin_user):
         "Should be false because no data was given")
 
     data = {"name": "pharma-pc1",
-            "customer": 3}
+            "customer": 20356}
     form = forms.ComputerUpdateForm(data=data)
     assert form.is_valid() is False, (
         "Should be false because the customer doesn't exist.")
