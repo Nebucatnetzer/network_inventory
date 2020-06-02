@@ -6,6 +6,11 @@
     <p>Are you sure you want to delete the warranty for "{{ object }}"?</p>
     <button type="submit" class="btn btn-danger">Delete</button>
     <a href="{{ view.get_success_url }}" class="btn btn-primary">Cancel</a>
+    <input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
 </form>
+<script>
+    prev = document.getElementById("previous_page");
+    prev.value = document.referrer;
+</script>
 </div>
 {% endblock %}

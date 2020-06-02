@@ -115,7 +115,7 @@ class WarrantyCreateView(LoginRequiredMixin, CreateView):
     template_name = 'devices/warranty_create.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.kwargs.get('pk'),))
+        return self.request.POST.get('previous_page')
 
     def get_initial(self):
         """
@@ -135,14 +135,14 @@ class WarrantyUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'devices/warranty_update.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.object.device.pk,))
+        return self.request.POST.get('previous_page')
 
 
 class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
     model = Warranty
 
     def get_success_url(self):
-        return reverse('device', args=(self.object.device.pk,))
+        return self.request.POST.get('previous_page')
 
 
 class DeviceInNetCreateView(LoginRequiredMixin, CreateView):
@@ -151,7 +151,7 @@ class DeviceInNetCreateView(LoginRequiredMixin, CreateView):
     template_name = 'devices/device_in_net_create.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.kwargs.get('pk'),))
+        return self.request.POST.get('previous_page')
 
     def get_initial(self):
         """
@@ -170,7 +170,7 @@ class DeviceInNetUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'devices/device_in_net_update.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.object.device.pk,))
+        return self.request.POST.get('previous_page')
 
 
 class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
@@ -178,4 +178,4 @@ class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'devices/device_in_net_confirm_delete.html'
 
     def get_success_url(self):
-        return reverse('device', args=(self.object.device.pk,))
+        return self.request.POST.get('previous_page')

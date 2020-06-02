@@ -17,5 +17,11 @@
 <br>
 <input type="submit" value="Save" class="btn btn-primary">
 <a href="{{ view.get_success_url }}" class="btn btn-secondary">Cancel</a>
+<input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
 </form>
+<script>
+    prev = document.getElementById("previous_page");
+    prev.value = document.referrer;
+</script>
+
 {% endblock %}
