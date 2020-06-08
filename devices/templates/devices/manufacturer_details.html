@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block section_title %}{{ devicemanufacturer.name }}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col mt-3">
+
+        <div class="card mt-3">
+            <div class="card-body">
+                    <h4>Description</h4>
+                    <div class="card-text"><p>{{ devicemanufacturer.description }}</p></div>
+                    <p>{{ devicemanufacturer.description }}</p>
+                    Phone: <a href="tel:{{ devicemanufacturer.phone_number }}">{{ devicemanufacturer.phone_number }}</a><br/>
+                    Email: <a href="mailto:{{ devicemanufacturer.email_address }}">{{ devicemanufacturer.email_address }}</a><br/>
+                    Website: <a href="{{ devicemanufacturer.website }}">{{ devicemanufacturer.website }}</a><br/>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

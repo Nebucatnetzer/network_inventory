@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
+from django.views.generic import DetailView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
@@ -24,6 +25,7 @@ from .forms import WarrantyUpdateForm
 
 from .models import Device
 from .models import DeviceInNet
+from .models import DeviceManufacturer
 from .models import Warranty
 
 from .tables import DevicesTable
@@ -179,3 +181,8 @@ class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return self.request.POST.get('previous_page')
+
+
+class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
+    model = DeviceManufacturer
+    template_name = 'devices/manufacturer_details.html'

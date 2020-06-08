@@ -21,7 +21,11 @@
             </tr>
             <tr>
                 <td><b>Manufacturer:</b></td>
+                {% if device.manufacturer %}
+                <td><a href="{% url 'manufacturer' device.manufacturer.id %}">{{ device.manufacturer }}</a></td>
+                {% else %}
                 <td>{{ device.manufacturer }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <td><b>Model:</b></td>
