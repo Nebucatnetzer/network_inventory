@@ -22,106 +22,79 @@
 </div>
 
 <div class="row">
-{% if device.os or software_relations or backup_relations or license_list or device.host %}
     <div class="col">
         <div class="card mt-3">
             <div class="card-body">
-                {% if device.host %}
                 <h2>Host</h2>
+                {% if device.host %}
                 <ul>
                     <li><a href="{% url 'computer' device.host.id %}">{{ device.host }}</a></li>
                 </ul>
+                {% else %}
+                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
                 {% endif %}
 
-                {% if device.os %}
                 <h2>Operating System</h2>
+                {% if device.os %}
                 <ul>
                     <li>{{ device.os }}</li>
                 </ul>
+                {% else %}
+                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
                 {% endif %}
 
-                {% if software_relations %}
                 <h2>Software</h2>
                 <ul>
                 {% for relation in software_relations %}
                     <li>{{ relation.software }}</li>
                 {% endfor %}
                 </ul>
-                {% endif %}
+                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
-                {% if license_list %}
                 {% block license %}
                     {% include "licenses/license_block.html" %}
                 {% endblock %}
-                {% endif %}
 
-                {% if backup_relations %}
                 <h2>Backup</h2>
                 <ul>
                     {% for backup in backup_relations %}
                     <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a></li>
                     {% endfor %}
                 </ul>
-                {% endif %}
+                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+
             </div>
         </div>
     </div>
-    {% endif %}
 
-    {% if cpu_relations or gpu_relations or ram_relations or disks_relations or raid_disk_pairs %}
     <div class="col">
         <div class="card mt-3">
             <h2 class="card-header">Hardware</h2>
             <div class="card-body">
-                {% if cpu_relations or gpu_relations or ram_relations or disks_relations or device.host %}
-                <table class="table table-bordered">
-                    {% if cpu_relations %}
-                    <tr>
-                        <td><b>CPUs:</b></td>
-                        <td>
-                        {% for cpu in cpu_relations %}
-                            {{ cpu.amount }}x {{ cpu.cpu }}<br>
-                        {% endfor %}
-                        </td>
-                    </tr>
-                    {% endif %}
+                    <p><b>CPUs:</b></p>
+                    {% for cpu in cpu_relations %}
+                        {{ cpu.amount }}x {{ cpu.cpu }}<br>
+                    {% endfor %}
+                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
-                    {% if gpu_relations %}
-                    <tr>
-                        <td><b>GPUs:</b></td>
-                        <td>
-                        {% for gpu in gpu_relations %}
-                            {{ gpu.amount }}x {{ gpu.gpu }}<br>
-                        {% endfor %}
-                        </td>
-                    </tr>
-                    {% endif %}
+                    <p><b>GPUs:</b></p>
+                    {% for gpu in gpu_relations %}
+                        {{ gpu.amount }}x {{ gpu.gpu }}<br>
+                    {% endfor %}
+                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
-                    {% if ram_relations %}
-                    <tr>
-                        <td><b>RAM Modules:</b></td>
-                        <td>
-                        {% for module in ram_relations %}
-                            {{ module.amount }}x {{ module.ram }}<br>
-                        {% endfor %}
-                        </td>
-                    </tr>
-                    {% endif %}
+                    <p><b>RAM Modules:</b></p>
+                    {% for module in ram_relations %}
+                        {{ module.amount }}x {{ module.ram }}<br>
+                    {% endfor %}
+                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
-                    {% if disks_relations %}
-                    <tr>
-                        <td><b>Disks:</b></td>
-                        <td>
-                        {% for disk in disks_relations %}
-                            {{ disk.amount }}x {{ disk.disk }}<br>
-                        {% endfor %}
-                        </td>
-                    </tr>
-                    {% endif %}
-                </table>
-                {% endif %}
+                    <p><b>Disks:</b></p>
+                    {% for disk in disks_relations %}
+                        {{ disk.amount }}x {{ disk.disk }}<br>
+                    {% endfor %}
+                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
-                {% if raid_disk_pairs %}
                 <h3>RAID</h3>
                 {% for raid, disks in raid_disk_pairs.items %}
                 <table class="table table-bordered">
@@ -147,10 +120,9 @@
                     {% endif %}
                 </table>
                 {% endfor %}
-                {% endif %}
+                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
             </div>
         </div>
     </div>
 </div>
-{% endif %}
 {% endblock %}
