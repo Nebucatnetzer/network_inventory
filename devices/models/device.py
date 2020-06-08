@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from core.models import Category, Company
 from customers.models import Customer, Owner, Location
@@ -6,6 +7,13 @@ from nets.models import Net, IpStatus
 
 
 class DeviceManufacturer(Company):
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17,
+                                    blank=True, null=True)
+    email_address = models.EmailField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Device Manufacturers"
