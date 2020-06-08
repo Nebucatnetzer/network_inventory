@@ -21,7 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/17]
+* TODO Must Have [0/18]
 ** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
 
 For the many to many relationships it might be a better idea to add them in a
@@ -132,6 +132,11 @@ from.
 
 It is best practice to create a custom user model to allow future modifications
 to the users without causing problems.
+
+** NEXT [#A] Add a view for DeviceManufacturer details
+
+since the DeviceManufacturer model now contains various contact details we
+should provide a details view to let uses access those details.
 
 ** NEXT [#B] Implement a license check into all forms
 
