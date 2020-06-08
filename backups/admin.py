@@ -10,30 +10,6 @@ from .models import (
 )
 
 
-class BackupMethodAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class NotificationTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class NotificationAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class TargetDeviceInLine(admin.StackedInline):
     model = TargetDevice
     extra = 0
@@ -50,16 +26,8 @@ class BackupAdmin(admin.ModelAdmin):
     inlines = (TargetDeviceInLine, NotificationForBackupInLine)
 
 
-class TargetDeviceAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 admin.site.register(Backup, BackupAdmin)
-admin.site.register(BackupMethod, BackupMethodAdmin)
-admin.site.register(Notification, NotificationAdmin)
-admin.site.register(NotificationType, NotificationTypeAdmin)
-admin.site.register(TargetDevice, TargetDeviceAdmin)
+admin.site.register(BackupMethod)
+admin.site.register(Notification)
+admin.site.register(NotificationType)
+admin.site.register(TargetDevice)

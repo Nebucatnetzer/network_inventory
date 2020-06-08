@@ -9,22 +9,6 @@ from .models import (
 )
 
 
-class LicenseWithComputerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class LicenseWithUserAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class UserLicenseAdmin(admin.ModelAdmin):
     model = UserLicense
     extra = 0
@@ -38,5 +22,5 @@ class ComputerLicenseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ComputerLicense, ComputerLicenseAdmin)
-admin.site.register(LicenseWithComputer, LicenseWithComputerAdmin)
+admin.site.register(LicenseWithComputer)
 admin.site.register(UserLicense, UserLicenseAdmin)

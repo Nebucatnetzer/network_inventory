@@ -26,94 +26,6 @@ from .models import (
 )
 
 
-class CpuAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class CpuArchitectureAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class CpuManufacturerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class GpuAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class GpuManufacturerAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class IpStatusAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class RamModuleAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class RaidTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class DiskTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class RamTypeAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class DiskInRaidAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class SoftwareInLine(nested_admin.NestedStackedInline):
     model = ComputerSoftwareRelation
     extra = 0
@@ -176,13 +88,13 @@ class ComputerAdmin(nested_admin.NestedModelAdmin):
 
 
 admin.site.register(Computer, ComputerAdmin)
-admin.site.register(Cpu, CpuAdmin)
-admin.site.register(CpuArchitecture, CpuArchitectureAdmin)
-admin.site.register(CpuManufacturer, CpuManufacturerAdmin)
+admin.site.register(Cpu)
+admin.site.register(CpuArchitecture)
+admin.site.register(CpuManufacturer)
 admin.site.register(Disk)
-admin.site.register(DiskType, DiskTypeAdmin)
-admin.site.register(Gpu, GpuAdmin)
-admin.site.register(GpuManufacturer, GpuManufacturerAdmin)
-admin.site.register(RaidType, RaidTypeAdmin)
-admin.site.register(Ram, RamModuleAdmin)
-admin.site.register(RamType, RamTypeAdmin)
+admin.site.register(DiskType)
+admin.site.register(Gpu)
+admin.site.register(GpuManufacturer)
+admin.site.register(RaidType)
+admin.site.register(Ram)
+admin.site.register(RamType)

@@ -12,30 +12,6 @@ from .models import (
 )
 
 
-class MailAliasAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class UserInAdGroupAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
-class UserInMailGroupAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        """
-        Return empty perms dict thus hiding the model from admin index.
-        """
-        return {}
-
-
 class LicenseWithUserInLine(admin.StackedInline):
     model = LicenseWithUser
     extra = 0
@@ -69,8 +45,8 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AdGroup)
-admin.site.register(MailAlias, MailAliasAdmin)
+admin.site.register(MailAlias)
 admin.site.register(MailGroup)
 admin.site.register(User, UserAdmin)
-admin.site.register(UserInAdGroup, UserInAdGroupAdmin)
-admin.site.register(UserInMailGroup, UserInMailGroupAdmin)
+admin.site.register(UserInAdGroup)
+admin.site.register(UserInMailGroup)

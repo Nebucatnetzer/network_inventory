@@ -3,6 +3,7 @@ SHELL=/bin/bash
 .PHONY: docker
 
 docker:
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
 	docker-compose up
 
 test:
