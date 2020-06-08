@@ -18,6 +18,10 @@ class DeviceManufacturer(Company):
     class Meta:
         verbose_name_plural = "Device Manufacturers"
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('manufacturer', args=[str(self.id)])
+
 
 class DeviceCategory(Category):
 
