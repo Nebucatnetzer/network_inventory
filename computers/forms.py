@@ -3,6 +3,7 @@ import floppyforms.__future__ as forms
 from core import utils
 
 from computers.models import Computer
+from computers.models import ComputerRamRelation
 
 
 class ComputerCreateForm(forms.ModelForm):
@@ -31,3 +32,12 @@ class ComputerUpdateForm(forms.ModelForm):
         model = Computer
         fields = '__all__'
         exclude = ('net', 'cpu', 'ram', 'gpu', 'disks', 'software')
+
+
+class ComputerRamRelationCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = ComputerRamRelation
+        fields = '__all__'

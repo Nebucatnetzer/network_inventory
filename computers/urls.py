@@ -20,4 +20,10 @@ urlpatterns = [
          name='computer_update'),
     path('delete/computer/<int:pk>/', views.ComputerDeleteView.as_view(),
          name='computer_delete'),
+    path('create/ram-relation/<int:pk>/',
+         views.ComputerRamRelationCreateView.as_view(),
+         name='ram_relation_create'),
+    path('delete/ram-relation/<int:pk>/',
+         views.ComputerRamRelationDeleteView.as_view(),
+         name='ram_relation_delete'),
  ]

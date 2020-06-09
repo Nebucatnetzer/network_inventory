@@ -85,9 +85,9 @@
 
                     <p><b>RAM Modules:</b></p>
                     {% for module in ram_relations %}
-                        {{ module.amount }}x {{ module.ram }}<br>
+                        {{ module.amount }}x {{ module.ram }} <a href="{% url 'ram_relation_delete' module.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a><br>
                     {% endfor %}
-                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                    <p><a href="{% url 'ram_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
                     <p><b>Disks:</b></p>
                     {% for disk in disks_relations %}

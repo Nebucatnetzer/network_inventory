@@ -23,6 +23,7 @@ from .decorators import computer_view_permission
 from .filters import ComputerFilter
 from .forms import ComputerCreateForm
 from .forms import ComputerUpdateForm
+from .forms import ComputerRamRelationCreateForm
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -135,3 +136,28 @@ class ComputerDeleteView(LoginRequiredMixin, DeleteView):
         return reverse('computers', args=(self.object.customer.pk,))
 
 
+class ComputerRamRelationCreateView(LoginRequiredMixin, CreateView):
+    model = ComputerRamRelation
+    form_class = ComputerRamRelationCreateForm
+    template_name = 'computers/ram_relation_create.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.computer.pk,))
+
+    def get_initial(self):
+        """
+        Set the device and customer dropdown to the device from the previous
+        view and the customer related to the device.
+        """
+        self.computer = get_object_or_404(Computer, id=self.kwargs.get('pk'))
+        return {
+            'computer': self.computer,
+        }
+
+
+class ComputerRamRelationDeleteView(LoginRequiredMixin, DeleteView):
+    model = ComputerRamRelation
+    template_name = 'computers/ram_relation_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.computer.pk,))
