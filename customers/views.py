@@ -36,7 +36,7 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
     """
     model = Customer
     template_name = 'customers/customer_create.html'
-    fields = '__all__'
+    fields = ['name', 'description']
 
     def get_success_url(self):
         return reverse('customer', args=(self.object.pk,))
