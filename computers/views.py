@@ -157,7 +157,12 @@ class ComputerRamRelationCreateView(LoginRequiredMixin, CreateView):
 
 class ComputerRamRelationDeleteView(LoginRequiredMixin, DeleteView):
     model = ComputerRamRelation
-    template_name = 'computers/ram_relation_confirm_delete.html'
+    template_name = 'computers/relation_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.computer.pk,))
+
+
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
