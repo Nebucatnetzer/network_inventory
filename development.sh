@@ -24,6 +24,7 @@ else
     python manage.py loaddata nets
     python manage.py loaddata softwares
     python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
+    python manage.py loaddata network_inventory.yaml
     touch .second_run
 fi
 python manage.py runserver 0.0.0.0:8000
