@@ -73,9 +73,9 @@
             <div class="card-body">
                     <p><b>CPUs:</b></p>
                     {% for cpu in cpu_relations %}
-                        {{ cpu.amount }}x {{ cpu.cpu }}<br>
+                        {{ cpu.amount }}x {{ cpu.cpu }} <a href="{% url 'cpu_relation_delete' cpu.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a><br>
                     {% endfor %}
-                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                    <p><a href="{% url 'cpu_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
                     <p><b>GPUs:</b></p>
                     {% for gpu in gpu_relations %}

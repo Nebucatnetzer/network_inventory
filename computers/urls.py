@@ -26,4 +26,10 @@ urlpatterns = [
     path('delete/ram-relation/<int:pk>/',
          views.ComputerRamRelationDeleteView.as_view(),
          name='ram_relation_delete'),
+    path('create/cpu-relation/<int:pk>/',
+         views.ComputerCpuRelationCreateView.as_view(),
+         name='cpu_relation_create'),
+    path('delete/cpu-relation/<int:pk>/',
+         views.ComputerCpuRelationDeleteView.as_view(),
+         name='cpu_relation_delete'),
  ]

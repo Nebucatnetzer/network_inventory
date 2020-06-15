@@ -3,6 +3,7 @@ import floppyforms.__future__ as forms
 from core import utils
 
 from computers.models import Computer
+from computers.models import ComputerCpuRelation
 from computers.models import ComputerRamRelation
 
 
@@ -41,3 +42,14 @@ class ComputerRamRelationCreateForm(forms.ModelForm):
     class Meta:
         model = ComputerRamRelation
         fields = '__all__'
+
+
+class ComputerCpuRelationCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = ComputerCpuRelation
+        fields = '__all__'
+
+
