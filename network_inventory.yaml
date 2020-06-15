@@ -1,0 +1,4193 @@
+- model: backups.notificationtype
+  pk: 1
+  fields:
+    name: Email
+- model: backups.notification
+  pk: 1
+  fields:
+    name: Support Email
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    recipient: support@pharma.com
+    notification_type: 1
+- model: backups.backupmethod
+  pk: 1
+  fields:
+    name: Sync
+    description: ''
+- model: backups.backupmethod
+  pk: 2
+  fields:
+    name: Forward Incremental
+    description: ''
+- model: backups.backupmethod
+  pk: 3
+  fields:
+    name: Reversed Incremental
+    description: ''
+- model: backups.backupmethod
+  pk: 4
+  fields:
+    name: Sure Backup
+    description: ''
+- model: backups.backupmethod
+  pk: 5
+  fields:
+    name: Copy Job
+    description: ''
+- model: backups.backup
+  pk: 1
+  fields:
+    name: Daily Backup
+    computer: 1
+    method: 1
+    software: 16
+    source_path: c:/User
+    exec_time: '11:21:52'
+    exec_days:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+- model: backups.backup
+  pk: 2
+  fields:
+    name: Weekly Backup
+    computer: 2
+    method: 1
+    software: 16
+    source_path: c:/
+    exec_time: 00:00:00
+    exec_days:
+    - 4
+- model: backups.notificationfrombackup
+  pk: 1
+  fields:
+    backup: 1
+    notification: 1
+- model: backups.notificationfrombackup
+  pk: 2
+  fields:
+    backup: 2
+    notification: 1
+- model: computers.cpuarchitecture
+  pk: 1
+  fields:
+    name: x86_64
+- model: computers.cpuarchitecture
+  pk: 2
+  fields:
+    name: i686
+- model: computers.cpuarchitecture
+  pk: 3
+  fields:
+    name: ARM
+- model: computers.cpuarchitecture
+  pk: 4
+  fields:
+    name: ARM64
+- model: computers.cpumanufacturer
+  pk: 1
+  fields:
+    name: Intel
+    description: ''
+- model: computers.cpumanufacturer
+  pk: 2
+  fields:
+    name: AMD
+    description: ''
+- model: computers.cpu
+  pk: 1
+  fields:
+    name: Generic Intel CPU
+    manufacturer: 1
+    number_of_cores: null
+    frequency: null
+    architecture: null
+    hyper_threading: false
+- model: computers.cpu
+  pk: 2
+  fields:
+    name: Generic AMD CPU
+    manufacturer: 2
+    number_of_cores: null
+    frequency: null
+    architecture: null
+    hyper_threading: false
+- model: computers.disktype
+  pk: 1
+  fields:
+    name: SSD
+- model: computers.disktype
+  pk: 2
+  fields:
+    name: HDD
+- model: computers.disktype
+  pk: 3
+  fields:
+    name: SAS
+- model: computers.disk
+  pk: 1
+  fields:
+    disk_type: 1
+    size_in_gb: 256
+- model: computers.disk
+  pk: 2
+  fields:
+    disk_type: 2
+    size_in_gb: 1000
+- model: computers.gpumanufacturer
+  pk: 1
+  fields:
+    name: Intel
+    description: ''
+- model: computers.gpumanufacturer
+  pk: 2
+  fields:
+    name: AMD
+    description: ''
+- model: computers.gpumanufacturer
+  pk: 3
+  fields:
+    name: Nvidia
+    description: ''
+- model: computers.gpu
+  pk: 1
+  fields:
+    name: GTX 1080
+    manufacturer: 3
+- model: computers.ramtype
+  pk: 1
+  fields:
+    name: unkown
+- model: computers.ramtype
+  pk: 2
+  fields:
+    name: DDR2
+- model: computers.ramtype
+  pk: 3
+  fields:
+    name: DDR3
+- model: computers.ramtype
+  pk: 4
+  fields:
+    name: DDR4
+- model: computers.ram
+  pk: 1
+  fields:
+    ram_type: 1
+    size_in_gb: 1
+    ecc: false
+- model: computers.ram
+  pk: 2
+  fields:
+    ram_type: 1
+    size_in_gb: 2
+    ecc: false
+- model: computers.ram
+  pk: 3
+  fields:
+    ram_type: 1
+    size_in_gb: 4
+    ecc: false
+- model: computers.ram
+  pk: 4
+  fields:
+    ram_type: 1
+    size_in_gb: 8
+    ecc: false
+- model: computers.ram
+  pk: 5
+  fields:
+    ram_type: 1
+    size_in_gb: 16
+    ecc: false
+- model: computers.ram
+  pk: 6
+  fields:
+    ram_type: 1
+    size_in_gb: 24
+    ecc: false
+- model: computers.ram
+  pk: 7
+  fields:
+    ram_type: 1
+    size_in_gb: 32
+    ecc: false
+- model: computers.ram
+  pk: 8
+  fields:
+    ram_type: 1
+    size_in_gb: 64
+    ecc: false
+- model: computers.ram
+  pk: 9
+  fields:
+    ram_type: 1
+    size_in_gb: 96
+    ecc: false
+- model: computers.ram
+  pk: 10
+  fields:
+    ram_type: 1
+    size_in_gb: 128
+    ecc: false
+- model: computers.ram
+  pk: 11
+  fields:
+    ram_type: 1
+    size_in_gb: 256
+    ecc: false
+- model: computers.ram
+  pk: 12
+  fields:
+    ram_type: 1
+    size_in_gb: 512
+    ecc: false
+- model: computers.computer
+  pk: 1
+  fields:
+    os: 12
+    host: null
+    allocated_space: null
+- model: computers.computer
+  pk: 2
+  fields:
+    os: 12
+    host: null
+    allocated_space: null
+- model: computers.computer
+  pk: 3
+  fields:
+    os: 3
+    host: null
+    allocated_space: null
+- model: computers.computercpurelation
+  pk: 1
+  fields:
+    cpu: 1
+    computer: 1
+    amount: 1
+- model: computers.computercpurelation
+  pk: 2
+  fields:
+    cpu: 1
+    computer: 2
+    amount: 1
+- model: computers.computercpurelation
+  pk: 3
+  fields:
+    cpu: 2
+    computer: 3
+    amount: 1
+- model: computers.computerramrelation
+  pk: 9
+  fields:
+    ram: 4
+    computer: 1
+    amount: 2
+- model: computers.computerramrelation
+  pk: 10
+  fields:
+    ram: 5
+    computer: 2
+    amount: 2
+- model: computers.computerramrelation
+  pk: 11
+  fields:
+    ram: 6
+    computer: 3
+    amount: 1
+- model: computers.computerdiskrelation
+  pk: 1
+  fields:
+    disk: 1
+    computer: 1
+    amount: 1
+- model: computers.computerdiskrelation
+  pk: 2
+  fields:
+    disk: 1
+    computer: 2
+    amount: 3
+- model: computers.computerdiskrelation
+  pk: 3
+  fields:
+    disk: 2
+    computer: 3
+    amount: 1
+- model: computers.computersoftwarerelation
+  pk: 1
+  fields:
+    software: 7
+    computer: 1
+    architecture: 2
+- model: computers.computersoftwarerelation
+  pk: 2
+  fields:
+    software: 7
+    computer: 2
+    architecture: 1
+- model: computers.computersoftwarerelation
+  pk: 3
+  fields:
+    software: 26
+    computer: 2
+    architecture: 2
+- model: computers.computersoftwarerelation
+  pk: 4
+  fields:
+    software: 12
+    computer: 3
+    architecture: 1
+- model: computers.computergpurelation
+  pk: 1
+  fields:
+    gpu: 1
+    computer: 1
+    amount: 1
+- model: computers.computergpurelation
+  pk: 2
+  fields:
+    gpu: 1
+    computer: 2
+    amount: 1
+- model: computers.computergpurelation
+  pk: 3
+  fields:
+    gpu: 1
+    computer: 3
+    amount: 1
+- model: computers.raidtype
+  pk: 1
+  fields:
+    name: RAID 0
+- model: computers.raidtype
+  pk: 2
+  fields:
+    name: RAID 1
+- model: computers.raidtype
+  pk: 4
+  fields:
+    name: RAID 6
+- model: computers.raidtype
+  pk: 5
+  fields:
+    name: RAID 10
+- model: computers.raidtype
+  pk: 6
+  fields:
+    name: RAID 50
+- model: core.weekday
+  pk: 1
+  fields:
+    name: Sunday
+    value: 0
+- model: core.weekday
+  pk: 2
+  fields:
+    name: Monday
+    value: 1
+- model: core.weekday
+  pk: 3
+  fields:
+    name: Thuesday
+    value: 2
+- model: core.weekday
+  pk: 4
+  fields:
+    name: Wednesday
+    value: 3
+- model: core.weekday
+  pk: 5
+  fields:
+    name: Thursday
+    value: 4
+- model: core.weekday
+  pk: 6
+  fields:
+    name: Friday
+    value: 5
+- model: core.weekday
+  pk: 7
+  fields:
+    name: Saturday
+    value: 6
+- model: core.dayofmonth
+  pk: 1
+  fields:
+    name: 1
+- model: core.dayofmonth
+  pk: 2
+  fields:
+    name: 2
+- model: core.dayofmonth
+  pk: 3
+  fields:
+    name: 3
+- model: core.dayofmonth
+  pk: 4
+  fields:
+    name: 4
+- model: core.dayofmonth
+  pk: 5
+  fields:
+    name: 5
+- model: core.dayofmonth
+  pk: 6
+  fields:
+    name: 6
+- model: core.dayofmonth
+  pk: 7
+  fields:
+    name: 7
+- model: core.dayofmonth
+  pk: 8
+  fields:
+    name: 8
+- model: core.dayofmonth
+  pk: 9
+  fields:
+    name: 9
+- model: core.dayofmonth
+  pk: 10
+  fields:
+    name: 10
+- model: core.dayofmonth
+  pk: 11
+  fields:
+    name: 11
+- model: core.dayofmonth
+  pk: 12
+  fields:
+    name: 12
+- model: core.dayofmonth
+  pk: 13
+  fields:
+    name: 13
+- model: core.dayofmonth
+  pk: 14
+  fields:
+    name: 14
+- model: core.dayofmonth
+  pk: 15
+  fields:
+    name: 15
+- model: core.dayofmonth
+  pk: 16
+  fields:
+    name: 16
+- model: core.dayofmonth
+  pk: 17
+  fields:
+    name: 17
+- model: core.dayofmonth
+  pk: 18
+  fields:
+    name: 18
+- model: core.dayofmonth
+  pk: 19
+  fields:
+    name: 19
+- model: core.dayofmonth
+  pk: 20
+  fields:
+    name: 20
+- model: core.dayofmonth
+  pk: 21
+  fields:
+    name: 21
+- model: core.dayofmonth
+  pk: 22
+  fields:
+    name: 22
+- model: core.dayofmonth
+  pk: 23
+  fields:
+    name: 23
+- model: core.dayofmonth
+  pk: 24
+  fields:
+    name: 24
+- model: core.dayofmonth
+  pk: 25
+  fields:
+    name: 25
+- model: core.dayofmonth
+  pk: 26
+  fields:
+    name: 26
+- model: core.dayofmonth
+  pk: 27
+  fields:
+    name: 27
+- model: core.dayofmonth
+  pk: 28
+  fields:
+    name: 28
+- model: core.dayofmonth
+  pk: 29
+  fields:
+    name: 29
+- model: core.dayofmonth
+  pk: 30
+  fields:
+    name: 30
+- model: core.dayofmonth
+  pk: 31
+  fields:
+    name: 31
+- model: core.month
+  pk: 1
+  fields:
+    name: January
+    value: 1
+- model: core.month
+  pk: 2
+  fields:
+    name: February
+    value: 2
+- model: core.month
+  pk: 3
+  fields:
+    name: March
+    value: 3
+- model: core.month
+  pk: 4
+  fields:
+    name: April
+    value: 4
+- model: core.month
+  pk: 5
+  fields:
+    name: May
+    value: 5
+- model: core.month
+  pk: 6
+  fields:
+    name: June
+    value: 6
+- model: core.month
+  pk: 7
+  fields:
+    name: July
+    value: 7
+- model: core.month
+  pk: 8
+  fields:
+    name: August
+    value: 8
+- model: core.month
+  pk: 9
+  fields:
+    name: September
+    value: 9
+- model: core.month
+  pk: 10
+  fields:
+    name: October
+    value: 10
+- model: core.month
+  pk: 11
+  fields:
+    name: November
+    value: 11
+- model: core.month
+  pk: 12
+  fields:
+    name: December
+    value: 12
+- model: core.hoursinday
+  pk: 1
+  fields:
+    name: 0
+- model: core.hoursinday
+  pk: 2
+  fields:
+    name: 1
+- model: core.hoursinday
+  pk: 3
+  fields:
+    name: 2
+- model: core.hoursinday
+  pk: 4
+  fields:
+    name: 3
+- model: core.hoursinday
+  pk: 5
+  fields:
+    name: 4
+- model: core.hoursinday
+  pk: 6
+  fields:
+    name: 5
+- model: core.hoursinday
+  pk: 7
+  fields:
+    name: 6
+- model: core.hoursinday
+  pk: 8
+  fields:
+    name: 7
+- model: core.hoursinday
+  pk: 9
+  fields:
+    name: 8
+- model: core.hoursinday
+  pk: 10
+  fields:
+    name: 9
+- model: core.hoursinday
+  pk: 11
+  fields:
+    name: 10
+- model: core.hoursinday
+  pk: 12
+  fields:
+    name: 11
+- model: core.hoursinday
+  pk: 13
+  fields:
+    name: 12
+- model: core.hoursinday
+  pk: 14
+  fields:
+    name: 13
+- model: core.hoursinday
+  pk: 15
+  fields:
+    name: 14
+- model: core.hoursinday
+  pk: 16
+  fields:
+    name: 15
+- model: core.hoursinday
+  pk: 17
+  fields:
+    name: 16
+- model: core.hoursinday
+  pk: 18
+  fields:
+    name: 17
+- model: core.hoursinday
+  pk: 19
+  fields:
+    name: 18
+- model: core.hoursinday
+  pk: 20
+  fields:
+    name: 19
+- model: core.hoursinday
+  pk: 21
+  fields:
+    name: 20
+- model: core.hoursinday
+  pk: 22
+  fields:
+    name: 21
+- model: core.hoursinday
+  pk: 23
+  fields:
+    name: 22
+- model: core.hoursinday
+  pk: 24
+  fields:
+    name: 23
+- model: core.minutesinhour
+  pk: 1
+  fields:
+    name: 0
+- model: core.minutesinhour
+  pk: 2
+  fields:
+    name: 1
+- model: core.minutesinhour
+  pk: 3
+  fields:
+    name: 2
+- model: core.minutesinhour
+  pk: 4
+  fields:
+    name: 3
+- model: core.minutesinhour
+  pk: 5
+  fields:
+    name: 4
+- model: core.minutesinhour
+  pk: 6
+  fields:
+    name: 5
+- model: core.minutesinhour
+  pk: 7
+  fields:
+    name: 6
+- model: core.minutesinhour
+  pk: 8
+  fields:
+    name: 7
+- model: core.minutesinhour
+  pk: 9
+  fields:
+    name: 8
+- model: core.minutesinhour
+  pk: 10
+  fields:
+    name: 9
+- model: core.minutesinhour
+  pk: 11
+  fields:
+    name: 10
+- model: core.minutesinhour
+  pk: 12
+  fields:
+    name: 11
+- model: core.minutesinhour
+  pk: 13
+  fields:
+    name: 12
+- model: core.minutesinhour
+  pk: 14
+  fields:
+    name: 13
+- model: core.minutesinhour
+  pk: 15
+  fields:
+    name: 14
+- model: core.minutesinhour
+  pk: 16
+  fields:
+    name: 15
+- model: core.minutesinhour
+  pk: 17
+  fields:
+    name: 16
+- model: core.minutesinhour
+  pk: 18
+  fields:
+    name: 17
+- model: core.minutesinhour
+  pk: 19
+  fields:
+    name: 18
+- model: core.minutesinhour
+  pk: 20
+  fields:
+    name: 19
+- model: core.minutesinhour
+  pk: 21
+  fields:
+    name: 20
+- model: core.minutesinhour
+  pk: 22
+  fields:
+    name: 21
+- model: core.minutesinhour
+  pk: 23
+  fields:
+    name: 22
+- model: core.minutesinhour
+  pk: 24
+  fields:
+    name: 23
+- model: core.minutesinhour
+  pk: 25
+  fields:
+    name: 24
+- model: core.minutesinhour
+  pk: 26
+  fields:
+    name: 25
+- model: core.minutesinhour
+  pk: 27
+  fields:
+    name: 26
+- model: core.minutesinhour
+  pk: 28
+  fields:
+    name: 27
+- model: core.minutesinhour
+  pk: 29
+  fields:
+    name: 28
+- model: core.minutesinhour
+  pk: 30
+  fields:
+    name: 29
+- model: core.minutesinhour
+  pk: 31
+  fields:
+    name: 30
+- model: core.minutesinhour
+  pk: 32
+  fields:
+    name: 31
+- model: core.minutesinhour
+  pk: 33
+  fields:
+    name: 32
+- model: core.minutesinhour
+  pk: 34
+  fields:
+    name: 33
+- model: core.minutesinhour
+  pk: 35
+  fields:
+    name: 34
+- model: core.minutesinhour
+  pk: 36
+  fields:
+    name: 35
+- model: core.minutesinhour
+  pk: 37
+  fields:
+    name: 36
+- model: core.minutesinhour
+  pk: 38
+  fields:
+    name: 37
+- model: core.minutesinhour
+  pk: 39
+  fields:
+    name: 38
+- model: core.minutesinhour
+  pk: 40
+  fields:
+    name: 39
+- model: core.minutesinhour
+  pk: 41
+  fields:
+    name: 40
+- model: core.minutesinhour
+  pk: 42
+  fields:
+    name: 41
+- model: core.minutesinhour
+  pk: 43
+  fields:
+    name: 42
+- model: core.minutesinhour
+  pk: 44
+  fields:
+    name: 43
+- model: core.minutesinhour
+  pk: 45
+  fields:
+    name: 44
+- model: core.minutesinhour
+  pk: 46
+  fields:
+    name: 45
+- model: core.minutesinhour
+  pk: 47
+  fields:
+    name: 46
+- model: core.minutesinhour
+  pk: 48
+  fields:
+    name: 47
+- model: core.minutesinhour
+  pk: 49
+  fields:
+    name: 48
+- model: core.minutesinhour
+  pk: 50
+  fields:
+    name: 49
+- model: core.minutesinhour
+  pk: 51
+  fields:
+    name: 50
+- model: core.minutesinhour
+  pk: 52
+  fields:
+    name: 51
+- model: core.minutesinhour
+  pk: 53
+  fields:
+    name: 52
+- model: core.minutesinhour
+  pk: 54
+  fields:
+    name: 53
+- model: core.minutesinhour
+  pk: 55
+  fields:
+    name: 54
+- model: core.minutesinhour
+  pk: 56
+  fields:
+    name: 55
+- model: core.minutesinhour
+  pk: 57
+  fields:
+    name: 56
+- model: core.minutesinhour
+  pk: 58
+  fields:
+    name: 57
+- model: core.minutesinhour
+  pk: 59
+  fields:
+    name: 58
+- model: core.minutesinhour
+  pk: 60
+  fields:
+    name: 59
+- model: customers.customer
+  pk: 1
+  fields:
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    name: Pharma Company
+- model: customers.customer
+  pk: 2
+  fields:
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    name: Water Company
+- model: customers.location
+  pk: 1
+  fields:
+    name: Pharma Office
+    customer: 1
+- model: customers.location
+  pk: 2
+  fields:
+    name: Water Office
+    customer: 2
+- model: devices.devicemanufacturer
+  pk: 1
+  fields:
+    name: Dell
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 2
+  fields:
+    name: HP
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 3
+  fields:
+    name: Axxiv
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 4
+  fields:
+    name: Acer
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 5
+  fields:
+    name: Asus
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 6
+  fields:
+    name: Lenovo
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicemanufacturer
+  pk: 7
+  fields:
+    name: Samsung
+    description: ''
+    phone_number: null
+    email_address: null
+    website: null
+- model: devices.devicecategory
+  pk: 1
+  fields:
+    name: Office PC
+- model: devices.devicecategory
+  pk: 2
+  fields:
+    name: CAD PC
+- model: devices.hardwaremodel
+  pk: 1
+  fields:
+    name: Latidude 5530
+    manufacturer: 1
+- model: devices.hardwaremodel
+  pk: 2
+  fields:
+    name: Optiplex 7070
+    manufacturer: 1
+- model: devices.hardwaremodel
+  pk: 3
+  fields:
+    name: Cumpact2700
+    manufacturer: 3
+- model: devices.device
+  pk: 1
+  fields:
+    name: pharma-pc1
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    serialnumber: ADSF124
+    category: 1
+    owner: null
+    customer: 1
+    manufacturer: 1
+    model: 1
+    location: 1
+    user: 1
+    installation_date: 2020-06-15
+- model: devices.device
+  pk: 2
+  fields:
+    name: pharma-pc2
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    serialnumber: ADSF125
+    category: 2
+    owner: null
+    customer: 1
+    manufacturer: 1
+    model: 2
+    location: 1
+    user: 2
+    installation_date: 2020-06-01
+- model: devices.device
+  pk: 3
+  fields:
+    name: water-pc1
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    serialnumber: asfasf
+    category: 1
+    owner: null
+    customer: 2
+    manufacturer: 3
+    model: 3
+    location: 2
+    user: 3
+    installation_date: 2020-06-15
+- model: devices.deviceinnet
+  pk: 1
+  fields:
+    device: 1
+    net: 1
+    ip: 10.60.0.2
+    nic: eth0
+    mac_address: A1:B2:C3:D4:E5:F6
+    ip_status: 1
+- model: devices.deviceinnet
+  pk: 2
+  fields:
+    device: 2
+    net: 1
+    ip: 10.60.0.3
+    nic: eth0
+    mac_address: A1:B2:C3:D4:E5:F6
+    ip_status: 1
+- model: devices.deviceinnet
+  pk: 3
+  fields:
+    device: 3
+    net: 2
+    ip: 192.168.1.12
+    nic: eth0
+    mac_address: A1:B2:C3:D4:E5:F6
+    ip_status: 2
+- model: devices.warrantytype
+  pk: 1
+  fields:
+    name: Dell Pro Support
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+- model: devices.warrantytype
+  pk: 2
+  fields:
+    name: Dell NDB Support
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+- model: devices.warranty
+  pk: 1
+  fields:
+    customer: 2
+    device: 3
+    valid_from: 2020-06-01
+    valid_until: 2021-06-01
+    warranty_type: 1
+- model: devices.warranty
+  pk: 2
+  fields:
+    customer: 1
+    device: 1
+    valid_from: 2020-05-01
+    valid_until: 2020-05-29
+    warranty_type: 2
+- model: devices.warranty
+  pk: 3
+  fields:
+    customer: 1
+    device: 2
+    valid_from: 2020-06-01
+    valid_until: 2023-07-13
+    warranty_type: 2
+- model: contenttypes.contenttype
+  pk: 1
+  fields:
+    app_label: backups
+    model: backup
+- model: contenttypes.contenttype
+  pk: 2
+  fields:
+    app_label: backups
+    model: backupmethod
+- model: contenttypes.contenttype
+  pk: 3
+  fields:
+    app_label: backups
+    model: notification
+- model: contenttypes.contenttype
+  pk: 4
+  fields:
+    app_label: backups
+    model: notificationtype
+- model: contenttypes.contenttype
+  pk: 5
+  fields:
+    app_label: backups
+    model: targetdevice
+- model: contenttypes.contenttype
+  pk: 6
+  fields:
+    app_label: backups
+    model: notificationfrombackup
+- model: contenttypes.contenttype
+  pk: 7
+  fields:
+    app_label: computers
+    model: computer
+- model: contenttypes.contenttype
+  pk: 8
+  fields:
+    app_label: computers
+    model: cpuarchitecture
+- model: contenttypes.contenttype
+  pk: 9
+  fields:
+    app_label: computers
+    model: cpumanufacturer
+- model: contenttypes.contenttype
+  pk: 10
+  fields:
+    app_label: computers
+    model: disk
+- model: contenttypes.contenttype
+  pk: 11
+  fields:
+    app_label: computers
+    model: disktype
+- model: contenttypes.contenttype
+  pk: 12
+  fields:
+    app_label: computers
+    model: gpumanufacturer
+- model: contenttypes.contenttype
+  pk: 13
+  fields:
+    app_label: computers
+    model: raidtype
+- model: contenttypes.contenttype
+  pk: 14
+  fields:
+    app_label: computers
+    model: ramtype
+- model: contenttypes.contenttype
+  pk: 15
+  fields:
+    app_label: computers
+    model: ram
+- model: contenttypes.contenttype
+  pk: 16
+  fields:
+    app_label: computers
+    model: raid
+- model: contenttypes.contenttype
+  pk: 17
+  fields:
+    app_label: computers
+    model: gpu
+- model: contenttypes.contenttype
+  pk: 18
+  fields:
+    app_label: computers
+    model: disksinraid
+- model: contenttypes.contenttype
+  pk: 19
+  fields:
+    app_label: computers
+    model: cpu
+- model: contenttypes.contenttype
+  pk: 20
+  fields:
+    app_label: computers
+    model: computersoftwarerelation
+- model: contenttypes.contenttype
+  pk: 21
+  fields:
+    app_label: computers
+    model: computerramrelation
+- model: contenttypes.contenttype
+  pk: 22
+  fields:
+    app_label: computers
+    model: computergpurelation
+- model: contenttypes.contenttype
+  pk: 23
+  fields:
+    app_label: computers
+    model: computerdiskrelation
+- model: contenttypes.contenttype
+  pk: 24
+  fields:
+    app_label: computers
+    model: computercpurelation
+- model: contenttypes.contenttype
+  pk: 25
+  fields:
+    app_label: core
+    model: dayofmonth
+- model: contenttypes.contenttype
+  pk: 26
+  fields:
+    app_label: core
+    model: hoursinday
+- model: contenttypes.contenttype
+  pk: 27
+  fields:
+    app_label: core
+    model: minutesinhour
+- model: contenttypes.contenttype
+  pk: 28
+  fields:
+    app_label: core
+    model: month
+- model: contenttypes.contenttype
+  pk: 29
+  fields:
+    app_label: core
+    model: weekday
+- model: contenttypes.contenttype
+  pk: 30
+  fields:
+    app_label: customers
+    model: customer
+- model: contenttypes.contenttype
+  pk: 31
+  fields:
+    app_label: customers
+    model: devicemanufacturer
+- model: contenttypes.contenttype
+  pk: 32
+  fields:
+    app_label: customers
+    model: owner
+- model: contenttypes.contenttype
+  pk: 33
+  fields:
+    app_label: customers
+    model: location
+- model: contenttypes.contenttype
+  pk: 34
+  fields:
+    app_label: devices
+    model: device
+- model: contenttypes.contenttype
+  pk: 35
+  fields:
+    app_label: devices
+    model: devicecategory
+- model: contenttypes.contenttype
+  pk: 36
+  fields:
+    app_label: devices
+    model: devicemanufacturer
+- model: contenttypes.contenttype
+  pk: 37
+  fields:
+    app_label: devices
+    model: warrantytype
+- model: contenttypes.contenttype
+  pk: 38
+  fields:
+    app_label: devices
+    model: warranty
+- model: contenttypes.contenttype
+  pk: 39
+  fields:
+    app_label: devices
+    model: hardwaremodel
+- model: contenttypes.contenttype
+  pk: 40
+  fields:
+    app_label: devices
+    model: deviceinnet
+- model: contenttypes.contenttype
+  pk: 41
+  fields:
+    app_label: admin
+    model: logentry
+- model: contenttypes.contenttype
+  pk: 42
+  fields:
+    app_label: auth
+    model: permission
+- model: contenttypes.contenttype
+  pk: 43
+  fields:
+    app_label: auth
+    model: group
+- model: contenttypes.contenttype
+  pk: 44
+  fields:
+    app_label: auth
+    model: user
+- model: contenttypes.contenttype
+  pk: 45
+  fields:
+    app_label: contenttypes
+    model: contenttype
+- model: contenttypes.contenttype
+  pk: 46
+  fields:
+    app_label: sessions
+    model: session
+- model: contenttypes.contenttype
+  pk: 47
+  fields:
+    app_label: guardian
+    model: groupobjectpermission
+- model: contenttypes.contenttype
+  pk: 48
+  fields:
+    app_label: guardian
+    model: userobjectpermission
+- model: contenttypes.contenttype
+  pk: 49
+  fields:
+    app_label: licenses
+    model: computerlicense
+- model: contenttypes.contenttype
+  pk: 50
+  fields:
+    app_label: licenses
+    model: licensewithuser
+- model: contenttypes.contenttype
+  pk: 51
+  fields:
+    app_label: licenses
+    model: userlicense
+- model: contenttypes.contenttype
+  pk: 52
+  fields:
+    app_label: licenses
+    model: licensewithcomputer
+- model: contenttypes.contenttype
+  pk: 53
+  fields:
+    app_label: nets
+    model: ipstatus
+- model: contenttypes.contenttype
+  pk: 54
+  fields:
+    app_label: nets
+    model: net
+- model: contenttypes.contenttype
+  pk: 55
+  fields:
+    app_label: softwares
+    model: softwarearchitecture
+- model: contenttypes.contenttype
+  pk: 56
+  fields:
+    app_label: softwares
+    model: softwarecategory
+- model: contenttypes.contenttype
+  pk: 57
+  fields:
+    app_label: softwares
+    model: software
+- model: contenttypes.contenttype
+  pk: 58
+  fields:
+    app_label: softwares
+    model: operatingsystem
+- model: contenttypes.contenttype
+  pk: 59
+  fields:
+    app_label: users
+    model: adgroup
+- model: contenttypes.contenttype
+  pk: 60
+  fields:
+    app_label: users
+    model: mailgroup
+- model: contenttypes.contenttype
+  pk: 61
+  fields:
+    app_label: users
+    model: user
+- model: contenttypes.contenttype
+  pk: 62
+  fields:
+    app_label: users
+    model: userinmailgroup
+- model: contenttypes.contenttype
+  pk: 63
+  fields:
+    app_label: users
+    model: userinadgroup
+- model: contenttypes.contenttype
+  pk: 64
+  fields:
+    app_label: users
+    model: mailalias
+- model: sessions.session
+  pk: 95jvbc5485htoo2lqvrr4vafl5appnoj
+  fields:
+    session_data: OTgwZjgxYTI4OWIzNjFiNjVkYTJhNjZlZDJhZjcyMjJiNDBkMGQ3Njp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOGFjNmQxNjRmYzJmODk0ZGE4OWRhYTJlYzE3NjdjMTcyNjViODE4In0=
+    expire_date: 2020-06-23 19:42:07.171455+00:00
+- model: licenses.userlicense
+  pk: 1
+  fields:
+    customer: 1
+    key: 1234-5678-9012-3456
+    software: 7
+    max_allowed_users: 3
+- model: licenses.userlicense
+  pk: 2
+  fields:
+    customer: 1
+    key: sadf-sd-f-sdf--sdfs-df
+    software: 26
+    max_allowed_users: 5
+- model: licenses.userlicense
+  pk: 3
+  fields:
+    customer: 2
+    key: 1234-5678-9012-3456
+    software: 15
+    max_allowed_users: 1
+- model: licenses.computerlicense
+  pk: 1
+  fields:
+    customer: 1
+    key: 1234-5678-9012-3456
+    software: 7
+    max_allowed_computers: 5
+- model: licenses.computerlicense
+  pk: 2
+  fields:
+    customer: 2
+    key: 1234-5678-9012-3456
+    software: 12
+    max_allowed_computers: 1
+- model: licenses.licensewithuser
+  pk: 1
+  fields:
+    user: 1
+    license: 1
+- model: licenses.licensewithuser
+  pk: 2
+  fields:
+    user: 2
+    license: 2
+- model: licenses.licensewithuser
+  pk: 3
+  fields:
+    user: 2
+    license: 1
+- model: licenses.licensewithuser
+  pk: 4
+  fields:
+    user: 3
+    license: 3
+- model: licenses.licensewithcomputer
+  pk: 1
+  fields:
+    computer: 1
+    license: 1
+- model: licenses.licensewithcomputer
+  pk: 2
+  fields:
+    computer: 2
+    license: 1
+- model: licenses.licensewithcomputer
+  pk: 3
+  fields:
+    computer: 3
+    license: 2
+- model: nets.ipstatus
+  pk: 1
+  fields:
+    name: Fixed in Device
+- model: nets.ipstatus
+  pk: 2
+  fields:
+    name: Reserved
+- model: nets.ipstatus
+  pk: 3
+  fields:
+    name: Fixed in Device + Reserved
+- model: nets.ipstatus
+  pk: 4
+  fields:
+    name: Dynamic
+- model: nets.net
+  pk: 1
+  fields:
+    name: Pharma Net
+    ip_range: 10.60.0.0/16
+    dhcp_range: 10.60.255.1-254
+    customer: 1
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+- model: nets.net
+  pk: 2
+  fields:
+    name: WaterNET
+    ip_range: 192.168.1.0/24
+    dhcp_range: 192.168.1.1-254
+    customer: 2
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+- model: softwares.softwarearchitecture
+  pk: 1
+  fields:
+    name: 32 Bit
+- model: softwares.softwarearchitecture
+  pk: 2
+  fields:
+    name: 64 Bit
+- model: softwares.softwarecategory
+  pk: 1
+  fields:
+    name: Office
+- model: softwares.softwarecategory
+  pk: 2
+  fields:
+    name: Backup
+- model: softwares.softwarecategory
+  pk: 3
+  fields:
+    name: Anti-Virus
+- model: softwares.softwarecategory
+  pk: 4
+  fields:
+    name: CAD
+- model: softwares.software
+  pk: 1
+  fields:
+    name: Office 2010 Student
+    category: 1
+- model: softwares.software
+  pk: 2
+  fields:
+    name: Office 2010 Pro
+    category: 1
+- model: softwares.software
+  pk: 3
+  fields:
+    name: Office 2010 Enterprise
+    category: 1
+- model: softwares.software
+  pk: 4
+  fields:
+    name: Office 2013 Student
+    category: 1
+- model: softwares.software
+  pk: 5
+  fields:
+    name: Office 2013 Pro
+    category: 1
+- model: softwares.software
+  pk: 6
+  fields:
+    name: Office 2013 Enterprise
+    category: 1
+- model: softwares.software
+  pk: 7
+  fields:
+    name: Office 2016 Home & Business
+    category: 1
+- model: softwares.software
+  pk: 8
+  fields:
+    name: Office 2016 Pro
+    category: 1
+- model: softwares.software
+  pk: 9
+  fields:
+    name: Office 2016 Enterprise
+    category: 1
+- model: softwares.software
+  pk: 10
+  fields:
+    name: Office 365
+    category: 1
+- model: softwares.software
+  pk: 11
+  fields:
+    name: Office 2013 Home & Business
+    category: 1
+- model: softwares.software
+  pk: 12
+  fields:
+    name: Office 2010 Home & Business
+    category: 1
+- model: softwares.software
+  pk: 13
+  fields:
+    name: 2007 Microsoft Office System
+    category: 1
+- model: softwares.software
+  pk: 14
+  fields:
+    name: Office 2007 Standard
+    category: 1
+- model: softwares.software
+  pk: 15
+  fields:
+    name: Office 2019 Home & Business
+    category: 1
+- model: softwares.software
+  pk: 16
+  fields:
+    name: Veeam
+    category: 2
+- model: softwares.software
+  pk: 17
+  fields:
+    name: Backup Exec
+    category: 2
+- model: softwares.software
+  pk: 18
+  fields:
+    name: Acronis
+    category: 2
+- model: softwares.software
+  pk: 19
+  fields:
+    name: Hyper Backup
+    category: 2
+- model: softwares.software
+  pk: 20
+  fields:
+    name: Bit Defender
+    category: 3
+- model: softwares.software
+  pk: 21
+  fields:
+    name: Panda Cloud Pro
+    category: 3
+- model: softwares.software
+  pk: 22
+  fields:
+    name: Panda Cloud Pro Plus
+    category: 3
+- model: softwares.software
+  pk: 23
+  fields:
+    name: Windows Defender
+    category: 3
+- model: softwares.software
+  pk: 24
+  fields:
+    name: Microsoft Security Essentials
+    category: 3
+- model: softwares.software
+  pk: 25
+  fields:
+    name: Panda Antivirus Pro
+    category: 3
+- model: softwares.software
+  pk: 26
+  fields:
+    name: AutoCAD
+    category: 4
+- model: softwares.software
+  pk: 27
+  fields:
+    name: AutoCAD
+    category: 4
+- model: softwares.operatingsystem
+  pk: 1
+  fields:
+    name: Windows XP
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 2
+  fields:
+    name: Windows 7 Home
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 3
+  fields:
+    name: Windows 7 Pro
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 4
+  fields:
+    name: Windows 7 Enterprise
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 5
+  fields:
+    name: Windows 8 Home
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 6
+  fields:
+    name: Windows 8 Pro
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 7
+  fields:
+    name: Windows 8 Enterprise
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 8
+  fields:
+    name: Windows 8.1 Home
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 9
+  fields:
+    name: Windows 8.1 Pro
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 10
+  fields:
+    name: Windows 8.1 Enterprise
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 11
+  fields:
+    name: Windows 10 Home
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 12
+  fields:
+    name: Windows 10 Pro
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 13
+  fields:
+    name: FreeBSD
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 14
+  fields:
+    name: VMware ESXi 6.5.0
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 15
+  fields:
+    name: Windows 10 Enterprise
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 16
+  fields:
+    name: Windows Server 2003
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 17
+  fields:
+    name: Windows Server 2008
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 18
+  fields:
+    name: Windows Server 2012
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 19
+  fields:
+    name: Windows Server 2012 R2
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 20
+  fields:
+    name: Windows Server 2016
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 21
+  fields:
+    name: Ubuntu 14.04
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 22
+  fields:
+    name: Ubuntu 16.04
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 23
+  fields:
+    name: VMware ESXi 6.0.0
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 24
+  fields:
+    name: pfsense 2.4.x
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 25
+  fields:
+    name: VMware vCenter Server Appliance 6.0.0
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 26
+  fields:
+    name: iOS 4.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 27
+  fields:
+    name: iOS 5.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 28
+  fields:
+    name: iOS 6.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 29
+  fields:
+    name: iOS 7.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 30
+  fields:
+    name: iOS 8.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 31
+  fields:
+    name: iOS 9.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 32
+  fields:
+    name: iOS 10.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 33
+  fields:
+    name: iOS 11.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 34
+  fields:
+    name: tvOS 4.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 35
+  fields:
+    name: tvOS 5.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 36
+  fields:
+    name: tvOS 6.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 37
+  fields:
+    name: tvOS 7.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 38
+  fields:
+    name: tvOS 8.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 39
+  fields:
+    name: tvOS 9.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 40
+  fields:
+    name: tvOS 10.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 41
+  fields:
+    name: tvOS 11.X
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 42
+  fields:
+    name: VMware ESXi 5.5.0
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 43
+  fields:
+    name: VMware vCenter Server Appliance 6.5.0
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 44
+  fields:
+    name: Windows Storage Server 2016 Standard
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 45
+  fields:
+    name: Windows 7 Home Premium
+    architecture: null
+- model: softwares.operatingsystem
+  pk: 46
+  fields:
+    name: Ubuntu 18.04
+    architecture: null
+- model: users.adgroup
+  pk: 1
+  fields:
+    name: HR
+    customer: 1
+- model: users.adgroup
+  pk: 2
+  fields:
+    name: Engineering
+    customer: 1
+- model: users.adgroup
+  pk: 3
+  fields:
+    name: HR
+    customer: 2
+- model: users.mailgroup
+  pk: 1
+  fields:
+    name: HR
+    customer: 1
+    mail_address: hr@pharma.com
+- model: users.mailgroup
+  pk: 2
+  fields:
+    name: Engineering
+    customer: 1
+    mail_address: engineering@pharma.com
+- model: users.mailgroup
+  pk: 3
+  fields:
+    name: HR
+    customer: 2
+    mail_address: hr@water.com
+- model: users.user
+  pk: 1
+  fields:
+    name: Muster
+    first_name: Max
+    ad_login: max.muster
+    ad_pw: ASDF1234
+    primary_mail: max.muster@pharma.com
+    mail_pw: ASDF1234
+    enabled: true
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    customer: 1
+- model: users.user
+  pk: 2
+  fields:
+    name: Meier
+    first_name: Anna
+    ad_login: anna.meier@pharma.com
+    ad_pw: Test1234!
+    primary_mail: anna.meier@pharma.com
+    mail_pw: Test1234!
+    enabled: true
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    customer: 1
+- model: users.user
+  pk: 3
+  fields:
+    name: "Pfl\xFCmli"
+    first_name: Karin
+    ad_login: karin.pfluemli
+    ad_pw: Test1234!
+    primary_mail: karin.pfluemli@water.com
+    mail_pw: Test1234!
+    enabled: true
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    customer: 2
+- model: users.userinadgroup
+  pk: 1
+  fields:
+    user: 1
+    group: 1
+- model: users.userinadgroup
+  pk: 2
+  fields:
+    user: 2
+    group: 2
+- model: users.userinadgroup
+  pk: 3
+  fields:
+    user: 3
+    group: 3
+- model: users.userinmailgroup
+  pk: 1
+  fields:
+    user: 1
+    group: 1
+- model: users.userinmailgroup
+  pk: 2
+  fields:
+    user: 2
+    group: 2
+- model: users.userinmailgroup
+  pk: 3
+  fields:
+    user: 3
+    group: 3
+- model: users.mailalias
+  pk: 1
+  fields:
+    email_address: m.muster@pharma.com
+    user: 1
+- model: users.mailalias
+  pk: 2
+  fields:
+    email_address: a.meier@pharma.com
+    user: 2
+- model: users.mailalias
+  pk: 3
+  fields:
+    email_address: pfuemli@water.com
+    user: 3
+- model: auth.permission
+  pk: 1
+  fields:
+    name: Can add backup
+    content_type: 1
+    codename: add_backup
+- model: auth.permission
+  pk: 2
+  fields:
+    name: Can change backup
+    content_type: 1
+    codename: change_backup
+- model: auth.permission
+  pk: 3
+  fields:
+    name: Can delete backup
+    content_type: 1
+    codename: delete_backup
+- model: auth.permission
+  pk: 4
+  fields:
+    name: Can view backup
+    content_type: 1
+    codename: view_backup
+- model: auth.permission
+  pk: 5
+  fields:
+    name: Can add backup method
+    content_type: 2
+    codename: add_backupmethod
+- model: auth.permission
+  pk: 6
+  fields:
+    name: Can change backup method
+    content_type: 2
+    codename: change_backupmethod
+- model: auth.permission
+  pk: 7
+  fields:
+    name: Can delete backup method
+    content_type: 2
+    codename: delete_backupmethod
+- model: auth.permission
+  pk: 8
+  fields:
+    name: Can view backup method
+    content_type: 2
+    codename: view_backupmethod
+- model: auth.permission
+  pk: 9
+  fields:
+    name: Can add notification
+    content_type: 3
+    codename: add_notification
+- model: auth.permission
+  pk: 10
+  fields:
+    name: Can change notification
+    content_type: 3
+    codename: change_notification
+- model: auth.permission
+  pk: 11
+  fields:
+    name: Can delete notification
+    content_type: 3
+    codename: delete_notification
+- model: auth.permission
+  pk: 12
+  fields:
+    name: Can view notification
+    content_type: 3
+    codename: view_notification
+- model: auth.permission
+  pk: 13
+  fields:
+    name: Can add notification type
+    content_type: 4
+    codename: add_notificationtype
+- model: auth.permission
+  pk: 14
+  fields:
+    name: Can change notification type
+    content_type: 4
+    codename: change_notificationtype
+- model: auth.permission
+  pk: 15
+  fields:
+    name: Can delete notification type
+    content_type: 4
+    codename: delete_notificationtype
+- model: auth.permission
+  pk: 16
+  fields:
+    name: Can view notification type
+    content_type: 4
+    codename: view_notificationtype
+- model: auth.permission
+  pk: 17
+  fields:
+    name: Can add target device
+    content_type: 5
+    codename: add_targetdevice
+- model: auth.permission
+  pk: 18
+  fields:
+    name: Can change target device
+    content_type: 5
+    codename: change_targetdevice
+- model: auth.permission
+  pk: 19
+  fields:
+    name: Can delete target device
+    content_type: 5
+    codename: delete_targetdevice
+- model: auth.permission
+  pk: 20
+  fields:
+    name: Can view target device
+    content_type: 5
+    codename: view_targetdevice
+- model: auth.permission
+  pk: 21
+  fields:
+    name: Can add notification from backup
+    content_type: 6
+    codename: add_notificationfrombackup
+- model: auth.permission
+  pk: 22
+  fields:
+    name: Can change notification from backup
+    content_type: 6
+    codename: change_notificationfrombackup
+- model: auth.permission
+  pk: 23
+  fields:
+    name: Can delete notification from backup
+    content_type: 6
+    codename: delete_notificationfrombackup
+- model: auth.permission
+  pk: 24
+  fields:
+    name: Can view notification from backup
+    content_type: 6
+    codename: view_notificationfrombackup
+- model: auth.permission
+  pk: 25
+  fields:
+    name: Can add computer
+    content_type: 7
+    codename: add_computer
+- model: auth.permission
+  pk: 26
+  fields:
+    name: Can change computer
+    content_type: 7
+    codename: change_computer
+- model: auth.permission
+  pk: 27
+  fields:
+    name: Can delete computer
+    content_type: 7
+    codename: delete_computer
+- model: auth.permission
+  pk: 28
+  fields:
+    name: Can view computer
+    content_type: 7
+    codename: view_computer
+- model: auth.permission
+  pk: 29
+  fields:
+    name: Can add cpu architecture
+    content_type: 8
+    codename: add_cpuarchitecture
+- model: auth.permission
+  pk: 30
+  fields:
+    name: Can change cpu architecture
+    content_type: 8
+    codename: change_cpuarchitecture
+- model: auth.permission
+  pk: 31
+  fields:
+    name: Can delete cpu architecture
+    content_type: 8
+    codename: delete_cpuarchitecture
+- model: auth.permission
+  pk: 32
+  fields:
+    name: Can view cpu architecture
+    content_type: 8
+    codename: view_cpuarchitecture
+- model: auth.permission
+  pk: 33
+  fields:
+    name: Can add cpu manufacturer
+    content_type: 9
+    codename: add_cpumanufacturer
+- model: auth.permission
+  pk: 34
+  fields:
+    name: Can change cpu manufacturer
+    content_type: 9
+    codename: change_cpumanufacturer
+- model: auth.permission
+  pk: 35
+  fields:
+    name: Can delete cpu manufacturer
+    content_type: 9
+    codename: delete_cpumanufacturer
+- model: auth.permission
+  pk: 36
+  fields:
+    name: Can view cpu manufacturer
+    content_type: 9
+    codename: view_cpumanufacturer
+- model: auth.permission
+  pk: 37
+  fields:
+    name: Can add disk
+    content_type: 10
+    codename: add_disk
+- model: auth.permission
+  pk: 38
+  fields:
+    name: Can change disk
+    content_type: 10
+    codename: change_disk
+- model: auth.permission
+  pk: 39
+  fields:
+    name: Can delete disk
+    content_type: 10
+    codename: delete_disk
+- model: auth.permission
+  pk: 40
+  fields:
+    name: Can view disk
+    content_type: 10
+    codename: view_disk
+- model: auth.permission
+  pk: 41
+  fields:
+    name: Can add disk type
+    content_type: 11
+    codename: add_disktype
+- model: auth.permission
+  pk: 42
+  fields:
+    name: Can change disk type
+    content_type: 11
+    codename: change_disktype
+- model: auth.permission
+  pk: 43
+  fields:
+    name: Can delete disk type
+    content_type: 11
+    codename: delete_disktype
+- model: auth.permission
+  pk: 44
+  fields:
+    name: Can view disk type
+    content_type: 11
+    codename: view_disktype
+- model: auth.permission
+  pk: 45
+  fields:
+    name: Can add gpu manufacturer
+    content_type: 12
+    codename: add_gpumanufacturer
+- model: auth.permission
+  pk: 46
+  fields:
+    name: Can change gpu manufacturer
+    content_type: 12
+    codename: change_gpumanufacturer
+- model: auth.permission
+  pk: 47
+  fields:
+    name: Can delete gpu manufacturer
+    content_type: 12
+    codename: delete_gpumanufacturer
+- model: auth.permission
+  pk: 48
+  fields:
+    name: Can view gpu manufacturer
+    content_type: 12
+    codename: view_gpumanufacturer
+- model: auth.permission
+  pk: 49
+  fields:
+    name: Can add raid type
+    content_type: 13
+    codename: add_raidtype
+- model: auth.permission
+  pk: 50
+  fields:
+    name: Can change raid type
+    content_type: 13
+    codename: change_raidtype
+- model: auth.permission
+  pk: 51
+  fields:
+    name: Can delete raid type
+    content_type: 13
+    codename: delete_raidtype
+- model: auth.permission
+  pk: 52
+  fields:
+    name: Can view raid type
+    content_type: 13
+    codename: view_raidtype
+- model: auth.permission
+  pk: 53
+  fields:
+    name: Can add ram type
+    content_type: 14
+    codename: add_ramtype
+- model: auth.permission
+  pk: 54
+  fields:
+    name: Can change ram type
+    content_type: 14
+    codename: change_ramtype
+- model: auth.permission
+  pk: 55
+  fields:
+    name: Can delete ram type
+    content_type: 14
+    codename: delete_ramtype
+- model: auth.permission
+  pk: 56
+  fields:
+    name: Can view ram type
+    content_type: 14
+    codename: view_ramtype
+- model: auth.permission
+  pk: 57
+  fields:
+    name: Can add ram
+    content_type: 15
+    codename: add_ram
+- model: auth.permission
+  pk: 58
+  fields:
+    name: Can change ram
+    content_type: 15
+    codename: change_ram
+- model: auth.permission
+  pk: 59
+  fields:
+    name: Can delete ram
+    content_type: 15
+    codename: delete_ram
+- model: auth.permission
+  pk: 60
+  fields:
+    name: Can view ram
+    content_type: 15
+    codename: view_ram
+- model: auth.permission
+  pk: 61
+  fields:
+    name: Can add raid
+    content_type: 16
+    codename: add_raid
+- model: auth.permission
+  pk: 62
+  fields:
+    name: Can change raid
+    content_type: 16
+    codename: change_raid
+- model: auth.permission
+  pk: 63
+  fields:
+    name: Can delete raid
+    content_type: 16
+    codename: delete_raid
+- model: auth.permission
+  pk: 64
+  fields:
+    name: Can view raid
+    content_type: 16
+    codename: view_raid
+- model: auth.permission
+  pk: 65
+  fields:
+    name: Can add gpu
+    content_type: 17
+    codename: add_gpu
+- model: auth.permission
+  pk: 66
+  fields:
+    name: Can change gpu
+    content_type: 17
+    codename: change_gpu
+- model: auth.permission
+  pk: 67
+  fields:
+    name: Can delete gpu
+    content_type: 17
+    codename: delete_gpu
+- model: auth.permission
+  pk: 68
+  fields:
+    name: Can view gpu
+    content_type: 17
+    codename: view_gpu
+- model: auth.permission
+  pk: 69
+  fields:
+    name: Can add disks in raid
+    content_type: 18
+    codename: add_disksinraid
+- model: auth.permission
+  pk: 70
+  fields:
+    name: Can change disks in raid
+    content_type: 18
+    codename: change_disksinraid
+- model: auth.permission
+  pk: 71
+  fields:
+    name: Can delete disks in raid
+    content_type: 18
+    codename: delete_disksinraid
+- model: auth.permission
+  pk: 72
+  fields:
+    name: Can view disks in raid
+    content_type: 18
+    codename: view_disksinraid
+- model: auth.permission
+  pk: 73
+  fields:
+    name: Can add cpu
+    content_type: 19
+    codename: add_cpu
+- model: auth.permission
+  pk: 74
+  fields:
+    name: Can change cpu
+    content_type: 19
+    codename: change_cpu
+- model: auth.permission
+  pk: 75
+  fields:
+    name: Can delete cpu
+    content_type: 19
+    codename: delete_cpu
+- model: auth.permission
+  pk: 76
+  fields:
+    name: Can view cpu
+    content_type: 19
+    codename: view_cpu
+- model: auth.permission
+  pk: 77
+  fields:
+    name: Can add computer software relation
+    content_type: 20
+    codename: add_computersoftwarerelation
+- model: auth.permission
+  pk: 78
+  fields:
+    name: Can change computer software relation
+    content_type: 20
+    codename: change_computersoftwarerelation
+- model: auth.permission
+  pk: 79
+  fields:
+    name: Can delete computer software relation
+    content_type: 20
+    codename: delete_computersoftwarerelation
+- model: auth.permission
+  pk: 80
+  fields:
+    name: Can view computer software relation
+    content_type: 20
+    codename: view_computersoftwarerelation
+- model: auth.permission
+  pk: 81
+  fields:
+    name: Can add computer ram relation
+    content_type: 21
+    codename: add_computerramrelation
+- model: auth.permission
+  pk: 82
+  fields:
+    name: Can change computer ram relation
+    content_type: 21
+    codename: change_computerramrelation
+- model: auth.permission
+  pk: 83
+  fields:
+    name: Can delete computer ram relation
+    content_type: 21
+    codename: delete_computerramrelation
+- model: auth.permission
+  pk: 84
+  fields:
+    name: Can view computer ram relation
+    content_type: 21
+    codename: view_computerramrelation
+- model: auth.permission
+  pk: 85
+  fields:
+    name: Can add computer gpu relation
+    content_type: 22
+    codename: add_computergpurelation
+- model: auth.permission
+  pk: 86
+  fields:
+    name: Can change computer gpu relation
+    content_type: 22
+    codename: change_computergpurelation
+- model: auth.permission
+  pk: 87
+  fields:
+    name: Can delete computer gpu relation
+    content_type: 22
+    codename: delete_computergpurelation
+- model: auth.permission
+  pk: 88
+  fields:
+    name: Can view computer gpu relation
+    content_type: 22
+    codename: view_computergpurelation
+- model: auth.permission
+  pk: 89
+  fields:
+    name: Can add computer disk relation
+    content_type: 23
+    codename: add_computerdiskrelation
+- model: auth.permission
+  pk: 90
+  fields:
+    name: Can change computer disk relation
+    content_type: 23
+    codename: change_computerdiskrelation
+- model: auth.permission
+  pk: 91
+  fields:
+    name: Can delete computer disk relation
+    content_type: 23
+    codename: delete_computerdiskrelation
+- model: auth.permission
+  pk: 92
+  fields:
+    name: Can view computer disk relation
+    content_type: 23
+    codename: view_computerdiskrelation
+- model: auth.permission
+  pk: 93
+  fields:
+    name: Can add computer cpu relation
+    content_type: 24
+    codename: add_computercpurelation
+- model: auth.permission
+  pk: 94
+  fields:
+    name: Can change computer cpu relation
+    content_type: 24
+    codename: change_computercpurelation
+- model: auth.permission
+  pk: 95
+  fields:
+    name: Can delete computer cpu relation
+    content_type: 24
+    codename: delete_computercpurelation
+- model: auth.permission
+  pk: 96
+  fields:
+    name: Can view computer cpu relation
+    content_type: 24
+    codename: view_computercpurelation
+- model: auth.permission
+  pk: 97
+  fields:
+    name: Can add day of month
+    content_type: 25
+    codename: add_dayofmonth
+- model: auth.permission
+  pk: 98
+  fields:
+    name: Can change day of month
+    content_type: 25
+    codename: change_dayofmonth
+- model: auth.permission
+  pk: 99
+  fields:
+    name: Can delete day of month
+    content_type: 25
+    codename: delete_dayofmonth
+- model: auth.permission
+  pk: 100
+  fields:
+    name: Can view day of month
+    content_type: 25
+    codename: view_dayofmonth
+- model: auth.permission
+  pk: 101
+  fields:
+    name: Can add hours in day
+    content_type: 26
+    codename: add_hoursinday
+- model: auth.permission
+  pk: 102
+  fields:
+    name: Can change hours in day
+    content_type: 26
+    codename: change_hoursinday
+- model: auth.permission
+  pk: 103
+  fields:
+    name: Can delete hours in day
+    content_type: 26
+    codename: delete_hoursinday
+- model: auth.permission
+  pk: 104
+  fields:
+    name: Can view hours in day
+    content_type: 26
+    codename: view_hoursinday
+- model: auth.permission
+  pk: 105
+  fields:
+    name: Can add minutes in hour
+    content_type: 27
+    codename: add_minutesinhour
+- model: auth.permission
+  pk: 106
+  fields:
+    name: Can change minutes in hour
+    content_type: 27
+    codename: change_minutesinhour
+- model: auth.permission
+  pk: 107
+  fields:
+    name: Can delete minutes in hour
+    content_type: 27
+    codename: delete_minutesinhour
+- model: auth.permission
+  pk: 108
+  fields:
+    name: Can view minutes in hour
+    content_type: 27
+    codename: view_minutesinhour
+- model: auth.permission
+  pk: 109
+  fields:
+    name: Can add month
+    content_type: 28
+    codename: add_month
+- model: auth.permission
+  pk: 110
+  fields:
+    name: Can change month
+    content_type: 28
+    codename: change_month
+- model: auth.permission
+  pk: 111
+  fields:
+    name: Can delete month
+    content_type: 28
+    codename: delete_month
+- model: auth.permission
+  pk: 112
+  fields:
+    name: Can view month
+    content_type: 28
+    codename: view_month
+- model: auth.permission
+  pk: 113
+  fields:
+    name: Can add weekday
+    content_type: 29
+    codename: add_weekday
+- model: auth.permission
+  pk: 114
+  fields:
+    name: Can change weekday
+    content_type: 29
+    codename: change_weekday
+- model: auth.permission
+  pk: 115
+  fields:
+    name: Can delete weekday
+    content_type: 29
+    codename: delete_weekday
+- model: auth.permission
+  pk: 116
+  fields:
+    name: Can view weekday
+    content_type: 29
+    codename: view_weekday
+- model: auth.permission
+  pk: 117
+  fields:
+    name: Can add customer
+    content_type: 30
+    codename: add_customer
+- model: auth.permission
+  pk: 118
+  fields:
+    name: Can change customer
+    content_type: 30
+    codename: change_customer
+- model: auth.permission
+  pk: 119
+  fields:
+    name: Can delete customer
+    content_type: 30
+    codename: delete_customer
+- model: auth.permission
+  pk: 120
+  fields:
+    name: Can view customer
+    content_type: 30
+    codename: view_customer
+- model: auth.permission
+  pk: 121
+  fields:
+    name: Can add device manufacturer
+    content_type: 31
+    codename: add_devicemanufacturer
+- model: auth.permission
+  pk: 122
+  fields:
+    name: Can change device manufacturer
+    content_type: 31
+    codename: change_devicemanufacturer
+- model: auth.permission
+  pk: 123
+  fields:
+    name: Can delete device manufacturer
+    content_type: 31
+    codename: delete_devicemanufacturer
+- model: auth.permission
+  pk: 124
+  fields:
+    name: Can view device manufacturer
+    content_type: 31
+    codename: view_devicemanufacturer
+- model: auth.permission
+  pk: 125
+  fields:
+    name: Can add owner
+    content_type: 32
+    codename: add_owner
+- model: auth.permission
+  pk: 126
+  fields:
+    name: Can change owner
+    content_type: 32
+    codename: change_owner
+- model: auth.permission
+  pk: 127
+  fields:
+    name: Can delete owner
+    content_type: 32
+    codename: delete_owner
+- model: auth.permission
+  pk: 128
+  fields:
+    name: Can view owner
+    content_type: 32
+    codename: view_owner
+- model: auth.permission
+  pk: 129
+  fields:
+    name: Can add location
+    content_type: 33
+    codename: add_location
+- model: auth.permission
+  pk: 130
+  fields:
+    name: Can change location
+    content_type: 33
+    codename: change_location
+- model: auth.permission
+  pk: 131
+  fields:
+    name: Can delete location
+    content_type: 33
+    codename: delete_location
+- model: auth.permission
+  pk: 132
+  fields:
+    name: Can view location
+    content_type: 33
+    codename: view_location
+- model: auth.permission
+  pk: 133
+  fields:
+    name: Can add device
+    content_type: 34
+    codename: add_device
+- model: auth.permission
+  pk: 134
+  fields:
+    name: Can change device
+    content_type: 34
+    codename: change_device
+- model: auth.permission
+  pk: 135
+  fields:
+    name: Can delete device
+    content_type: 34
+    codename: delete_device
+- model: auth.permission
+  pk: 136
+  fields:
+    name: Can view device
+    content_type: 34
+    codename: view_device
+- model: auth.permission
+  pk: 137
+  fields:
+    name: Can add device category
+    content_type: 35
+    codename: add_devicecategory
+- model: auth.permission
+  pk: 138
+  fields:
+    name: Can change device category
+    content_type: 35
+    codename: change_devicecategory
+- model: auth.permission
+  pk: 139
+  fields:
+    name: Can delete device category
+    content_type: 35
+    codename: delete_devicecategory
+- model: auth.permission
+  pk: 140
+  fields:
+    name: Can view device category
+    content_type: 35
+    codename: view_devicecategory
+- model: auth.permission
+  pk: 141
+  fields:
+    name: Can add device manufacturer
+    content_type: 36
+    codename: add_devicemanufacturer
+- model: auth.permission
+  pk: 142
+  fields:
+    name: Can change device manufacturer
+    content_type: 36
+    codename: change_devicemanufacturer
+- model: auth.permission
+  pk: 143
+  fields:
+    name: Can delete device manufacturer
+    content_type: 36
+    codename: delete_devicemanufacturer
+- model: auth.permission
+  pk: 144
+  fields:
+    name: Can view device manufacturer
+    content_type: 36
+    codename: view_devicemanufacturer
+- model: auth.permission
+  pk: 145
+  fields:
+    name: Can add warranty type
+    content_type: 37
+    codename: add_warrantytype
+- model: auth.permission
+  pk: 146
+  fields:
+    name: Can change warranty type
+    content_type: 37
+    codename: change_warrantytype
+- model: auth.permission
+  pk: 147
+  fields:
+    name: Can delete warranty type
+    content_type: 37
+    codename: delete_warrantytype
+- model: auth.permission
+  pk: 148
+  fields:
+    name: Can view warranty type
+    content_type: 37
+    codename: view_warrantytype
+- model: auth.permission
+  pk: 149
+  fields:
+    name: Can add warranty
+    content_type: 38
+    codename: add_warranty
+- model: auth.permission
+  pk: 150
+  fields:
+    name: Can change warranty
+    content_type: 38
+    codename: change_warranty
+- model: auth.permission
+  pk: 151
+  fields:
+    name: Can delete warranty
+    content_type: 38
+    codename: delete_warranty
+- model: auth.permission
+  pk: 152
+  fields:
+    name: Can view warranty
+    content_type: 38
+    codename: view_warranty
+- model: auth.permission
+  pk: 153
+  fields:
+    name: Can add hardware model
+    content_type: 39
+    codename: add_hardwaremodel
+- model: auth.permission
+  pk: 154
+  fields:
+    name: Can change hardware model
+    content_type: 39
+    codename: change_hardwaremodel
+- model: auth.permission
+  pk: 155
+  fields:
+    name: Can delete hardware model
+    content_type: 39
+    codename: delete_hardwaremodel
+- model: auth.permission
+  pk: 156
+  fields:
+    name: Can view hardware model
+    content_type: 39
+    codename: view_hardwaremodel
+- model: auth.permission
+  pk: 157
+  fields:
+    name: Can add device in net
+    content_type: 40
+    codename: add_deviceinnet
+- model: auth.permission
+  pk: 158
+  fields:
+    name: Can change device in net
+    content_type: 40
+    codename: change_deviceinnet
+- model: auth.permission
+  pk: 159
+  fields:
+    name: Can delete device in net
+    content_type: 40
+    codename: delete_deviceinnet
+- model: auth.permission
+  pk: 160
+  fields:
+    name: Can view device in net
+    content_type: 40
+    codename: view_deviceinnet
+- model: auth.permission
+  pk: 161
+  fields:
+    name: Can add log entry
+    content_type: 41
+    codename: add_logentry
+- model: auth.permission
+  pk: 162
+  fields:
+    name: Can change log entry
+    content_type: 41
+    codename: change_logentry
+- model: auth.permission
+  pk: 163
+  fields:
+    name: Can delete log entry
+    content_type: 41
+    codename: delete_logentry
+- model: auth.permission
+  pk: 164
+  fields:
+    name: Can view log entry
+    content_type: 41
+    codename: view_logentry
+- model: auth.permission
+  pk: 165
+  fields:
+    name: Can add permission
+    content_type: 42
+    codename: add_permission
+- model: auth.permission
+  pk: 166
+  fields:
+    name: Can change permission
+    content_type: 42
+    codename: change_permission
+- model: auth.permission
+  pk: 167
+  fields:
+    name: Can delete permission
+    content_type: 42
+    codename: delete_permission
+- model: auth.permission
+  pk: 168
+  fields:
+    name: Can view permission
+    content_type: 42
+    codename: view_permission
+- model: auth.permission
+  pk: 169
+  fields:
+    name: Can add group
+    content_type: 43
+    codename: add_group
+- model: auth.permission
+  pk: 170
+  fields:
+    name: Can change group
+    content_type: 43
+    codename: change_group
+- model: auth.permission
+  pk: 171
+  fields:
+    name: Can delete group
+    content_type: 43
+    codename: delete_group
+- model: auth.permission
+  pk: 172
+  fields:
+    name: Can view group
+    content_type: 43
+    codename: view_group
+- model: auth.permission
+  pk: 173
+  fields:
+    name: Can add user
+    content_type: 44
+    codename: add_user
+- model: auth.permission
+  pk: 174
+  fields:
+    name: Can change user
+    content_type: 44
+    codename: change_user
+- model: auth.permission
+  pk: 175
+  fields:
+    name: Can delete user
+    content_type: 44
+    codename: delete_user
+- model: auth.permission
+  pk: 176
+  fields:
+    name: Can view user
+    content_type: 44
+    codename: view_user
+- model: auth.permission
+  pk: 177
+  fields:
+    name: Can add content type
+    content_type: 45
+    codename: add_contenttype
+- model: auth.permission
+  pk: 178
+  fields:
+    name: Can change content type
+    content_type: 45
+    codename: change_contenttype
+- model: auth.permission
+  pk: 179
+  fields:
+    name: Can delete content type
+    content_type: 45
+    codename: delete_contenttype
+- model: auth.permission
+  pk: 180
+  fields:
+    name: Can view content type
+    content_type: 45
+    codename: view_contenttype
+- model: auth.permission
+  pk: 181
+  fields:
+    name: Can add session
+    content_type: 46
+    codename: add_session
+- model: auth.permission
+  pk: 182
+  fields:
+    name: Can change session
+    content_type: 46
+    codename: change_session
+- model: auth.permission
+  pk: 183
+  fields:
+    name: Can delete session
+    content_type: 46
+    codename: delete_session
+- model: auth.permission
+  pk: 184
+  fields:
+    name: Can view session
+    content_type: 46
+    codename: view_session
+- model: auth.permission
+  pk: 185
+  fields:
+    name: Can add group object permission
+    content_type: 47
+    codename: add_groupobjectpermission
+- model: auth.permission
+  pk: 186
+  fields:
+    name: Can change group object permission
+    content_type: 47
+    codename: change_groupobjectpermission
+- model: auth.permission
+  pk: 187
+  fields:
+    name: Can delete group object permission
+    content_type: 47
+    codename: delete_groupobjectpermission
+- model: auth.permission
+  pk: 188
+  fields:
+    name: Can view group object permission
+    content_type: 47
+    codename: view_groupobjectpermission
+- model: auth.permission
+  pk: 189
+  fields:
+    name: Can add user object permission
+    content_type: 48
+    codename: add_userobjectpermission
+- model: auth.permission
+  pk: 190
+  fields:
+    name: Can change user object permission
+    content_type: 48
+    codename: change_userobjectpermission
+- model: auth.permission
+  pk: 191
+  fields:
+    name: Can delete user object permission
+    content_type: 48
+    codename: delete_userobjectpermission
+- model: auth.permission
+  pk: 192
+  fields:
+    name: Can view user object permission
+    content_type: 48
+    codename: view_userobjectpermission
+- model: auth.permission
+  pk: 193
+  fields:
+    name: Can add computer license
+    content_type: 49
+    codename: add_computerlicense
+- model: auth.permission
+  pk: 194
+  fields:
+    name: Can change computer license
+    content_type: 49
+    codename: change_computerlicense
+- model: auth.permission
+  pk: 195
+  fields:
+    name: Can delete computer license
+    content_type: 49
+    codename: delete_computerlicense
+- model: auth.permission
+  pk: 196
+  fields:
+    name: Can view computer license
+    content_type: 49
+    codename: view_computerlicense
+- model: auth.permission
+  pk: 197
+  fields:
+    name: Can add license with user
+    content_type: 50
+    codename: add_licensewithuser
+- model: auth.permission
+  pk: 198
+  fields:
+    name: Can change license with user
+    content_type: 50
+    codename: change_licensewithuser
+- model: auth.permission
+  pk: 199
+  fields:
+    name: Can delete license with user
+    content_type: 50
+    codename: delete_licensewithuser
+- model: auth.permission
+  pk: 200
+  fields:
+    name: Can view license with user
+    content_type: 50
+    codename: view_licensewithuser
+- model: auth.permission
+  pk: 201
+  fields:
+    name: Can add user license
+    content_type: 51
+    codename: add_userlicense
+- model: auth.permission
+  pk: 202
+  fields:
+    name: Can change user license
+    content_type: 51
+    codename: change_userlicense
+- model: auth.permission
+  pk: 203
+  fields:
+    name: Can delete user license
+    content_type: 51
+    codename: delete_userlicense
+- model: auth.permission
+  pk: 204
+  fields:
+    name: Can view user license
+    content_type: 51
+    codename: view_userlicense
+- model: auth.permission
+  pk: 205
+  fields:
+    name: Can add license with computer
+    content_type: 52
+    codename: add_licensewithcomputer
+- model: auth.permission
+  pk: 206
+  fields:
+    name: Can change license with computer
+    content_type: 52
+    codename: change_licensewithcomputer
+- model: auth.permission
+  pk: 207
+  fields:
+    name: Can delete license with computer
+    content_type: 52
+    codename: delete_licensewithcomputer
+- model: auth.permission
+  pk: 208
+  fields:
+    name: Can view license with computer
+    content_type: 52
+    codename: view_licensewithcomputer
+- model: auth.permission
+  pk: 209
+  fields:
+    name: Can add IP Status
+    content_type: 53
+    codename: add_ipstatus
+- model: auth.permission
+  pk: 210
+  fields:
+    name: Can change IP Status
+    content_type: 53
+    codename: change_ipstatus
+- model: auth.permission
+  pk: 211
+  fields:
+    name: Can delete IP Status
+    content_type: 53
+    codename: delete_ipstatus
+- model: auth.permission
+  pk: 212
+  fields:
+    name: Can view IP Status
+    content_type: 53
+    codename: view_ipstatus
+- model: auth.permission
+  pk: 213
+  fields:
+    name: Can add net
+    content_type: 54
+    codename: add_net
+- model: auth.permission
+  pk: 214
+  fields:
+    name: Can change net
+    content_type: 54
+    codename: change_net
+- model: auth.permission
+  pk: 215
+  fields:
+    name: Can delete net
+    content_type: 54
+    codename: delete_net
+- model: auth.permission
+  pk: 216
+  fields:
+    name: Can view net
+    content_type: 54
+    codename: view_net
+- model: auth.permission
+  pk: 217
+  fields:
+    name: Can add software architecture
+    content_type: 55
+    codename: add_softwarearchitecture
+- model: auth.permission
+  pk: 218
+  fields:
+    name: Can change software architecture
+    content_type: 55
+    codename: change_softwarearchitecture
+- model: auth.permission
+  pk: 219
+  fields:
+    name: Can delete software architecture
+    content_type: 55
+    codename: delete_softwarearchitecture
+- model: auth.permission
+  pk: 220
+  fields:
+    name: Can view software architecture
+    content_type: 55
+    codename: view_softwarearchitecture
+- model: auth.permission
+  pk: 221
+  fields:
+    name: Can add software category
+    content_type: 56
+    codename: add_softwarecategory
+- model: auth.permission
+  pk: 222
+  fields:
+    name: Can change software category
+    content_type: 56
+    codename: change_softwarecategory
+- model: auth.permission
+  pk: 223
+  fields:
+    name: Can delete software category
+    content_type: 56
+    codename: delete_softwarecategory
+- model: auth.permission
+  pk: 224
+  fields:
+    name: Can view software category
+    content_type: 56
+    codename: view_softwarecategory
+- model: auth.permission
+  pk: 225
+  fields:
+    name: Can add software
+    content_type: 57
+    codename: add_software
+- model: auth.permission
+  pk: 226
+  fields:
+    name: Can change software
+    content_type: 57
+    codename: change_software
+- model: auth.permission
+  pk: 227
+  fields:
+    name: Can delete software
+    content_type: 57
+    codename: delete_software
+- model: auth.permission
+  pk: 228
+  fields:
+    name: Can view software
+    content_type: 57
+    codename: view_software
+- model: auth.permission
+  pk: 229
+  fields:
+    name: Can add operating system
+    content_type: 58
+    codename: add_operatingsystem
+- model: auth.permission
+  pk: 230
+  fields:
+    name: Can change operating system
+    content_type: 58
+    codename: change_operatingsystem
+- model: auth.permission
+  pk: 231
+  fields:
+    name: Can delete operating system
+    content_type: 58
+    codename: delete_operatingsystem
+- model: auth.permission
+  pk: 232
+  fields:
+    name: Can view operating system
+    content_type: 58
+    codename: view_operatingsystem
+- model: auth.permission
+  pk: 233
+  fields:
+    name: Can add ad group
+    content_type: 59
+    codename: add_adgroup
+- model: auth.permission
+  pk: 234
+  fields:
+    name: Can change ad group
+    content_type: 59
+    codename: change_adgroup
+- model: auth.permission
+  pk: 235
+  fields:
+    name: Can delete ad group
+    content_type: 59
+    codename: delete_adgroup
+- model: auth.permission
+  pk: 236
+  fields:
+    name: Can view ad group
+    content_type: 59
+    codename: view_adgroup
+- model: auth.permission
+  pk: 237
+  fields:
+    name: Can add mail group
+    content_type: 60
+    codename: add_mailgroup
+- model: auth.permission
+  pk: 238
+  fields:
+    name: Can change mail group
+    content_type: 60
+    codename: change_mailgroup
+- model: auth.permission
+  pk: 239
+  fields:
+    name: Can delete mail group
+    content_type: 60
+    codename: delete_mailgroup
+- model: auth.permission
+  pk: 240
+  fields:
+    name: Can view mail group
+    content_type: 60
+    codename: view_mailgroup
+- model: auth.permission
+  pk: 241
+  fields:
+    name: Can add user
+    content_type: 61
+    codename: add_user
+- model: auth.permission
+  pk: 242
+  fields:
+    name: Can change user
+    content_type: 61
+    codename: change_user
+- model: auth.permission
+  pk: 243
+  fields:
+    name: Can delete user
+    content_type: 61
+    codename: delete_user
+- model: auth.permission
+  pk: 244
+  fields:
+    name: Can view user
+    content_type: 61
+    codename: view_user
+- model: auth.permission
+  pk: 245
+  fields:
+    name: Can add user in mail group
+    content_type: 62
+    codename: add_userinmailgroup
+- model: auth.permission
+  pk: 246
+  fields:
+    name: Can change user in mail group
+    content_type: 62
+    codename: change_userinmailgroup
+- model: auth.permission
+  pk: 247
+  fields:
+    name: Can delete user in mail group
+    content_type: 62
+    codename: delete_userinmailgroup
+- model: auth.permission
+  pk: 248
+  fields:
+    name: Can view user in mail group
+    content_type: 62
+    codename: view_userinmailgroup
+- model: auth.permission
+  pk: 249
+  fields:
+    name: Can add user in ad group
+    content_type: 63
+    codename: add_userinadgroup
+- model: auth.permission
+  pk: 250
+  fields:
+    name: Can change user in ad group
+    content_type: 63
+    codename: change_userinadgroup
+- model: auth.permission
+  pk: 251
+  fields:
+    name: Can delete user in ad group
+    content_type: 63
+    codename: delete_userinadgroup
+- model: auth.permission
+  pk: 252
+  fields:
+    name: Can view user in ad group
+    content_type: 63
+    codename: view_userinadgroup
+- model: auth.permission
+  pk: 253
+  fields:
+    name: Can add mail alias
+    content_type: 64
+    codename: add_mailalias
+- model: auth.permission
+  pk: 254
+  fields:
+    name: Can change mail alias
+    content_type: 64
+    codename: change_mailalias
+- model: auth.permission
+  pk: 255
+  fields:
+    name: Can delete mail alias
+    content_type: 64
+    codename: delete_mailalias
+- model: auth.permission
+  pk: 256
+  fields:
+    name: Can view mail alias
+    content_type: 64
+    codename: view_mailalias
+- model: auth.user
+  pk: 1
+  fields:
+    password: '!c7GSQMX3Yx9m7XfSx94UzysOaUSKknTlsfWg1wBQ'
+    last_login: null
+    is_superuser: false
+    username: AnonymousUser
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2020-06-09 19:41:33.728056+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$150000$HBWWv6eZc2DW$pm+P/C967Rx/B7zTqqkY4EstNtExQiMyVR59FEJ+Q9w=
+    last_login: 2020-06-09 19:42:07.168245+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: admin@example.com
+    is_staff: true
+    is_active: true
+    date_joined: 2020-06-09 19:41:40.773107+00:00
+    groups: []
+    user_permissions: []
+- model: admin.logentry
+  pk: 1
+  fields:
+    action_time: 2020-06-15 10:59:03.336794+00:00
+    user: 2
+    content_type: 30
+    object_id: '1'
+    object_repr: Pharma Company
+    action_flag: 2
+    change_message: '[{"changed": {"fields": ["name"]}}]'
+- model: admin.logentry
+  pk: 2
+  fields:
+    action_time: 2020-06-15 10:59:15.553166+00:00
+    user: 2
+    content_type: 30
+    object_id: '2'
+    object_repr: Water Company
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 3
+  fields:
+    action_time: 2020-06-15 10:59:37.258958+00:00
+    user: 2
+    content_type: 33
+    object_id: '1'
+    object_repr: Pharma Office
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 4
+  fields:
+    action_time: 2020-06-15 10:59:44.704236+00:00
+    user: 2
+    content_type: 33
+    object_id: '2'
+    object_repr: Water Office
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 5
+  fields:
+    action_time: 2020-06-15 11:00:30.628955+00:00
+    user: 2
+    content_type: 35
+    object_id: '1'
+    object_repr: Office PC
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 6
+  fields:
+    action_time: 2020-06-15 11:00:46.203736+00:00
+    user: 2
+    content_type: 39
+    object_id: '1'
+    object_repr: Latidude 5530
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 7
+  fields:
+    action_time: 2020-06-15 11:02:59.174884+00:00
+    user: 2
+    content_type: 59
+    object_id: '1'
+    object_repr: HR
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 8
+  fields:
+    action_time: 2020-06-15 11:03:20.424173+00:00
+    user: 2
+    content_type: 60
+    object_id: '1'
+    object_repr: HR
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 9
+  fields:
+    action_time: 2020-06-15 11:04:01.105228+00:00
+    user: 2
+    content_type: 51
+    object_id: '1'
+    object_repr: 'Pharma Company: Office 2016 Home & Business'
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 10
+  fields:
+    action_time: 2020-06-15 11:04:04.826353+00:00
+    user: 2
+    content_type: 61
+    object_id: '1'
+    object_repr: Muster Max
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "user in ad group", "object":
+      "UserInAdGroup object (1)"}}, {"added": {"name": "user in mail group", "object":
+      "UserInMailGroup object (1)"}}, {"added": {"name": "mail alias", "object": "m.muster@pharma.com"}},
+      {"added": {"name": "license with user", "object": "LicenseWithUser object (1)"}}]'
+- model: admin.logentry
+  pk: 11
+  fields:
+    action_time: 2020-06-15 11:06:07.470296+00:00
+    user: 2
+    content_type: 17
+    object_id: '1'
+    object_repr: GTX 1080
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 12
+  fields:
+    action_time: 2020-06-15 11:06:24.257931+00:00
+    user: 2
+    content_type: 10
+    object_id: '1'
+    object_repr: SSD 256 GB
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 13
+  fields:
+    action_time: 2020-06-15 11:06:50.590551+00:00
+    user: 2
+    content_type: 13
+    object_id: '3'
+    object_repr: RAID 5
+    action_flag: 3
+    change_message: ''
+- model: admin.logentry
+  pk: 14
+  fields:
+    action_time: 2020-06-15 11:07:25.122188+00:00
+    user: 2
+    content_type: 54
+    object_id: '1'
+    object_repr: Pharma Net
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 15
+  fields:
+    action_time: 2020-06-15 11:07:48.324001+00:00
+    user: 2
+    content_type: 7
+    object_id: '1'
+    object_repr: pharma-pc1
+    action_flag: 2
+    change_message: '[{"changed": {"fields": ["name", "serialnumber", "category",
+      "manufacturer", "model", "location", "user", "installation_date", "os"]}}, {"added":
+      {"name": "computer software relation", "object": "pharma-pc1"}}, {"added": {"name":
+      "computer cpu relation", "object": "pharma-pc1"}}, {"added": {"name": "computer
+      gpu relation", "object": "pharma-pc1"}}, {"added": {"name": "computer ram relation",
+      "object": "pharma-pc1"}}, {"added": {"name": "computer disk relation", "object":
+      "pharma-pc1"}}, {"added": {"name": "device in net", "object": "10.60.0.2: Fixed
+      in Device"}}]'
+- model: admin.logentry
+  pk: 16
+  fields:
+    action_time: 2020-06-15 11:08:21.386141+00:00
+    user: 2
+    content_type: 49
+    object_id: '1'
+    object_repr: 'Pharma Company: Office 2016 Home & Business'
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 17
+  fields:
+    action_time: 2020-06-15 11:08:39.511664+00:00
+    user: 2
+    content_type: 7
+    object_id: '1'
+    object_repr: pharma-pc1
+    action_flag: 2
+    change_message: '[{"added": {"name": "license with computer", "object": "LicenseWithComputer
+      object (1)"}}]'
+- model: admin.logentry
+  pk: 18
+  fields:
+    action_time: 2020-06-15 11:09:21.130567+00:00
+    user: 2
+    content_type: 35
+    object_id: '2'
+    object_repr: CAD PC
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 19
+  fields:
+    action_time: 2020-06-15 11:09:56.249359+00:00
+    user: 2
+    content_type: 39
+    object_id: '2'
+    object_repr: Optiplex 7070
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 20
+  fields:
+    action_time: 2020-06-15 11:11:16.540397+00:00
+    user: 2
+    content_type: 59
+    object_id: '2'
+    object_repr: Engineering
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 21
+  fields:
+    action_time: 2020-06-15 11:11:46.148101+00:00
+    user: 2
+    content_type: 60
+    object_id: '2'
+    object_repr: Engineering
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 22
+  fields:
+    action_time: 2020-06-15 11:12:21.021520+00:00
+    user: 2
+    content_type: 56
+    object_id: '4'
+    object_repr: CAD
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 23
+  fields:
+    action_time: 2020-06-15 11:12:22.369650+00:00
+    user: 2
+    content_type: 57
+    object_id: '26'
+    object_repr: AutoCAD
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 24
+  fields:
+    action_time: 2020-06-15 11:12:26.117973+00:00
+    user: 2
+    content_type: 51
+    object_id: '2'
+    object_repr: 'Pharma Company: AutoCAD'
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 25
+  fields:
+    action_time: 2020-06-15 11:12:32.849351+00:00
+    user: 2
+    content_type: 61
+    object_id: '2'
+    object_repr: Meier Anna
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "user in ad group", "object":
+      "UserInAdGroup object (2)"}}, {"added": {"name": "user in mail group", "object":
+      "UserInMailGroup object (2)"}}, {"added": {"name": "mail alias", "object": "a.meier@pharma.com"}},
+      {"added": {"name": "license with user", "object": "LicenseWithUser object (2)"}},
+      {"added": {"name": "license with user", "object": "LicenseWithUser object (3)"}}]'
+- model: admin.logentry
+  pk: 26
+  fields:
+    action_time: 2020-06-15 11:13:16.210104+00:00
+    user: 2
+    content_type: 57
+    object_id: '27'
+    object_repr: AutoCAD
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 27
+  fields:
+    action_time: 2020-06-15 11:13:27.340227+00:00
+    user: 2
+    content_type: 7
+    object_id: '2'
+    object_repr: pharma-pc2
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "computer software relation",
+      "object": "pharma-pc2"}}]'
+- model: admin.logentry
+  pk: 28
+  fields:
+    action_time: 2020-06-15 11:14:14.929959+00:00
+    user: 2
+    content_type: 7
+    object_id: '2'
+    object_repr: pharma-pc2
+    action_flag: 2
+    change_message: '[{"added": {"name": "computer software relation", "object": "pharma-pc2"}},
+      {"added": {"name": "computer cpu relation", "object": "pharma-pc2"}}, {"added":
+      {"name": "computer gpu relation", "object": "pharma-pc2"}}, {"added": {"name":
+      "computer ram relation", "object": "pharma-pc2"}}, {"added": {"name": "computer
+      disk relation", "object": "pharma-pc2"}}, {"added": {"name": "device in net",
+      "object": "10.60.0.3: Fixed in Device"}}, {"added": {"name": "license with computer",
+      "object": "LicenseWithComputer object (2)"}}]'
+- model: admin.logentry
+  pk: 29
+  fields:
+    action_time: 2020-06-15 11:15:04.579044+00:00
+    user: 2
+    content_type: 39
+    object_id: '3'
+    object_repr: Cumpact2700
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 30
+  fields:
+    action_time: 2020-06-15 11:16:18.671502+00:00
+    user: 2
+    content_type: 59
+    object_id: '3'
+    object_repr: HR
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 31
+  fields:
+    action_time: 2020-06-15 11:16:34.163161+00:00
+    user: 2
+    content_type: 60
+    object_id: '3'
+    object_repr: HR
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 32
+  fields:
+    action_time: 2020-06-15 11:17:10.553845+00:00
+    user: 2
+    content_type: 51
+    object_id: '3'
+    object_repr: 'Water Company: Office 2019 Home & Business'
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 33
+  fields:
+    action_time: 2020-06-15 11:17:13.033949+00:00
+    user: 2
+    content_type: 61
+    object_id: '3'
+    object_repr: "Pfl\xFCmli Karin"
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "user in ad group", "object":
+      "UserInAdGroup object (3)"}}, {"added": {"name": "user in mail group", "object":
+      "UserInMailGroup object (3)"}}, {"added": {"name": "mail alias", "object": "pfuemli@water.com"}},
+      {"added": {"name": "license with user", "object": "LicenseWithUser object (4)"}}]'
+- model: admin.logentry
+  pk: 34
+  fields:
+    action_time: 2020-06-15 11:18:04.414867+00:00
+    user: 2
+    content_type: 10
+    object_id: '2'
+    object_repr: HDD 1000 GB
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 35
+  fields:
+    action_time: 2020-06-15 11:18:30.688317+00:00
+    user: 2
+    content_type: 54
+    object_id: '2'
+    object_repr: WaterNET
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 36
+  fields:
+    action_time: 2020-06-15 11:19:10.886503+00:00
+    user: 2
+    content_type: 49
+    object_id: '2'
+    object_repr: 'Water Company: Office 2010 Home & Business'
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 37
+  fields:
+    action_time: 2020-06-15 11:19:12.832968+00:00
+    user: 2
+    content_type: 7
+    object_id: '3'
+    object_repr: water-pc1
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "computer software relation",
+      "object": "water-pc1"}}, {"added": {"name": "computer cpu relation", "object":
+      "water-pc1"}}, {"added": {"name": "computer gpu relation", "object": "water-pc1"}},
+      {"added": {"name": "computer ram relation", "object": "water-pc1"}}, {"added":
+      {"name": "computer disk relation", "object": "water-pc1"}}, {"added": {"name":
+      "device in net", "object": "192.168.1.12: Reserved"}}, {"added": {"name": "license
+      with computer", "object": "LicenseWithComputer object (3)"}}]'
+- model: admin.logentry
+  pk: 38
+  fields:
+    action_time: 2020-06-15 11:19:33.972161+00:00
+    user: 2
+    content_type: 30
+    object_id: '2'
+    object_repr: Water Company
+    action_flag: 2
+    change_message: '[{"changed": {"fields": ["description"]}}]'
+- model: admin.logentry
+  pk: 39
+  fields:
+    action_time: 2020-06-15 11:19:37.203443+00:00
+    user: 2
+    content_type: 30
+    object_id: '1'
+    object_repr: Pharma Company
+    action_flag: 2
+    change_message: '[{"changed": {"fields": ["description"]}}]'
+- model: admin.logentry
+  pk: 40
+  fields:
+    action_time: 2020-06-15 11:20:54.764811+00:00
+    user: 2
+    content_type: 37
+    object_id: '1'
+    object_repr: Dell Pro Support
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 41
+  fields:
+    action_time: 2020-06-15 11:21:05.730415+00:00
+    user: 2
+    content_type: 37
+    object_id: '2'
+    object_repr: Dell NDB Support
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 42
+  fields:
+    action_time: 2020-06-15 11:22:23.758099+00:00
+    user: 2
+    content_type: 4
+    object_id: '1'
+    object_repr: Email
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 43
+  fields:
+    action_time: 2020-06-15 11:22:25.823065+00:00
+    user: 2
+    content_type: 3
+    object_id: '1'
+    object_repr: Support Email
+    action_flag: 1
+    change_message: '[{"added": {}}]'
+- model: admin.logentry
+  pk: 44
+  fields:
+    action_time: 2020-06-15 11:23:23.014935+00:00
+    user: 2
+    content_type: 1
+    object_id: '1'
+    object_repr: Daily Backup
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "notification from backup",
+      "object": "NotificationFromBackup object (1)"}}]'
+- model: admin.logentry
+  pk: 45
+  fields:
+    action_time: 2020-06-15 11:24:52.769430+00:00
+    user: 2
+    content_type: 1
+    object_id: '2'
+    object_repr: Weekly Backup
+    action_flag: 1
+    change_message: '[{"added": {}}, {"added": {"name": "notification from backup",
+      "object": "NotificationFromBackup object (2)"}}]'
+- model: admin.logentry
+  pk: 46
+  fields:
+    action_time: 2020-06-15 11:25:08.747132+00:00
+    user: 2
+    content_type: 7
+    object_id: '1'
+    object_repr: pharma-pc1
+    action_flag: 2
+    change_message: '[{"changed": {"fields": ["description"]}}]'
