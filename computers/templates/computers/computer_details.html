@@ -79,9 +79,9 @@
 
                     <p><b>GPUs:</b></p>
                     {% for gpu in gpu_relations %}
-                        {{ gpu.amount }}x {{ gpu.gpu }}<br>
+                        {{ gpu.amount }}x {{ gpu.gpu }} <a href="{% url 'gpu_relation_delete' gpu.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a><br>
                     {% endfor %}
-                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                    <p><a href="{% url 'gpu_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
                     <p><b>RAM Modules:</b></p>
                     {% for module in ram_relations %}
