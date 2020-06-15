@@ -38,4 +38,10 @@ urlpatterns = [
     path('delete/gpu-relation/<int:pk>/',
          views.ComputerGpuRelationDeleteView.as_view(),
          name='gpu_relation_delete'),
+    path('create/disk-relation/<int:pk>/',
+         views.ComputerDiskRelationCreateView.as_view(),
+         name='disk_relation_create'),
+    path('delete/disk-relation/<int:pk>/',
+         views.ComputerDiskRelationDeleteView.as_view(),
+         name='disk_relation_delete'),
  ]

@@ -91,9 +91,9 @@
 
                     <p><b>Disks:</b></p>
                     {% for disk in disks_relations %}
-                        {{ disk.amount }}x {{ disk.disk }}<br>
+                        {{ disk.amount }}x {{ disk.disk }} <a href="{% url 'disk_relation_delete' disk.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a><br>
                     {% endfor %}
-                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                    <p><a href="{% url 'disk_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
                 <h3>RAID</h3>
                 {% for raid, disks in raid_disk_pairs.items %}

@@ -4,6 +4,7 @@ from core import utils
 
 from computers.models import Computer
 from computers.models import ComputerCpuRelation
+from computers.models import ComputerDiskRelation
 from computers.models import ComputerGpuRelation
 from computers.models import ComputerRamRelation
 
@@ -63,3 +64,10 @@ class ComputerGpuRelationCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ComputerDiskRelationCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = ComputerDiskRelation
+        fields = '__all__'

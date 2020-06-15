@@ -24,6 +24,7 @@ from .filters import ComputerFilter
 from .forms import ComputerCreateForm
 from .forms import ComputerUpdateForm
 from .forms import ComputerCpuRelationCreateForm
+from .forms import ComputerDiskRelationCreateForm
 from .forms import ComputerGpuRelationCreateForm
 from .forms import ComputerRamRelationCreateForm
 from .models import Computer
@@ -219,6 +220,28 @@ class ComputerGpuRelationDeleteView(LoginRequiredMixin, DeleteView):
         return reverse('computer', args=(self.object.computer.pk,))
 
 
+class ComputerDiskRelationCreateView(LoginRequiredMixin, CreateView):
+    model = ComputerDiskRelation
+    form_class = ComputerDiskRelationCreateForm
+    template_name = 'computers/disk_relation_create.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.computer.pk,))
+
+    def get_initial(self):
+        """
+        Set the device and customer dropdown to the device from the previous
+        view and the customer related to the device.
+        """
+        self.computer = get_object_or_404(Computer, id=self.kwargs.get('pk'))
+        return {
+            'computer': self.computer,
+        }
+
+
+class ComputerDiskRelationDeleteView(LoginRequiredMixin, DeleteView):
+    model = ComputerDiskRelation
+    template_name = 'computers/relation_confirm_delete.html'
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
