@@ -27,4 +27,4 @@ else
     python manage.py loaddata network_inventory.yaml
     touch .second_run
 fi
-python manage.py runserver 0.0.0.0:8000
+gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
