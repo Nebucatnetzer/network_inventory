@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 
 from django_tables2 import RequestConfig
 
@@ -35,7 +36,6 @@ def licenses_table_view(request, pk):
 
 class LicenseWithComputerCreateView(LoginRequiredMixin, CreateView):
     model = LicenseWithComputer
-    #form_class = ComputerSoftwareRelationCreateForm
     template_name = 'licenses/license_with_computer_create.html'
     fields = '__all__'
 
@@ -51,3 +51,13 @@ class LicenseWithComputerCreateView(LoginRequiredMixin, CreateView):
         return {
             'computer': self.computer,
         }
+
+
+class LicenseWithComputerDeleteView(LoginRequiredMixin, DeleteView):
+    model = LicenseWithComputer
+    template_name = 'licenses/license_with_computer_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.computer.pk,))
+
+

@@ -8,4 +8,7 @@ urlpatterns = [
     path('create/license-with/computer/<int:pk>/',
          views.LicenseWithComputerCreateView.as_view(),
          name='license_with_computer_create'),
+    path('delete/license-with-computer/<int:pk>/',
+         views.LicenseWithComputerDeleteView.as_view(),
+         name='license_with_computer_delete'),
  ]

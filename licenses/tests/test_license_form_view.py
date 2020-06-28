@@ -6,7 +6,7 @@ import pytest
 pytestmark = pytest.mark.django_db
 
 
-def test_license_relation_create_view(create_admin_user):
+def test_license_with_computer_create_view(create_admin_user):
     create_admin_user()
     client = Client()
     client.login(username="pharma-admin", password="password")
@@ -22,3 +22,14 @@ def test_license_relation_create_view(create_admin_user):
     assert response.status_code == 302
 
 
+def test_license_with_computer_delete_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    license = mixer.blend('licenses.ComputerLicense')
+    license_with_computer = mixer.blend('licenses.LicenseWithComputer',
+                                        computer=computer, license=license)
+    url = '/delete/license-with-computer/{}/'.format(license_with_computer.id)
+    response = client.post(url)
+    assert response.status_code == 302
