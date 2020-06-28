@@ -51,8 +51,8 @@
 
                 <h2>Software</h2>
                 <ul>
-                {% for relation in software_relations %}
-                    <li>{{ relation.software }}</li>
+                {% for software in software_relations %}
+                    <li>{{ software.software }} <a href="{% url 'software_relation_delete' software.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a></li>
                 {% endfor %}
                 </ul>
                 <p><a href="{% url 'software_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>

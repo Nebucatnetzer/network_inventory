@@ -47,4 +47,7 @@ urlpatterns = [
     path('computer/<int:pk>/create/software-relation/',
          views.ComputerSoftwareRelationCreateView.as_view(),
          name='software_relation_create'),
+    path('delete/software-relation/<int:pk>/',
+         views.ComputerSoftwareRelationDeleteView.as_view(),
+         name='software_relation_delete'),
  ]

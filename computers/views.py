@@ -266,3 +266,11 @@ class ComputerSoftwareRelationCreateView(LoginRequiredMixin, CreateView):
             'computer': self.computer,
         }
 
+
+class ComputerSoftwareRelationDeleteView(LoginRequiredMixin, DeleteView):
+    model = ComputerSoftwareRelation
+    template_name = 'computers/relation_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.computer.pk,))
+

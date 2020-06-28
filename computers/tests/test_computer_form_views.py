@@ -178,3 +178,16 @@ def test_disk_relation_delete_view(create_admin_user):
     url = '/delete/disk-relation/{}/'.format(disk_relation.id)
     response = client.post(url)
     assert response.status_code == 302
+
+
+def test_software_relation_delete_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    software = mixer.blend('softwares.Software')
+    software_relation = mixer.blend('computers.ComputerSoftwareRelation',
+                                    computer=computer, software=software)
+    url = '/delete/software-relation/{}/'.format(software_relation.id)
+    response = client.post(url)
+    assert response.status_code == 302
