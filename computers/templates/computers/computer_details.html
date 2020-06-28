@@ -55,7 +55,7 @@
                     <li>{{ relation.software }}</li>
                 {% endfor %}
                 </ul>
-                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                <p><a href="{% url 'software_relation_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
                 {% block license %}
                     {% include "licenses/license_block.html" %}
