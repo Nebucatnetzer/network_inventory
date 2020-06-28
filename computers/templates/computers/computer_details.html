@@ -28,19 +28,25 @@
                 <h2>Host</h2>
                 {% if device.host %}
                 <ul>
-                    <li><a href="{% url 'computer' device.host.id %}">{{ device.host }}</a></li>
+                    <li>
+                        <a href="{% url 'computer' device.host.id %}">{{ device.host }}</a>
+                        <a href="{% url 'computer_update' pk %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                    </li>
                 </ul>
                 {% else %}
-                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                <p><a href="{% url 'computer_update' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
                 {% endif %}
 
                 <h2>Operating System</h2>
                 {% if device.os %}
                 <ul>
-                    <li>{{ device.os }}</li>
+                    <li>
+                        {{ device.os }}
+                        <a href="{% url 'computer_update' pk %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                    </li>
                 </ul>
                 {% else %}
-                    <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                    <p><a href="{% url 'computer_update' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
                 {% endif %}
 
                 <h2>Software</h2>
