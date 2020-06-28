@@ -44,7 +44,7 @@ urlpatterns = [
     path('delete/disk-relation/<int:pk>/',
          views.ComputerDiskRelationDeleteView.as_view(),
          name='disk_relation_delete'),
-   path('computer/<int:pk>/create/software-relation/',
+    path('computer/<int:pk>/create/software-relation/',
          views.ComputerSoftwareRelationCreateView.as_view(),
          name='software_relation_create'),
  ]
