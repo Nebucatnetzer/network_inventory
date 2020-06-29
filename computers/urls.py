@@ -50,4 +50,8 @@ urlpatterns = [
     path('delete/software-relation/<int:pk>/',
          views.ComputerSoftwareRelationDeleteView.as_view(),
          name='software_relation_delete'),
+    path('computer/<int:pk>/create/raid/', views.RaidCreateView.as_view(),
+         name='raid_create'),
+    path('delete/raid/<int:pk>/', views.RaidDeleteView.as_view(),
+         name='raid_delete'),
  ]

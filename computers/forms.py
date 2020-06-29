@@ -8,6 +8,7 @@ from computers.models import ComputerDiskRelation
 from computers.models import ComputerGpuRelation
 from computers.models import ComputerRamRelation
 from computers.models import ComputerSoftwareRelation
+from computers.models import Raid
 
 
 class ComputerCreateForm(forms.ModelForm):
@@ -80,4 +81,13 @@ class ComputerSoftwareRelationCreateForm(forms.ModelForm):
     """
     class Meta:
         model = ComputerSoftwareRelation
+        fields = '__all__'
+
+
+class RaidCreateForm(forms.ModelForm):
+    """
+    Basic form class to use crispies HTML5 forms.
+    """
+    class Meta:
+        model = Raid
         fields = '__all__'

@@ -107,10 +107,9 @@
                     <tr>
                         <td><b>Type:</b></td>
                         <td>{{ raid.raid_type }}</td>
-                    </tr>
-                    <tr>
                         <td><b>Usable Space</b></td>
                         <td>{{ raid.usable_space }}</td>
+                        <td><a href="{% url 'raid_delete' raid.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">delete</i></a></td>
                     </tr>
                     {% if disks %}
                     {% for disk in disks %}
@@ -126,7 +125,7 @@
                     {% endif %}
                 </table>
                 {% endfor %}
-                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                <p><a href="{% url 'raid_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
             </div>
         </div>
     </div>

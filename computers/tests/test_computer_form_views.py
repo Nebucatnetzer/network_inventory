@@ -128,6 +128,19 @@ def test_software_relation_create_view(create_admin_user):
     assert response.status_code == 302
 
 
+def test_raid_create_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    data = {
+        'computer': computer.id,
+    }
+    url = '/computer/{}/create/raid/'.format(computer.id)
+    response = client.post(url, data)
+    assert response.status_code == 302
+
+
 def test_ram_relation_delete_view(create_admin_user):
     create_admin_user()
     client = Client()
@@ -189,5 +202,16 @@ def test_software_relation_delete_view(create_admin_user):
     software_relation = mixer.blend('computers.ComputerSoftwareRelation',
                                     computer=computer, software=software)
     url = '/delete/software-relation/{}/'.format(software_relation.id)
+    response = client.post(url)
+    assert response.status_code == 302
+
+
+def test_raid_delete_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    computer = mixer.blend('computers.Computer', customer=mixer.SELECT)
+    raid = mixer.blend('computers.Raid', computer=computer)
+    url = '/delete/raid/{}/'.format(raid.id)
     response = client.post(url)
     assert response.status_code == 302

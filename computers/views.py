@@ -28,6 +28,7 @@ from .forms import ComputerDiskRelationCreateForm
 from .forms import ComputerGpuRelationCreateForm
 from .forms import ComputerRamRelationCreateForm
 from .forms import ComputerSoftwareRelationCreateForm
+from .forms import RaidCreateForm
 from .models import Computer
 from .models import ComputerCpuRelation
 from .models import ComputerDiskRelation
@@ -273,4 +274,32 @@ class ComputerSoftwareRelationDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
+
+
+class RaidCreateView(LoginRequiredMixin, CreateView):
+    model = Raid
+    form_class = RaidCreateForm
+    template_name = 'computers/raid_create.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.computer.pk,))
+
+    def get_initial(self):
+        """
+        Set the device and customer dropdown to the device from the previous
+        view and the customer related to the device.
+        """
+        self.computer = get_object_or_404(Computer, id=self.kwargs.get('pk'))
+        return {
+            'computer': self.computer,
+        }
+
+
+class RaidDeleteView(LoginRequiredMixin, DeleteView):
+    model = Raid
+    template_name = 'computers/relation_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('computer', args=(self.object.computer.pk,))
+
 
