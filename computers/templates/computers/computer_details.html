@@ -64,10 +64,10 @@
                 <h2>Backup</h2>
                 <ul>
                     {% for backup in backup_relations %}
-                    <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a></li>
+                    <li><a href="{% url 'backup' backup.id %}">{{ backup }}</a> <a href="{% url 'backup_delete' backup.pk %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">clear</i></a></li>
                     {% endfor %}
                 </ul>
-                <p><a href="{% url 'warranty_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
+                <p><a href="{% url 'backup_create' pk %}" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a></p>
 
             </div>
         </div>

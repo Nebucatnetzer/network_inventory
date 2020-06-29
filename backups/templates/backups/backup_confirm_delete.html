@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block section_title %}Delete Backup{% endblock %}
+{% block content %}
+<div class="row">
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want delete the backup "{{ object }}" for "{{ object.computer }}"?</p>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">Cancel</a>
+    <input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
+</form>
+<script>
+    prev = document.getElementById("previous_page");
+    prev.value = document.referrer;
+</script>
+</div>
+{% endblock %}
