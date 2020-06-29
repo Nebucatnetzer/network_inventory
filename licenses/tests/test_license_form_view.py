@@ -17,7 +17,7 @@ def test_license_with_computer_create_view(create_admin_user):
         'license': license.id,
         'amount': 1
     }
-    url = '/create/license-with/computer/{}/'.format(computer.id)
+    url = '/create/license-with-computer/{}/'.format(computer.id)
     response = client.post(url, data)
     assert response.status_code == 302
 
