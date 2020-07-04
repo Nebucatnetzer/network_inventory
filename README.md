@@ -5,31 +5,31 @@
 I started this project in order to have solution for keeping an
 inventory over my various servers and other network equipment.
 
-## Setup
+## Production Setup
 
 1. Clone the repository
-2. Now decide if you want to develop fully locally or inside the docker
-   container. Locally you'll use SQlite for the database and inside the Docker
-   container you'll use Postgres for the database. For the moment there aren't
-   any features implemented which require Postgres. However this might change
-   in the future and SQlite is not supported for production.
-3. Copy the `.env-example` file to `.env` and change the `POSTGRES_PASSWORD`
+2. Copy the `.env-example` file to `.env` and change the `POSTGRES_PASSWORD`
    and `DJANGO_SECRET_KEY` variables to something secure.
+3. Run `docker-compose up` and connect to http://localhost
 
-### Local Setup
+### Local Development Setup
 
 The local setup is mainly intended to run the tests quickly. I recommend that
 you use the Docker setup if you want to interact with the website.
 
-4. Run `make local` to create the virtual environment for development.
+1. Run `make local` to create the virtual environment for development.
    You're now all set to start developing.
 
-### Docker Setup
+### Docker Development Setup
 
-4. Run `make` to start the production server. You can access it
+This is very similar to the production setup with the difference that the image
+for the `web` application gets built locally instead of getting pulled from
+Dockerhub.
+
+1. Run `make` to start the server. You can access it
    at   http://localhost . You're now all set to start working.
-5. If you want to develop with the Docker setup change the `run` command in the
-   `docker-compose.yml` from `run.sh` to `development.sh`
+2. If you want to have some example data to work with run the command `make
+   init` after you successfully run `make`.
 
 #### Environment Variables
 
