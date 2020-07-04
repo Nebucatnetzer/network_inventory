@@ -42,19 +42,19 @@ Maybe with this I can limit the number of times a relation can be added.
 - [ ] Delete
 
 **** NEXT CPU Forms
-- [ ] Add
-- [ ] Update
-- [ ] Delete
+- [X] Add
+- [X] Update
+- [X] Delete
 
 **** NEXT RAM Forms
-- [ ] Add
-- [ ] Update
-- [ ] Delete
+- [X] Add
+- [X] Update
+- [X] Delete
 
 **** NEXT Disk Forms
-- [ ] Add
-- [ ] Update
-- [ ] Delete
+- [X] Add
+- [X] Update
+- [X] Delete
 
 *** NEXT Customer Forms
 - [X] Add
@@ -72,9 +72,9 @@ Maybe with this I can limit the number of times a relation can be added.
 - [ ] Delete
 
 *** NEXT DeviceLicense Forms
-- [ ] Add
-- [ ] Update
-- [ ] Delete
+- [X] Add
+- [X] Update
+- [X] Delete
 
 *** NEXT Net Forms
 - [ ] Add
