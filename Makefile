@@ -4,7 +4,11 @@ SHELL=/bin/bash
 
 docker:
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
-	docker-compose up
+	docker-compose -f docker-compose-development.yml up
+
+init:
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
+	docker-compose -f docker-compose-development.yml run web python manage.py loaddata network_inventory.yaml
 
 test:
 	docker-compose -f docker-compose-development.yml run web pytest -nauto --nomigrations --cov=. --cov-report=html
