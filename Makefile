@@ -31,7 +31,6 @@ clean:
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm -f */migrations/0*.py
 	sudo rm -rf htmlcov/
-	sudo rm -f .second_run
 	docker-compose down -v
 
 cleanall:
@@ -39,5 +38,4 @@ cleanall:
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm */migrations/*.py
 	sudo rm -rf htmlcov/
-	sudo rm -f .second_run
 	docker-compose down -v --rmi local
