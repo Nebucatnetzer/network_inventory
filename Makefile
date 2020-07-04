@@ -28,14 +28,14 @@ testlocal:
 
 
 clean:
-	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm -f */migrations/0*.py
-	sudo rm -rf htmlcov/
 	docker-compose -f docker-compose-development.yml down -v
+	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
+	sudo rm -rf htmlcov/
+	sudo rm -f */migrations/0*.py
 
 cleanall:
+	docker-compose  -f docker-compose-development.yml down -v --rmi local
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm */migrations/*.py
 	sudo rm -rf htmlcov/
-	docker-compose  -f docker-compose-development.yml down -v --rmi local
+	sudo rm */migrations/*.py
