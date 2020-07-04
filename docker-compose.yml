@@ -16,8 +16,6 @@ services:
     image: nebucatnetzer/network_inventory
     volumes:
       - .:/code
-    ports:
-      - 8000:8000
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
