@@ -13,8 +13,8 @@ services:
       - db_data:/var/lib/postgresql/data/
 
   web:
-    image: nebucatnetzer/network_inventory
-    command: ./run.sh
+    build: .
+    command: ./development.sh
     volumes:
       - .:/code
     ports:
