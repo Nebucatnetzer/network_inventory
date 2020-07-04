@@ -26,4 +26,5 @@ else
     python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
     touch .second_run
 fi
+find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
