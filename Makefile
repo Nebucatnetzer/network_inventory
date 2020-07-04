@@ -7,7 +7,7 @@ docker:
 	docker-compose up
 
 test:
-	docker-compose run web pytest -nauto --nomigrations --cov=. --cov-report=html
+	docker-compose -f docker-compose-development.yml run web pytest -nauto --nomigrations --cov=. --cov-report=html
 
 local:
 	python3 -m venv venv
