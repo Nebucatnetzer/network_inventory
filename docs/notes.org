@@ -21,20 +21,7 @@
 - Customer :: A customer which owns some of the devices in the inventory tool
   and might have access to only the information related to the devices he owns.
 
-* TODO Must Have [0/18]
-** NEXT [#A] add a button to add a relation :computer_detail_view:device_detail_view:
-
-For the many to many relationships it might be a better idea to add them in a
-separate form. So that the view displays the information but when you want to
-add a new CPU for example it shows a button "Add CPU" which you can click an it
-brings you to a new page where the PC is already preselected and the CPU can
-get selected from a drop down.
-
-The update form currently adds a new relation every time I update. The idea
-above would be an easy solution. Another option to try out might be the
-MultipleChoice field[fn:8].
-Maybe with this I can limit the number of times a relation can be added.
-
+* TODO Must Have [0/14]
 ** TODO [#A] Forms [0/12]
 *** TODO Computer Forms [0/3]
 - [X] Add
@@ -64,7 +51,7 @@ Maybe with this I can limit the number of times a relation can be added.
 *** NEXT Backup Forms
 - [ ] Add
 - [ ] Update
-- [ ] Delete
+- [X] Delete
 
 *** NEXT UserLicense Forms
 - [ ] Add
@@ -106,7 +93,6 @@ he's allowed to see. Like only the Nets or Users related to that customer.
 We can use the get_objects helper function in core.utils.
 
 *** NEXT Limit the customer views to superusers
-
 *** NEXT Add + button for nets in the DeviceInNet form
 
 This way we can quickly add a net when we want to add an IP to a device.
@@ -123,20 +109,10 @@ adjustments in order to add many objects after another.
 
 So that one can search for a string in the responding column.
 
-** NEXT [#A] Fix the table for the connected devices
-
-Currently there is a column for "Device_ptr" I have no idea where that came
-from.
-
 ** NEXT [#A] Create custom user model                                :model:
 
 It is best practice to create a custom user model to allow future modifications
 to the users without causing problems.
-
-** NEXT [#A] Add a view for DeviceManufacturer details
-
-since the DeviceManufacturer model now contains various contact details we
-should provide a details view to let uses access those details.
 
 ** NEXT [#B] Implement a license check into all forms
 
@@ -152,14 +128,6 @@ the technician when the limit is reached.
 ** NEXT [#B] Convert the NETSheet Data file to YML fixtures.
 
 A lot of this is already done. Only the hardware models are currently missing.
-
-** NEXT [#B] Check tests for response.context[‚table‘]
-
-This would allow for tests of the views which check explicitly what gets
-returned by the view. Might be easier/faster then rendering the whole view.
-
-However for some views it would be better to test the final view because the
-template contains logic which can fail.
 
 ** NEXT [#B] Have a look at the documentation of django-nested-admin
 
@@ -177,28 +145,26 @@ might help with that [fn:1]:
 The admin tables show currently very little information about the various
 objects. At minimum every object should display the customer it belongs to.
 
-** NEXT [#B] Show all models in the admin interface
-
-Currently I'm hiding a lot of models from the admin interace to make it look a
-bit nicer. However for the production site we want to work mostly on the
-frontend. The admin page should then become really what it is. An admin
-inteface so that we can delete or add models which currently don't have a
-frontend interface.
-
 ** NEXT [#B] In the warranty form validate the date inputs
 
 The starting date shouldn't be allowed to be newer than the end date.
 
-* TODO Nice to Have [0/15]
+** NEXT [#C] Filter Hardware Model to corresponding device manufacturer
+
+When changing the HardwareModel field of a device the dropdown should be
+filtered to the provided DeviceManufacturer.
+
+Currently it could still make sense to make the DeviceManufacturer only
+available through the HardwareModel. This way we wouldn't have to filter the
+HardwareModel dropdown. However we would loose the ability to only select the
+DeviceManufacturer for a device in case we don't know the specific model which
+happens quite often.
+
+* TODO Nice to Have [0/11]
 ** NEXT [#C] allow technicians to add custom fields
 
 This would allow technicians to create custom models without change
 Maybe this approach would be something [fn:2]:
-
-** NEXT [#C] Extend the CSS
-
-- A more centered layout would be nice
-- Maybe some colours
 
 ** NEXT [#C] calculate the used space on a host
 
@@ -226,26 +192,11 @@ that the user needs to be deactivated. Then any technician could deactivate the
 user and not just the technician responsible for the customer, increasing the
 security of the customer.
 
-** NEXT [#C] Filter Hardware Model to corresponding device manufacturer
-
-When changing the HardwareModel field of a device the dropdown should be
-filtered to the provided DeviceManufacturer.
-
-Currently it could still make sense to make the DeviceManufacturer only
-available through the HardwareModel. This way we wouldn't have to filter the
-HardwareModel dropdown. However we would loose the ability to only select the
-DeviceManufacturer for a device in case we don't know the specific model which
-happens quite often.
-
 ** NEXT [#C] change the admin url
 
 For security reasons it's recommended to change the name of the admin panel
 url. This way automated tools can't find it so easy. It only increases the
 security slightly.
-
-** NEXT [#C] update the url code [fn:5]
-
-I'm currently not sure what I wanted to do with this.
 
 ** NEXT [#C] implement guardian
 
@@ -272,22 +223,17 @@ I don't remember what the initial idea here was. We could show here
 which customers are using this software. But that is currently a really low
 priority item.
 
-** NEXT [#C] Add a check to see if a software has a license attached to it.
-
-I forgot the reason why I need this. Maybe to show in general if a software has
-any licenses attached to it.
-Add a check to see if a software has a license attached to it.If so it
-increases the used licenses counter. Maybe with this this stackoverflow post
-can help [fn:7].
-
 ** NEXT [#C] Implement the .all command in templates
 
 This stackoverflow post should help [fn:9]
 
-** NEXT [#C] Inline Formfields like in the admin interface
+** NEXT [#B] Check tests for response.context[‚table‘]
 
-If already found various Github projects which might serves as an
-example[fn:10] [fn:11]
+This would allow for tests of the views which check explicitly what gets
+returned by the view. Might be easier/faster then rendering the whole view.
+
+However for some views it would be better to test the final view because the
+template contains logic which can fail.
 
 * Resources
 
@@ -609,4 +555,71 @@ CLOSED: [2020-05-03 So 22:19]
 - [X] Add
 - [X] Update
 - [X] Delete
+
+** DONE [#A] add a button to add a relation
+CLOSED: [2020-07-05 So 13:05]
+
+For the many to many relationships it might be a better idea to add them in a
+separate form. So that the view displays the information but when you want to
+add a new CPU for example it shows a button "Add CPU" which you can click an it
+brings you to a new page where the PC is already preselected and the CPU can
+get selected from a drop down.
+
+The update form currently adds a new relation every time I update. The idea
+above would be an easy solution. Another option to try out might be the
+MultipleChoice field[fn:8].
+Maybe with this I can limit the number of times a relation can be added.
+
+** DONE [#A] Fix the table for the connected devices
+CLOSED: [2020-07-05 So 13:36]
+
+Currently there is a column for "Device_ptr" I have no idea where that came
+from.
+
+** DONE [#A] Add a view for DeviceManufacturer details
+CLOSED: [2020-07-05 So 13:39]
+
+since the DeviceManufacturer model now contains various contact details we
+should provide a details view to let uses access those details.
+
+** DONE [#B] Show all models in the admin interface
+CLOSED: [2020-07-05 So 13:49]
+:LOGBOOK:
+- State "WAITING"    from "NEXT"       [2020-07-05 So 13:49]
+:END:
+
+Currently I'm hiding a lot of models from the admin interace to make it look a
+bit nicer. However for the production site we want to work mostly on the
+frontend. The admin page should then become really what it is. An admin
+inteface so that we can delete or add models which currently don't have a
+frontend interface.
+
+** DONE [#C] Extend the CSS
+CLOSED: [2020-07-05 So 13:50]
+
+- A more centered layout would be nice
+- Maybe some colours
+
+** CANCELLED [#C] update the url code [fn:5]
+CLOSED: [2020-07-05 So 13:56]
+
+I'm currently not sure what I wanted to do with this.
+
+** CANCELLED [#C] Add a check to see if a software has a license attached to it.
+CLOSED: [2020-07-05 So 14:04]
+
+I forgot the reason why I need this. Maybe to show in general if a software has
+any licenses attached to it.
+Add a check to see if a software has a license attached to it.If so it
+increases the used licenses counter. Maybe with this this stackoverflow post
+can help [fn:7].
+
+** CANCELLED [#C] Inline Formfields like in the admin interface
+CLOSED: [2020-07-05 So 14:06]
+
+If already found various Github projects which might serves as an
+example[fn:10] [fn:11]
+
+currently not needed anymore I solve it with multiple form views because the
+manytomany always generate a new object when updating.
 

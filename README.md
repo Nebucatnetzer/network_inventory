@@ -48,5 +48,5 @@ supported.
 ## Documentation
 
 Currently there isn't a lot of documentation present. I try to document my
-thoughts, tasks and other related information in the [Notes
+thoughts and other related information in the [Notes
 file](./docs/notes.org).
