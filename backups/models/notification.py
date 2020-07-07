@@ -14,5 +14,8 @@ class Notification(models.Model):
     notification_type = models.ForeignKey(NotificationType, models.SET_NULL,
                                           blank=True, null=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name

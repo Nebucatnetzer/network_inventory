@@ -16,6 +16,7 @@ class Group(models.Model):
 class AdGroup(Group):
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "AD Groups"
 
 
@@ -23,4 +24,5 @@ class MailGroup(Group):
     mail_address = models.EmailField()
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Mail Groups"

@@ -16,6 +16,9 @@ class User(models.Model):
     ad_groups = models.ManyToManyField(AdGroup, through='UserInAdGroup')
     mail_groups = models.ManyToManyField(MailGroup, through='UserInMailGroup')
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name + " " + self.first_name
 
