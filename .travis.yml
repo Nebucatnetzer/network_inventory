@@ -9,3 +9,7 @@ before_install:
 
 script:
 - make test
+
+branches:
+  only: 
+    - master
