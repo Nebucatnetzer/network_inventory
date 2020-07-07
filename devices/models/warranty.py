@@ -11,6 +11,7 @@ class WarrantyType(Category):
     description = models.TextField()
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Warranty Types"
 
 
@@ -34,6 +35,7 @@ class Warranty(models.Model):
         return str(self.device)
 
     class Meta:
+        ordering = ['customer']
         verbose_name_plural = "Warranties"
 
     @property

@@ -9,6 +9,9 @@ class Owner(Company):
 class Customer(Company):
     name = models.CharField(max_length=50)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -20,6 +23,7 @@ class Customer(Company):
 class DeviceManufacturer(Company):
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Device Manufacturers"
 
 

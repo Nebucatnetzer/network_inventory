@@ -11,6 +11,7 @@ class BackupMethod(Category):
     description = models.TextField()
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Backup Methods"
 
 
@@ -27,6 +28,9 @@ class Backup(models.Model):
     exec_days = models.ManyToManyField(Weekday, blank=True)
     target_device = models.ManyToManyField(Computer, through='TargetDevice',
                                            blank=True)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return str(self.name)

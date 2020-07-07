@@ -24,6 +24,9 @@ class UserLicense(License):
     max_allowed_users = models.IntegerField(null=True, blank=True)
     user = models.ManyToManyField(User, through="LicenseWithUser")
 
+    class Meta:
+        ordering = ['software']
+
     @property
     def used_licenses(self):
         return LicenseWithUser.objects.filter(license=self).count()
@@ -32,6 +35,9 @@ class UserLicense(License):
 class ComputerLicense(License):
     max_allowed_computers = models.IntegerField(null=True, blank=True)
     computer = models.ManyToManyField(Computer, through="LicenseWithComputer")
+
+    class Meta:
+        ordering = ['software']
 
     @property
     def used_licenses(self):

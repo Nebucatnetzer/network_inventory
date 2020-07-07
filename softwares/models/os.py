@@ -11,4 +11,5 @@ class OperatingSystem(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Operating Systems"

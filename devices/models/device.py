@@ -16,6 +16,7 @@ class DeviceManufacturer(Company):
     website = models.URLField(null=True, blank=True)
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Device Manufacturers"
 
     def get_absolute_url(self):
@@ -26,6 +27,7 @@ class DeviceManufacturer(Company):
 class DeviceCategory(Category):
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Device Categories"
 
 
@@ -33,6 +35,9 @@ class HardwareModel(models.Model):
     name = models.CharField(max_length=50)
     manufacturer = models.ForeignKey(DeviceManufacturer,
                                      on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -71,6 +76,9 @@ class Device(models.Model):
     installation_date = models.DateField(null=True, blank=True)
     net = models.ManyToManyField(Net, through='DeviceInNet')
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -97,4 +105,5 @@ class DeviceInNet(models.Model):
         return "{}: {}".format(self.ip, self.ip_status)
 
     class Meta:
+        ordering = ['ip']
         verbose_name_plural = "Devices in Net"
