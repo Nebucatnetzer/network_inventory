@@ -13,6 +13,9 @@ init:
 test:
 	docker-compose -f docker-compose-development.yml run web pytest -nauto --nomigrations --cov=. --cov-report=html
 
+debug:
+	docker-compose -f docker-compose-development.yml run web pytest --pdb --nomigrations --cov=. --cov-report=html
+
 local:
 	python3 -m venv venv
 	( \
