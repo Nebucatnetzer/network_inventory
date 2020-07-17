@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy-to-prod:
+  stage: deploy
+    script:
+      - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" down --remove-orphans
+      - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" pull
+      - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" up -d
+  only:
+    - master
