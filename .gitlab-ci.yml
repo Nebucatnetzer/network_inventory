@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+deploy-to-prod:
+  stage: deploy
+  script:
+    - ssh $STAGE_SERVER_USER@$STAGE_SERVER_IP "cd /home/localadmin/network_inventory;docker-compose pull;docker-compose up --build -d"
+  only:
+    - master
