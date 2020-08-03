@@ -9,6 +9,7 @@
     "python.testing.pytestArgs": [
         ".",
         "-n 6",
+        "--nomigrations",
         "--ds=network_inventory.settings.local"
     ]
 }
