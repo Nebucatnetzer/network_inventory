@@ -10,4 +10,7 @@ urlpatterns = [
          views.BackupCreateView.as_view(), name='backup_create'),
     path('delete/backup/<int:pk>/',
          views.BackupDeleteView.as_view(), name='backup_delete'),
+    path('delete/backup/from-table/<int:pk>/',
+         views.BackupDeleteFromTableView.as_view(),
+         name='backup_delete_from-table'),
 ]

@@ -64,3 +64,11 @@ class BackupDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
+
+
+class BackupDeleteFromTableView(LoginRequiredMixin, DeleteView):
+    model = Backup
+    template_name = 'backups/backup_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('backups', args=(self.object.customer.pk,))
