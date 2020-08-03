@@ -5,7 +5,7 @@
 <form method="post">{% csrf_token %}
     <p>Are you sure you want to delete the device "{{ object }}"?</p>
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'device' object.pk %}" class="btn btn-primary">Cancel</a>
+    <a href="{% url 'devices' object.customer.pk %}" class="btn btn-primary">Cancel</a>
     <input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
 </form>
 <script>
