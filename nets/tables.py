@@ -11,6 +11,13 @@ class NetsTable(CoreTable):
     id = tables.Column(visible=False)
     name = tables.Column('Net', linkify=True)
     customer = tables.Column('Customer', linkify=True)
+    description = tables.Column(
+        attrs={
+            'td': {
+                'class': 'text-truncate',
+                'style': 'max-width: 150px;'}
+        }
+    )
     delete = tables.LinkColumn('net_delete',
                                text='delete',
                                args=[A('pk')], attrs={

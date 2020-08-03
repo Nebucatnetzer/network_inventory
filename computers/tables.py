@@ -6,7 +6,13 @@ from core.tables import CoreTable
 
 class ComputersTable(CoreTable):
     name = tables.Column('Computer', linkify=True)
-    description = tables.Column()
+    description = tables.Column(
+        attrs={
+            'td': {
+                'class': 'text-truncate',
+                'style': 'max-width: 150px;'}
+        }
+    )
     serialnumber = tables.Column()
     owner = tables.Column()
     manufacturer = tables.Column()

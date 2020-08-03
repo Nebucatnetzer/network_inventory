@@ -9,6 +9,13 @@ from .models import User
 class UsersTable(CoreTable):
     id = tables.Column(visible=False)
     name = tables.Column('User', linkify=True)
+    description = tables.Column(
+        attrs={
+            'td': {
+                'class': 'text-truncate',
+                'style': 'max-width: 150px;'}
+        }
+    )
     customer = tables.Column('Customer', linkify=True)
     ad_groups = tables.ManyToManyColumn()
     mail_groups = tables.ManyToManyColumn()

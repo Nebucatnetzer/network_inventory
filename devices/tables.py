@@ -11,6 +11,13 @@ from .models import Device
 class DevicesTable(CoreTable):
     id = tables.Column(visible=False)
     name = tables.Column('Device', linkify=True)
+    description = tables.Column(
+        attrs={
+            'td': {
+                'class': 'text-truncate',
+                'style': 'max-width: 150px;'}
+        }
+    )
     delete = tables.LinkColumn('device_delete',
                                text='delete',
                                args=[A('pk')], attrs={
