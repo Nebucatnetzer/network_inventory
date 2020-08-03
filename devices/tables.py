@@ -27,6 +27,11 @@ class WarrantiesTable(CoreTable):
     valid_from = tables.Column()
     valid_until = tables.Column()
     warranty_type = tables.Column()
+    delete = tables.LinkColumn('warranty_delete',
+                               text='delete',
+                               args=[A('pk')], attrs={
+                                   'a': {'class': 'delete material-icons', }
+                               })
 
     class Meta(CoreTable.Meta):
         pass
