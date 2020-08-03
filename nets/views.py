@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-
+from django.urls import reverse
+from django.views.generic import DeleteView
 from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
@@ -30,3 +32,10 @@ def net_detail_view(request, pk):
     return render(request, 'nets/net_details.html',
                   {'table': table,
                    'net': net})
+
+
+class NetDeleteView(LoginRequiredMixin, DeleteView):
+    model = Net
+
+    def get_success_url(self):
+        return reverse('nets', args=(self.object.customer.pk,))

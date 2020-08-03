@@ -1,4 +1,5 @@
 import django_tables2 as tables
+from django_tables2.utils import A
 
 from core.tables import CoreTable
 
@@ -10,6 +11,11 @@ class NetsTable(CoreTable):
     id = tables.Column(visible=False)
     name = tables.Column('Net', linkify=True)
     customer = tables.Column('Customer', linkify=True)
+    delete = tables.LinkColumn('net_delete',
+                               text='delete',
+                               args=[A('pk')], attrs={
+                                   'a': {'class': 'delete material-icons', }
+                               })
 
     class Meta(CoreTable.Meta):
         model = Net
