@@ -17,7 +17,6 @@ from .models import UserLicense
 from .models import LicenseWithComputer
 from .tables import ComputerLicensesTable
 from .tables import UserLicensesTable
-# Create your views here.
 
 
 @login_required
@@ -59,3 +58,19 @@ class LicenseWithComputerDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
+
+
+class UserLicenseDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserLicense
+    template_name = 'licenses/license_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('licenses', args=(self.object.customer.pk,))
+
+
+class ComputerLicenseDeleteView(LoginRequiredMixin, DeleteView):
+    model = ComputerLicense
+    template_name = 'licenses/license_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('licenses', args=(self.object.customer.pk,))

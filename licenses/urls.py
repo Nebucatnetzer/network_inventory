@@ -11,4 +11,10 @@ urlpatterns = [
     path('delete/license-with-computer/<int:pk>/',
          views.LicenseWithComputerDeleteView.as_view(),
          name='license_with_computer_delete'),
+    path('delete/user-license/<int:pk>/',
+         views.UserLicenseDeleteView.as_view(),
+         name='user_license_delete'),
+    path('delete/computer-license/<int:pk>/',
+         views.ComputerLicenseDeleteView.as_view(),
+         name='computer_license_delete'),
 ]
