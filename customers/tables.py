@@ -31,6 +31,11 @@ class CustomersTable(CoreTable):
                               text='Users',
                               args=[A('pk')],
                               orderable=False)
+    delete = tables.LinkColumn('customer_delete',
+                               text='delete',
+                               args=[A('pk')], attrs={
+                                   'a': {'class': 'delete material-icons', }
+                               })
 
     class Meta(CoreTable.Meta):
         pass

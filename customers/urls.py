@@ -9,4 +9,6 @@ urlpatterns = [
     path('create/customer/',
          views.CustomerCreateView.as_view(),
          name='customer_create'),
+    path('delete/customer/<int:pk>/', views.CustomerDeleteView.as_view(),
+         name='customer_delete'),
 ]

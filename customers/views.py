@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import DetailView
 
 from django_tables2 import RequestConfig
@@ -40,3 +41,11 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('customer', args=(self.object.pk,))
+
+
+class CustomerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Customer
+
+    def get_success_url(self):
+        return reverse('computers', args=(self.object.customer.pk,))
+
