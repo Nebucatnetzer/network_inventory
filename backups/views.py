@@ -64,5 +64,3 @@ class BackupDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('computer', args=(self.object.computer.pk,))
-
-

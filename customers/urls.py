@@ -9,4 +9,4 @@ urlpatterns = [
     path('create/customer/',
          views.CustomerCreateView.as_view(),
          name='customer_create'),
- ]
+]

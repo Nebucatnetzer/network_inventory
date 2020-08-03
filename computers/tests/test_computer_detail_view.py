@@ -94,5 +94,3 @@ def test_computer_detail_view_gpu_relation(create_admin_user):
     response = client.get('/computer/' + str(computer.id) + '/')
     assert (response.status_code == 200
             and helper.in_content(response, gpu))
-
-

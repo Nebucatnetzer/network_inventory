@@ -94,4 +94,3 @@ class ComputerGpuRelation(models.Model):
 
     class Meta:
         verbose_name_plural = "GPUs in Computer"
-

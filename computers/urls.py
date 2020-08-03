@@ -54,4 +54,4 @@ urlpatterns = [
          name='raid_create'),
     path('delete/raid/<int:pk>/', views.RaidDeleteView.as_view(),
          name='raid_delete'),
- ]
+]

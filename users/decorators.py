@@ -13,5 +13,5 @@ def user_view_permission(old_fuction):
         else:
             return HttpResponseForbidden(
                 "You're not allowed to access this device."
-                )
+            )
     return new_function

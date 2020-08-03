@@ -12,5 +12,5 @@ def customer_view_permission(old_function):
         else:
             return HttpResponseForbidden(
                 "You're not allowed to access this page."
-                )
+            )
     return new_function
