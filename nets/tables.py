@@ -15,7 +15,7 @@ class NetsTable(CoreTable):
                                text='delete',
                                args=[A('pk')], attrs={
                                    'a': {'class': 'delete material-icons', }
-                               })
+                               }, orderable=False)
 
     class Meta(CoreTable.Meta):
         model = Net
