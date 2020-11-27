@@ -4,7 +4,7 @@ SHELL=/bin/bash
 
 docker:
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
-	docker-compose -f docker-compose-development.yml up
+	docker-compose -f docker-compose-development.yml up --build
 
 init:
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
