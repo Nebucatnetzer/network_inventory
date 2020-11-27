@@ -13,6 +13,6 @@ router.register(r'dayofmonths', core_views.DayOfMonthViewSet)
 
 urlpatterns = [
     # required for the login functionality
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
