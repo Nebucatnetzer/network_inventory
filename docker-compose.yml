@@ -9,7 +9,7 @@ services:
     volumes:
       - ./db_data:/var/lib/postgresql/data/
 
-  web:
+  backend:
     image: nebucatnetzer/network_inventory
     volumes:
       - .:/code
@@ -20,11 +20,16 @@ services:
     depends_on:
       - db
 
+  frontend:
+    build: frontend/.
+    ports:
+      - 8080:8080
+
   nginx:
     build: ./nginx
     ports:
       - 80:80
     depends_on:
-      - web
+      - backend
     volumes:
       - ./static:/home/app/web/static
