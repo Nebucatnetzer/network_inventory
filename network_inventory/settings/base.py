@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'backups.apps.BackupsConfig',
     'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
+    'rest_framework',
     'crispy_forms',
     'customers.apps.CustomersConfig',
     'devices.apps.DevicesConfig',
@@ -49,6 +50,11 @@ INSTALLED_APPS = [
     'softwares.apps.SoftwaresConfig',
     'users.apps.UsersConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -107,8 +113,6 @@ AUTHENTICATION_BACKENDS = (
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LOGIN_REDIRECT_URL = reverse_lazy('customers')
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 LANGUAGE_CODE = 'en-us'
 

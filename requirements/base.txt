@@ -1,5 +1,6 @@
 wheel
 Django==2.2.13
+djangorestframework
 pyaml
 pytz
 django-guardian
