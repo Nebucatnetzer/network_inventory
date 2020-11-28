@@ -10,7 +10,7 @@ from .serializers import MonthSerializer
 from .serializers import DayOfMonthSerializer
 
 
-class WeekdayViewSet(viewsets.ModelViewSet):
+class WeekdayViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
@@ -19,7 +19,7 @@ class WeekdayViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class MonthViewSet(viewsets.ModelViewSet):
+class MonthViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows months to be viewed or edited.
     """
@@ -28,7 +28,7 @@ class MonthViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class DayOfMonthViewSet(viewsets.ModelViewSet):
+class DayOfMonthViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows day of months to be viewed or edited.
     """
