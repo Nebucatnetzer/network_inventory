@@ -4,10 +4,14 @@ from rest_framework import permissions
 from .models import Weekday
 from .models import Month
 from .models import DayOfMonth
+from .models import HoursInDay
+from .models import MinutesInHour
 
 from .serializers import WeekdaySerializer
 from .serializers import MonthSerializer
 from .serializers import DayOfMonthSerializer
+from .serializers import HoursInDaySerializer
+from .serializers import MinutesInHourSerializer
 
 
 class WeekdayViewSet(viewsets.ReadOnlyModelViewSet):
@@ -34,4 +38,22 @@ class DayOfMonthViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = DayOfMonth.objects.all()
     serializer_class = DayOfMonthSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class HoursInDayViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows hours in day to be viewed or edited.
+    """
+    queryset = HoursInDay.objects.all()
+    serializer_class = HoursInDaySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class MinutesInHourViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows minutes in hour to be viewed or edited.
+    """
+    queryset = MinutesInHour.objects.all()
+    serializer_class = MinutesInHourSerializer
     permission_classes = [permissions.IsAuthenticated]
