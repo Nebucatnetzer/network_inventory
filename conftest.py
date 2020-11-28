@@ -36,3 +36,9 @@ def create_admin_user():
         result['group'] = group
         return result
     return _create_admin_user
+
+
+@pytest.fixture
+def api_client():
+    from rest_framework.test import APIClient
+    return APIClient()
