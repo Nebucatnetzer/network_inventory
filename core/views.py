@@ -12,7 +12,7 @@ from .serializers import DayOfMonthSerializer
 
 class WeekdayViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API endpoint that allows weekdays to be viewed or edited.
     """
     queryset = Weekday.objects.all()
     serializer_class = WeekdaySerializer
@@ -21,7 +21,7 @@ class WeekdayViewSet(viewsets.ModelViewSet):
 
 class MonthViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that allows months to be viewed or edited.
     """
     queryset = Month.objects.all()
     serializer_class = MonthSerializer
@@ -30,7 +30,7 @@ class MonthViewSet(viewsets.ModelViewSet):
 
 class DayOfMonthViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API endpoint that allows day of months to be viewed or edited.
     """
     queryset = DayOfMonth.objects.all()
     serializer_class = DayOfMonthSerializer
