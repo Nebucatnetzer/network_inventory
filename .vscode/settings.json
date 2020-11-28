@@ -6,6 +6,7 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
+    "python.testing.cwd": "backend",
     "python.testing.pytestArgs": [
         ".",
         "-n 6",
