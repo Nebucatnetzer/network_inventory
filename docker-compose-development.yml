@@ -13,9 +13,9 @@ services:
       - db_data:/var/lib/postgresql/data/
 
   backend:
-    build: .
+    build: backend/.
     volumes:
-      - .:/code
+      - ./backend:/code
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
@@ -30,4 +30,4 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./static:/home/app/backend/static
+      - ./backend/static:/home/app/backend/static
