@@ -2,20 +2,20 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from core import views as core_views
+from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'months', core_views.MonthViewSet)
-router.register(r'weekdays', core_views.WeekdayViewSet)
+router.register(r'months', views.MonthViewSet)
+router.register(r'weekdays', views.WeekdayViewSet)
 router.register(r'days-of-month',
-                core_views.DayOfMonthViewSet,
+                views.DayOfMonthViewSet,
                 'days-of-month')
 router.register(r'hours-in-day',
-                core_views.HoursInDayViewSet,
+                views.HoursInDayViewSet,
                 'hours-in-day')
 router.register(r'minutes-in-hour',
-                core_views.MinutesInHourViewSet,
+                views.MinutesInHourViewSet,
                 'minutes-in-hour')
 
 
