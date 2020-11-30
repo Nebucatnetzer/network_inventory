@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'', include('devices.urls')),
     url(r'', include('licenses.urls')),
     url(r'', include('nets.urls')),
+    url(r'', include('softwares.urls')),
     url(r'', include('users.urls')),
     path('admin/', admin.site.urls),
     url(r'^_nested_admin/', include('nested_admin.urls')),
