@@ -19,20 +19,20 @@ def test_unauthorized_request_month(api_client):
 
 @pytest.mark.django_db
 def test_unauthorized_request_day_of_month(api_client):
-    url = reverse('dayofmonth-list')
+    url = reverse('days-of-month-list')
     response = api_client.get(url)
     assert response.status_code == 403
 
 
 @pytest.mark.django_db
 def test_unauthorized_request_hours_in_day(api_client):
-    url = reverse('hoursinday-list')
+    url = reverse('hours-in-day-list')
     response = api_client.get(url)
     assert response.status_code == 403
 
 
 @pytest.mark.django_db
 def test_unauthorized_request_minutes_in_hour(api_client):
-    url = reverse('minutesinhour-list')
+    url = reverse('minutes-in-hour-list')
     response = api_client.get(url)
     assert response.status_code == 403
