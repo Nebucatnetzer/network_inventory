@@ -29,3 +29,17 @@ def test_unauthorized_request_notificaton_from_backup(api_client):
     url = reverse('notification-from-backup-list')
     response = api_client.get(url)
     assert response.status_code == 403
+
+
+@pytest.mark.django_db
+def test_unauthorized_request_notificaton(api_client):
+    url = reverse('notification-list')
+    response = api_client.get(url)
+    assert response.status_code == 403
+
+
+@pytest.mark.django_db
+def test_unauthorized_request_notificaton_type(api_client):
+    url = reverse('notification-types-list')
+    response = api_client.get(url)
+    assert response.status_code == 403
