@@ -11,10 +11,10 @@ init:
 	docker-compose -f docker-compose-development.yml run web python manage.py loaddata network_inventory.yaml
 
 test:
-	docker-compose -f docker-compose-development.yml run web pytest -nauto --nomigrations --cov=. --cov-report=html
+	docker-compose -f docker-compose-development.yml run backend pytest -nauto --nomigrations --cov=. --cov-report=html
 
 debug:
-	docker-compose -f docker-compose-development.yml run web pytest --pdb --nomigrations --cov=. --cov-report=html
+	docker-compose -f docker-compose-development.yml run backend pytest --pdb --nomigrations --cov=. --cov-report=html
 
 local:
 	python3 -m venv venv
