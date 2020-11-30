@@ -4,11 +4,7 @@ djangorestframework
 pyaml
 pytz
 django-guardian
-django-tables2
-django-filter
 django-nested-admin
-django-floppyforms
-django-crispy-forms
 pytest
 pytest-django
 pytest-cov
