@@ -96,7 +96,7 @@ def test_unauthorized_request_gpu(api_client):
 
 @pytest.mark.django_db
 def test_unauthorized_request_disks_in_raid(api_client):
-    url = reverse('disk-in-raid-list')
+    url = reverse('disks-in-raid-list')
     response = api_client.get(url)
     assert response.status_code == 403
 
