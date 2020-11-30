@@ -26,7 +26,7 @@ local:
 testlocal:
 	( \
 	source backend/venv/bin/activate; \
-	pytest -n 6 --ds=network_inventory.settings.local --nomigrations --cov=. --cov-report=html:backend/htmlcov/ backend/; \
+	pytest -n 6 --ds=network_inventory.settings.local --nomigrations --cov=. --cov-config=backend/.coveragerc --cov-report=html:backend/htmlcov/ backend/; \
 	)
 
 
