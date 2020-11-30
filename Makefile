@@ -17,28 +17,28 @@ debug:
 	docker-compose -f docker-compose-development.yml run backend pytest --pdb --nomigrations --cov=. --cov-report=html
 
 local:
-	python3 -m venv venv
+	python3 -m venv backend/venv
 	( \
-	source venv/bin/activate; \
-	pip3 install -r requirements/local.txt; \
+	source backend/venv/bin/activate; \
+	pip3 install -r backend/requirements/local.txt; \
 	)
 
 testlocal:
 	( \
-	source venv/bin/activate; \
-	pytest -n 6 --ds=network_inventory.settings.local --nomigrations; \
+	source backend/venv/bin/activate; \
+	pytest -n 6 --ds=network_inventory.settings.local --nomigrations --cov=. --cov-report=html:backend/htmlcov/ backend/; \
 	)
 
 
 clean:
 	docker-compose -f docker-compose-development.yml down -v
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm -rf htmlcov/
-	sudo rm -f */migrations/0*.py
+	sudo rm -rf backend/htmlcov/
+	sudo rm -f backend/*/migrations/0*.py
 
 cleanall:
 	docker-compose  -f docker-compose-development.yml down -v --rmi local
-	rm -rf venv/
+	rm -rf backend/venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm -rf htmlcov/
-	sudo rm */migrations/*.py
+	sudo rm -rf backend/htmlcov/
+	sudo rm backend/*/migrations/*.py
