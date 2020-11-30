@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
     'rest_framework',
-    'crispy_forms',
     'customers.apps.CustomersConfig',
     'devices.apps.DevicesConfig',
     'django.contrib.admin',
@@ -40,9 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'django_filters',
-    'django_tables2',
-    'floppyforms',
     'guardian',
     'licenses.apps.LicensesConfig',
     'nested_admin',
@@ -130,6 +126,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
-
-DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
