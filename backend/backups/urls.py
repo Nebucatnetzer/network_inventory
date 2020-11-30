@@ -5,19 +5,19 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'backup-method',
+router.register(r'backup-methods',
                 views.BackupMethodViewSet,
                 'backup-method')
 router.register(r'backups', views.BackupViewSet)
 router.register(r'target-devices',
                 views.TargetDeviceViewSet,
                 'target-device')
-router.register(r'notification-from-backup',
+router.register(r'notifications-from-backup',
                 views.NotificationFromBackupViewSet,
                 'notification-from-backup')
-router.register(r'notification',
+router.register(r'notifications',
                 views.NotificationViewSet)
-router.register(r'notification-type',
+router.register(r'notifications-type',
                 views.NotificationTypeViewSet,
                 'notification-types')
 
