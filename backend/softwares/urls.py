@@ -12,7 +12,8 @@ router.register(r'software-architectures',
                 views.SoftwareArchitectureViewSet,
                 'software-architecture')
 router.register(r'software-categories',
-                views.SoftwareCategoryViewSet)
+                views.SoftwareCategoryViewSet,
+                'software-category')
 router.register(r'softwares', views.SoftwareViewSet)
 
 
