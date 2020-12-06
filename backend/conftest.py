@@ -42,3 +42,11 @@ def create_admin_user():
 def api_client():
     from rest_framework.test import APIClient
     return APIClient()
+
+
+@pytest.fixture
+def api_client_authenticatet(db, create_admin_user, api_client):
+    fixture = create_admin_user()
+    api_client.force_authenticate(user=fixture['admin'])
+    yield api_client
+    api_client.force_authenticate(user=None)
