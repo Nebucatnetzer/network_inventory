@@ -5,21 +5,21 @@ from django.urls import reverse
 
 @pytest.mark.django_db
 def test_unauthorized_request_operating_system(api_client):
-    url = reverse('operating-system-list')
+    url = reverse('operatingsystem-list')
     response = api_client.get(url)
     assert response.status_code == 403
 
 
 @pytest.mark.django_db
 def test_unauthorized_request_software_architecture(api_client):
-    url = reverse('software-architecture-list')
+    url = reverse('softwarearchitecture-list')
     response = api_client.get(url)
     assert response.status_code == 403
 
 
 @pytest.mark.django_db
 def test_unauthorized_request_software_category(api_client):
-    url = reverse('software-category-list')
+    url = reverse('softwarecategory-list')
     response = api_client.get(url)
     assert response.status_code == 403
 

@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'', include('nets.urls')),
     url(r'', include('softwares.urls')),
     url(r'', include('users.urls')),
-    path('admin/', admin.site.urls),
     url(r'^_nested_admin/', include('nested_admin.urls')),
-    path('api/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api/', include('rest_framework.urls')),
+    path('api/accounts/', include('django.contrib.auth.urls')),
+    path('api/admin/', admin.site.urls),
 ]

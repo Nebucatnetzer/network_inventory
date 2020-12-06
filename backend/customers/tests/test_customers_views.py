@@ -19,7 +19,7 @@ def test_unauthorized_request_customer(api_client):
 
 @pytest.mark.django_db
 def test_unauthorized_request_device_manufacturer(api_client):
-    url = reverse('device-manufacturer-list')
+    url = reverse('devicemanufacturer-list')
     response = api_client.get(url)
     assert response.status_code == 403
 

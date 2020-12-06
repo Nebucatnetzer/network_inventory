@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'computers.apps.ComputersConfig',
     'core.apps.CoreConfig',
     'rest_framework',
+    'rest_framework.authtoken',
     'customers.apps.CustomersConfig',
     'devices.apps.DevicesConfig',
     'django.contrib.admin',
