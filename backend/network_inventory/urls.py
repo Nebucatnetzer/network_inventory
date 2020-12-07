@@ -45,7 +45,6 @@ router.registry.extend(users_router.registry)
 urlpatterns = [
     #path(r'^_nested_admin/', include('nested_admin.urls')),
     path('api/', include(router.urls)),
-    path('api/accounts/', include('django.contrib.auth.urls')),
+    path('api/', include('rest_framework.urls')),
     path('api/admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
 ]
