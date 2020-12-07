@@ -45,7 +45,7 @@ def api_client():
 
 
 @pytest.fixture
-def api_client_authenticatet(db, create_admin_user, api_client):
+def api_client_authenticated(db, create_admin_user, api_client):
     fixture = create_admin_user()
     api_client.force_authenticate(user=fixture['admin'])
     yield api_client

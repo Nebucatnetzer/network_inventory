@@ -11,9 +11,9 @@ def test_unauthorized_request_backup_method(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_backup_method(api_client_authenticatet):
+def test_authorized_request_backup_method(api_client_authenticated):
     url = reverse('backupmethod-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
 
 
@@ -25,9 +25,9 @@ def test_unauthorized_request_backup(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_backup(api_client_authenticatet):
+def test_authorized_request_backup(api_client_authenticated):
     url = reverse('backup-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
 
 
@@ -39,9 +39,9 @@ def test_unauthorized_request_target_device(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_target_device(api_client_authenticatet):
+def test_authorized_request_target_device(api_client_authenticated):
     url = reverse('targetdevice-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
 
 
@@ -53,9 +53,9 @@ def test_unauthorized_request_notificaton_from_backup(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_notificaton_from_backup(api_client_authenticatet):
+def test_authorized_request_notificaton_from_backup(api_client_authenticated):
     url = reverse('notificationfrombackup-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
 
 
@@ -67,9 +67,9 @@ def test_unauthorized_request_notificaton(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_notificaton(api_client_authenticatet):
+def test_authorized_request_notificaton(api_client_authenticated):
     url = reverse('notification-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
 
 
@@ -81,7 +81,7 @@ def test_unauthorized_request_notificaton_type(api_client):
 
 
 @pytest.mark.django_db
-def test_authorized_request_notificaton_type(api_client_authenticatet):
+def test_authorized_request_notificaton_type(api_client_authenticated):
     url = reverse('notificationtype-list')
-    response = api_client_authenticatet.get(url)
+    response = api_client_authenticated.get(url)
     assert response.status_code == 200
