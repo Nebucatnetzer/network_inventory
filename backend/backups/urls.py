@@ -1,5 +1,3 @@
-from django.urls import path, include
-
 from rest_framework import routers
 
 from . import views
@@ -12,8 +10,3 @@ router.register(r'notifications-from-backup',
                 views.NotificationFromBackupViewSet)
 router.register(r'notifications', views.NotificationViewSet)
 router.register(r'notifications-type', views.NotificationTypeViewSet,)
-
-
-urlpatterns = [
-    path('api/', include(router.urls)),
-]

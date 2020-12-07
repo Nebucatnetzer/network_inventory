@@ -1,5 +1,3 @@
-from django.urls import path, include
-
 from rest_framework import routers
 
 from . import views
@@ -9,8 +7,3 @@ router.register(r'operating-systems', views.OperatingSystemViewSet)
 router.register(r'software-architectures', views.SoftwareArchitectureViewSet)
 router.register(r'software-categories', views.SoftwareCategoryViewSet)
 router.register(r'softwares', views.SoftwareViewSet)
-
-
-urlpatterns = [
-    path('api/', include(router.urls)),
-]

@@ -1,5 +1,3 @@
-from django.urls import path, include
-
 from rest_framework import routers
 
 from . import views
@@ -11,8 +9,3 @@ router.register(r'users-in-mail-group', views.UserInMailGroupViewSet)
 router.register(r'ad-groups', views.AdGroupViewSet)
 router.register(r'mail-groups', views.MailGroupViewSet)
 router.register(r'mail-alias', views.MailAliasViewSet)
-
-
-urlpatterns = [
-    path('api/', include(router.urls)),
-]

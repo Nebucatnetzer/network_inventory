@@ -17,19 +17,35 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
 
+from rest_framework import routers
+
+from backups.urls import router as backups_router
+from computers.urls import router as computers_router
+from core.urls import router as core_router
+from customers.urls import router as customers_router
+from devices.urls import router as devices_router
+from licenses.urls import router as licenses_router
+from nets.urls import router as nets_router
+from softwares.urls import router as softwares_router
+from users.urls import router as users_router
+
+
+router = routers.DefaultRouter()
+router.registry.extend(backups_router.registry)
+router.registry.extend(computers_router.registry)
+router.registry.extend(core_router.registry)
+router.registry.extend(customers_router.registry)
+router.registry.extend(devices_router.registry)
+router.registry.extend(licenses_router.registry)
+router.registry.extend(nets_router.registry)
+router.registry.extend(softwares_router.registry)
+router.registry.extend(users_router.registry)
+
 
 urlpatterns = [
-    url(r'', include('backups.urls')),
-    url(r'', include('computers.urls')),
-    url(r'', include('core.urls')),
-    url(r'', include('customers.urls')),
-    url(r'', include('devices.urls')),
-    url(r'', include('licenses.urls')),
-    url(r'', include('nets.urls')),
-    url(r'', include('softwares.urls')),
-    url(r'', include('users.urls')),
-    url(r'^_nested_admin/', include('nested_admin.urls')),
-    path('api/', include('rest_framework.urls')),
+    #path(r'^_nested_admin/', include('nested_admin.urls')),
+    path('api/', include(router.urls)),
     path('api/accounts/', include('django.contrib.auth.urls')),
     path('api/admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
 ]
