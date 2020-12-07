@@ -43,6 +43,6 @@ class LocationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Location.objects.all()
+    queryset = Location.objects.all().order_by('name')
     serializer_class = LocationSerializer
     permission_classes = [permissions.IsAuthenticated]

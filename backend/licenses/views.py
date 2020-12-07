@@ -34,7 +34,7 @@ class LicenseWithUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = LicenseWithUser.objects.all()
+    queryset = LicenseWithUser.objects.all().order_by('user')
     serializer_class = LicenseWithUserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -43,6 +43,6 @@ class LicenseWithComputerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = LicenseWithComputer.objects.all()
+    queryset = LicenseWithComputer.objects.all().order_by('computer')
     serializer_class = LicenseWithComputerSerializer
     permission_classes = [permissions.IsAuthenticated]

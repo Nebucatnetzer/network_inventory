@@ -40,7 +40,7 @@ class DeviceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Device.objects.all()
+    queryset = Device.objects.all().order_by('name')
     serializer_class = DeviceSerializer
     permission_classes = [permissions.IsAuthenticated]
 

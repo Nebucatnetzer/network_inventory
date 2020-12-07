@@ -44,7 +44,7 @@ class ComputerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Computer.objects.all()
+    queryset = Computer.objects.all().order_by('name')
     serializer_class = ComputerSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -53,7 +53,7 @@ class ComputerCpuRelationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = ComputerCpuRelation.objects.all()
+    queryset = ComputerCpuRelation.objects.all().order_by('computer')
     serializer_class = ComputerCpuRelationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -62,7 +62,7 @@ class ComputerDiskRelationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = ComputerDiskRelation.objects.all()
+    queryset = ComputerDiskRelation.objects.all().order_by('computer')
     serializer_class = ComputerDiskRelationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -71,7 +71,7 @@ class ComputerGpuRelationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = ComputerGpuRelation.objects.all()
+    queryset = ComputerGpuRelation.objects.all().order_by('computer')
     serializer_class = ComputerGpuRelationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -80,7 +80,7 @@ class ComputerRamRelationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = ComputerRamRelation.objects.all()
+    queryset = ComputerRamRelation.objects.all().order_by('computer')
     serializer_class = ComputerRamRelationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -89,7 +89,7 @@ class ComputerSoftwareRelationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = ComputerSoftwareRelation.objects.all()
+    queryset = ComputerSoftwareRelation.objects.all().order_by('computer')
     serializer_class = ComputerSoftwareRelationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -98,7 +98,7 @@ class CpuArchitectureViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = CpuArchitecture.objects.all()
+    queryset = CpuArchitecture.objects.all().order_by('name')
     serializer_class = CpuArchitectureSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -107,7 +107,7 @@ class CpuManufacturerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = CpuManufacturer.objects.all()
+    queryset = CpuManufacturer.objects.all().order_by('name')
     serializer_class = CpuManufacturerSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -116,7 +116,7 @@ class CpuViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Cpu.objects.all()
+    queryset = Cpu.objects.all().order_by('name')
     serializer_class = CpuSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -134,7 +134,7 @@ class DiskViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Disk.objects.all()
+    queryset = Disk.objects.all().order_by('computer')
     serializer_class = DiskSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -143,7 +143,7 @@ class GpuManufacturerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = GpuManufacturer.objects.all()
+    queryset = GpuManufacturer.objects.all().order_by('name')
     serializer_class = GpuManufacturerSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -152,7 +152,7 @@ class GpuViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Gpu.objects.all()
+    queryset = Gpu.objects.all().order_by('name')
     serializer_class = GpuSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -161,7 +161,7 @@ class DisksInRaidViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = DisksInRaid.objects.all()
+    queryset = DisksInRaid.objects.all().order_by('raid')
     serializer_class = DisksInRaidSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -170,7 +170,7 @@ class RaidTypeViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = RaidType.objects.all()
+    queryset = RaidType.objects.all().order_by('name')
     serializer_class = RaidTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -179,7 +179,7 @@ class RaidViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Raid.objects.all()
+    queryset = Raid.objects.all().order_by('computer')
     serializer_class = RaidSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -188,7 +188,7 @@ class RamTypeViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = RamType.objects.all()
+    queryset = RamType.objects.all().order_by('name')
     serializer_class = RamTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -197,6 +197,6 @@ class RamViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows weekdays to be viewed or edited.
     """
-    queryset = Ram.objects.all()
+    queryset = Ram.objects.all().order_by('computer')
     serializer_class = RamSerializer
     permission_classes = [permissions.IsAuthenticated]

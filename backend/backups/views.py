@@ -29,7 +29,7 @@ class BackupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows BackupMethods to be viewed or edited.
     """
-    queryset = Backup.objects.all()
+    queryset = Backup.objects.all().order_by('name')
     serializer_class = BackupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -38,7 +38,7 @@ class TargetDeviceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows BackupMethods to be viewed or edited.
     """
-    queryset = TargetDevice.objects.all()
+    queryset = TargetDevice.objects.all().order_by('device')
     serializer_class = TargetDeviceSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -47,7 +47,7 @@ class NotificationFromBackupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows BackupMethods to be viewed or edited.
     """
-    queryset = NotificationFromBackup.objects.all()
+    queryset = NotificationFromBackup.objects.all().order_by('backup')
     serializer_class = NotificationFromBackupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -65,6 +65,6 @@ class NotificationTypeViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows BackupMethods to be viewed or edited.
     """
-    queryset = NotificationType.objects.all()
+    queryset = NotificationType.objects.all().order_by('name')
     serializer_class = NotificationTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
