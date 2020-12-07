@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  db_data:
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_PASSWORD
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+
+  backend:
+    build: backend/.
+    volumes:
+      - ./backend:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE
+      - DJANGO_DEBUG
+      - DJANGO_SECRET_KEY
+    depends_on:
+      - db
+
+  frontend:
+    build: frontend/.
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ./backend/static:/home/app/backend/static
