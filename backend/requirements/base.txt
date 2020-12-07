@@ -1,0 +1,12 @@
+wheel
+Django==2.2.13
+djangorestframework
+pyaml
+pytz
+django-guardian
+django-nested-admin
+pytest
+pytest-django
+pytest-cov
+pytest-xdist
+mixer

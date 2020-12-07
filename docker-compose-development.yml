@@ -12,10 +12,10 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data/
 
-  web:
-    build: .
+  backend:
+    build: backend/.
     volumes:
-      - .:/code
+      - ./backend:/code
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
@@ -23,11 +23,11 @@ services:
     depends_on:
       - db
 
-  nginx:
-    build: ./nginx
+  frontend:
+    build: frontend/.
+    depends_on:
+      - backend
     ports:
       - 80:80
-    depends_on:
-      - web
     volumes:
-      - ./static:/home/app/web/static
+      - ./backend/static:/home/app/backend/static

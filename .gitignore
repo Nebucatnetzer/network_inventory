@@ -174,4 +174,4 @@ migrations/
 htmlcov/
 .second_run
 
-/static
+backend/static

@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  db_data:
+
 services:
   db:
     image: postgres
@@ -7,12 +10,12 @@ services:
       - POSTGRES_DB
       - POSTGRES_PASSWORD
     volumes:
-      - ./db_data:/var/lib/postgresql/data/
+      - db_data:/var/lib/postgresql/data/
 
-  web:
-    image: nebucatnetzer/network_inventory
+  backend:
+    build: backend/.
     volumes:
-      - .:/code
+      - ./backend:/code
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
@@ -20,11 +23,11 @@ services:
     depends_on:
       - db
 
-  nginx:
-    build: ./nginx
+  frontend:
+    build: frontend/.
+    depends_on:
+      - backend
     ports:
       - 80:80
-    depends_on:
-      - web
     volumes:
-      - ./static:/home/app/web/static
+      - ./backend/static:/home/app/backend/static
