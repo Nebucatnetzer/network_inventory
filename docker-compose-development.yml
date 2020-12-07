@@ -24,10 +24,12 @@ services:
       - db
 
   frontend:
-    build: frontend/.
+    build:
+      context: frontend/.
+      dockerfile: Dockerfile-dev
     depends_on:
       - backend
     ports:
-      - 80:80
+      - 3000:3000
     volumes:
-      - ./backend/static:/home/app/backend/static
+      - ./frontend:/usr/src/app/frontend
