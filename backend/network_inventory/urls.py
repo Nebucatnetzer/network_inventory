@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from rest_framework import routers
 
@@ -47,4 +49,4 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/', include('rest_framework.urls')),
     path('api/admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
