@@ -1,16 +1,22 @@
 <template>
-    <table>
-        <tr>
-            <th>Customer</th>
-            <th>Description</th>
-        </tr>
-        <tr v-for="customer in customers" :key="customer.id">
-            <td>
-                {{ customer.name }}
-            </td>
-            <td>{{ customer.description }}</td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col">
+            <div class="table-container">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <th class="orderable">Customer</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr v-for="customer in customers" :key="customer.id">
+                        <td>
+                            {{ customer.name }}
+                        </td>
+                        <td>{{ customer.description }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
