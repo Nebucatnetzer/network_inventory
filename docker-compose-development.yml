@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 volumes:
   db_data:
@@ -32,6 +32,6 @@ services:
     depends_on:
       - backend
     ports:
-      - 3000:3000
+      - 8080:8080
     volumes:
       - ./frontend:/usr/src/app/frontend
