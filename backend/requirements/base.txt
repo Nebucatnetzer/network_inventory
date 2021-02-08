@@ -1,6 +1,7 @@
 wheel
 Django==3.1.4
 djangorestframework
+djangorestframework-simplejwt
 pyaml
 pytz
 django-guardian

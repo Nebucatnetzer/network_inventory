@@ -20,7 +20,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import routers
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from backups.urls import router as backups_router
 from computers.urls import router as computers_router
 from core.urls import router as core_router
@@ -49,4 +52,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/', include('rest_framework.urls')),
     path('api/admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
