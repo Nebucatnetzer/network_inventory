@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -19,6 +19,8 @@ services:
       - DJANGO_SECRET_KEY
     depends_on:
       - db
+    ports:
+      - 8000:8000
 
   frontend:
     build: frontend/.
