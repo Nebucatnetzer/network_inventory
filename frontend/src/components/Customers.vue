@@ -1,4 +1,10 @@
 <template>
+    <header><h1>List of Customers</h1></header>
+    <div>
+        <form action="/create/customer/">
+            <input type="submit" value="Add Customer" class="btn btn-primary" />
+        </form>
+    </div>
     <table class="table table-hover table-bordered">
         <tr>
             <th class="orderable">Name</th>
@@ -21,7 +27,11 @@
             <td><a :href="customer.url">Backups</a></td>
             <td><a :href="customer.url">Licenses</a></td>
             <td><a :href="customer.url">Users</a></td>
-            <td><a :href="customer.url">Actions</a></td>
+            <td>
+                <a :href="customer.url"
+                    ><div class="delete material-icons">delete</div></a
+                >
+            </td>
         </tr>
     </table>
 </template>
