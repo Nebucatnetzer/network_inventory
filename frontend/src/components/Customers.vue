@@ -1,22 +1,29 @@
 <template>
-    <div class="row">
-        <div class="col">
-            <div class="table-container">
-                <table class="table table-hover table-bordered">
-                    <tr>
-                        <th class="orderable">Customer</th>
-                        <th>Description</th>
-                    </tr>
-                    <tr v-for="customer in customers" :key="customer.id">
-                        <td>
-                            {{ customer.name }}
-                        </td>
-                        <td>{{ customer.description }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th class="orderable">Name</th>
+            <th>Nets</th>
+            <th>Computers</th>
+            <th>Devices</th>
+            <th>Backups</th>
+            <th>Licenses</th>
+            <th>Users</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr v-for="customer in customers" :key="customer.id">
+            <td>
+                <a href="">{{ customer.name }}</a>
+            </td>
+            <td><a :href="customer.url">Nets</a></td>
+            <td><a :href="customer.url">Computers</a></td>
+            <td><a :href="customer.url">Devices</a></td>
+            <td><a :href="customer.url">Backups</a></td>
+            <td><a :href="customer.url">Licenses</a></td>
+            <td><a :href="customer.url">Users</a></td>
+            <td><a :href="customer.url">Actions</a></td>
+        </tr>
+    </table>
 </template>
 
 <script>

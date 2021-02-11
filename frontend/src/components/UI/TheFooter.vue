@@ -1,10 +1,8 @@
 <template>
     <footer>
-        <div class="row mt-3">
-            <p class="copyright">
-                Created by Andreas Zweili licensed under GPLv3.0
-            </p>
-        </div>
+        <p>
+            Created by Andreas Zweili licensed under GPLv3.0
+        </p>
     </footer>
 </template>
 
