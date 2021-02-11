@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getAPI } from "../axios-api";
+import getAPI from "./scripts/axios-api";
 
 export default {
     data() {
