@@ -1,18 +1,18 @@
 <template>
   <div>
-    <customer></customer>
+    <the-customers></the-customers>
     <the-footer></the-footer>
   </div>
 </template>
 
 <script>
 import TheFooter from "./components/UI/TheFooter.vue";
-import Customer from "./components/customers/Customers.vue";
+import TheCustomers from "./components/customers/TheCustomers.vue";
 
 export default {
   components: {
     TheFooter,
-    Customer,
+    TheCustomers,
   },
   data() {
     return {};
