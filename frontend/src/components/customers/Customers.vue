@@ -57,12 +57,12 @@ export default {
     deleteCustomer(url) {
       getAPI
         .delete(url)
-        .then(function() {
+        .then(() => {
           this.customers = this.customers.filter(
             (customer) => customer.url !== url
           );
         })
-        .catch(function(err) {
+        .catch((err) => {
           console.log(err);
         });
     },
@@ -77,10 +77,10 @@ export default {
   created() {
     getAPI
       .get("/customers/")
-      .then(function(response) {
+      .then((response) => {
         this.customers = response.data.results;
       })
-      .catch(function(err) {
+      .catch((err) => {
         console.log(err);
       });
   },
