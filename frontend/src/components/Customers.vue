@@ -28,9 +28,7 @@
             <td><a :href="customer.url">Licenses</a></td>
             <td><a :href="customer.url">Users</a></td>
             <td>
-                <a :href="customer.url"
-                    ><div class="delete material-icons">delete</div></a
-                >
+                <a href="#" @click="deleteCustomer(customer.url)">delete</a>
             </td>
         </tr>
     </table>
@@ -44,6 +42,15 @@ export default {
         return {
             customers: [],
         };
+    },
+    methods: {
+        deleteCustomer(url){
+        getAPI.delete(url)
+                .catch((err) => {
+                    console.log(err);
+                });
+            this.customers = this.customers.filter(customer => customer.url !== url)
+        },
     },
     created() {
         getAPI
