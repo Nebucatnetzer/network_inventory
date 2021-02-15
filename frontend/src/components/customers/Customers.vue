@@ -47,8 +47,7 @@ export default {
     deleteCustomer(url) {
       getAPI
         .delete(url)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           this.customers = this.customers.filter(
             (customer) => customer.url !== url
           );
