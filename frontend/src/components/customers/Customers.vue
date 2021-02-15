@@ -20,7 +20,7 @@
 
       <tr v-for="customer in customers" :key="customer.id">
         <td>
-          <a href="">{{ customer.name }}</a>
+          <a href="#">{{ customer.name }}</a>
         </td>
         <td><a :href="customer.url">Nets</a></td>
         <td><a :href="customer.url">Computers</a></td>
