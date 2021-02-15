@@ -58,4 +58,29 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+dialog {
+  margin: 0;
+  position: fixed;
+  top: 20vh;
+  left: 30%;
+  width: 40%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  padding: 0.15rem;
+  border: 1px solid #ccc;
+}
+</style>
