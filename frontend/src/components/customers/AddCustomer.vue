@@ -46,10 +46,10 @@ export default {
             name: this.customerName,
             description: this.customerDescription,
           })
-          .then(function(response) {
-            this.$emit("close", response.data);
+          .then((response) => {
+            this.$emit("created-customer", response.data);
           })
-          .catch(function(error) {
+          .catch((error) => {
             console.log(error);
           });
       }
