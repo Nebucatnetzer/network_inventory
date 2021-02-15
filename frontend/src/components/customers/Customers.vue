@@ -62,7 +62,6 @@ export default {
     getAPI
       .get("/customers/")
       .then((response) => {
-        console.log("Post API has recieved data");
         this.customers = response.data.results;
       })
       .catch((err) => {
