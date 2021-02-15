@@ -49,13 +49,13 @@ export default {
         .delete(url)
         .then((response) => {
           console.log(response.data);
+          this.customers = this.customers.filter(
+            (customer) => customer.url !== url
+          );
         })
         .catch((err) => {
           console.log(err);
         });
-      this.customers = this.customers.filter(
-        (customer) => customer.url !== url
-      );
     },
   },
   created() {
