@@ -70,7 +70,7 @@ export default {
       this.addCustomerDialogVisible = true;
     },
     closeDialog(customer) {
-      this.customers.push(customer);
+      this.customers.unshift(customer);
       this.addCustomerDialogVisible = false;
     },
   },
