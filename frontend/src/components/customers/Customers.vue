@@ -1,5 +1,17 @@
 <template>
-  <div v-if="!addCustomerDialogVisible">
+  <customer-details
+    v-if="showCustomerDetails"
+    :customer-name="customerName"
+    :customer-description="customerDescription"
+    @hide-details="hideDetails"
+  ></customer-details>
+
+  <add-customer
+    v-if="addCustomerDialogVisible"
+    @created-customer="closeDialog"
+  ></add-customer>
+
+  <div v-if="!addCustomerDialogVisible && !showCustomerDetails">
     <header><h1>List of Customers</h1></header>
     <div>
       <form @submit.prevent="addCustomer">
@@ -20,7 +32,7 @@
 
       <tr v-for="customer in customers" :key="customer.url">
         <td>
-          <a href="#">{{ customer.name }}</a>
+          <a href="#" @click="showDetails(customer)">{{ customer.name }}</a>
         </td>
         <td><a :href="customer.url">Nets</a></td>
         <td><a :href="customer.url">Computers</a></td>
@@ -34,23 +46,25 @@
       </tr>
     </table>
   </div>
-  <div v-if="addCustomerDialogVisible">
-    <add-customer @created-customer="closeDialog"></add-customer>
-  </div>
 </template>
 
 <script>
 import getAPI from "../scripts/axios-api";
 import AddCustomer from "./AddCustomer.vue";
+import CustomerDetails from "./CustomerDetails.vue";
 
 export default {
   components: {
     AddCustomer,
+    CustomerDetails,
   },
   data() {
     return {
       customers: [],
       addCustomerDialogVisible: false,
+      showCustomerDetails: false,
+      customerName: "",
+      customerDescription: "",
     };
   },
   methods: {
@@ -72,6 +86,14 @@ export default {
     closeDialog(customer) {
       this.customers.unshift(customer);
       this.addCustomerDialogVisible = false;
+    },
+    showDetails(customer) {
+      this.customerName = customer.name;
+      this.customerDescription = customer.description;
+      this.showCustomerDetails = true;
+    },
+    hideDetails() {
+      this.showCustomerDetails = false;
     },
   },
   created() {
