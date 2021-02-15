@@ -18,7 +18,7 @@
         <th>Actions</th>
       </tr>
 
-      <tr v-for="customer in customers" :key="customer.id">
+      <tr v-for="customer in customers" :key="customer.url">
         <td>
           <a href="#">{{ customer.name }}</a>
         </td>
