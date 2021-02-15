@@ -11,7 +11,7 @@
     @created-customer="closeDialog"
   ></add-customer>
 
-  <div v-if="!addCustomerDialogVisible && !showCustomerDetails">
+  <div v-if="!addCustomerDialogVisible && !showCustomerDetails" class="card">
     <header><h1>List of Customers</h1></header>
     <div>
       <form @submit.prevent="addCustomer">
