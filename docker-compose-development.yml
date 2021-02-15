@@ -25,13 +25,13 @@ services:
     ports:
       - 8000:8000
 
-  frontend:
-    build:
-      context: frontend/.
-      dockerfile: Dockerfile-dev
-    depends_on:
-      - backend
-    ports:
-      - 8080:8080
-    volumes:
-      - ./frontend:/usr/src/app/frontend
+        #  frontend:
+        #    build:
+        #      context: frontend/.
+        #      dockerfile: Dockerfile-dev
+        #    depends_on:
+        #      - backend
+        #    ports:
+        #      - 8080:8080
+        #    volumes:
+        #      - ./frontend:/usr/src/app/frontend
