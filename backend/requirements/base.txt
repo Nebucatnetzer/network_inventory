@@ -1,5 +1,5 @@
 wheel
-Django==3.1.4
+Django==3.1.6
 djangorestframework
 djangorestframework-simplejwt
 pyaml
