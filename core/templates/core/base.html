@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_htmx %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,9 @@
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="{% static 'core/img/favicon.ico' %}" />
     <title>Network Inventory</title>
 </head>
+
 <body>
+    {% django_htmx_script %}
     <div class="container">
         <a href="{% url 'customers' %}">Home</a> |
         <a href="{% url 'warranties' %}">Warranties</a> |
@@ -33,4 +36,5 @@
         </footer>
     </div>
 </body>
+
 </html>

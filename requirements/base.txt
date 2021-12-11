@@ -8,6 +8,7 @@ django-filter
 django-nested-admin
 django-floppyforms
 django-crispy-forms
+django-htmx
 pytest
 pytest-django
 pytest-cov
