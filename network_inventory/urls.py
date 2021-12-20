@@ -13,19 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    url(r'', include('backups.urls')),
-    url(r'', include('computers.urls')),
-    url(r'', include('core.urls')),
-    url(r'', include('customers.urls')),
-    url(r'', include('devices.urls')),
-    url(r'', include('licenses.urls')),
-    url(r'', include('nets.urls')),
-    url(r'', include('users.urls')),
+    path('', include('backups.urls')),
+    path(r'', include('computers.urls')),
+    path(r'', include('core.urls')),
+    path(r'', include('customers.urls')),
+    path(r'', include('devices.urls')),
+    path(r'', include('licenses.urls')),
+    path(r'', include('nets.urls')),
+    path(r'', include('users.urls')),
     path('admin/', admin.site.urls),
-    url(r'^_nested_admin/', include('nested_admin.urls')),
+    path('_nested_admin/', include('nested_admin.urls')),
 ]
