@@ -12,8 +12,8 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in
       rec {
-        devShell."${system}" = pkgs.mkShell {
-          buildInputs = [ gnumake ];
+        devShell = pkgs.mkShell {
+          buildInputs = [ pkgs.gnumake ];
         };
       });
 }
