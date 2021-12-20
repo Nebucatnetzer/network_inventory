@@ -13,7 +13,7 @@
       in
       rec {
         devShell = pkgs.mkShell {
-          buildInputs = [ gnumake ];
+          buildInputs = [ pkgs.gnumake ];
         };
       });
 }
