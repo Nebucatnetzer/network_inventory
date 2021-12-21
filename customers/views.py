@@ -23,6 +23,18 @@ def customers_table_view(request):
                   {'customers': table})
 
 
+class HtmxCustomerCreateView(LoginRequiredMixin, CreateView):
+    """
+    A view to create a customer.
+    """
+    model = Customer
+    template_name = 'customers/partials/customer_create.html'
+    fields = ['name', 'description']
+
+    def get_success_url(self):
+        return reverse('customer', args=(self.object.pk,))
+
+
 class CustomerDetailView(LoginRequiredMixin,
                          PermissionRequiredMixin,
                          DetailView):
@@ -48,4 +60,3 @@ class CustomerDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('computers', args=(self.object.customer.pk,))
-

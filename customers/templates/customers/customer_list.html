@@ -5,10 +5,9 @@
 {% if request.user.is_superuser %}
 <div class="row mb-3">
     <div class="col">
-        <form action="{% url 'customer_create' %}">
-            <input type="submit" value="Add Customer" class="btn btn-primary">
-        </form>
+        <button hx-get="{% url 'htmx_create_customer' %}" hx-target="#htmx-create-customer" class="btn btn-primary">Add Customer</button>
     </div>
+    <div class="col" id="htmx-create-customer"></div>
 </div>
 {% endif %}
 <div class="row">

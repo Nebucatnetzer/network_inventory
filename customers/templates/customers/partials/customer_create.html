@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+
+{% block section_title %}Create Customer{% endblock %}
+{% block content %}
+<div class="row">
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Save" class="btn btn-primary">
+        <a href="{% url 'customers' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
