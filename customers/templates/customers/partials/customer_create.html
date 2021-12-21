@@ -6,7 +6,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="Save" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" hx-post="{% url 'htmx_create_customer' %}">Save</button>
         <a href="{% url 'customers' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
