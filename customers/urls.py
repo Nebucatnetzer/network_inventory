@@ -12,6 +12,6 @@ urlpatterns = [
     path('delete/customer/<int:pk>/', views.CustomerDeleteView.as_view(),
          name='customer_delete'),
     path('htmx/create/customer/',
-         views.HtmxCustomerCreateView.as_view(),
+         views.htmx_create_customer,
          name='htmx_create_customer'),
 ]

@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -12,6 +13,7 @@ from guardian.mixins import PermissionRequiredMixin
 from core import utils
 from .models import Customer
 from .tables import CustomersTable
+from .forms import CustomerForm
 
 
 @login_required
@@ -23,16 +25,25 @@ def customers_table_view(request):
                   {'customers': table})
 
 
-class HtmxCustomerCreateView(LoginRequiredMixin, CreateView):
-    """
-    A view to create a customer.
-    """
-    model = Customer
-    template_name = 'customers/partials/customer_create.html'
-    fields = ['name', 'description']
+@login_required
+def htmx_create_customer(request):
+    if request.method == "POST":
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return HttpResponse("Success")
+        else:
+            return render(request,
+                          "customers/partials/customer_create.html",
+                          context={
+                              "form": form
+                          })
 
-    def get_success_url(self):
-        return reverse('customer', args=(self.object.pk,))
+    form = CustomerForm()
+    context = {
+        "form": form
+    }
+    return render(request, "customers/partials/customer_create.html", context)
 
 
 class CustomerDetailView(LoginRequiredMixin,
