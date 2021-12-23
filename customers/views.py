@@ -70,4 +70,4 @@ class CustomerDeleteView(LoginRequiredMixin, DeleteView):
     model = Customer
 
     def get_success_url(self):
-        return reverse('computers', args=(self.object.customer.pk,))
+        return reverse('customers')
