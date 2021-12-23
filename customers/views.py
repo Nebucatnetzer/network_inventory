@@ -46,9 +46,8 @@ def htmx_create_customer(request):
 @login_required
 def customer_detail_view(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
-    permission = request.user.has_perm('customers.view_customer',
-                                       customer)
-    if permission:
+
+    if request.user.has_perm('view_customer', customer):
         context = {'customer': customer}
         return TemplateResponse(request,
                                 "customers/customer_details.html",
