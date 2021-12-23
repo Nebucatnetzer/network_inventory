@@ -24,8 +24,7 @@ def create_admin_user():
         User = get_user_model()
         admin = User.objects.create_user("pharma-admin",
                                          "admin@pharma.com",
-                                         "password",
-                                         is_staff=True)
+                                         "password")
         customer = mixer.blend('customers.Customer')
         group = Group.objects.create(name="Pharma Corp. Admin")
         admin.groups.add(group)
