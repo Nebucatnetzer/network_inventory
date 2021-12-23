@@ -1,14 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
-from django.views.generic import DetailView
 from django_tables2 import RequestConfig
-from guardian.mixins import PermissionRequiredMixin
+from guardian.decorators import permission_required
 
 from core import utils
 from .forms import CustomerForm
@@ -43,12 +43,13 @@ def htmx_create_customer(request):
                             context)
 
 
-class CustomerDetailView(LoginRequiredMixin,
-                         PermissionRequiredMixin,
-                         DetailView):
-    model = Customer
-    template_name = 'customers/customer_details.html'
-    permission_required = 'view_customer'
+@login_required
+@permission_required('customers.view_customer', (Customer, 'id', 'pk'))
+def customer_detail_view(request, pk):
+    context = {'customer': get_object_or_404(Customer, pk=pk)}
+    return TemplateResponse(request,
+                            "customers/customer_details.html",
+                            context)
 
 
 class CustomerCreateView(LoginRequiredMixin, CreateView):
