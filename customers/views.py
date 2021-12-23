@@ -31,7 +31,7 @@ def htmx_create_customer(request):
         form = CustomerForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponse("Success")
+            return HttpResponse("<script>location.reload()</script>")
         else:
             return render(request,
                           "customers/partials/customer_create.html",
