@@ -16,7 +16,8 @@ from .tables import CustomersTable
 
 @login_required
 def customers_table_view(request):
-    table = CustomersTable(utils.get_customers(request.user))
+    customers = utils.get_objects_with_view_permission(Customer, request.user)
+    table = CustomersTable(customers)
     RequestConfig(request).configure(table)
     return render(request,
                   'customers/customer_list.html',

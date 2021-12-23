@@ -79,3 +79,13 @@ def get_object_with_view_permission(model, user=None, pk=None):
     if user.has_perm(permission, customer):
         return requested_object
     raise Http404()
+
+
+def get_objects_with_view_permission(model, user=None):
+    customers = get_customers(user)
+    if model.__name__ == 'Customer' and customers:
+        return customers
+    objects = model.objects.filter(customer__in=customers)
+    if not objects:
+        raise Http404()
+    return objects
