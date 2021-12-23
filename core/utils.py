@@ -83,7 +83,7 @@ def get_object_with_view_permission(model, user=None, pk=None):
 
 def get_objects_with_view_permission(model, user=None):
     customers = get_customers(user)
-    if model.__name__ == 'Customer' and customers:
+    if model.__name__ == 'Customer':
         return customers
     objects = model.objects.filter(customer__in=customers)
     if not objects:
