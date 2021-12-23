@@ -70,10 +70,12 @@ def get_objects(model_name, user):
 
 def get_object_with_view_permission(model, user=None, pk=None):
     requested_object = get_object_or_404(model, id=pk)
-    model_name = model.__name__.lower()
-    permission = "{}s.view_{}".format(model_name, model_name)
-    print(permission)
-    if user.has_perm(permission, requested_object):
-        return requested_object
+    permission = "customers.view_customer"
+    if model.__name__ == 'Customer':
+        customer = requested_object
     else:
-        raise Http404()
+        customer = get_object_or_404(
+            Customer, name=requested_object.customer)
+    if user.has_perm(permission, customer):
+        return requested_object
+    raise Http404()
