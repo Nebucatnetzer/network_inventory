@@ -1,5 +1,6 @@
 from django.apps import apps
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from guardian.shortcuts import get_objects_for_user
 
 from customers.models import Customer
@@ -65,3 +66,14 @@ def get_objects(model_name, user):
             model = app.models[model_name]
             return model.objects.filter(customer__in=customers)
     raise Http404("Model ", model_name, " not found.")
+
+
+def get_object_with_view_permission(model, user=None, pk=None):
+    requested_object = get_object_or_404(model, id=pk)
+    model_name = model.__name__.lower()
+    permission = "{}s.view_{}".format(model_name, model_name)
+    print(permission)
+    if user.has_perm(permission, requested_object):
+        return requested_object
+    else:
+        raise Http404()
