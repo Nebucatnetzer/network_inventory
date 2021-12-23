@@ -34,10 +34,9 @@ def test_customer_detail_view(create_admin_user):
 
 def test_customer_detail_view_no_permissions():
     User = get_user_model()
-    User.objects.create_user("pharma-admin", "admin@pharma.com",
-                             "password", is_staff=True)
+    User.objects.create_user("pharma-admin", "admin@pharma.com", "password")
     client = Client()
     customer = mixer.blend('customers.Customer')
     client.login(username="pharma-admin", password="password")
     response = client.get('/customer/' + str(customer.id) + '/')
-    assert response.status_code == 302 and 'login' in response.url
+    assert response.status_code == 404
