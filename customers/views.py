@@ -9,7 +9,6 @@ from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django_tables2 import RequestConfig
-from guardian.decorators import permission_required
 
 from core import utils
 from .forms import CustomerForm
