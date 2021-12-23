@@ -38,7 +38,9 @@ def htmx_create_customer(request):
                                     context={"form": form})
     form = CustomerForm()
     context = {"form": form}
-    return TemplateResponse(request, "customers/partials/customer_create.html", context)
+    return TemplateResponse(request,
+                            "customers/partials/customer_create.html",
+                            context)
 
 
 class CustomerDetailView(LoginRequiredMixin,
