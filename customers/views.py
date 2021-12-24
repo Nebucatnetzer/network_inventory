@@ -16,7 +16,8 @@ from .tables import CustomersTable
 
 @login_required
 def customers_table_view(request):
-    customers = utils.get_objects_with_view_permission(Customer, request.user)
+    customers = utils.get_all_objects_for_alLowed_customers(
+        Customer, request.user)
     table = CustomersTable(customers)
     RequestConfig(request).configure(table)
     return render(request,

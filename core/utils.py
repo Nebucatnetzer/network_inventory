@@ -81,7 +81,7 @@ def get_object_with_view_permission(model, user=None, pk=None):
     raise Http404()
 
 
-def get_objects_with_view_permission(model, user=None):
+def get_all_objects_for_alLowed_customers(model, user=None):
     customers = get_customers(user)
     if model.__name__ == 'Customer':
         return customers
