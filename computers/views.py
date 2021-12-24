@@ -91,7 +91,8 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = ComputerFilter
 
     def get_queryset(self):
-        return utils.get_objects("Computer", self.request.user)
+        return utils.get_all_objects_for_alLowed_customers(Computer,
+                                                           self.request.user)
 
 
 class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):

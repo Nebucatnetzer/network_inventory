@@ -12,7 +12,7 @@ from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
 from customers.models import Customer
-from core.utils import get_objects
+from core import utils
 
 from .decorators import device_view_permission
 
@@ -59,7 +59,8 @@ def devices_table_view(request, pk):
 
 @login_required
 def warranties_view(request):
-    table = WarrantiesTable(get_objects("Warranty", request.user))
+    table = WarrantiesTable(
+        utils.get_all_objects_for_alLowed_customers(Warranty, request.user))
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/warranties_list.html',

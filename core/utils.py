@@ -1,4 +1,3 @@
-from django.apps import apps
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from guardian.shortcuts import get_objects_for_user
@@ -38,34 +37,6 @@ def _get_customers(user):
     return get_objects_for_user(user,
                                 'customers.view_customer',
                                 klass=Customer)
-
-
-def get_objects(model_name, user):
-    """
-    Returns a queryset of a given model name the user is allowed to view.
-
-    model_name: string
-    user : django.contrib.auth.models.User
-    """
-    model_name = model_name.lower()
-    customers = _get_customers(user)
-    app_names = [
-        'backups',
-        'computers',
-        'core',
-        'customers',
-        'devices',
-        'licenses',
-        'nets',
-        'softwares',
-        'users',
-    ]
-    for name in app_names:
-        app = apps.get_app_config(name)
-        if model_name in app.models:
-            model = app.models[model_name]
-            return model.objects.filter(customer__in=customers)
-    raise Http404("Model ", model_name, " not found.")
 
 
 def get_object_with_view_permission(model, user=None, pk=None):
