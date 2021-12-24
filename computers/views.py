@@ -14,7 +14,6 @@ from django_tables2.views import SingleTableMixin
 from core import utils
 from backups.models import Backup
 from customers.models import Customer
-from customers.decorators import customer_view_permission
 from devices.models import DeviceInNet
 from devices.models import Warranty
 from licenses.models import LicenseWithComputer
@@ -72,9 +71,9 @@ def computer_detail_view(request, pk):
 
 
 @login_required
-@customer_view_permission
 def computers_table_view(request, pk):
-    table = ComputersTable(Computer.objects.filter(customer=pk))
+    table = ComputersTable(utils.get_objects_for_customer(
+        Computer, user=request.user, customer_pk=pk))
     RequestConfig(request).configure(table)
     return render(request, 'computers/computer_list.html', {'computers': table,
                                                             'pk': pk})

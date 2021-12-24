@@ -42,7 +42,7 @@ def test_customer_computer_table_no_permission(create_admin_user):
     client.login(username="pharma-admin", password="password")
     mixer.blend('computers.Computer', customer=customer)
     response = client.get('/customer/' + str(customer.id) + '/computers/')
-    assert response.status_code == 403
+    assert response.status_code == 404
 
 
 def test_customer_computer_table_multiple_computers(create_admin_user):
