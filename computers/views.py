@@ -18,7 +18,6 @@ from devices.models import DeviceInNet
 from devices.models import Warranty
 from licenses.models import LicenseWithComputer
 
-from .decorators import computer_view_permission
 from .filters import ComputerFilter
 from .forms import ComputerCreateForm
 from .forms import ComputerUpdateForm
@@ -40,9 +39,9 @@ from .tables import ComputersTable
 
 
 @login_required
-@computer_view_permission
 def computer_detail_view(request, pk):
-    device = get_object_or_404(Computer, pk=pk)
+    device = utils.get_object_with_view_permission(
+        Computer, user=request.user, pk=pk)
     disks_relations = ComputerDiskRelation.objects.filter(computer=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
     ram_relations = ComputerRamRelation.objects.filter(computer=pk)

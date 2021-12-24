@@ -81,7 +81,7 @@ def test_computer_detail_view_no_permission(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get('/computer/' + str(computer.id) + '/')
-    assert response.status_code == 403
+    assert response.status_code == 404
 
 
 def test_computer_detail_view_gpu_relation(create_admin_user):
