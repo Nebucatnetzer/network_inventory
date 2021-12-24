@@ -10,6 +10,8 @@ from computers.models import ComputerRamRelation
 from computers.models import ComputerSoftwareRelation
 from computers.models import Raid
 
+from customers.models import Customer
+
 
 class ComputerCreateForm(forms.ModelForm):
     class Meta:
@@ -26,7 +28,9 @@ class ComputerCreateForm(forms.ModelForm):
         """
         super(ComputerCreateForm, self).__init__(*args, **kwargs)
         if not user.is_superuser:
-            self.fields['customer'].queryset = utils.get_customers(user)
+            self.fields['customer'].queryset = (
+                utils.get_all_objects_for_alLowed_customers(
+                    Customer, user=user))
 
 
 class ComputerUpdateForm(forms.ModelForm):

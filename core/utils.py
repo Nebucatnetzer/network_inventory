@@ -29,7 +29,7 @@ def td_format(td_object):
     return ", ".join(strings)
 
 
-def get_customers(user):
+def _get_customers(user):
     """
     Returns a queryset of customers the user is allowed to view.
 
@@ -48,7 +48,7 @@ def get_objects(model_name, user):
     user : django.contrib.auth.models.User
     """
     model_name = model_name.lower()
-    customers = get_customers(user)
+    customers = _get_customers(user)
     app_names = [
         'backups',
         'computers',
@@ -82,7 +82,7 @@ def get_object_with_view_permission(model, user=None, pk=None):
 
 
 def get_all_objects_for_alLowed_customers(model, user=None):
-    customers = get_customers(user)
+    customers = _get_customers(user)
     if model.__name__ == 'Customer':
         return customers
     objects = model.objects.filter(customer__in=customers)

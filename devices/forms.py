@@ -2,6 +2,8 @@ import floppyforms.__future__ as forms
 
 from core import utils
 
+from customers.models import Customer
+
 from devices.models import Device
 from devices.models import DeviceInNet
 from devices.models import Warranty
@@ -22,7 +24,9 @@ class DeviceCreateForm(forms.ModelForm):
         """
         super(DeviceCreateForm, self).__init__(*args, **kwargs)
         if not user.is_superuser:
-            self.fields['customer'].queryset = utils.get_customers(user)
+            self.fields['customer'].queryset = (
+                utils.get_all_objects_for_alLowed_customers(
+                    Customer, user=user))
 
 
 class DeviceUpdateForm(forms.ModelForm):
