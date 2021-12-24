@@ -1,6 +1,6 @@
 # network_inventory
 
-[![Build Status](https://travis-ci.com/Nebucatnetzer/network_inventory.svg?branch=master)](https://travis-ci.com/Nebucatnetzer/network_inventory)
+![Test Status](https://github.com/Nebucatnetzer/network_inventory/actions/workflows/tests.yml/badge.svg)
 
 I started this project in order to have solution for keeping an
 inventory over my various servers and other network equipment.
