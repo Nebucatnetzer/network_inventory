@@ -29,7 +29,7 @@ class ComputerCreateForm(forms.ModelForm):
         super(ComputerCreateForm, self).__init__(*args, **kwargs)
         if not user.is_superuser:
             self.fields['customer'].queryset = (
-                utils.get_all_objects_for_alLowed_customers(
+                utils.get_all_objects_for_allowed_customers(
                     Customer, user=user))
 
 

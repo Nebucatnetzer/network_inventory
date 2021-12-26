@@ -60,7 +60,7 @@ def devices_table_view(request, pk):
 @login_required
 def warranties_view(request):
     table = WarrantiesTable(
-        utils.get_all_objects_for_alLowed_customers(Warranty, request.user))
+        utils.get_all_objects_for_allowed_customers(Warranty, request.user))
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/warranties_list.html',
