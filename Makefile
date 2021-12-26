@@ -26,7 +26,7 @@ local:
 testlocal:
 	( \
 	source venv/bin/activate; \
-	pytest -n 6 --ds=network_inventory.settings.local --nomigrations; \
+	pytest -n6 --ds=network_inventory.settings.local --nomigrations  --cov=. --cov-report=html; \
 	)
 
 
