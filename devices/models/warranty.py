@@ -37,6 +37,11 @@ class Warranty(models.Model):
     class Meta:
         ordering = ['customer']
         verbose_name_plural = "Warranties"
+        constraints = [
+            models.CheckConstraint(check=models.Q(
+                valid_from__lte=models.F("valid_until")),
+                name='valid_from_lt_valid_until'),
+        ]
 
     @property
     def duration_in_years(self):
