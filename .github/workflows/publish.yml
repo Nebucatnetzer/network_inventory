@@ -2,6 +2,9 @@ on:
   push:
     branches: [master]
 
+env:
+  IMAGE_NAME: network_inventory
+
 jobs:
   tests:
     runs-on: ubuntu-latest
