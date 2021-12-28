@@ -1,5 +1,5 @@
 wheel
-Django==3.2.10
+Django
 pyaml
 pytz
 django-guardian
