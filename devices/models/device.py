@@ -78,6 +78,7 @@ class Device(models.Model):
 
     class Meta:
         ordering = ['name']
+        unique_together = ("name", "customer")
 
     def __str__(self):
         return self.name
