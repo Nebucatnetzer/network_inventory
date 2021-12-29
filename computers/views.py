@@ -130,7 +130,7 @@ def computer_update_view(request, pk):
     """
     A view to create a customer.
     """
-    template_name = 'computers/customer_update.html'
+    template_name = 'computers/computer_update.html'
     computer = utils.get_object_with_view_permission(Computer,
                                                      user=request.user,
                                                      pk=pk)
@@ -140,7 +140,7 @@ def computer_update_view(request, pk):
             computer = form.save()
             return redirect(computer)
     else:
-        form = ComputerUpdateForm()
+        form = ComputerUpdateForm(instance=computer)
     return TemplateResponse(request, template_name, {'form': form})
 
 
