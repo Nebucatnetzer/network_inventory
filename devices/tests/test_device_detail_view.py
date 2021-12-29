@@ -62,7 +62,9 @@ def test_device_detail_view_warranty(create_admin_user):
     fixture = create_admin_user()
     device = mixer.blend('devices.Device', customer=fixture['customer'])
     warranty = mixer.blend('devices.Warranty',
-                           device=device)
+                           device=device,
+                           valid_from="2020-01-01",
+                           valid_until="2020-12-31")
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get('/device/' + str(device.id) + '/')

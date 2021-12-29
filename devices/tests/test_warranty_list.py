@@ -20,7 +20,9 @@ def test_warranties_no_warranties_found(create_admin_user):
     client = Client()
     customer = mixer.blend('customers.Customer')
     device = mixer.blend('devices.Device', customer=customer)
-    warranty = mixer.blend('devices.Warranty', device=device)
+    warranty = mixer.blend('devices.Warranty', device=device,
+                           valid_from="1999-01-01",
+                           valid_until="2000-01-01")
     client.login(username="pharma-admin", password="password")
     response = client.get('/warranties/')
     assert (response.status_code == 200
@@ -48,7 +50,8 @@ def test_warranties_view_plenty_of_time(create_admin_user):
 def test_warranties_view_warranty_expired(create_admin_user):
     fixture = create_admin_user()
     device = mixer.blend('devices.Device', customer=fixture['customer'])
-    mixer.blend('devices.Warranty', device=device, valid_until="1970-01-01")
+    mixer.blend('devices.Warranty', device=device, valid_from="1999-01-01",
+                valid_until="2000-01-01")
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get('/warranties/')

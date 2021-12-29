@@ -74,7 +74,9 @@ def test_warranty_update_view(create_admin_user):
     device = mixer.blend('devices.Device', customer=mixer.SELECT)
     warranty = mixer.blend('devices.Warranty',
                            customer=device.customer,
-                           device=device)
+                           device=device,
+                           valid_from="2019-05-24",
+                           valid_until="2020-05-25")
     data = {
         'customer': device.customer.id,
         'device': device.id,
@@ -96,7 +98,9 @@ def test_warranty_delete_view(create_admin_user):
     device = mixer.blend('devices.Device', customer=mixer.SELECT)
     warranty = mixer.blend('devices.Warranty',
                            customer=device.customer,
-                           device=device)
+                           device=device,
+                           valid_from="2019-05-24",
+                           valid_until="2020-05-25")
     url = '/delete/warranty/{}/'.format(warranty.id)
     response = client.post(url)
     assert response.status_code == 302
