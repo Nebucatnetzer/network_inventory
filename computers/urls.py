@@ -16,7 +16,7 @@ urlpatterns = [
          views.ComputerCreateFromCustomerView.as_view(),
          name='computer_create'),
     path('update/computer/<int:pk>/',
-         views.ComputerUpdateView.as_view(),
+         views.computer_update_view,
          name='computer_update'),
     path('delete/computer/<int:pk>/', views.ComputerDeleteView.as_view(),
          name='computer_delete'),

@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import CreateView
-from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
 from django_filters.views import FilterView
@@ -124,13 +125,23 @@ class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerUpdateView(LoginRequiredMixin, UpdateView):
-    model = Computer
-    form_class = ComputerUpdateForm
-    template_name = 'computers/computer_update.html'
-
-    def get_success_url(self):
-        return reverse('computer', args=(self.object.pk,))
+@login_required
+def computer_update_view(request, pk):
+    """
+    A view to create a customer.
+    """
+    template_name = 'computers/customer_update.html'
+    computer = utils.get_object_with_view_permission(Computer,
+                                                     user=request.user,
+                                                     pk=pk)
+    if request.method == 'POST':
+        form = ComputerUpdateForm(request.POST, instance=computer)
+        if form.is_valid():
+            computer = form.save()
+            return redirect(computer)
+    else:
+        form = ComputerUpdateForm()
+    return TemplateResponse(request, template_name, {'form': form})
 
 
 class ComputerDeleteView(LoginRequiredMixin, DeleteView):
