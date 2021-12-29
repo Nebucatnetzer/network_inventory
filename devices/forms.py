@@ -43,6 +43,18 @@ class WarrantyCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
+    def clean(self):
+        cleaned_data = super().clean()
+        valid_from = cleaned_data.get("valid_from")
+        valid_until = cleaned_data.get("valid_until")
+
+        if valid_from and valid_until:
+            if valid_from > valid_until:
+                raise forms.ValidationError(
+                    "Valid from date must be before valid until date")
+        return cleaned_data
+
     class Meta:
         model = Warranty
         fields = '__all__'
@@ -52,6 +64,18 @@ class WarrantyUpdateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
+    def clean(self):
+        cleaned_data = super().clean()
+        valid_from = cleaned_data.get("valid_from")
+        valid_until = cleaned_data.get("valid_until")
+
+        if valid_from and valid_until:
+            if valid_from > valid_until:
+                raise forms.ValidationError(
+                    "Valid from date must be before valid until date")
+        return cleaned_data
+
     class Meta:
         model = Warranty
         fields = '__all__'
