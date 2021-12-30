@@ -1,21 +1,49 @@
 - model: devices.DeviceManufacturer
   fields:
-    name: Dell
+    name: Dell #1
 - model: devices.DeviceManufacturer
   fields:
-    name: HP
+    name: HP #2
 - model: devices.DeviceManufacturer
   fields:
-    name: Axxiv
+    name: Axxiv #3
 - model: devices.DeviceManufacturer
   fields:
-    name: Acer
+    name: Acer #4
 - model: devices.DeviceManufacturer
   fields:
-    name: Asus
+    name: Asus #5
 - model: devices.DeviceManufacturer
   fields:
-    name: Lenovo
+    name: Lenovo #6
 - model: devices.DeviceManufacturer
   fields:
-    name: Samsung
+    name: Samsung #7
+- model: devices.DeviceManufacturer
+  fields:
+    name: Apple #8
+
+- model: devices.HardwareModel
+  fields:
+    name: MacBook Pro
+    manufacturer: 8
+- model: devices.HardwareModel
+  fields:
+    name: MacBook Air
+    manufacturer: 8
+- model: devices.HardwareModel
+  fields:
+    name: Latidude 74XX
+    manufacturer: 1
+- model: devices.HardwareModel
+  fields:
+    name: Latidude 75XX
+    manufacturer: 1
+- model: devices.HardwareModel
+  fields:
+    name: Latidude 54XX
+    manufacturer: 1
+- model: devices.HardwareModel
+  fields:
+    name: Latidude 55XX
+    manufacturer: 1
