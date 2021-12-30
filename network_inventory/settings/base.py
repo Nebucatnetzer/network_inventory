@@ -129,3 +129,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
