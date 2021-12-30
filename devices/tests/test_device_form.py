@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 def test_device_create_form(create_admin_user):
     fixture = create_admin_user()
-    user = mixer.blend("auth.User", customer=fixture['customer'])
+    user = mixer.blend("core.InventoryUser", customer=fixture['customer'])
     form = forms.DeviceCreateForm(user=user, data={})
     assert form.is_valid() is False, (
         "Should be false because no data was given")
@@ -49,7 +49,7 @@ def test_device_update_form(create_admin_user):
 
 def test_device_create_form_duplicate_device(create_admin_user):
     fixture = create_admin_user()
-    user = mixer.blend("auth.User", customer=fixture['customer'])
+    user = mixer.blend("core.InventoryUser", customer=fixture['customer'])
     mixer.blend("devices.Device", name="pharma-device1",
                 customer=fixture['customer'])
     data = {"name": "pharma-device1",

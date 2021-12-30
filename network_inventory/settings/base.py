@@ -105,7 +105,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # this is default
     'guardian.backends.ObjectPermissionBackend',
 )
-
+AUTH_USER_MODEL = 'core.InventoryUser'
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
