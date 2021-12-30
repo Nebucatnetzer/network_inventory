@@ -26,6 +26,6 @@ urlpatterns = [
     path(r'', include('licenses.urls')),
     path(r'', include('nets.urls')),
     path(r'', include('users.urls')),
-    path('admin/', admin.site.urls),
+    path('management/', admin.site.urls),
     path('_nested_admin/', include('nested_admin.urls')),
 ]
