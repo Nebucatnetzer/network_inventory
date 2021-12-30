@@ -1,21 +1,28 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import DeleteView
 
 from django_tables2 import RequestConfig
 
+from core import utils
 from customers.decorators import customer_view_permission
 from computers.models import Computer
 from licenses.models import LicenseWithUser
 
 from .decorators import user_view_permission
+from .models import AdGroup
+from .models import MailGroup
 from .models import MailAlias
 from .models import User
 from .models import UserInAdGroup
 from .models import UserInMailGroup
+from .tables import AdGroupsTable
+from .tables import MailGroupsTable
 from .tables import UsersTable
 
 
@@ -50,3 +57,69 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('users', args=(self.object.customer.pk,))
+
+
+@login_required
+def ad_groups_table_view(request, pk):
+    table = AdGroupsTable(utils.get_objects_for_customer(AdGroup,
+                                                         user=request.user,
+                                                         customer_pk=pk))
+    RequestConfig(request).configure(table)
+    return TemplateResponse(request,
+                            'groups/group_list.html',
+                            {'groups': table})
+
+
+@login_required
+def ad_group_detail_view(request, pk):
+    group = utils.get_object_with_view_permission(AdGroup,
+                                                  user=request.user,
+                                                  pk=pk)
+    return render(request, 'groups/group_details.html',
+                  {'group': group})
+
+
+@login_required
+def mail_groups_table_view(request, pk):
+    table = MailGroupsTable(utils.get_objects_for_customer(MailGroup,
+                                                           user=request.user,
+                                                           customer_pk=pk))
+    RequestConfig(request).configure(table)
+    return TemplateResponse(request,
+                            'groups/group_list.html',
+                            {'groups': table})
+
+
+@login_required
+def mail_group_detail_view(request, pk):
+    group = utils.get_object_with_view_permission(MailGroup,
+                                                  user=request.user,
+                                                  pk=pk)
+    return render(request, 'groups/group_details.html',
+                  {'group': group})
+
+
+@login_required
+def delete_ad_group(request, pk):
+    group = utils.get_object_with_view_permission(AdGroup,
+                                                  user=request.user,
+                                                  pk=pk)
+    if request.method == 'POST':
+        group.delete()
+        return redirect('ad_groups', pk=group.customer.pk)
+    return TemplateResponse(request,
+                            'groups/ad_group_confirm_delete.html',
+                            {'object': group})
+
+
+@login_required
+def delete_mail_group(request, pk):
+    group = utils.get_object_with_view_permission(MailGroup,
+                                                  user=request.user,
+                                                  pk=pk)
+    if request.method == 'POST':
+        group.delete()
+        return redirect('mail_groups', pk=group.customer.pk)
+    return TemplateResponse(request,
+                            'groups/mail_group_confirm_delete.html',
+                            {'object': group})

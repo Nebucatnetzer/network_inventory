@@ -31,6 +31,14 @@ class CustomersTable(CoreTable):
                               text='Users',
                               args=[A('pk')],
                               orderable=False)
+    ad_groups = tables.LinkColumn('ad_groups',
+                                  text='AD Groups',
+                                  args=[A('pk')],
+                                  orderable=False)
+    mail_groups = tables.LinkColumn('mail_groups',
+                                    text='Mail Groups',
+                                    args=[A('pk')],
+                                    orderable=False)
     delete = tables.LinkColumn('customer_delete',
                                text='delete',
                                args=[A('pk')], attrs={

@@ -19,6 +19,10 @@ class AdGroup(Group):
         ordering = ['name']
         verbose_name_plural = "AD Groups"
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('ad_group', args=[str(self.id)])
+
 
 class MailGroup(Group):
     mail_address = models.EmailField()
@@ -26,3 +30,7 @@ class MailGroup(Group):
     class Meta:
         ordering = ['name']
         verbose_name_plural = "Mail Groups"
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('mail_group', args=[str(self.id)])
