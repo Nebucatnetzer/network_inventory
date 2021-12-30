@@ -14,7 +14,7 @@ urlpatterns = [
          views.DeviceCreateFromCustomerView.as_view(),
          name='device_create'),
     path('update/device/<int:pk>/',
-         views.DeviceUpdateView.as_view(),
+         views.device_update_view,
          name='device_update'),
     path('delete/device/<int:pk>/', views.DeviceDeleteView.as_view(),
          name='device_delete'),

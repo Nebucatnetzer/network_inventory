@@ -92,8 +92,8 @@ class ComputersFilterView(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = ComputerFilter
 
     def get_queryset(self):
-        return utils.get_all_objects_for_allowed_customers(Computer,
-                                                           self.request.user)
+        return utils.objects_for_allowed_customers(Computer,
+                                                   self.request.user)
 
 
 class ComputerCreateFromCustomerView(LoginRequiredMixin, CreateView):
@@ -135,12 +135,12 @@ def computer_update_view(request, pk):
                                                      user=request.user,
                                                      pk=pk)
     if request.method == 'POST':
-        form = ComputerUpdateForm(request.POST, instance=computer)
+        form = ComputerUpdateForm(request, request.POST, instance=computer)
         if form.is_valid():
             computer = form.save()
             return redirect(computer)
     else:
-        form = ComputerUpdateForm(instance=computer)
+        form = ComputerUpdateForm(request, instance=computer)
     return TemplateResponse(request, template_name, {'form': form})
 
 

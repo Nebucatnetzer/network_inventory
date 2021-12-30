@@ -1,6 +1,8 @@
 import pytest
 from mixer.backend.django import mixer
 
+from django.http import HttpRequest
+
 from computers import forms
 
 pytestmark = pytest.mark.django_db
@@ -27,17 +29,19 @@ def test_computer_create_form(create_admin_user):
 
 def test_computer_update_form(create_admin_user):
     fixture = create_admin_user()
-    form = forms.ComputerUpdateForm(data={})
+    request = HttpRequest()
+    request.user = fixture['admin']
+    form = forms.ComputerUpdateForm(request, data={})
     assert form.is_valid() is False, (
         "Should be false because no data was given")
 
     data = {"name": "pharma-pc1",
             "customer": 20356}
-    form = forms.ComputerUpdateForm(data=data)
+    form = forms.ComputerUpdateForm(request, data=data)
     assert form.is_valid() is False, (
         "Should be false because the customer doesn't exist.")
 
     data = {"name": "pharma-pc1",
             "customer": fixture['customer'].id}
-    form = forms.ComputerUpdateForm(data=data)
+    form = forms.ComputerUpdateForm(request, data=data)
     assert form.is_valid() is True, ("Should be valid with the given data.")

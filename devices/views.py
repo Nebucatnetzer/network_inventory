@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import DetailView
@@ -60,7 +61,7 @@ def devices_table_view(request, pk):
 @login_required
 def warranties_view(request):
     table = WarrantiesTable(
-        utils.get_all_objects_for_allowed_customers(Warranty, request.user))
+        utils.objects_for_allowed_customers(Warranty, request.user))
     RequestConfig(request).configure(table)
     return render(request,
                   'devices/warranties_list.html',
@@ -96,13 +97,23 @@ class DeviceCreateFromCustomerView(LoginRequiredMixin, CreateView):
         }
 
 
-class DeviceUpdateView(LoginRequiredMixin, UpdateView):
-    model = Device
-    form_class = DeviceUpdateForm
-    template_name = 'devices/device_update.html'
-
-    def get_success_url(self):
-        return self.request.POST.get('previous_page')
+@login_required
+def device_update_view(request, pk):
+    """
+    A view to create a customer.
+    """
+    template_name = 'computers/computer_update.html'
+    device = utils.get_object_with_view_permission(Device,
+                                                   user=request.user,
+                                                   pk=pk)
+    if request.method == 'POST':
+        form = DeviceUpdateForm(request, request.POST, instance=device)
+        if form.is_valid():
+            device = form.save()
+            return redirect(device)
+    else:
+        form = DeviceUpdateForm(request, instance=device)
+    return TemplateResponse(request, template_name, {'form': form})
 
 
 class DeviceDeleteView(LoginRequiredMixin, DeleteView):

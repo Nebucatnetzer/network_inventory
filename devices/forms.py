@@ -3,10 +3,13 @@ import floppyforms.__future__ as forms
 from core import utils
 
 from customers.models import Customer
+from customers.models import Location
 
 from devices.models import Device
 from devices.models import DeviceInNet
 from devices.models import Warranty
+
+from users.models import User
 
 
 class DeviceCreateForm(forms.ModelForm):
@@ -23,16 +26,28 @@ class DeviceCreateForm(forms.ModelForm):
         we can use to assign to the field.
         """
         super(DeviceCreateForm, self).__init__(*args, **kwargs)
-        if not user.is_superuser:
-            self.fields['customer'].queryset = (
-                utils.get_all_objects_for_allowed_customers(
-                    Customer, user=user))
+        self.fields['customer'].queryset = (
+            utils.objects_for_allowed_customers(
+                Customer, user=user))
 
 
 class DeviceUpdateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
+    def __init__(self, request, *args, **kwargs):
+        super(DeviceUpdateForm, self).__init__(*args, **kwargs)
+        customers = utils.objects_for_allowed_customers(Customer,
+                                                        user=request.user)
+        locations = utils.objects_for_allowed_customers(Location,
+                                                        user=request.user)
+        users = utils.objects_for_allowed_customers(User,
+                                                    user=request.user)
+        self.fields['customer'].queryset = customers
+        self.fields['location'].queryset = locations
+        self.fields['user'].queryset = users
+
     class Meta:
         model = Device
         fields = '__all__'
