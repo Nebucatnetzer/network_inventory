@@ -42,5 +42,5 @@ cleanall:
 	rm -rf venv/
 	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 	sudo rm -rf htmlcov/
-	sudo rm */migrations/*.py
+	sudo rm -f */migrations/*.py
 	sudo rm .second_run
