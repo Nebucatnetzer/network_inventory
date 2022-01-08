@@ -5,7 +5,8 @@
 {% if request.user.is_superuser %}
 <div class="row mb-3">
     <div class="col">
-        <button hx-get="{% url 'htmx_create_customer' %}" hx-target="#htmx-create-customer" class="btn btn-primary">Add Customer</button>
+        <button hx-get="{% url 'htmx_create_customer' %}" hx-target="#htmx-create-customer" class="btn btn-primary"
+            _="on htmx:afterOnLoad wait 10ms then add .show to #modal then add .show to #modal-backdrop">Add Customer</button>
     </div>
     <div class="col" id="htmx-create-customer"></div>
 </div>
@@ -17,5 +18,20 @@
         </div>
     </div>
 </div>
+<script>
+    function closeModal() {
+        var container = document.getElementById("htmx-create-customer")
+        var backdrop = document.getElementById("modal-backdrop")
+        var modal = document.getElementById("modal")
+
+        modal.classList.remove("show")
+        backdrop.classList.remove("show")
+
+        setTimeout(function () {
+            container.removeChild(backdrop)
+            container.removeChild(modal)
+        }, 200)
+    }
+</script>
 
 {% endblock %}
