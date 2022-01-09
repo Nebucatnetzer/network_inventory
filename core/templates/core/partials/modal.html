@@ -1,0 +1,18 @@
+<div id="modal-backdrop" class="modal-backdrop fade show" style="display:block;"></div>
+<div id="modal" class="modal fade show" tabindex="-1" style="display:block;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modal_title }}</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary" hx-post="{% url 'htmx_create_customer' %}" hx-target="#htmx-create-customer">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
