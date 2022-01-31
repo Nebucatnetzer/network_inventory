@@ -27,6 +27,7 @@
         devShell = machNix.mkPythonShell {
           packagesExtra = with pkgs; [ pkgs.gnumake ];
           requirements = builtins.readFile ./requirements/local.txt;
+          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
         };
       });
 }
