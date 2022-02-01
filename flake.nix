@@ -26,5 +26,9 @@
           requirements = builtins.readFile ./requirements/local.txt;
           _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
         };
+        defaultPackage = machNix.mkDockerImage {
+          requirements = builtins.readFile ./requirements/docker.txt;
+          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
+        };
       });
 }
