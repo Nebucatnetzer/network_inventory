@@ -35,7 +35,7 @@
           _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
         }).override (oldAttrs: {
           name = "network-inventory";
-          config.Cmd = [ "/code/run.sh" ];
+          config.Cmd = [ "run.sh" ];
         });
       });
 }
