@@ -1,7 +1,8 @@
+from django.urls import reverse_lazy
 import floppyforms.__future__ as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button, Div
-from crispy_forms.bootstrap import FormActions, Modal
+from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button
+from crispy_forms.bootstrap import FormActions
 
 from core import utils
 
@@ -27,18 +28,18 @@ class DeviceCategoryForm(forms.ModelForm):
         super(DeviceCategoryForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
+        self.helper.attrs = {
+            'hx-post': reverse_lazy('device_category_create'),
+            'hx_target': '#htmx-device-form',
+            'hx-swap': 'outerHTML'
+        }
         self.helper.layout = Layout(
-            Modal(
-                'name',
-                # Div('field2'),
-                title="This is my modal"),
+            Field('name'),
             FormActions(
-                Submit(
-                    'save', 'Save', hx_post="{% url 'htmx_create_customer' %}",
-                    hx_target="#htmx-modal-position"),
+                Submit('save_category', 'Save'),
                 Button('cancel', 'Cancel', css_class="btn btn-secondary",
-                       onclick="closeModal()"))
-        )
+                       onclick="closeModal()")
+            ))
 
 
 class DeviceCreateForm(forms.ModelForm):
@@ -77,6 +78,7 @@ class DeviceUpdateForm(forms.ModelForm):
         self.fields['location'].queryset = locations
         self.fields['user'].queryset = users
         self.helper = FormHelper()
+        self.helper.form_id = 'htmx-device-form'
         self.helper.layout = Layout(
             Fieldset(
                 '',
@@ -92,7 +94,7 @@ class DeviceUpdateForm(forms.ModelForm):
                 'description',
             ),
             FormActions(
-                Submit('save', 'Save'),
+                Submit('save_device', 'Save'),
                 HTML(
                     """<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>""")
             )

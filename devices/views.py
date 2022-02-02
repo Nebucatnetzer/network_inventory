@@ -10,6 +10,7 @@ from django.views.generic import DetailView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
+from crispy_forms.utils import render_crispy_form
 from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
@@ -108,7 +109,7 @@ def device_update_view(request, pk):
     device = utils.get_object_with_view_permission(Device,
                                                    user=request.user,
                                                    pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST" and 'save_device' in request.POST:
         form = DeviceUpdateForm(request, request.POST, instance=device)
         if form.is_valid():
             device = form.save()
@@ -205,11 +206,13 @@ class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
 @login_required
 def htmx_create_device_cagetory(request):
     template_path = "devices/partials/device_category_create.html"
-    if request.method == "POST":
+    if request.method == "POST" and 'save_category' in request.POST:
         form = DeviceCategoryForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return HttpResponse("<script>location.reload()</script>")
+            device_form = DeviceUpdateForm(request)
+            form_html = render_crispy_form(device_form)
+            return HttpResponse(form_html)
         else:
             return TemplateResponse(request,
                                     template_path,

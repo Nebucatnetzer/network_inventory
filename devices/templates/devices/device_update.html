@@ -3,20 +3,8 @@
 
 {% block section_title %}Edit Device{% endblock %}
 {% block content %}
-<form method="post">
-    <div class="row">
-        {% csrf_token %}
-        <div class="col">
-            <div class="card mt-3">
-                <div class="card-body">
-                    {% crispy form %}
-                </div>
-            </div>
 
-        </div>
-    </div>
-    <br>
+{% crispy form %}
 
-</form>
 <div class="col" id="htmx-modal-position"></div>
 {% endblock %}
