@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.template.response import TemplateResponse
@@ -17,6 +18,7 @@ from core import utils
 
 from .decorators import device_view_permission
 
+from .forms import DeviceCategoryForm
 from .forms import DeviceCreateForm
 from .forms import DeviceInNetCreateForm
 from .forms import DeviceInNetUpdateForm
@@ -102,7 +104,7 @@ def device_update_view(request, pk):
     """
     A view to create a customer.
     """
-    template_name = 'computers/computer_update.html'
+    template_name = 'devices/device_update.html'
     device = utils.get_object_with_view_permission(Device,
                                                    user=request.user,
                                                    pk=pk)
@@ -198,3 +200,22 @@ class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
 class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
     model = DeviceManufacturer
     template_name = 'devices/manufacturer_details.html'
+
+
+@login_required
+def htmx_create_device_cagetory(request):
+    template_path = "devices/partials/device_category_create.html"
+    if request.method == "POST":
+        form = DeviceCategoryForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return HttpResponse("<script>location.reload()</script>")
+        else:
+            return TemplateResponse(request,
+                                    template_path,
+                                    context={"form": form})
+    form = DeviceCategoryForm()
+    context = {"form": form}
+    return TemplateResponse(request,
+                            template_path,
+                            context)

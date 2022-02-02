@@ -8,12 +8,7 @@
                 <h5 class="modal-title">{{ modal_title }}</h5>
             </div>
             <div class="modal-body">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit" class="btn btn-primary" hx-post="{% url 'htmx_create_customer' %}" hx-target="#htmx-modal-position">Save</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-                </form>
+                {% crispy form %}
             </div>
         </div>
     </div>

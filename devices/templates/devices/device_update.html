@@ -4,24 +4,19 @@
 {% block section_title %}Edit Device{% endblock %}
 {% block content %}
 <form method="post">
-<div class="row">
-    {% csrf_token %}
-    <div class="col">
-        <div class="card mt-3">
-            <div class="card-body">
-            {{ form|crispy }}
+    <div class="row">
+        {% csrf_token %}
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-body">
+                    {% crispy form %}
+                </div>
             </div>
+
         </div>
     </div>
-</div>
-<br>
-<input type="submit" value="Save" class="btn btn-primary">
-<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">Cancel</a>
-<input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
-</form>
-<script>
-    prev = document.getElementById("previous_page");
-    prev.value = document.referrer;
-</script>
+    <br>
 
+</form>
+<div class="col" id="htmx-modal-position"></div>
 {% endblock %}

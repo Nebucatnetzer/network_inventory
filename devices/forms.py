@@ -1,4 +1,7 @@
 import floppyforms.__future__ as forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button, Div
+from crispy_forms.bootstrap import FormActions, Modal
 
 from core import utils
 
@@ -6,10 +9,36 @@ from customers.models import Customer
 from customers.models import Location
 
 from devices.models import Device
+from devices.models import DeviceCategory
 from devices.models import DeviceInNet
 from devices.models import Warranty
 
 from users.models import User
+
+
+class DeviceCategoryForm(forms.ModelForm):
+    class Meta:
+        model = DeviceCategory
+        fields = (
+            'name',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(DeviceCategoryForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Modal(
+                'name',
+                # Div('field2'),
+                title="This is my modal"),
+            FormActions(
+                Submit(
+                    'save', 'Save', hx_post="{% url 'htmx_create_customer' %}",
+                    hx_target="#htmx-modal-position"),
+                Button('cancel', 'Cancel', css_class="btn btn-secondary",
+                       onclick="closeModal()"))
+        )
 
 
 class DeviceCreateForm(forms.ModelForm):
@@ -47,6 +76,27 @@ class DeviceUpdateForm(forms.ModelForm):
         self.fields['customer'].queryset = customers
         self.fields['location'].queryset = locations
         self.fields['user'].queryset = users
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'name',
+                Field('customer'),
+                'location',
+                'user',
+                'category',
+                HTML("""
+                    <a hx-get="{% url 'device_category_create' %}" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
+                """),
+                'serialnumber',
+                'description',
+            ),
+            FormActions(
+                Submit('save', 'Save'),
+                HTML(
+                    """<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>""")
+            )
+        )
 
     class Meta:
         model = Device

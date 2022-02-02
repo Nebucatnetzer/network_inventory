@@ -14,6 +14,7 @@ CSRF_TRUSTED_ORIGINS = [
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 DATABASES = {
     'default': {

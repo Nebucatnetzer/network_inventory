@@ -13,6 +13,7 @@ CSRF_TRUSTED_ORIGINS = [
 SECRET_KEY = "foo"
 
 DEBUG = True
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 DATABASES = {
     'default': {
