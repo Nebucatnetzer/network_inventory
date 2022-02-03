@@ -106,6 +106,7 @@ def device_update_view(request, pk):
     A view to create a customer.
     """
     template_name = 'devices/device_update.html'
+    request.session['device_to_update'] = pk
     device = utils.get_object_with_view_permission(Device,
                                                    user=request.user,
                                                    pk=pk)
@@ -206,14 +207,20 @@ class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
 @login_required
 def htmx_create_device_cagetory(request):
     template_path = "devices/partials/device_category_create.html"
+    pk = request.session.get('device_to_update')
+    device = utils.get_object_with_view_permission(Device,
+                                                   user=request.user,
+                                                   pk=pk)
     if request.method == "POST" and 'save_category' in request.POST:
         form = DeviceCategoryForm(request.POST)
         if form.is_valid():
-            form.save(commit=True)
-            device_form = DeviceUpdateForm(request)
+            category = form.save(commit=True)
+            device.category = category
+            device_form = DeviceUpdateForm(request, instance=device)
             form_html = render_crispy_form(device_form)
             return HttpResponse(form_html)
         else:
+            form.helper.attrs['hx-target'] = '#htmx-modal-position'
             return TemplateResponse(request,
                                     template_path,
                                     context={"form": form})

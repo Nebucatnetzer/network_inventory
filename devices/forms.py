@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 import floppyforms.__future__ as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button
+from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button, Div
 from crispy_forms.bootstrap import FormActions
 
 from core import utils
@@ -30,8 +30,8 @@ class DeviceCategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.attrs = {
             'hx-post': reverse_lazy('device_category_create'),
-            'hx_target': '#htmx-device-form',
-            'hx-swap': 'outerHTML'
+            'hx-target': '#device-update',
+            'hx-swap': 'innerHTML'
         }
         self.helper.layout = Layout(
             Field('name'),
@@ -88,7 +88,7 @@ class DeviceUpdateForm(forms.ModelForm):
                 'user',
                 'category',
                 HTML("""
-                    <a hx-get="{% url 'device_category_create' %}" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
+                    <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
                 'serialnumber',
                 'description',
@@ -97,7 +97,8 @@ class DeviceUpdateForm(forms.ModelForm):
                 Submit('save_device', 'Save'),
                 HTML(
                     """<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>""")
-            )
+            ),
+            Div(css_id='htmx-modal-position', css_class="col")
         )
 
     class Meta:
