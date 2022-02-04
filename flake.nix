@@ -6,14 +6,7 @@
       url = github:numtide/flake-utils;
     };
     mach-nix = {
-      url = "github:DavHau/mach-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        pypi-deps-db = {
-          url = "github:DavHau/pypi-deps-db";
-        };
-      };
+      url = "mach-nix/3.4.0";
     };
   };
 
