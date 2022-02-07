@@ -3,6 +3,8 @@ from django_tables2.utils import A
 
 from core.tables import CoreTable
 
+from .models import AdGroup
+from .models import MailGroup
 from .models import User
 
 
@@ -27,3 +29,31 @@ class UsersTable(CoreTable):
 
     class Meta(CoreTable.Meta):
         model = User
+
+
+class AdGroupsTable(CoreTable):
+    id = tables.Column(visible=False)
+    name = tables.Column('AdGroup', linkify=True)
+    customer = tables.Column('Customer', linkify=True)
+    delete = tables.LinkColumn('ad_group_delete',
+                               text='delete',
+                               args=[A('pk')], attrs={
+                                   'a': {'class': 'delete material-icons', }
+                               }, orderable=False)
+
+    class Meta(CoreTable.Meta):
+        model = AdGroup
+
+
+class MailGroupsTable(CoreTable):
+    id = tables.Column(visible=False)
+    name = tables.Column('MailGroup', linkify=True)
+    customer = tables.Column('Customer', linkify=True)
+    delete = tables.LinkColumn('mail_group_delete',
+                               text='delete',
+                               args=[A('pk')], attrs={
+                                   'a': {'class': 'delete material-icons', }
+                               }, orderable=False)
+
+    class Meta(CoreTable.Meta):
+        model = MailGroup

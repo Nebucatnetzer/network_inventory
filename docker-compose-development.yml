@@ -7,27 +7,9 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_DB
-      - POSTGRES_PASSWORD
+      - POSTGRES_DB=network_inventory
+      - POSTGRES_PASSWORD=password
     volumes:
       - db_data:/var/lib/postgresql/data/
-
-  web:
-    build: .
-    volumes:
-      - .:/code
-    environment:
-      - DJANGO_SETTINGS_MODULE
-      - DJANGO_DEBUG
-      - DJANGO_SECRET_KEY
-    depends_on:
-      - db
-
-  nginx:
-    build: ./nginx
     ports:
-      - 8080:80
-    depends_on:
-      - web
-    volumes:
-      - ./static:/home/app/web/static
+      - "5432:5432"

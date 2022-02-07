@@ -11,6 +11,7 @@ services:
 
   web:
     image: nebucatnetzer/network_inventory
+    # build: .
     volumes:
       - .:/code
     environment:

@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 def test_computer_create_form(create_admin_user):
     fixture = create_admin_user()
-    user = mixer.blend("auth.User", customer=fixture['customer'])
+    user = mixer.blend("core.InventoryUser", customer=fixture['customer'])
     form = forms.ComputerCreateForm(user=user, data={})
     assert form.is_valid() is False, (
         "Should be false because no data was given")

@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
+from django.template.context_processors import csrf
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -9,6 +10,8 @@ from django.views.generic import DetailView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
+from crispy_forms.utils import render_crispy_form
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
@@ -17,6 +20,7 @@ from core import utils
 
 from .decorators import device_view_permission
 
+from .forms import DeviceCategoryForm
 from .forms import DeviceCreateForm
 from .forms import DeviceInNetCreateForm
 from .forms import DeviceInNetUpdateForm
@@ -102,11 +106,12 @@ def device_update_view(request, pk):
     """
     A view to create a customer.
     """
-    template_name = 'computers/computer_update.html'
+    template_name = 'devices/device_update.html'
+    request.session['device_to_update'] = pk
     device = utils.get_object_with_view_permission(Device,
                                                    user=request.user,
                                                    pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST" and 'save_device' in request.POST:
         form = DeviceUpdateForm(request, request.POST, instance=device)
         if form.is_valid():
             device = form.save()
@@ -198,3 +203,35 @@ class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
 class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
     model = DeviceManufacturer
     template_name = 'devices/manufacturer_details.html'
+
+
+@login_required
+def htmx_create_device_cagetory(request):
+    context = {}
+    if request.method == "POST" and 'save_category' in request.POST:
+        form = DeviceCategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=True)
+            pk = request.session.get('device_to_update')
+            device = utils.get_object_with_view_permission(Device,
+                                                           user=request.user,
+                                                           pk=pk)
+            device.category = category
+            device_form = DeviceUpdateForm(request, instance=device)
+            form_html = as_crispy_field(device_form['category'])
+        else:
+            context.update(csrf(request))
+            form.helper.attrs['hx-swap-oob'] = 'true'
+            form_html = render_crispy_form(form, context=context)
+        context["valid"] = form.is_valid()
+        context["form"] = form_html
+        template_path = "devices/partials/device_category_response.html"
+        return TemplateResponse(request,
+                                template_path,
+                                context)
+    form = DeviceCategoryForm()
+    context["form"] = form
+    template_path = "devices/partials/device_category_create.html"
+    return TemplateResponse(request,
+                            template_path,
+                            context)

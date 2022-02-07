@@ -1,44 +1,79 @@
 SHELL=/usr/bin/env bash
 
-.PHONY: docker
+.DEFAULT_GOAL := run
 
-docker:
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
-	docker-compose -f docker-compose-development.yml up
+.PHONY: run
+run: setup
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	$(find . -name __pycache__ -o -name "*.pyc" -delete) \
+	python manage.py runserver; \
 
-init:
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.docker; \
-	docker-compose -f docker-compose-development.yml run web python manage.py loaddata network_inventory.yaml
+.PHONY: setup
+setup: ./venv
+	( \
+	source venv/bin/activate; \
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	docker-compose -f docker-compose-development.yml up -d; \
+	if [ -f .second_run ]; then \
+		sleep 2; \
+		python manage.py collectstatic --noinput; \
+		python manage.py makemigrations; \
+		python manage.py migrate; \
+	else \
+		python manage.py collectstatic --noinput; \
+		python manage.py makemigrations backups; \
+		python manage.py makemigrations computers; \
+		python manage.py makemigrations core; \
+		python manage.py makemigrations customers; \
+		python manage.py makemigrations devices; \
+		python manage.py makemigrations licenses; \
+		python manage.py makemigrations nets; \
+		python manage.py makemigrations softwares; \
+		python manage.py makemigrations users; \
+		python manage.py makemigrations; \
+		python manage.py migrate; \
+		python manage.py loaddata backups; \
+		python manage.py loaddata computers; \
+		python manage.py loaddata core; \
+		python manage.py loaddata devices; \
+		python manage.py loaddata nets; \
+		python manage.py loaddata softwares; \
+		python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"; \
+		touch .second_run; \
+	fi; \
+	)
 
-test:
-	docker-compose -f docker-compose-development.yml run web pytest -nauto --nomigrations --cov=. --cov-report=html
-
-debug:
-	docker-compose -f docker-compose-development.yml run web pytest --pdb --nomigrations --cov=. --cov-report=html
-
-local:
+./venv:
 	python3 -m venv venv
 	( \
 	source venv/bin/activate; \
 	pip3 install -r requirements/local.txt; \
 	)
 
-testlocal:
-	( \
-	source venv/bin/activate; \
-	pytest -n6 --ds=network_inventory.settings.local --nomigrations  --cov=. --cov-report=html; \
-	)
-
-
+.PHONY: clean
 clean:
 	docker-compose -f docker-compose-development.yml down -v
-	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm -rf htmlcov/
-	sudo rm -f */migrations/0*.py
+	find . \( -name __pycache__ -o -name "*.pyc" \) -delete
+	rm -rf htmlcov/
+	rm -f */migrations/0*.py
+	rm .second_run
 
-cleanall:
+.PHONY: cleanall
+cleanall: clean
 	docker-compose  -f docker-compose-development.yml down -v --rmi local
 	rm -rf venv/
-	sudo find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-	sudo rm -rf htmlcov/
-	sudo rm */migrations/*.py
+
+.PHONY: init
+init:
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	python manage.py loaddata network_inventory.yaml
+
+.PHONY: test
+test:
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	pytest -nauto --nomigrations --cov=. --cov-report=html
+
+.PHONY: debug
+debug:
+	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
+	pytest --pdb --nomigrations --cov=. --cov-report=html

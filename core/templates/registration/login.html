@@ -4,21 +4,15 @@
 
 {% block content %}
 <form id="login" name="login" method="post">
-{% csrf_token %}
-<p>
-    <label for="id_username">Username:</label>
-    <div class="ui input">
-        <input type="text" name="username" autofocus required id="id_username">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="username" autofocus required id="id_username" placeholder="Username">
     </div>
-</p>
-<p>
-    <label for="id_password">Password:</label>
-    <div class="ui input">
-        <input type="password" name="password" required id="id_password">
+    <div class="input-group mb-3">
+        <input type="password" class="form-control" name="password" required id="id_password" placeholder="Password">
     </div>
-</p>
-<p>
-    <button name="button_login" type="submit" class="ui button">Login</button>
-</p>
+    <p>
+        <button name="button_login" type="submit" class="btn btn-primary">Login</button>
+    </p>
 </form>
 {% endblock %}

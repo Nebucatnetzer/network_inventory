@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -f /var/cache/network_inventory/.second_run ]; then
+if [ -f .second_run ]; then
     sleep 2
     python manage.py collectstatic --noinput
     python manage.py makemigrations
@@ -24,8 +24,7 @@ else
     python manage.py loaddata nets
     python manage.py loaddata softwares
     python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-    mkdir -p /var/cache/network_inventory
-    touch /var/cache/network_inventory/.second_run
+    touch .second_run
 fi
 find . \( -name __pycache__ -o -name "*.pyc" \) -delete
 gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3

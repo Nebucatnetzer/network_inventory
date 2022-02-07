@@ -177,3 +177,4 @@ htmlcov/
 /static
 .idea/
 db_data
+.direnv

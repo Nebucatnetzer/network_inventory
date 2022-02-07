@@ -3,6 +3,7 @@ from .base import *
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    '10.7.89.104'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -13,6 +14,7 @@ CSRF_TRUSTED_ORIGINS = [
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 DATABASES = {
     'default': {
