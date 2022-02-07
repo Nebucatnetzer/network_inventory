@@ -26,7 +26,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         run: |
-          pytest -nauto --ds=network_inventory.settings.local --nomigrations
+          pytest -nauto --ds=network_inventory.settings.ram_test --nomigrations
 
   publish:
     # Ensure test job passes before pushing image.

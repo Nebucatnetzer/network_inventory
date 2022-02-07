@@ -45,7 +45,7 @@ def test_device_update_view(create_admin_user):
             'user': '',
             'installation_date': ''}
     response = client.post('/update/device/{}/'.format(device.pk), data)
-    assert response.status_code == 302
+    assert response.status_code == 200
     device.refresh_from_db()
     assert device.name == data['name']
 
