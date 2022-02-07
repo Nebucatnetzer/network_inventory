@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
+from django.template.context_processors import csrf
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -11,6 +11,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
 from crispy_forms.utils import render_crispy_form
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 from django_tables2 import RequestConfig
 
 from customers.decorators import customer_view_permission
@@ -206,26 +207,31 @@ class DeviceManufacturerDetailView(LoginRequiredMixin, DetailView):
 
 @login_required
 def htmx_create_device_cagetory(request):
-    template_path = "devices/partials/device_category_create.html"
-    pk = request.session.get('device_to_update')
-    device = utils.get_object_with_view_permission(Device,
-                                                   user=request.user,
-                                                   pk=pk)
+    context = {}
     if request.method == "POST" and 'save_category' in request.POST:
         form = DeviceCategoryForm(request.POST)
         if form.is_valid():
             category = form.save(commit=True)
+            pk = request.session.get('device_to_update')
+            device = utils.get_object_with_view_permission(Device,
+                                                           user=request.user,
+                                                           pk=pk)
             device.category = category
             device_form = DeviceUpdateForm(request, instance=device)
-            form_html = render_crispy_form(device_form)
-            return HttpResponse(form_html)
+            form_html = as_crispy_field(device_form['category'])
         else:
-            form.helper.attrs['hx-target'] = '#htmx-modal-position'
-            return TemplateResponse(request,
-                                    template_path,
-                                    context={"form": form})
+            context.update(csrf(request))
+            form.helper.attrs['hx-swap-oob'] = 'true'
+            form_html = render_crispy_form(form, context=context)
+        context["valid"] = form.is_valid()
+        context["form"] = form_html
+        template_path = "devices/partials/device_category_response.html"
+        return TemplateResponse(request,
+                                template_path,
+                                context)
     form = DeviceCategoryForm()
-    context = {"form": form}
+    context["form"] = form
+    template_path = "devices/partials/device_category_create.html"
     return TemplateResponse(request,
                             template_path,
                             context)
