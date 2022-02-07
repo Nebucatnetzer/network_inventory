@@ -30,8 +30,7 @@ class DeviceCategoryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.attrs = {
             'hx-post': reverse_lazy('device_category_create'),
-            'hx-target': '#device-update',
-            'hx-swap': 'innerHTML'
+            'id': 'device-category-form',
         }
         self.helper.layout = Layout(
             Field('name'),
