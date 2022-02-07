@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 import floppyforms.__future__ as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, HTML, Field, Button, Div
+from crispy_forms.layout import Layout, Submit, HTML, Field, Button, Div
 from crispy_forms.bootstrap import FormActions
 
 from core import utils
@@ -80,19 +80,16 @@ class DeviceUpdateForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'htmx-device-form'
         self.helper.layout = Layout(
-            Fieldset(
-                '',
-                'name',
-                Field('customer'),
-                'location',
-                'user',
-                'category',
-                HTML("""
+            'name',
+            'customer',
+            'location',
+            'user',
+            Field('category'),
+            HTML("""
                     <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
-                'serialnumber',
-                'description',
-            ),
+            'serialnumber',
+            'description',
             FormActions(
                 Submit('save_device', 'Save'),
                 HTML(
