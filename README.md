@@ -1,6 +1,6 @@
 # network_inventory
 
-![Test Status](https://github.com/Nebucatnetzer/network_inventory/actions/workflows/tests.yml/badge.svg)
+[![.github/workflows/publish.yml](https://github.com/Nebucatnetzer/network_inventory/actions/workflows/publish.yml/badge.svg?branch=master)](https://github.com/Nebucatnetzer/network_inventory/actions/workflows/publish.yml)
 
 I started this project in order to have solution for keeping an
 inventory over my various servers and other network equipment.
