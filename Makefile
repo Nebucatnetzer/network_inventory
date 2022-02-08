@@ -65,15 +65,24 @@ cleanall: clean
 
 .PHONY: init
 init:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	python manage.py loaddata network_inventory.yaml
+	)
 
 .PHONY: test
 test:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	pytest -nauto --nomigrations --cov=. --cov-report=html
+	pytest -nauto --nomigrations --cov=. --cov-report=html; \
+	)
 
 .PHONY: debug
 debug:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	pytest --pdb --nomigrations --cov=. --cov-report=html
+	)
