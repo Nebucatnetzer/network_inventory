@@ -4,9 +4,12 @@ SHELL=/usr/bin/env bash
 
 .PHONY: run
 run: setup
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	$(find . -name __pycache__ -o -name "*.pyc" -delete) \
+	find . -name __pycache__ -o -name "*.pyc" -delete; \
 	python manage.py runserver; \
+	)
 
 .PHONY: setup
 setup: ./venv
@@ -65,15 +68,24 @@ cleanall: clean
 
 .PHONY: init
 init:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	python manage.py loaddata network_inventory.yaml
+	python manage.py loaddata network_inventory.yaml; \
+	)
 
 .PHONY: test
 test:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	pytest -nauto --nomigrations --cov=. --cov-report=html
+	pytest -nauto --nomigrations --cov=. --cov-report=html; \
+	)
 
 .PHONY: debug
 debug:
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	pytest --pdb --nomigrations --cov=. --cov-report=html
+	pytest --pdb --nomigrations --cov=. --cov-report=html; \
+	)
