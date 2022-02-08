@@ -10,7 +10,7 @@ services:
       - ./db_data:/var/lib/postgresql/data/
 
   web:
-    image: nebucatnetzer/network_inventory
+    image: ghcr.io/nebucatnetzer/network_inventory/network_inventory:master
     # build: .
     volumes:
       - .:/code
