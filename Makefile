@@ -4,9 +4,12 @@ SHELL=/usr/bin/env bash
 
 .PHONY: run
 run: setup
+	( \
+	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	$(find . -name __pycache__ -o -name "*.pyc" -delete) \
+	find . -name __pycache__ -o -name "*.pyc" -delete; \
 	python manage.py runserver; \
+	)
 
 .PHONY: setup
 setup: ./venv
