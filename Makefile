@@ -71,7 +71,7 @@ init:
 	( \
 	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	python manage.py loaddata network_inventory.yaml
+	python manage.py loaddata network_inventory.yaml; \
 	)
 
 .PHONY: test
@@ -87,5 +87,5 @@ debug:
 	( \
 	source venv/bin/activate; \
 	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
-	pytest --pdb --nomigrations --cov=. --cov-report=html
+	pytest --pdb --nomigrations --cov=. --cov-report=html; \
 	)
