@@ -30,6 +30,16 @@ def test_device_delete_view(create_admin_user):
     assert response.status_code == 302
 
 
+def test_load_device_update_view(create_admin_user):
+    create_admin_user()
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    device = mixer.blend('devices.Device', customer=mixer.SELECT)
+    response = client.get('/update/device/{}/'.format(device.pk))
+    assert (response.status_code == 200
+            and helper.in_content(response, device.name))
+
+
 def test_device_update_view(create_admin_user):
     create_admin_user()
     client = Client()
