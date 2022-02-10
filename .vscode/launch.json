@@ -10,7 +10,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
             "args": [
-                "migrate",
                 "runserver",
                 "--noreload",
                 "--settings=network_inventory.settings.local"
