@@ -19,15 +19,13 @@ class CustomerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CustomerForm, self).__init__(*args, **kwargs)
 
-        self.helper = FormHelper()
+        self.helper = FormHelper(self)
         self.helper.attrs = {
             'hx-post': reverse_lazy('customer_create'),
             'id': 'customer-form',
         }
-        self.helper.layout = Layout(
+        self.helper.layout.append(
             FormActions(
-                Field('name'),
-                Field('description'),
                 Submit('save', 'Save'),
                 Button('cancel', 'Cancel', css_class="btn btn-secondary",
                        onclick="closeModal()")
