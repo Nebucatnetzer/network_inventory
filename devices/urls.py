@@ -35,6 +35,6 @@ urlpatterns = [
          views.DeviceInNetDeleteView.as_view(),
          name='device_in_net_delete'),
     path('warranties/', views.warranties_view, name='warranties'),
-    path('create/devices/category', views.htmx_create_device_cagetory,
+    path('create/devices/category/', views.htmx_create_device_cagetory,
          name='device_category_create')
 ]

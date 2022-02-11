@@ -2,7 +2,6 @@ from django_tables2 import RequestConfig
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponse
-from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.urls import reverse
@@ -26,7 +25,7 @@ def customers_table_view(request):
 
 
 @login_required
-def htmx_create_customer(request):
+def create_customer(request):
     if request.method == "POST":
         form = CustomerForm(request.POST)
         if form.is_valid():
@@ -51,23 +50,6 @@ def customer_detail_view(request, pk):
     return TemplateResponse(request,
                             "customers/customer_details.html",
                             context)
-
-
-@login_required
-def customer_create_view(request):
-    """
-    A view to create a customer.
-    """
-    template_name = 'customers/customer_create.html'
-
-    if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        if form.is_valid():
-            customer = form.save()
-            return redirect(customer)
-    else:
-        form = CustomerForm()
-    return TemplateResponse(request, template_name, {'form': form})
 
 
 class CustomerDeleteView(LoginRequiredMixin, DeleteView):

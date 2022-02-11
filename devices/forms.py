@@ -27,13 +27,12 @@ class DeviceCategoryForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DeviceCategoryForm, self).__init__(*args, **kwargs)
 
-        self.helper = FormHelper()
+        self.helper = FormHelper(self)
         self.helper.attrs = {
             'hx-post': reverse_lazy('device_category_create'),
             'id': 'device-category-form',
         }
-        self.helper.layout = Layout(
-            Field('name'),
+        self.helper.layout.append(
             FormActions(
                 Submit('save_category', 'Save'),
                 Button('cancel', 'Cancel', css_class="btn btn-secondary",
@@ -83,10 +82,11 @@ class DeviceUpdateForm(forms.ModelForm):
             'customer',
             'location',
             'user',
-            Field('category'),
-            HTML("""
+            Div(Field('category'),
+                HTML("""
                     <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
+                css_class="input-group"),
             'serialnumber',
             'description',
             FormActions(
