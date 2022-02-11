@@ -82,10 +82,11 @@ class DeviceUpdateForm(forms.ModelForm):
             'customer',
             'location',
             'user',
-            Field('category'),
-            HTML("""
+            Div(Field('category'),
+                HTML("""
                     <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
+                css_class="input-group"),
             'serialnumber',
             'description',
             FormActions(
