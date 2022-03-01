@@ -5,7 +5,6 @@ SHELL=/usr/bin/env bash
 .PHONY: run
 run: setup
 	( \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	find . -name __pycache__ -o -name "*.pyc" -delete; \
 	python manage.py runserver; \
 	)
@@ -13,7 +12,6 @@ run: setup
 .PHONY: setup
 setup:
 	( \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	docker-compose -f docker-compose-development.yml up -d; \
 	if [ -f .second_run ]; then \
 		sleep 2; \
@@ -64,20 +62,17 @@ cleanall: clean
 .PHONY: init
 init:
 	( \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	python manage.py loaddata network_inventory.yaml; \
 	)
 
 .PHONY: test
 test:
 	( \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	pytest -nauto --nomigrations --cov=. --cov-report=html; \
 	)
 
 .PHONY: debug
 debug:
 	( \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	pytest --pdb --nomigrations --cov=. --cov-report=html; \
 	)
