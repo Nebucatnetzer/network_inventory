@@ -15,11 +15,16 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         machNix = mach-nix.lib."${system}";
+        local_requirements = builtins.readFile ./requirements/local.txt;
       in
       {
         devShell = machNix.mkPythonShell {
           packagesExtra = with pkgs; [ pkgs.gnumake ];
-          requirements = builtins.readFile ./requirements/local.txt;
+          requirements = local_requirements;
+          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
+        };
+        packages.venv = machNix.mkPython {
+          requirements = local_requirements;
           _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
         };
         defaultPackage = (machNix.mkDockerImage {
