@@ -15,25 +15,31 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         machNix = mach-nix.lib."${system}";
-        local_requirements = builtins.readFile ./requirements/local.txt;
+        devEnvironment = machNix.mkPython {
+          requirements = builtins.readFile ./requirements/local.txt;
+          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
+        };
       in
       {
-        devShell = machNix.mkPythonShell {
-          packagesExtra = with pkgs; [ pkgs.gnumake ];
-          requirements = local_requirements;
-          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
+        devShell = pkgs.mkShell {
+          buildInputs = [
+            devEnvironment
+            pkgs.gnumake
+          ];
+          shellHook = ''
+            export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
+          '';
         };
-        packages.venv = machNix.mkPython {
-          requirements = local_requirements;
-          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
-        };
+        packages.venv = devEnvironment;
         defaultPackage = (machNix.mkDockerImage {
-          packagesExtra = with pkgs; [ pkgs.bash ];
+          packagesExtra = with pkgs;
+            [ pkgs.bash ];
           requirements = builtins.readFile ./requirements/docker.txt;
           _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
-        }).override (oldAttrs: {
-          name = "network-inventory";
-          config.Cmd = [ "run.sh" ];
-        });
+        }).override
+          (oldAttrs: {
+            name = "network-inventory";
+            config.Cmd = [ "run.sh" ];
+          });
       });
 }
