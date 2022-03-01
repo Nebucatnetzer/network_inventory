@@ -57,7 +57,7 @@ clean:
 .PHONY: cleanall
 cleanall: clean
 	docker-compose  -f docker-compose-development.yml down -v --rmi local
-	rm -rf venv/
+	rm venv
 
 .PHONY: init
 init:
