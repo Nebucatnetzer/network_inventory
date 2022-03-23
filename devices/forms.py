@@ -80,17 +80,17 @@ class DeviceUpdateForm(forms.ModelForm):
         self.helper.layout = Layout(
             'name',
             'customer',
-            Div(Field('location'),
+            Div('location',
                 HTML("""
                     <a hx-get="{% url 'htmx_create_location' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
-                css_class="input-group"),
+                css_class="input-group", id="htmx-location-target"),
             'user',
             Div(Field('category'),
                 HTML("""
                     <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                 """),
-                css_class="input-group"),
+                css_class="input-group", id="htmx-category-target"),
             'serialnumber',
             'description',
             FormActions(
