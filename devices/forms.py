@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 import floppyforms.__future__ as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, HTML, Field, Button, Div
+from crispy_forms.layout import Layout, Submit, HTML, Button, Div
 from crispy_forms.bootstrap import FormActions
 
 from core import utils
