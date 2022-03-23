@@ -39,3 +39,16 @@ def test_mail_group_detail_view_no_permission(create_admin_user):
     client.login(username="pharma-admin", password="password")
     response = client.get('/mail-group/' + str(group.id) + '/')
     assert response.status_code == 404
+
+
+def test_mail_group_detail_view_with_user(create_admin_user):
+    create_admin_user()
+    group = mixer.blend('users.MailGroup', customer=mixer.SELECT)
+    client = Client()
+    client.login(username="pharma-admin", password="password")
+    response = client.get('/mail-group/' + str(group.id) + '/')
+    user = mixer.blend('users.User', customer=mixer.SELECT)
+    user.mail_groups.add(group)
+    response = client.get('/mail-group/' + str(group.id) + '/')
+    assert (response.status_code == 200
+            and helper.in_content(response, user))
