@@ -83,14 +83,22 @@ class DeviceUpdateForm(forms.ModelForm):
             Div(
                 Div('location', id="htmx-location-target"),
                 HTML("""
-                    <a hx-get="{% url 'htmx_create_location' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
+                    <a hx-get="{% url 'htmx_create_location' %}"
+                    hx-swap="innerHTML" hx-target="#htmx-modal-position"
+                    href=""
+                    class="add" title="Add" data-toggle="tooltip"><i
+                    class="material-icons">add</i></a>
                 """),
                 css_class="input-group"),
             'user',
             Div(
                 Div('category', id="htmx-category-target"),
                 HTML("""
-                    <a hx-get="{% url 'device_category_create' %}" hx-swap="innerHTML" hx-target="#htmx-modal-position" href="" class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
+                    <a hx-get="{% url 'device_category_create' %}"
+                    hx-swap="innerHTML" hx-target="#htmx-modal-position"
+                    href=""
+                    class="add" title="Add" data-toggle="tooltip"><i
+                    class="material-icons">add</i></a>
                 """),
                 css_class="input-group"),
             'serialnumber',
@@ -98,7 +106,8 @@ class DeviceUpdateForm(forms.ModelForm):
             FormActions(
                 Submit('save_device', 'Save'),
                 HTML(
-                    """<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>""")
+                    """<a href="{{ request.META.HTTP_REFERER }}"
+                    class="btn btn-secondary">Cancel</a>""")
             ),
             Div(css_id='htmx-modal-position', css_class="col")
         )
