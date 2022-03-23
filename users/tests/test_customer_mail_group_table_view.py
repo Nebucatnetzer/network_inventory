@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 
 def test_customer_mail_group_table_not_logged_in():
-    response = Client().get('/customer/1/mail-groups/')
+    response = Client().get('/customer/1/groups/')
     assert response.status_code == 302 and 'login' in response.url
 
 
@@ -20,7 +20,7 @@ def test_customer_mail_group_table(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     mail_group = mixer.blend('users.MailGroup', customer=customer)
-    response = client.get('/customer/' + str(customer.id) + '/mail-groups/')
+    response = client.get('/customer/' + str(customer.id) + '/groups/')
     assert (response.status_code == 200
             and helper.in_content(response, mail_group))
 
@@ -30,9 +30,8 @@ def test_customer_mail_group_table_no_group(create_admin_user):
     customer = fixture['customer']
     client = Client()
     client.login(username="pharma-admin", password="password")
-    response = client.get('/customer/' + str(customer.id) + '/mail-groups/')
-    assert (response.status_code == 200
-            and helper.not_in_content(response, customer))
+    response = client.get('/customer/' + str(customer.id) + '/groups/')
+    assert response.status_code == 200
 
 
 def test_customer_mail_group_table_no_permission(create_admin_user):
@@ -41,8 +40,8 @@ def test_customer_mail_group_table_no_permission(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     mixer.blend('users.MailGroup', customer=customer)
-    response = client.get('/customer/' + str(customer.id) + '/mail-groups/')
-    assert response.status_code == 404
+    response = client.get('/customer/' + str(customer.id) + '/groups/')
+    assert response.status_code == 403
 
 
 def test_customer_mail_group_table_multiple_groups(create_admin_user):
@@ -52,7 +51,7 @@ def test_customer_mail_group_table_multiple_groups(create_admin_user):
     client.login(username="pharma-admin", password="password")
     group1 = mixer.blend('users.MailGroup', customer=mixer.SELECT)
     group2 = mixer.blend('users.MailGroup', customer=mixer.SELECT)
-    response = client.get('/customer/' + str(customer.id) + '/mail-groups/')
+    response = client.get('/customer/' + str(customer.id) + '/groups/')
     assert (response.status_code == 200
             and helper.in_content(response, group1.name)
             and helper.in_content(response, group2.name))

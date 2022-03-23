@@ -33,9 +33,9 @@ class UsersTable(CoreTable):
 
 class AdGroupsTable(CoreTable):
     id = tables.Column(visible=False)
-    name = tables.Column('AdGroup', linkify=True)
-    customer = tables.Column('Customer', linkify=True)
-    delete = tables.LinkColumn('ad_group_delete',
+    name = tables.Column('Ad Groups', linkify=True)
+    customer = tables.Column(visible=False)
+    action = tables.LinkColumn('ad_group_delete',
                                text='delete',
                                args=[A('pk')], attrs={
                                    'a': {'class': 'delete material-icons', }
@@ -47,9 +47,10 @@ class AdGroupsTable(CoreTable):
 
 class MailGroupsTable(CoreTable):
     id = tables.Column(visible=False)
-    name = tables.Column('MailGroup', linkify=True)
-    customer = tables.Column('Customer', linkify=True)
-    delete = tables.LinkColumn('mail_group_delete',
+    name = tables.Column('Mail Groups', linkify=True)
+    mail_address = tables.EmailColumn(verbose_name='Mail Address')
+    customer = tables.Column(visible=False)
+    action = tables.LinkColumn('mail_group_delete',
                                text='delete',
                                args=[A('pk')], attrs={
                                    'a': {'class': 'delete material-icons', }

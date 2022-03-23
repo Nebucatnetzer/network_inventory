@@ -1,10 +1,15 @@
 from django.db import models
+
+from model_utils.managers import InheritanceManager
+
 from customers.models import Customer
 
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    objects = InheritanceManager()
 
     class Meta:
         abstract = True

@@ -11,6 +11,7 @@ from django_tables2 import RequestConfig
 
 from core import utils
 from customers.decorators import customer_view_permission
+from customers.models import Customer
 from computers.models import Computer
 from licenses.models import LicenseWithUser
 
@@ -60,14 +61,25 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 
 @login_required
-def ad_groups_table_view(request, pk):
-    table = AdGroupsTable(utils.get_objects_for_customer(AdGroup,
-                                                         user=request.user,
-                                                         customer_pk=pk))
-    RequestConfig(request).configure(table)
+@customer_view_permission
+def groups_table_view(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    ad_groups_table = AdGroupsTable(
+        utils.get_objects_for_customer(AdGroup,
+                                       user=request.user,
+                                       customer_pk=pk))
+    RequestConfig(request).configure(ad_groups_table)
+
+    mail_groups_table = MailGroupsTable(
+        utils.get_objects_for_customer(MailGroup,
+                                       user=request.user,
+                                       customer_pk=pk))
+    RequestConfig(request).configure(mail_groups_table)
     return TemplateResponse(request,
                             'groups/group_list.html',
-                            {'groups': table})
+                            {'customer': customer.name,
+                             'ad_groups': ad_groups_table,
+                             'mail_groups': mail_groups_table})
 
 
 @login_required
@@ -77,17 +89,6 @@ def ad_group_detail_view(request, pk):
                                                   pk=pk)
     return render(request, 'groups/group_details.html',
                   {'group': group})
-
-
-@login_required
-def mail_groups_table_view(request, pk):
-    table = MailGroupsTable(utils.get_objects_for_customer(MailGroup,
-                                                           user=request.user,
-                                                           customer_pk=pk))
-    RequestConfig(request).configure(table)
-    return TemplateResponse(request,
-                            'groups/group_list.html',
-                            {'groups': table})
 
 
 @login_required
