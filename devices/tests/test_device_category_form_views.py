@@ -4,7 +4,6 @@ import pytest
 from mixer.backend.django import mixer
 
 from core.tests import helper
-from devices.models import DeviceCategory
 
 
 pytestmark = pytest.mark.django_db

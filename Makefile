@@ -5,17 +5,13 @@ SHELL=/usr/bin/env bash
 .PHONY: run
 run: setup
 	( \
-	source venv/bin/activate; \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	find . -name __pycache__ -o -name "*.pyc" -delete; \
 	python manage.py runserver; \
 	)
 
 .PHONY: setup
-setup: ./venv
+setup:
 	( \
-	source venv/bin/activate; \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	docker-compose -f docker-compose-development.yml up -d; \
 	if [ -f .second_run ]; then \
 		sleep 2; \
@@ -46,12 +42,9 @@ setup: ./venv
 	fi; \
 	)
 
-./venv:
-	python3 -m venv venv
-	( \
-	source venv/bin/activate; \
-	pip3 install -r requirements/local.txt; \
-	)
+venv:
+	nix build .#venv -o venv
+
 
 .PHONY: clean
 clean:
@@ -64,28 +57,22 @@ clean:
 .PHONY: cleanall
 cleanall: clean
 	docker-compose  -f docker-compose-development.yml down -v --rmi local
-	rm -rf venv/
+	rm venv
 
 .PHONY: init
 init:
 	( \
-	source venv/bin/activate; \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	python manage.py loaddata network_inventory.yaml; \
 	)
 
 .PHONY: test
 test:
 	( \
-	source venv/bin/activate; \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	pytest -nauto --nomigrations --cov=. --cov-report=html; \
 	)
 
 .PHONY: debug
 debug:
 	( \
-	source venv/bin/activate; \
-	export DJANGO_SETTINGS_MODULE=network_inventory.settings.local; \
 	pytest --pdb --nomigrations --cov=. --cov-report=html; \
 	)
