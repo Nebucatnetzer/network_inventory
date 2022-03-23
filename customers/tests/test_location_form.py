@@ -18,7 +18,7 @@ def test_location_form(create_admin_user):
     assert form.is_valid() is False, (
         "Should be false because the customer doesn't exist.")
 
-    data = {"name": "Main Office",
+    data = {"name": mixer.blend('customers.Location').name,
             "customer": fixture['customer'].id}
     form = forms.LocationForm(user=fixture['admin'], data=data)
     assert form.is_valid() is True, ("Should be valid with the given data.")
