@@ -3,12 +3,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import csrf
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.views.generic import DeleteView
 
+from crispy_forms.utils import render_crispy_form
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
+
 from core import utils
 from .forms import CustomerForm
+from .forms import LocationForm
 from .models import Customer
 from .tables import CustomersTable
 
@@ -57,3 +62,27 @@ class CustomerDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('customers')
+
+
+@login_required
+def htmx_create_location(request):
+    context = {}
+    user = request.user
+    if request.method == "POST" and 'save_location' in request.POST:
+        form = LocationForm(request.POST, user=user)
+        if form.is_valid():
+            form.save(commit=True)
+            form_html = render_crispy_form(form)
+        else:
+            context.update(csrf(request))
+            form.helper.attrs['hx-swap-oob'] = 'true'
+            form_html = render_crispy_form(form)
+        context["valid"] = form.is_valid()
+        context['form'] = form_html
+        template_path = "customers/partials/location_response.html"
+        return TemplateResponse(request, template_path, context)
+
+    form = LocationForm(user=user)
+    context["form"] = form
+    template_path = "customers/partials/location_create.html"
+    return TemplateResponse(request, template_path, context)

@@ -1,0 +1,6 @@
+{% if valid %}
+<div hx-swap-oob="true:#div_id_location">{{ form }}</div>
+<div id="htmx-modal-position" hx-swap-oob="true"></div>
+{% else %}
+{{ form }}
+{% endif %}

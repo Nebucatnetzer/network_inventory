@@ -11,4 +11,6 @@ urlpatterns = [
     path('create/customer/',
          views.create_customer,
          name='customer_create'),
+    path('create/location/', views.htmx_create_location,
+         name='htmx_create_location')
 ]

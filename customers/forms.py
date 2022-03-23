@@ -41,7 +41,8 @@ class LocationForm(forms.ModelForm):
             'customer'
         )
 
-    def __init__(self, user=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user")
         super(LocationForm, self).__init__(*args, **kwargs)
         """
         If the user is not a superuser it's always assigned to a customer which
@@ -53,12 +54,12 @@ class LocationForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
         self.helper.attrs = {
-            'hx-post': reverse_lazy('device_category_create'),
-            'id': 'device-category-form',
+            'hx-post': reverse_lazy('htmx_create_location'),
+            'id': 'location-form',
         }
         self.helper.layout.append(
             FormActions(
-                Submit('save_category', 'Save'),
+                Submit('save_location', 'Save'),
                 Button('cancel', 'Cancel', css_class="btn btn-secondary",
                        onclick="closeModal()")
             ))
