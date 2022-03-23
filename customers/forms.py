@@ -6,7 +6,7 @@ from crispy_forms.layout import Submit, Button
 from crispy_forms.bootstrap import FormActions
 
 from core import utils
-from .models import Customer, Location
+from .models import Customer, DummyLocation, Location
 
 
 class CustomerForm(forms.ModelForm):
@@ -63,3 +63,11 @@ class LocationForm(forms.ModelForm):
                 Button('cancel', 'Cancel', css_class="btn btn-secondary",
                        onclick="closeModal()")
             ))
+
+
+class DummyLocationForm(forms.ModelForm):
+    class Meta:
+        model = DummyLocation
+        fields = (
+            'location',
+        )

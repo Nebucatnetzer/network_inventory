@@ -13,8 +13,9 @@ from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 
 from core import utils
 from .forms import CustomerForm
+from .forms import DummyLocationForm
 from .forms import LocationForm
-from .models import Customer
+from .models import Customer, DummyLocation
 from .tables import CustomersTable
 
 
@@ -71,8 +72,11 @@ def htmx_create_location(request):
     if request.method == "POST" and 'save_location' in request.POST:
         form = LocationForm(request.POST, user=user)
         if form.is_valid():
-            form.save(commit=True)
-            form_html = render_crispy_form(form)
+            location = form.save(commit=True)
+            dummy_model = DummyLocation()
+            dummy_model.location = location
+            dummy_form = DummyLocationForm(instance=dummy_model)
+            form_html = as_crispy_field(dummy_form["location"])
         else:
             context.update(csrf(request))
             form.helper.attrs['hx-swap-oob'] = 'true'
