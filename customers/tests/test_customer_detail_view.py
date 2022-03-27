@@ -10,33 +10,34 @@ pytestmark = pytest.mark.django_db
 
 
 def test_customer_detail_view_not_logged_in():
-    response = Client().get('/customer/1/')
-    assert response.status_code == 302 and 'login' in response.url
+    response = Client().get("/customer/1/")
+    assert response.status_code == 302 and "login" in response.url
 
 
 def test_customer_detail_view_not_found(create_admin_user):
     create_admin_user()
     client = Client()
     client.login(username="pharma-admin", password="password")
-    response = client.get('/customer/230/')
+    response = client.get("/customer/230/")
     assert response.status_code == 404
 
 
 def test_customer_detail_view(create_admin_user):
     fixture = create_admin_user()
-    customer = fixture['customer']
+    customer = fixture["customer"]
     client = Client()
     client.login(username="pharma-admin", password="password")
-    response = client.get('/customer/' + str(customer.id) + '/')
-    assert (response.status_code == 200
-            and helper.in_content(response, customer))
+    response = client.get("/customer/" + str(customer.id) + "/")
+    assert response.status_code == 200 and helper.in_content(
+        response, customer
+    )
 
 
 def test_customer_detail_view_no_permissions():
     User = get_user_model()
     User.objects.create_user("pharma-admin", "admin@pharma.com", "password")
     client = Client()
-    customer = mixer.blend('customers.Customer')
+    customer = mixer.blend("customers.Customer")
     client.login(username="pharma-admin", password="password")
-    response = client.get('/customer/' + str(customer.id) + '/')
+    response = client.get("/customer/" + str(customer.id) + "/")
     assert response.status_code == 404

@@ -15,33 +15,35 @@ from .models import (
 class LicenseWithUserInLine(admin.StackedInline):
     model = LicenseWithUser
     extra = 0
-    verbose_name_plural = 'Licenses'
+    verbose_name_plural = "Licenses"
 
 
 class AdGroupInLine(admin.StackedInline):
     model = UserInAdGroup
     extra = 0
-    verbose_name_plural = 'AD Groups'
+    verbose_name_plural = "AD Groups"
 
 
 class MailGroupInLine(admin.StackedInline):
     model = UserInMailGroup
     extra = 0
-    verbose_name_plural = 'Mail Groups'
+    verbose_name_plural = "Mail Groups"
 
 
 class MailAliasInLine(admin.StackedInline):
     model = MailAlias
     extra = 0
-    verbose_name_plural = 'Mail Aliases'
+    verbose_name_plural = "Mail Aliases"
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('name', 'customer', 'enabled')
-    inlines = (AdGroupInLine,
-               MailGroupInLine,
-               MailAliasInLine,
-               LicenseWithUserInLine)
+    list_display = ("name", "customer", "enabled")
+    inlines = (
+        AdGroupInLine,
+        MailGroupInLine,
+        MailAliasInLine,
+        LicenseWithUserInLine,
+    )
 
 
 admin.site.register(AdGroup)

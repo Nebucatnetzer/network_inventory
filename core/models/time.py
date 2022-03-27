@@ -9,7 +9,7 @@ class HoursInDay(models.Model):
 
     class Meta:
         verbose_name_plural = "Hours"
-        ordering = ['name']
+        ordering = ["name"]
 
 
 class MinutesInHour(models.Model):
@@ -20,4 +20,4 @@ class MinutesInHour(models.Model):
 
     class Meta:
         verbose_name_plural = "Minutes"
-        ordering = ['name']
+        ordering = ["name"]

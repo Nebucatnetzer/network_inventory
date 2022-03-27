@@ -9,9 +9,7 @@ from softwares.models import Software
 class License(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     key = models.CharField(max_length=50, null=True, blank=True)
-    software = models.ForeignKey(Software,
-                                 null=True,
-                                 on_delete=models.CASCADE)
+    software = models.ForeignKey(Software, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.customer) + ": " + str(self.software)
@@ -25,7 +23,7 @@ class UserLicense(License):
     user = models.ManyToManyField(User, through="LicenseWithUser")
 
     class Meta:
-        ordering = ['software']
+        ordering = ["software"]
 
     @property
     def used_licenses(self):
@@ -37,7 +35,7 @@ class ComputerLicense(License):
     computer = models.ManyToManyField(Computer, through="LicenseWithComputer")
 
     class Meta:
-        ordering = ['software']
+        ordering = ["software"]
 
     @property
     def used_licenses(self):
@@ -50,8 +48,9 @@ class LicenseWithUser(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'license'],
-                                    name='user per license')
+            models.UniqueConstraint(
+                fields=["user", "license"], name="user per license"
+            )
         ]
 
 
@@ -61,6 +60,7 @@ class LicenseWithComputer(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['computer', 'license'],
-                                    name='computer per license')
+            models.UniqueConstraint(
+                fields=["computer", "license"], name="computer per license"
+            )
         ]

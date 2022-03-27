@@ -4,7 +4,6 @@ from core.models import Category
 
 
 class RamType(Category):
-
     class Meta:
         verbose_name_plural = "Types of RAM Modules"
 
@@ -15,7 +14,7 @@ class Ram(models.Model):
     ecc = models.BooleanField(default=False)
 
     def __str__(self):
-        return '{} {} GB'.format(self.ram_type, self.size_in_gb)
+        return "{} {} GB".format(self.ram_type, self.size_in_gb)
 
     class Meta:
         verbose_name_plural = "RAM Modules"

@@ -12,8 +12,9 @@ class RaidType(Category):
 
 class Raid(models.Model):
     usable_space = models.IntegerField(blank=True, null=True)
-    raid_type = models.ForeignKey(RaidType, models.SET_NULL, blank=True,
-                                  null=True)
+    raid_type = models.ForeignKey(
+        RaidType, models.SET_NULL, blank=True, null=True
+    )
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
 
     def __str__(self):

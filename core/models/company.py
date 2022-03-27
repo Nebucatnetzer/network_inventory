@@ -7,7 +7,7 @@ class Company(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return self.name

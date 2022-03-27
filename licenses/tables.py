@@ -10,14 +10,20 @@ from .models import UserLicense
 class UserLicensesTable(CoreTable):
     id = tables.Column(visible=False)
     license_ptr = tables.Column(visible=False)
-    customer = tables.Column('Customer', linkify=True)
+    customer = tables.Column("Customer", linkify=True)
     used_licenses = tables.Column()
     user = tables.ManyToManyColumn(linkify_item=True)
-    delete = tables.LinkColumn('user_license_delete',
-                               text='delete',
-                               args=[A('pk')], attrs={
-                                   'a': {'class': 'delete material-icons', }
-                               }, orderable=False)
+    delete = tables.LinkColumn(
+        "user_license_delete",
+        text="delete",
+        args=[A("pk")],
+        attrs={
+            "a": {
+                "class": "delete material-icons",
+            }
+        },
+        orderable=False,
+    )
 
     class Meta(CoreTable.Meta):
         model = UserLicense
@@ -26,14 +32,20 @@ class UserLicensesTable(CoreTable):
 class ComputerLicensesTable(CoreTable):
     id = tables.Column(visible=False)
     license_ptr = tables.Column(visible=False)
-    customer = tables.Column('Customer', linkify=True)
+    customer = tables.Column("Customer", linkify=True)
     used_licenses = tables.Column()
     computer = tables.ManyToManyColumn(linkify_item=True)
-    delete = tables.LinkColumn('computer_license_delete',
-                               text='delete',
-                               args=[A('pk')], attrs={
-                                   'a': {'class': 'delete material-icons', }
-                               }, orderable=False)
+    delete = tables.LinkColumn(
+        "computer_license_delete",
+        text="delete",
+        args=[A("pk")],
+        attrs={
+            "a": {
+                "class": "delete material-icons",
+            }
+        },
+        orderable=False,
+    )
 
     class Meta(CoreTable.Meta):
         model = ComputerLicense

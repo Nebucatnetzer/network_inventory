@@ -13,13 +13,13 @@ from .models import (
 class TargetDeviceInLine(admin.StackedInline):
     model = TargetDevice
     extra = 0
-    verbose_name_plural = 'Target Devices'
+    verbose_name_plural = "Target Devices"
 
 
 class NotificationForBackupInLine(admin.StackedInline):
     model = NotificationFromBackup
     extra = 0
-    verbose_name_plural = 'Notifications'
+    verbose_name_plural = "Notifications"
 
 
 class BackupAdmin(admin.ModelAdmin):

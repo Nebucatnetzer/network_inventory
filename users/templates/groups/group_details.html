@@ -6,9 +6,17 @@
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-text">
-                    <ul>
-                        <li>Customer: <a href="{% url 'customer' group.customer.id %}">{{ group.customer }}</a></li>
-                    </ul>
+                <p>Customer: <a href="{% url 'customer' group.customer.id %}">{{ group.customer }}</a></p>
+                <table class="table table-bordered">
+                    <tr>
+                    <th>User</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td><a href="{% url 'user' user.id %}">{{ user }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 </div>
             </div>
         </div>

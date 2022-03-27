@@ -11,33 +11,38 @@ class BackupMethod(Category):
     description = models.TextField()
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name_plural = "Backup Methods"
 
 
 class Backup(models.Model):
     name = models.CharField(max_length=50)
-    computer = models.ForeignKey(Computer, related_name='source_computer',
-                                 on_delete=models.CASCADE)
-    method = models.ForeignKey(BackupMethod, models.SET_NULL, blank=True,
-                               null=True)
-    software = models.ForeignKey(Software, models.SET_NULL, blank=True,
-                                 null=True)
+    computer = models.ForeignKey(
+        Computer, related_name="source_computer", on_delete=models.CASCADE
+    )
+    method = models.ForeignKey(
+        BackupMethod, models.SET_NULL, blank=True, null=True
+    )
+    software = models.ForeignKey(
+        Software, models.SET_NULL, blank=True, null=True
+    )
     source_path = models.CharField(max_length=200, blank=True)
     exec_time = models.TimeField(null=True, blank=True)
     exec_days = models.ManyToManyField(Weekday, blank=True)
-    target_device = models.ManyToManyField(Computer, through='TargetDevice',
-                                           blank=True)
+    target_device = models.ManyToManyField(
+        Computer, through="TargetDevice", blank=True
+    )
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return str(self.name)
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('backup', args=[str(self.id)])
+
+        return reverse("backup", args=[str(self.id)])
 
     @property
     def customer(self):
@@ -45,8 +50,9 @@ class Backup(models.Model):
 
 
 class TargetDevice(models.Model):
-    device = models.ForeignKey(Computer, models.SET_NULL, blank=True,
-                               null=True)
+    device = models.ForeignKey(
+        Computer, models.SET_NULL, blank=True, null=True
+    )
     backup = models.ForeignKey(Backup, on_delete=models.CASCADE)
     target_path = models.CharField(max_length=200, blank=True)
 

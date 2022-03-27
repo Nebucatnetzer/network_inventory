@@ -12,27 +12,35 @@ from .ram import Ram
 
 
 class Computer(Device):
-    os = models.ForeignKey(OperatingSystem, models.SET_NULL, blank=True,
-                           null=True, verbose_name='OS')
-    cpu = models.ManyToManyField(Cpu, through='ComputerCpuRelation')
-    ram = models.ManyToManyField(Ram, through='ComputerRamRelation')
-    gpu = models.ManyToManyField(Gpu, through='ComputerGpuRelation')
-    disks = models.ManyToManyField(Disk, through='ComputerDiskRelation')
-    software = models.ManyToManyField(Software,
-                                      through='ComputerSoftwareRelation')
-    host = models.ForeignKey('self', null=True, blank=True,
-                             on_delete=models.CASCADE)
+    os = models.ForeignKey(
+        OperatingSystem,
+        models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="OS",
+    )
+    cpu = models.ManyToManyField(Cpu, through="ComputerCpuRelation")
+    ram = models.ManyToManyField(Ram, through="ComputerRamRelation")
+    gpu = models.ManyToManyField(Gpu, through="ComputerGpuRelation")
+    disks = models.ManyToManyField(Disk, through="ComputerDiskRelation")
+    software = models.ManyToManyField(
+        Software, through="ComputerSoftwareRelation"
+    )
+    host = models.ForeignKey(
+        "self", null=True, blank=True, on_delete=models.CASCADE
+    )
     allocated_space = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('computer', args=[str(self.id)])
+
+        return reverse("computer", args=[str(self.id)])
 
 
 class ComputerCpuRelation(models.Model):
@@ -74,8 +82,9 @@ class ComputerDiskRelation(models.Model):
 class ComputerSoftwareRelation(models.Model):
     software = models.ForeignKey(Software, on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
-    architecture = models.ForeignKey(SoftwareArchitecture, models.SET_NULL,
-                                     blank=True, null=True)
+    architecture = models.ForeignKey(
+        SoftwareArchitecture, models.SET_NULL, blank=True, null=True
+    )
 
     def __str__(self):
         return str(self.computer)

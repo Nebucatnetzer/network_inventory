@@ -11,21 +11,20 @@ class WarrantyType(Category):
     description = models.TextField()
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name_plural = "Warranty Types"
 
 
 class Warranty(models.Model):
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.CASCADE,
-                                 blank=True)
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, blank=True
+    )
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     valid_from = models.DateField()
     valid_until = models.DateField()
-    warranty_type = models.ForeignKey(WarrantyType,
-                                      models.SET_NULL,
-                                      blank=True,
-                                      null=True)
+    warranty_type = models.ForeignKey(
+        WarrantyType, models.SET_NULL, blank=True, null=True
+    )
 
     def save(self, *args, **kwargs):
         self.customer = self.device.customer
@@ -35,12 +34,13 @@ class Warranty(models.Model):
         return str(self.device)
 
     class Meta:
-        ordering = ['customer']
+        ordering = ["customer"]
         verbose_name_plural = "Warranties"
         constraints = [
-            models.CheckConstraint(check=models.Q(
-                valid_from__lte=models.F("valid_until")),
-                name='valid_from_lt_valid_until'),
+            models.CheckConstraint(
+                check=models.Q(valid_from__lte=models.F("valid_until")),
+                name="valid_from_lt_valid_until",
+            ),
         ]
 
     @property

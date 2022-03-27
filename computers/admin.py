@@ -29,62 +29,70 @@ from .models import (
 class SoftwareInLine(nested_admin.NestedStackedInline):
     model = ComputerSoftwareRelation
     extra = 0
-    verbose_name_plural = 'Software'
+    verbose_name_plural = "Software"
 
 
 class RamInLine(nested_admin.NestedStackedInline):
     model = ComputerRamRelation
     extra = 0
-    verbose_name_plural = 'RAM Modules'
+    verbose_name_plural = "RAM Modules"
 
 
 class DiskInLine(nested_admin.NestedStackedInline):
     model = ComputerDiskRelation
     extra = 0
-    verbose_name_plural = 'Disks'
+    verbose_name_plural = "Disks"
 
 
 class DisksInRaidInLine(nested_admin.NestedStackedInline):
     model = DisksInRaid
     extra = 0
-    verbose_name_plural = 'Disks in RAID'
+    verbose_name_plural = "Disks in RAID"
 
 
 class CpusInLine(nested_admin.NestedStackedInline):
     model = ComputerCpuRelation
     extra = 0
-    verbose_name_plural = 'CPUs'
+    verbose_name_plural = "CPUs"
 
 
 class GpusInLine(nested_admin.NestedStackedInline):
     model = ComputerGpuRelation
     extra = 0
-    verbose_name_plural = 'GPUs'
+    verbose_name_plural = "GPUs"
 
 
 class RaidInLine(nested_admin.NestedStackedInline):
     model = Raid
     extra = 0
-    verbose_name_plural = 'RAID'
+    verbose_name_plural = "RAID"
     inlines = (DisksInRaidInLine,)
 
 
 class DeviceInNetInline(nested_admin.NestedStackedInline):
     model = DeviceInNet
     extra = 0
-    verbose_name_plural = 'Nets'
+    verbose_name_plural = "Nets"
 
 
 class LicenseWithComputerInLine(nested_admin.NestedStackedInline):
     model = LicenseWithComputer
     extra = 0
-    verbose_name_plural = 'Licenses'
+    verbose_name_plural = "Licenses"
 
 
 class ComputerAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('name', 'host')
-    inlines = (SoftwareInLine, CpusInLine, GpusInLine, RamInLine, DiskInLine,
-               RaidInLine, DeviceInNetInline, LicenseWithComputerInLine)
+    list_display = ("name", "host")
+    inlines = (
+        SoftwareInLine,
+        CpusInLine,
+        GpusInLine,
+        RamInLine,
+        DiskInLine,
+        RaidInLine,
+        DeviceInNetInline,
+        LicenseWithComputerInLine,
+    )
 
 
 admin.site.register(Computer, ComputerAdmin)

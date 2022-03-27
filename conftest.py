@@ -7,31 +7,32 @@ from django.contrib.auth.models import Group
 from guardian.shortcuts import assign_perm
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def django_db_setup(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
-        call_command('loaddata', 'backups.yaml')
-        call_command('loaddata', 'computers.yaml')
-        call_command('loaddata', 'core.yaml')
-        call_command('loaddata', 'devices.yaml')
-        call_command('loaddata', 'nets.yaml')
-        call_command('loaddata', 'softwares.yaml')
+        call_command("loaddata", "backups.yaml")
+        call_command("loaddata", "computers.yaml")
+        call_command("loaddata", "core.yaml")
+        call_command("loaddata", "devices.yaml")
+        call_command("loaddata", "nets.yaml")
+        call_command("loaddata", "softwares.yaml")
 
 
 @pytest.fixture
 def create_admin_user():
     def _create_admin_user():
         User = get_user_model()
-        admin = User.objects.create_user("pharma-admin",
-                                         "admin@pharma.com",
-                                         "password")
-        customer = mixer.blend('customers.Customer')
+        admin = User.objects.create_user(
+            "pharma-admin", "admin@pharma.com", "password"
+        )
+        customer = mixer.blend("customers.Customer")
         group = Group.objects.create(name="Pharma Corp. Admin")
         admin.groups.add(group)
-        assign_perm('view_customer', admin, customer)
+        assign_perm("view_customer", admin, customer)
         result = {}
-        result['admin'] = admin
-        result['customer'] = customer
-        result['group'] = group
+        result["admin"] = admin
+        result["customer"] = customer
+        result["group"] = group
         return result
+
     return _create_admin_user

@@ -10,19 +10,21 @@ from .models import Device
 
 class DevicesTable(CoreTable):
     id = tables.Column(visible=False)
-    name = tables.Column('Device', linkify=True)
+    name = tables.Column("Device", linkify=True)
     description = tables.Column(
-        attrs={
-            'td': {
-                'class': 'text-truncate',
-                'style': 'max-width: 150px;'}
-        }
+        attrs={"td": {"class": "text-truncate", "style": "max-width: 150px;"}}
     )
-    delete = tables.LinkColumn('device_delete',
-                               text='delete',
-                               args=[A('pk')], attrs={
-                                   'a': {'class': 'delete material-icons', }
-                               }, orderable=False)
+    delete = tables.LinkColumn(
+        "device_delete",
+        text="delete",
+        args=[A("pk")],
+        attrs={
+            "a": {
+                "class": "delete material-icons",
+            }
+        },
+        orderable=False,
+    )
 
     class Meta(CoreTable.Meta):
         model = Device
@@ -34,26 +36,31 @@ class WarrantiesTable(CoreTable):
     valid_from = tables.Column()
     valid_until = tables.Column()
     warranty_type = tables.Column()
-    delete = tables.LinkColumn('warranty_delete',
-                               text='delete',
-                               args=[A('pk')], attrs={
-                                   'a': {'class': 'delete material-icons', }
-                               }, orderable=False)
+    delete = tables.LinkColumn(
+        "warranty_delete",
+        text="delete",
+        args=[A("pk")],
+        attrs={
+            "a": {
+                "class": "delete material-icons",
+            }
+        },
+        orderable=False,
+    )
 
     class Meta(CoreTable.Meta):
         pass
 
     def render_valid_until(self, value, column):
         today = datetime.date(datetime.today())
-        one_year_from_today = (datetime.date(datetime.today()
-                                             + timedelta(365)))
+        one_year_from_today = datetime.date(datetime.today() + timedelta(365))
 
         if value > one_year_from_today:
-            column.attrs = {'td': {}}
+            column.attrs = {"td": {}}
             return value
         if value <= today:
-            column.attrs = {'td': {'bgcolor': 'red'}}
+            column.attrs = {"td": {"bgcolor": "red"}}
             return value
         if value <= one_year_from_today:
-            column.attrs = {'td': {'bgcolor': 'orange'}}
+            column.attrs = {"td": {"bgcolor": "orange"}}
             return value

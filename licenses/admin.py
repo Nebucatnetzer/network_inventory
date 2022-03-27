@@ -12,13 +12,13 @@ from .models import (
 class UserLicenseAdmin(admin.ModelAdmin):
     model = UserLicense
     extra = 0
-    verbose_name_plural = 'User Licenses'
+    verbose_name_plural = "User Licenses"
 
 
 class ComputerLicenseAdmin(admin.ModelAdmin):
     model = ComputerLicense
     extra = 0
-    verbose_name_plural = 'Computer Licenses'
+    verbose_name_plural = "Computer Licenses"
 
 
 admin.site.register(ComputerLicense, ComputerLicenseAdmin)

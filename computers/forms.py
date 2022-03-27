@@ -20,8 +20,8 @@ class ComputerCreateForm(forms.ModelForm):
     class Meta:
         model = Computer
         fields = (
-            'name',
-            'customer',
+            "name",
+            "customer",
         )
 
     def __init__(self, user=None, *args, **kwargs):
@@ -30,9 +30,8 @@ class ComputerCreateForm(forms.ModelForm):
         we can use to assign to the field.
         """
         super(ComputerCreateForm, self).__init__(*args, **kwargs)
-        customers = utils.objects_for_allowed_customers(Customer,
-                                                        user=user)
-        self.fields['customer'].queryset = customers
+        customers = utils.objects_for_allowed_customers(Customer, user=user)
+        self.fields["customer"].queryset = customers
 
 
 class ComputerUpdateForm(forms.ModelForm):
@@ -42,74 +41,82 @@ class ComputerUpdateForm(forms.ModelForm):
 
     def __init__(self, request, *args, **kwargs):
         super(ComputerUpdateForm, self).__init__(*args, **kwargs)
-        customers = utils.objects_for_allowed_customers(Customer,
-                                                        user=request.user)
-        locations = utils.objects_for_allowed_customers(Location,
-                                                        user=request.user)
-        hosts = utils.objects_for_allowed_customers(Computer,
-                                                    user=request.user)
-        users = utils.objects_for_allowed_customers(User,
-                                                    user=request.user)
-        self.fields['customer'].queryset = customers
-        self.fields['location'].queryset = locations
-        self.fields['host'].queryset = hosts
-        self.fields['user'].queryset = users
+        customers = utils.objects_for_allowed_customers(
+            Customer, user=request.user
+        )
+        locations = utils.objects_for_allowed_customers(
+            Location, user=request.user
+        )
+        hosts = utils.objects_for_allowed_customers(
+            Computer, user=request.user
+        )
+        users = utils.objects_for_allowed_customers(User, user=request.user)
+        self.fields["customer"].queryset = customers
+        self.fields["location"].queryset = locations
+        self.fields["host"].queryset = hosts
+        self.fields["user"].queryset = users
 
     class Meta:
         model = Computer
-        fields = '__all__'
-        exclude = ('net', 'cpu', 'ram', 'gpu', 'disks', 'software')
+        fields = "__all__"
+        exclude = ("net", "cpu", "ram", "gpu", "disks", "software")
 
 
 class ComputerRamRelationCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = ComputerRamRelation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ComputerCpuRelationCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = ComputerCpuRelation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ComputerGpuRelationCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = ComputerGpuRelation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ComputerDiskRelationCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = ComputerDiskRelation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ComputerSoftwareRelationCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = ComputerSoftwareRelation
-        fields = '__all__'
+        fields = "__all__"
 
 
 class RaidCreateForm(forms.ModelForm):
     """
     Basic form class to use crispies HTML5 forms.
     """
+
     class Meta:
         model = Raid
-        fields = '__all__'
+        fields = "__all__"

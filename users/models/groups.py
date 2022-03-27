@@ -1,10 +1,15 @@
 from django.db import models
+
+from model_utils.managers import InheritanceManager
+
 from customers.models import Customer
 
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    objects = InheritanceManager()
 
     class Meta:
         abstract = True
@@ -14,23 +19,24 @@ class Group(models.Model):
 
 
 class AdGroup(Group):
-
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name_plural = "AD Groups"
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('ad_group', args=[str(self.id)])
+
+        return reverse("ad_group", args=[str(self.id)])
 
 
 class MailGroup(Group):
     mail_address = models.EmailField()
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name_plural = "Mail Groups"
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('mail_group', args=[str(self.id)])
+
+        return reverse("mail_group", args=[str(self.id)])

@@ -11,51 +11,54 @@ pytestmark = pytest.mark.django_db
 
 
 def test_customer_backup_table_not_logged_in():
-    response = Client().get('/customer/1/backups/')
-    assert response.status_code == 302 and 'login' in response.url
+    response = Client().get("/customer/1/backups/")
+    assert response.status_code == 302 and "login" in response.url
 
 
 def test_customer_backup_table(create_admin_user):
     fixture = create_admin_user()
-    customer = fixture['customer']
+    customer = fixture["customer"]
     client = Client()
     client.login(username="pharma-admin", password="password")
-    computer = mixer.blend('computers.Computer', customer=customer)
-    backup = mixer.blend('backups.Backup', computer=computer)
-    response = client.get('/customer/' + str(customer.id) + '/backups/')
-    assert (response.status_code == 200
-            and helper.in_content(response, backup.name))
+    computer = mixer.blend("computers.Computer", customer=customer)
+    backup = mixer.blend("backups.Backup", computer=computer)
+    response = client.get("/customer/" + str(customer.id) + "/backups/")
+    assert response.status_code == 200 and helper.in_content(
+        response, backup.name
+    )
 
 
 def test_customer_backup_table_no_backup(create_admin_user):
     fixture = create_admin_user()
-    customer = fixture['customer']
+    customer = fixture["customer"]
     client = Client()
     client.login(username="pharma-admin", password="password")
-    response = client.get('/customer/' + str(customer.id) + '/backups/')
+    response = client.get("/customer/" + str(customer.id) + "/backups/")
     assert response.status_code == 200
 
 
 def test_customer_backup_table_no_permission(create_admin_user):
     create_admin_user()
-    customer = Customer.objects.create(name='Water Corp.')
+    customer = Customer.objects.create(name="Water Corp.")
     client = Client()
     client.login(username="pharma-admin", password="password")
-    computer = mixer.blend('computers.Computer', customer=customer)
-    mixer.blend('backups.Backup', computer=computer)
-    response = client.get('/customer/' + str(customer.id) + '/backups/')
+    computer = mixer.blend("computers.Computer", customer=customer)
+    mixer.blend("backups.Backup", computer=computer)
+    response = client.get("/customer/" + str(customer.id) + "/backups/")
     assert response.status_code == 403
 
 
 def test_customer_backup_table_with_multiple_backups(create_admin_user):
     fixture = create_admin_user()
-    customer = fixture['customer']
+    customer = fixture["customer"]
     client = Client()
     client.login(username="pharma-admin", password="password")
-    computer = mixer.blend('computers.Computer', customer=customer)
-    backup1 = mixer.blend('backups.Backup', computer=computer)
-    backup2 = mixer.blend('backups.Backup', computer=computer)
-    response = client.get('/customer/' + str(customer.id) + '/backups/')
-    assert (response.status_code == 200
-            and helper.in_content(response, backup1)
-            and helper.in_content(response, backup2))
+    computer = mixer.blend("computers.Computer", customer=customer)
+    backup1 = mixer.blend("backups.Backup", computer=computer)
+    backup2 = mixer.blend("backups.Backup", computer=computer)
+    response = client.get("/customer/" + str(customer.id) + "/backups/")
+    assert (
+        response.status_code == 200
+        and helper.in_content(response, backup1)
+        and helper.in_content(response, backup2)
+    )
