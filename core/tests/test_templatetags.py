@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 
 from core.models import DayOfMonth
 from core.templatetags import core_extras
