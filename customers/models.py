@@ -10,20 +10,20 @@ class Customer(Company):
     name = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('customer', args=[str(self.id)])
+
+        return reverse("customer", args=[str(self.id)])
 
 
 class DeviceManufacturer(Company):
-
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name_plural = "Device Manufacturers"
 
 

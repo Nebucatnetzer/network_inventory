@@ -13,18 +13,19 @@ class User(models.Model):
     enabled = models.BooleanField()
     description = models.TextField(blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    ad_groups = models.ManyToManyField(AdGroup, through='UserInAdGroup')
-    mail_groups = models.ManyToManyField(MailGroup, through='UserInMailGroup')
+    ad_groups = models.ManyToManyField(AdGroup, through="UserInAdGroup")
+    mail_groups = models.ManyToManyField(MailGroup, through="UserInMailGroup")
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return self.name + " " + self.first_name
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('user', args=[str(self.id)])
+
+        return reverse("user", args=[str(self.id)])
 
 
 class UserInAdGroup(models.Model):

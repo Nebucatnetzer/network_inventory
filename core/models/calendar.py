@@ -9,7 +9,7 @@ class Weekday(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['value']
+        ordering = ["value"]
 
 
 class DayOfMonth(models.Model):
@@ -20,7 +20,7 @@ class DayOfMonth(models.Model):
 
     class Meta:
         verbose_name_plural = "Days of Month"
-        ordering = ['name']
+        ordering = ["name"]
 
 
 class Month(models.Model):
@@ -31,4 +31,4 @@ class Month(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['value']
+        ordering = ["value"]

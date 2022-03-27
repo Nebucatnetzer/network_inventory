@@ -3,7 +3,6 @@ from core.models import Company
 
 
 class GpuManufacturer(Company):
-
     class Meta:
         verbose_name_plural = "GPU Manufacturers"
 

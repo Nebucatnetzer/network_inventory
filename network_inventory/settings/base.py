@@ -14,9 +14,9 @@ import os
 import warnings
 from django.urls import reverse_lazy
 
-warnings.filterwarnings('ignore',
-                        module='floppyforms',
-                        message='Unable to import floppyforms.gis')
+warnings.filterwarnings(
+    "ignore", module="floppyforms", message="Unable to import floppyforms.gis"
+)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,60 +27,60 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
-    'backups.apps.BackupsConfig',
-    'computers.apps.ComputersConfig',
-    'core.apps.CoreConfig',
-    'crispy_forms',
-    'customers.apps.CustomersConfig',
-    'devices.apps.DevicesConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.messages',
-    'django.contrib.sessions',
-    'django.contrib.staticfiles',
-    'django_filters',
-    'django_tables2',
-    'floppyforms',
-    'guardian',
-    'licenses.apps.LicensesConfig',
-    'nested_admin',
-    'nets.apps.NetsConfig',
-    'softwares.apps.SoftwaresConfig',
-    'users.apps.UsersConfig',
-    'django_htmx',
+    "backups.apps.BackupsConfig",
+    "computers.apps.ComputersConfig",
+    "core.apps.CoreConfig",
+    "crispy_forms",
+    "customers.apps.CustomersConfig",
+    "devices.apps.DevicesConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.messages",
+    "django.contrib.sessions",
+    "django.contrib.staticfiles",
+    "django_filters",
+    "django_tables2",
+    "floppyforms",
+    "guardian",
+    "licenses.apps.LicensesConfig",
+    "nested_admin",
+    "nets.apps.NetsConfig",
+    "softwares.apps.SoftwaresConfig",
+    "users.apps.UsersConfig",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_htmx.middleware.HtmxMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
-ROOT_URLCONF = 'network_inventory.urls'
+ROOT_URLCONF = "network_inventory.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'network_inventory.wsgi.application'
+WSGI_APPLICATION = "network_inventory.wsgi.application"
 
 
 # Password validation
@@ -88,34 +88,34 @@ WSGI_APPLICATION = 'network_inventory.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',  # this is default
-    'guardian.backends.ObjectPermissionBackend',
+    "django.contrib.auth.backends.ModelBackend",  # this is default
+    "guardian.backends.ObjectPermissionBackend",
 )
-AUTH_USER_MODEL = 'core.InventoryUser'
+AUTH_USER_MODEL = "core.InventoryUser"
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LOGIN_REDIRECT_URL = reverse_lazy('customers')
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy("customers")
+LOGOUT_REDIRECT_URL = reverse_lazy("login")
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
-TIME_FORMAT = 'H:i'
+TIME_ZONE = "UTC"
+TIME_FORMAT = "H:i"
 
 USE_I18N = True
 
@@ -124,10 +124,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

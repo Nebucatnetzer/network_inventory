@@ -18,14 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('', include('backups.urls')),
-    path(r'', include('computers.urls')),
-    path(r'', include('core.urls')),
-    path(r'', include('customers.urls')),
-    path(r'', include('devices.urls')),
-    path(r'', include('licenses.urls')),
-    path(r'', include('nets.urls')),
-    path(r'', include('users.urls')),
-    path('management/', admin.site.urls),
-    path('_nested_admin/', include('nested_admin.urls')),
+    path("", include("backups.urls")),
+    path(r"", include("computers.urls")),
+    path(r"", include("core.urls")),
+    path(r"", include("customers.urls")),
+    path(r"", include("devices.urls")),
+    path(r"", include("licenses.urls")),
+    path(r"", include("nets.urls")),
+    path(r"", include("users.urls")),
+    path("management/", admin.site.urls),
+    path("_nested_admin/", include("nested_admin.urls")),
 ]

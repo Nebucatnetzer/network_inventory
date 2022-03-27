@@ -20,7 +20,7 @@ from .tables import NetsTable
 def nets_table_view(request, pk):
     table = NetsTable(Net.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(request, 'nets/net_list.html', {'nets': table})
+    return render(request, "nets/net_list.html", {"nets": table})
 
 
 @login_required
@@ -29,13 +29,13 @@ def net_detail_view(request, pk):
     net = get_object_or_404(Net, pk=pk)
     table = NetDetailTable(DeviceInNet.objects.filter(net=net))
     RequestConfig(request).configure(table)
-    return render(request, 'nets/net_details.html',
-                  {'table': table,
-                   'net': net})
+    return render(
+        request, "nets/net_details.html", {"table": table, "net": net}
+    )
 
 
 class NetDeleteView(LoginRequiredMixin, DeleteView):
     model = Net
 
     def get_success_url(self):
-        return reverse('nets', args=(self.object.customer.pk,))
+        return reverse("nets", args=(self.object.customer.pk,))
