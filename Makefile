@@ -6,7 +6,7 @@ SHELL=/usr/bin/env bash
 run: setup
 	( \
 	find . -name __pycache__ -o -name "*.pyc" -delete; \
-	python manage.py runserver; \
+	python manage.py runserver 0.0.0.0:8000; \
 	)
 
 .PHONY: setup
