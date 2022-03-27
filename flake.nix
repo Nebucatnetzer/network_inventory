@@ -25,6 +25,12 @@
           buildInputs = [
             devEnvironment
             pkgs.gnumake
+            pkgs.python39Packages.autopep8
+            pkgs.python39Packages.black
+            pkgs.python39Packages.flake8
+            pkgs.python39Packages.jedi
+            pkgs.python39Packages.pip
+            pkgs.python39Packages.yapf
           ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
