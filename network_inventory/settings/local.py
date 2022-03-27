@@ -1,8 +1,16 @@
+from socket import gethostname
+from socket import gethostbyname
+from socket import getfqdn
+
 from .base import *
+
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    getfqdn(),
+    gethostname(),
+    gethostbyname(gethostname()),
 ]
 
 CSRF_TRUSTED_ORIGINS = [
