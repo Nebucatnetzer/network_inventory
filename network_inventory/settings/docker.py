@@ -1,6 +1,12 @@
+from socket import gethostname
+from socket import gethostbyname_ex
+
 from .base import *
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "10.7.89.104"]
+
+ALLOWED_HOSTS = [
+    gethostname(),
+] + list(set(gethostbyname_ex(gethostname())[2]))
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",

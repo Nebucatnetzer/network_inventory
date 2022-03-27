@@ -1,7 +1,17 @@
+from socket import gethostname
+from socket import gethostbyname
+from socket import getfqdn
+
 from .base import *
 
+
 ALLOWED_HOSTS = [
-    "inventory.2li.local",
+    "localhost",
+    "127.0.0.1",
+    getfqdn(),
+    gethostname(),
+    gethostbyname(gethostname()),
+    os.getenv("DOMAIN"),
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
