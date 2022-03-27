@@ -98,7 +98,10 @@ def ad_group_detail_view(request, pk):
     group = utils.get_object_with_view_permission(
         AdGroup, user=request.user, pk=pk
     )
-    return render(request, "groups/group_details.html", {"group": group})
+    users = group.user_set.all()
+    return render(
+        request, "groups/group_details.html", {"group": group, "users": users}
+    )
 
 
 @login_required
