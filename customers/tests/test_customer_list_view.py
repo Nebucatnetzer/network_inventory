@@ -28,8 +28,14 @@ def test_customer_list_view_no_customer():
 
 
 def test_customer_list_view(create_admin_user):
+    User = get_user_model()
+    project_manager = User.objects.create_superuser(
+        "meyer", "meyer@contria.com", "password"
+    )
     fixture = create_admin_user()
     customer = fixture["customer"]
+    customer.project_manager = project_manager
+    customer.save()
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/")
@@ -54,6 +60,7 @@ def test_customer_list_view(create_admin_user):
         and helper.in_content(
             response, "/customer/" + str(customer.id) + "/users/"
         )
+        and helper.in_content(response, project_manager)
     )
 
 

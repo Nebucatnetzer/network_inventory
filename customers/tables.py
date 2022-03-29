@@ -27,6 +27,7 @@ class CustomersTable(CoreTable):
     groups = tables.LinkColumn(
         "groups", text="Groups", args=[A("pk")], orderable=False
     )
+    project_manager = tables.Column(verbose_name="Project Manager")
     delete = tables.LinkColumn(
         "customer_delete",
         text="delete",
