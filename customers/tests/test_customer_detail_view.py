@@ -25,11 +25,20 @@ def test_customer_detail_view_not_found(create_admin_user):
 def test_customer_detail_view(create_admin_user):
     fixture = create_admin_user()
     customer = fixture["customer"]
+    User = get_user_model()
+    project_manager = User.objects.create_superuser(
+        "meyer", "meyer@contria.com", "password"
+    )
+    customer.project_manager = project_manager
+    customer.save()
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/customer/" + str(customer.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, customer
+    print(response.content)
+    assert (
+        response.status_code == 200
+        and helper.in_content(response, customer.name)
+        and helper.in_content(response, project_manager)
     )
 
 

@@ -1,5 +1,6 @@
 from django.db import models
 from core.models import Company
+from core.models import InventoryUser
 
 
 class Owner(Company):
@@ -8,6 +9,9 @@ class Owner(Company):
 
 class Customer(Company):
     name = models.CharField(max_length=50, unique=True)
+    project_manager = models.ForeignKey(
+        InventoryUser, null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     class Meta:
         ordering = ["name"]
