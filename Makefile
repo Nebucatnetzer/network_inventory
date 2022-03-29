@@ -6,6 +6,7 @@ SHELL=/usr/bin/env bash
 run: setup
 	( \
 	find . -name __pycache__ -o -name "*.pyc" -delete; \
+	sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
 	python manage.py runserver 0.0.0.0:8000; \
 	)
 
