@@ -69,7 +69,7 @@ init:
 .PHONY: test
 test:
 	( \
-	pytest -nauto --nomigrations --cov=. --cov-report=html; \
+	pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=. --cov-report=html; \
 	)
 
 .PHONY: debug
