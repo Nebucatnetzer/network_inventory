@@ -1,6 +1,6 @@
 from django.db import models
 from customers.models import Customer
-from .groups import AdGroup, MailGroup
+from .groups import Group
 
 
 class User(models.Model):
@@ -13,8 +13,7 @@ class User(models.Model):
     enabled = models.BooleanField()
     description = models.TextField(blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    ad_groups = models.ManyToManyField(AdGroup, through="UserInAdGroup")
-    mail_groups = models.ManyToManyField(MailGroup, through="UserInMailGroup")
+    groups = models.ManyToManyField(Group, through="UserInGroup")
 
     class Meta:
         ordering = ["name"]
@@ -28,11 +27,6 @@ class User(models.Model):
         return reverse("user", args=[str(self.id)])
 
 
-class UserInAdGroup(models.Model):
+class UserInGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(AdGroup, on_delete=models.CASCADE)
-
-
-class UserInMailGroup(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(MailGroup, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)

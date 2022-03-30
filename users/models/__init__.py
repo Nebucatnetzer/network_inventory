@@ -1,3 +1,3 @@
-from .user import User, UserInAdGroup, UserInMailGroup
-from .groups import AdGroup, Group, MailGroup
+from .user import User, UserInGroup
+from .groups import Group
 from .mailalias import MailAlias

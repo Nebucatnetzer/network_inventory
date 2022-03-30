@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    {% if ad_groups or mail_groups or mail_alias %}
+    {% if groups or mail_alias %}
     <div class="col">
         {% if mail_alias %}
         <div class="card mt-3">
@@ -64,31 +64,15 @@
         </div>
         {% endif %}
 
-        {% if ad_groups %}
-        <div class="card mt-3">
-            <div class="card-header">AD Groups</div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    {% for group in ad_groups %}
-                    <tr>
-                        <td>{{ group.group }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if mail_groups %}
-        <div class="card mt-3">
-            <div class="card-header">Mail Groups</div>
+        {% if groups %} <div class="card mt-3">
+            <div class="card-header">Groups</div>
             <div class="card-body">
                 <table class="table table-bordered">
                     <tr>
                     <th>Group Name</th>
                     <th>Address</th>
                     </tr>
-                    {% for group in mail_groups %}
+                    {% for group in groups %}
                     <tr>
                         <td>{{ group.group }}</td>
                         <td>{{ group.group.mail_address }}</td>

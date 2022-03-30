@@ -20,16 +20,13 @@ def test_customer_user_table(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     user = mixer.blend("users.User", customer=mixer.SELECT)
-    ad_group = mixer.blend("users.AdGroup")
-    mail_group = mixer.blend("users.MailGroup")
-    mixer.blend("users.UserInAdGroup", user=user, group=ad_group)
-    mixer.blend("users.UserInMailGroup", user=user, group=mail_group)
+    group = mixer.blend("users.Group")
+    mixer.blend("users.UserInGroup", user=user, group=group)
     response = client.get("/customer/" + str(customer.id) + "/users/")
     assert (
         response.status_code == 200
         and helper.in_content(response, user.name)
-        and helper.in_content(response, ad_group)
-        and helper.in_content(response, mail_group)
+        and helper.in_content(response, group)
         and helper.in_content(response, user.primary_mail)
     )
 

@@ -1,11 +1,11 @@
 {% extends "core/base.html" %}
-{% block section_title %}Delete Mail group{% endblock %}
+{% block section_title %}Delete Group{% endblock %}
 {% block content %}
 <div class="row">
     <form method="post">{% csrf_token %}
-        <p>Are you sure you want to delete the mail group "{{ object }}"?</p>
+        <p>Are you sure you want to delete the group "{{ object }}"?</p>
         <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{% url 'mail_groups' object.customer.pk %}" class="btn btn-primary">Cancel</a>
+        <a href="{% url 'groups' object.customer.pk %}" class="btn btn-primary">Cancel</a>
         <input type="hidden" id="previous_page" name="previous_page" value="/previous/page/url">
     </form>
     <script>

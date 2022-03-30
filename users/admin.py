@@ -3,12 +3,10 @@ from django.contrib import admin
 from licenses.models import LicenseWithUser
 
 from .models import (
-    AdGroup,
+    Group,
     MailAlias,
-    MailGroup,
     User,
-    UserInAdGroup,
-    UserInMailGroup,
+    UserInGroup,
 )
 
 
@@ -18,16 +16,10 @@ class LicenseWithUserInLine(admin.StackedInline):
     verbose_name_plural = "Licenses"
 
 
-class AdGroupInLine(admin.StackedInline):
-    model = UserInAdGroup
+class GroupInLine(admin.StackedInline):
+    model = UserInGroup
     extra = 0
     verbose_name_plural = "AD Groups"
-
-
-class MailGroupInLine(admin.StackedInline):
-    model = UserInMailGroup
-    extra = 0
-    verbose_name_plural = "Mail Groups"
 
 
 class MailAliasInLine(admin.StackedInline):
@@ -39,16 +31,13 @@ class MailAliasInLine(admin.StackedInline):
 class UserAdmin(admin.ModelAdmin):
     list_display = ("name", "customer", "enabled")
     inlines = (
-        AdGroupInLine,
-        MailGroupInLine,
+        GroupInLine,
         MailAliasInLine,
         LicenseWithUserInLine,
     )
 
 
-admin.site.register(AdGroup)
+admin.site.register(Group)
 admin.site.register(MailAlias)
-admin.site.register(MailGroup)
 admin.site.register(User, UserAdmin)
-admin.site.register(UserInAdGroup)
-admin.site.register(UserInMailGroup)
+admin.site.register(UserInGroup)
