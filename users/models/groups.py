@@ -6,7 +6,7 @@ from customers.models import Customer
 class Group(models.Model):
     name = models.CharField(max_length=50)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    mail_address = models.EmailField()
+    mail_address = models.EmailField(blank=True, null=True)
 
     def __str__(self):
         return self.name
