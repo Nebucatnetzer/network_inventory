@@ -19,7 +19,7 @@ class LicenseWithUserInLine(admin.StackedInline):
 class GroupInLine(admin.StackedInline):
     model = UserInGroup
     extra = 0
-    verbose_name_plural = "AD Groups"
+    verbose_name_plural = "Groups"
 
 
 class MailAliasInLine(admin.StackedInline):
