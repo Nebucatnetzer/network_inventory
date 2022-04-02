@@ -7,6 +7,9 @@ class Group(models.Model):
     name = models.CharField(max_length=50)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     mail_address = models.EmailField(blank=True, null=True)
+    parent_group = models.ForeignKey(
+        "self", blank=True, null=True, on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.name
