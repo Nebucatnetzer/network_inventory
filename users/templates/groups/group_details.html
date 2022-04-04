@@ -17,6 +17,21 @@
                     </tr>
                     {% endfor %}
                 </table>
+
+        {% if groups %}
+                <table class="table table-bordered">
+                    <tr>
+                    <th>Group Name</th>
+                    <th>Address</th>
+                    </tr>
+                    {% for group in groups %}
+                    <tr>
+                        <td>{{ group.name }}</td>
+                        <td><a href="mailto:{{ group.mail_address }}">{{ group.mail_address }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+        {% endif %}
                 </div>
             </div>
         </div>

@@ -86,8 +86,12 @@ def group_detail_view(request, pk):
         Group, user=request.user, pk=pk
     )
     users = group.user_set.all()
+    groups = Group.objects.filter(parent_group=group)
+    print(groups)
     return render(
-        request, "groups/group_details.html", {"group": group, "users": users}
+        request,
+        "groups/group_details.html",
+        {"group": group, "users": users, "groups": groups},
     )
 
 
