@@ -5,6 +5,8 @@
     <div class="col">
         <div class="card mt-3">
             <div class="card-body">
+                <h4>Description</h4>
+                <div class="card-text"><p>{{ group.description }}</p></div>
                 <div class="card-text">
                 <p>Customer: <a href="{% url 'customer' group.customer.id %}">{{ group.customer }}</a></p>
                 <table class="table table-bordered">
