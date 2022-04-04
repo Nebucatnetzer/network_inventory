@@ -8,14 +8,18 @@
                 <h4>Description</h4>
                 <div class="card-text"><p>{{ group.description }}</p></div>
                 <div class="card-text">
-                <p>Customer: <a href="{% url 'customer' group.customer.id %}">{{ group.customer }}</a></p>
+                    <p>Customer: <a href="{% url 'customer' group.customer.id %}">
+                        {{ group.customer }}
+                    </a></p>
                 <table class="table table-bordered">
                     <tr>
                     <th>User</th>
                     </tr>
                     {% for user in users %}
                     <tr>
-                        <td><a href="{% url 'user' user.id %}">{{ user }}</a></td>
+                        <td><a href="{% url 'user' user.id %}">
+                            {{ user }}
+                        </a></td>
                     </tr>
                     {% endfor %}
                 </table>
