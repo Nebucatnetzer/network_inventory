@@ -344,7 +344,7 @@
     customer: 2
     device: 3
     valid_from: 2020-06-01
-    valid_until: 2021-06-01
+    valid_until: 2022-12-01
     warranty_type: 1
 - model: devices.warranty
   pk: 2
