@@ -1,7 +1,7 @@
 asgiref==3.5.0
 attrs==21.4.0
 coverage==6.3
-Django==4.0.2
+Django==4.0.6
 django-crispy-forms==1.14.0
 django-filter==21.1
 django-floppyforms==1.9.0
