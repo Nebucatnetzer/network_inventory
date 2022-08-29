@@ -5,8 +5,14 @@
     flake-utils = {
       url = github:numtide/flake-utils;
     };
+    pypi = {
+      url = "github:DavHau/pypi-deps-db";
+      flake = false;
+    };
     mach-nix = {
-      url = "mach-nix/3.4.0";
+      inputs.pypi-deps-db.follows = "pypi";
+      url = "mach-nix/3.5.0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

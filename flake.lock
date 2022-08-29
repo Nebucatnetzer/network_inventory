@@ -33,39 +33,28 @@
     "mach-nix": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs",
-        "pypi-deps-db": "pypi-deps-db"
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pypi-deps-db": [
+          "pypi"
+        ]
       },
       "locked": {
-        "lastModified": 1643953409,
-        "narHash": "sha256-CJDg/RpZdUVyI3QIAXUqIoYDl7VkxFtNE4JWih0ucKc=",
+        "lastModified": 1654084003,
+        "narHash": "sha256-j/XrVVistvM+Ua+0tNFvO5z83isL+LBgmBi9XppxuKA=",
         "owner": "DavHau",
         "repo": "mach-nix",
-        "rev": "fe5255e6fd8df57e9507b7af82fc59dda9e9ff2b",
+        "rev": "7e14360bde07dcae32e5e24f366c83272f52923f",
         "type": "github"
       },
       "original": {
         "id": "mach-nix",
-        "ref": "3.4.0",
+        "ref": "3.5.0",
         "type": "indirect"
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1643805626,
-        "narHash": "sha256-AXLDVMG+UaAGsGSpOtQHPIKB+IZ0KSd9WS77aanGzgc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "554d2d8aa25b6e583575459c297ec23750adb6cb",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1647902355,
         "narHash": "sha256-SySJ8IRaogpc/BPOkysA+kzq9URvXthoeKIemaTKCiM=",
@@ -81,14 +70,14 @@
         "type": "github"
       }
     },
-    "pypi-deps-db": {
+    "pypi": {
       "flake": false,
       "locked": {
-        "lastModified": 1643877077,
-        "narHash": "sha256-jv8pIvRFTP919GybOxXE5TfOkrjTbdo9QiCO1TD3ZaY=",
+        "lastModified": 1661761829,
+        "narHash": "sha256-HmUtNTzLcbf+Tf1V0ibwzzhsvIdeK6NpaPN+JpDiR30=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "da53397f0b782b0b18deb72ef8e0fb5aa7c98aa3",
+        "rev": "645422a381528e75b7bfced7bcd3b48fd9707828",
         "type": "github"
       },
       "original": {
@@ -101,7 +90,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "mach-nix": "mach-nix",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs",
+        "pypi": "pypi"
       }
     }
   },
