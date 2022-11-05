@@ -4,7 +4,7 @@ attrs==21.4.0
 autopep8==1.6.0
 black==21.12b0
 click==8.0.3
-coverage==6.2
+coverage==6.5.0
 Django==4.0.7
 django-crispy-forms==1.14.0
 django-filter==21.1
