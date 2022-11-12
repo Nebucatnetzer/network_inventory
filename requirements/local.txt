@@ -1,7 +1,7 @@
 asgiref==3.5.2
 astroid==2.9.0
 attrs==22.1.0
-autopep8==2.0.0
+autopep8
 black==21.12b0
 click==8.0.3
 coverage==6.5.0
@@ -16,7 +16,7 @@ django-nested-admin==3.4.0
 django-tables2==2.4.1
 execnet==1.9.0
 Faker==11.1.0
-flake8==4.0.1
+flake8
 iniconfig==1.1.1
 isort==5.10.1
 jedi==0.18.1
