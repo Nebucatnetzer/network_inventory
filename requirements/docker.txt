@@ -1,4 +1,4 @@
-asgiref==3.5.0
+asgiref==3.5.2
 attrs==21.4.0
 coverage==6.5.0
 Django==4.1.3
