@@ -43,6 +43,18 @@
                         buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-scm ];
                       }
                     );
+                  python-monkey-business = super.python-monkey-business.overridePythonAttrs
+                    (
+                      old: {
+                        buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-scm ];
+                      }
+                    );
+                  pytoolconfig = super.pytoolconfig.overridePythonAttrs
+                    (
+                      old: {
+                        buildInputs = (old.buildInputs or [ ]) ++ [ super.pdm ];
+                      }
+                    );
                 });
             })
             pkgs.python310Packages.poetry
