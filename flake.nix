@@ -4,7 +4,7 @@
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     flake-utils.url = github:numtide/flake-utils;
     poetry2nix = {
-      url = "github:nix-community/poetry2nix";
+      url = "github:Nebucatnetzer/poetry2nix?rev=283a1398ee9c080c8c3310c8fd1aa937f6e84b62";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,52 +18,10 @@
             projectDir = ./.;
             overrides = prev.poetry2nix.defaultPoetryOverrides.extend
               (self: super: {
-                findpython = super.findpython.overridePythonAttrs (
-                  old: {
-                    buildInputs = (old.buildInputs or [ ]) ++ [ super.pdm ];
-                  }
-                );
-                django-floppyforms =
-                  super.django-floppyforms.overridePythonAttrs
-                    (
-                      old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                      }
-                    );
-                django-crispy-forms = super.django-crispy-forms.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
-                django-nested-admin = super.django-crispy-forms.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
-                exceptiongroup = super.exceptiongroup.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-scm ];
-                    }
-                  );
-                mixer = super.mixer.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
                 python-monkey-business = super.python-monkey-business.overridePythonAttrs
                   (
                     old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-scm ];
-                    }
-                  );
-                pytoolconfig = super.pytoolconfig.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.pdm-pep517 ];
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
                     }
                   );
               });
