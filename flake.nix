@@ -81,6 +81,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
+            pkgs.inventory
             pkgs.poetry
           ];
         };
