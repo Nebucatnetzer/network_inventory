@@ -37,6 +37,12 @@
                         buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
                       }
                     );
+                  django-nested-admin = super.django-crispy-forms.overridePythonAttrs
+                    (
+                      old: {
+                        buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                      }
+                    );
                   exceptiongroup = super.exceptiongroup.overridePythonAttrs
                     (
                       old: {
