@@ -21,26 +21,26 @@
                 (self: super: {
                   findpython = super.findpython.overridePythonAttrs (
                     old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pdm ];
+                      buildInputs = (old.buildInputs or [ ]) ++ [ self.pdm ];
                     }
                   );
                   django-floppyforms =
                     super.django-floppyforms.overridePythonAttrs
                       (
                         old: {
-                          buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.python310Packages.setuptools ];
+                          buildInputs = (old.buildInputs or [ ]) ++ [ self.setuptools ];
                         }
                       );
                   django-crispy-forms = super.django-crispy-forms.overridePythonAttrs
                     (
                       old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.python310Packages.setuptools ];
+                        buildInputs = (old.buildInputs or [ ]) ++ [ self.setuptools ];
                       }
                     );
                   exceptiongroup = super.exceptiongroup.overridePythonAttrs
                     (
                       old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.python310Packages.flit-scm ];
+                        buildInputs = (old.buildInputs or [ ]) ++ [ self.flit-scm ];
                       }
                     );
                 });
