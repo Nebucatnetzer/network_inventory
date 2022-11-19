@@ -75,8 +75,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
-            pkgs.inventory
-            pkgs.python310Packages.poetry
+            pkgs.poetry
           ];
         };
         shellHook = ''
