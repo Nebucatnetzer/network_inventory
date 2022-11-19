@@ -17,6 +17,18 @@
             pkgs.gnumake
             (pkgs.poetry2nix.mkPoetryEnv {
               projectDir = ./.;
+              overrides = pkgs.poetry2nix.defaultPoetryOverrides.extend (self: super: {
+                findpython = super.findpython.overridePythonAttrs (
+                  old: {
+                    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pdm ];
+                  }
+                );
+                idna = super.idna.overridePythonAttrs (
+                  old: {
+                    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.python39Packages.flit-core ];
+                  }
+                );
+              });
             })
             pkgs.python39Packages.poetry
           ];
