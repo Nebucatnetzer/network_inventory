@@ -43,6 +43,7 @@ setup:
 	fi; \
 	)
 
+.PHONY: venv
 venv:
 	nix build .#venv -o venv
 
