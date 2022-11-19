@@ -1,9 +1,9 @@
 on:
   push:
-    branches: [ "master" "dev" ]
+    branches: [ "master", "dev" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "master" "dev" ]
+    branches: [ "master", "dev" ]
 
 env:
   IMAGE_NAME: network_inventory
