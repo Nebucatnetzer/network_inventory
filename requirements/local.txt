@@ -16,7 +16,7 @@ jedi
 mixer==7.2.0
 pep8==1.7.1
 psycopg2-binary==2.9.5
-pylint==2.12.2
+pylint==2.15.6
 pytest==6.2.5
 pytest-cov==3.0.0
 pytest-django==4.5.2
