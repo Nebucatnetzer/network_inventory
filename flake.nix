@@ -48,6 +48,12 @@
                       buildInputs = (old.buildInputs or [ ]) ++ [ super.flit-scm ];
                     }
                   );
+                mixer = super.mixer.overridePythonAttrs
+                  (
+                    old: {
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                    }
+                  );
                 python-monkey-business = super.python-monkey-business.overridePythonAttrs
                   (
                     old: {
