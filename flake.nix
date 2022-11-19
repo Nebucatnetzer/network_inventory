@@ -57,7 +57,7 @@
                 pytoolconfig = super.pytoolconfig.overridePythonAttrs
                   (
                     old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.pdm ];
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.pdm-pep517 ];
                     }
                   );
               });
