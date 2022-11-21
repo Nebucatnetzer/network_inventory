@@ -17,12 +17,8 @@ jobs:
       - name: Enable Nix shell
         run: |
           nix develop
-      - name: Lint with flake8
-        run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --statistics
-      - name: Test with pytest
-        run: |
           pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=.
