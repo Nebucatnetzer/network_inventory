@@ -1,42 +1,51 @@
 {
   description = "A Python API for various tools I use at work.";
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
-    flake-utils = {
-      url = github:numtide/flake-utils;
-    };
-    pypi = {
-      url = "github:DavHau/pypi-deps-db";
-      flake = false;
-    };
-    mach-nix = {
-      inputs.pypi-deps-db.follows = "pypi";
-      url = "mach-nix/3.5.0";
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    flake-utils.url = github:numtide/flake-utils;
+    poetry2nix = {
+      url = "github:Nebucatnetzer/poetry2nix?rev=283a1398ee9c080c8c3310c8fd1aa937f6e84b62";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, ... }@inputs:
-    flake-utils.lib.eachDefaultSystem (system:
+  };
+  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
+    {
+      overlay = nixpkgs.lib.composeManyExtensions [
+        poetry2nix.overlay
+        (final: prev: {
+          inventory = prev.poetry2nix.mkPoetryEnv {
+            projectDir = ./.;
+            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
+              (self: super: {
+                python-monkey-business = super.python-monkey-business.overridePythonAttrs
+                  (
+                    old: {
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                    }
+                  );
+              });
+          };
+        })
+      ];
+    } // (flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        machNix = mach-nix.lib."${system}";
-        devEnvironment = machNix.mkPython {
-          requirements = builtins.readFile ./requirements/local.txt;
-          _.pytest-cov.propagatedBuildInputs.mod = pySelf: self: oldVal: oldVal ++ [ pySelf.tomli ];
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ self.overlay ];
         };
       in
       {
         devShell = pkgs.mkShell {
           buildInputs = [
-            devEnvironment
             pkgs.gnumake
-            pkgs.python39Packages.pip
+            pkgs.inventory
+            pkgs.poetry
           ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
         };
-        packages.venv = devEnvironment;
-      });
+        packages.venv = pkgs.inventory;
+      }));
 }
