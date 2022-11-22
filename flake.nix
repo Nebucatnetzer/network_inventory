@@ -41,6 +41,7 @@
             pkgs.gnumake
             pkgs.inventory
             pkgs.poetry
+            pkgs.python310Packages.pip
           ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
