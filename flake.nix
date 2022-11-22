@@ -14,18 +14,19 @@
       overlay = nixpkgs.lib.composeManyExtensions [
         poetry2nix.overlay
         (final: prev: {
-          inventory = prev.poetry2nix.mkPoetryEnv {
-            projectDir = ./.;
-            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
-              (self: super: {
-                python-monkey-business = super.python-monkey-business.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
-              });
-          };
+          inventoryEnv = prev.poetry2nix.mkPoetryEnv
+            {
+              projectDir = ./.;
+              overrides = prev.poetry2nix.defaultPoetryOverrides.extend
+                (self: super: {
+                  python-monkey-business = super.python-monkey-business.overridePythonAttrs
+                    (
+                      old: {
+                        buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                      }
+                    );
+                });
+            };
         })
       ];
     } // (flake-utils.lib.eachDefaultSystem (system:
@@ -36,10 +37,10 @@
         };
       in
       {
-        devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
-            pkgs.inventory
+            pkgs.inventoryEnv
             pkgs.poetry
             pkgs.python310Packages.pip
           ];
@@ -47,6 +48,6 @@
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
         };
-        packages.venv = pkgs.inventory;
+        packages.venv = pkgs.inventoryEnv;
       }));
 }
