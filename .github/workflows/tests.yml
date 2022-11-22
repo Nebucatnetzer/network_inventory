@@ -16,7 +16,6 @@ jobs:
       - uses: cachix/install-nix-action@v18
       - name: Enable Nix shell
         run: |
-          nix develop
+          nix develop --command flake8 . --count --show-source --statistics
           # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --show-source --statistics
-          pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=.
+          nix develop --command pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=.
