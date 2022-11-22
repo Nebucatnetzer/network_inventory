@@ -14,8 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v18
-      - name: Enable Nix shell
+      - name: Linting
         run: |
           nix develop --command flake8 . --count --show-source --statistics
-          # stop the build if there are Python syntax errors or undefined names
+
+      - name: Testing
+        run: |
           nix develop --command pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=.
