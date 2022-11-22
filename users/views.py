@@ -19,7 +19,6 @@ from .decorators import user_view_permission
 from .models import Group
 from .models import MailAlias
 from .models import User
-from .models import UserInGroup
 from .tables import GroupsTable
 from .tables import UsersTable
 
