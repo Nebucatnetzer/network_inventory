@@ -20,4 +20,4 @@ jobs:
 
       - name: Testing
         run: |
-          nix develop --command pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=.
+          nix develop --command make test
