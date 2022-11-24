@@ -14,36 +14,30 @@
       overlay = nixpkgs.lib.composeManyExtensions [
         poetry2nix.overlay
         (final: prev: {
-          inventoryEnv = prev.poetry2nix.mkPoetryEnv
-            {
-              projectDir = ./.;
-              overrides = prev.poetry2nix.defaultPoetryOverrides.extend
-                (self: super: {
-                  python-monkey-business = super.python-monkey-business.overridePythonAttrs
-                    (
-                      old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                      }
-                    );
-                });
-            };
-        })
-        poetry2nix.overlay
-        (final: prev: {
-          inventory = prev.poetry2nix.mkPoetryApplication
-            {
-              projectDir = ./.;
-              checkPhase = "pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations";
-              overrides = prev.poetry2nix.defaultPoetryOverrides.extend
-                (self: super: {
-                  python-monkey-business = super.python-monkey-business.overridePythonAttrs
-                    (
-                      old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                      }
-                    );
-                });
-            };
+          inventoryEnv = prev.poetry2nix.mkPoetryEnv {
+            projectDir = ./.;
+            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
+              (self: super: {
+                python-monkey-business = super.python-monkey-business.overridePythonAttrs
+                  (
+                    old: {
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                    }
+                  );
+              });
+          };
+          inventoryPackage = prev.poetry2nix.mkPoetryApplication {
+            projectDir = ./.;
+            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
+              (self: super: {
+                python-monkey-business = super.python-monkey-business.overridePythonAttrs
+                  (
+                    old: {
+                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
+                    }
+                  );
+              });
+          };
         })
       ];
     } // (flake-utils.lib.eachDefaultSystem (system:
@@ -66,7 +60,7 @@
           '';
         };
         packages.venv = pkgs.inventoryEnv;
-        packages.inventory = pkgs.inventory;
-        packages.default = pkgs.inventory;
+        packages.inventory = pkgs.inventoryPackage;
+        packages.default = pkgs.inventoryPackage;
       }));
 }
