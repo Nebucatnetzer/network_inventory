@@ -7,6 +7,7 @@ run: setup
 	( \
 	find . -name __pycache__ -o -name "*.pyc" -delete; \
 	sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT; \
+	cd src/
 	python manage.py runserver 0.0.0.0:8000; \
 	)
 
@@ -14,6 +15,7 @@ run: setup
 setup:
 	( \
 	docker-compose -f docker-compose-development.yml up -d; \
+	cd src/
 	if [ -f .second_run ]; then \
 		sleep 2; \
 		python manage.py collectstatic --noinput; \
