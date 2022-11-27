@@ -175,7 +175,7 @@ migrations/
 htmlcov/
 .second_run
 
-/static
+/src/static
 .idea/
 db_data
 .direnv

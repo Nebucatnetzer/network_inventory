@@ -4,5 +4,5 @@ exclude =
     __init__.py,
     *cache*,
     venv/,
-    manage.py,
-    network_inventory/settings/*
+    src/manage.py,
+    src/network_inventory/settings/*
