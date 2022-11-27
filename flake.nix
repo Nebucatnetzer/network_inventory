@@ -19,7 +19,6 @@
           };
           inventoryPackage = prev.poetry2nix.mkPoetryApplication {
             projectDir = ./.;
-            src = ./src;
           };
         })
       ];
