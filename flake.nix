@@ -4,7 +4,7 @@
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     flake-utils.url = github:numtide/flake-utils;
     poetry2nix = {
-      url = "github:Nebucatnetzer/poetry2nix?rev=283a1398ee9c080c8c3310c8fd1aa937f6e84b62";
+      url = "github:nix-community/poetry2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
