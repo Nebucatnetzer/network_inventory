@@ -30,6 +30,8 @@ Please note that I will only use and test the first method.
 After you've entered the development environment with either method you can
 start the server with `make`. This will start a PostgreSQL database running
 inside a docker container and start the Django development server.
+You can then access it in the browser under the FQDN of your computer. E.g.
+`mypc.domain.local`.
 
 ## Environment Variables
 
