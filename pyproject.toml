@@ -7,6 +7,9 @@ version = "0.1.0"
 description = ""
 authors = ["Andreas Zweili <andreas@zweili.ch>"]
 license = "GPLv3"
+packages = [
+  { include = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
