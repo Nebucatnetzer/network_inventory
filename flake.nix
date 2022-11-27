@@ -16,27 +16,9 @@
         (final: prev: {
           inventoryEnv = prev.poetry2nix.mkPoetryEnv {
             projectDir = ./.;
-            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
-              (self: super: {
-                python-monkey-business = super.python-monkey-business.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
-              });
           };
           inventoryPackage = prev.poetry2nix.mkPoetryApplication {
             projectDir = ./.;
-            overrides = prev.poetry2nix.defaultPoetryOverrides.extend
-              (self: super: {
-                python-monkey-business = super.python-monkey-business.overridePythonAttrs
-                  (
-                    old: {
-                      buildInputs = (old.buildInputs or [ ]) ++ [ super.setuptools ];
-                    }
-                  );
-              });
           };
         })
       ];
