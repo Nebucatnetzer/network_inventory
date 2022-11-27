@@ -16,9 +16,6 @@
         (final: prev: {
           inventoryEnv = prev.poetry2nix.mkPoetryEnv {
             projectDir = ./.;
-            editablePackageSources = {
-              inventory = ./src;
-            };
           };
           inventoryPackage = prev.poetry2nix.mkPoetryApplication {
             projectDir = ./.;
