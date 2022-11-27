@@ -49,7 +49,6 @@ setup:
 venv:
 	nix build .#venv -o venv
 
-
 .PHONY: clean
 clean:
 	docker-compose -f docker-compose-development.yml down -v
@@ -67,12 +66,6 @@ cleanall: clean
 init:
 	( \
 	python manage.py loaddata network_inventory.yaml; \
-	)
-
-.PHONY: test
-test:
-	( \
-	pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=./src --cov-report=html ./src; \
 	)
 
 .PHONY: debug
