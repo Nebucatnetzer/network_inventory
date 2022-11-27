@@ -41,8 +41,43 @@
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
         };
+        checks.lint = pkgs.stdenv.mkDerivation {
+          dontPatch = true;
+          dontConfigure = true;
+          dontBuild = true;
+          dontInstall = true;
+          doCheck = true;
+          name = "lint";
+          src = ./.;
+          checkInputs = [ pkgs.inventoryEnv ];
+          checkPhase = ''
+            mkdir -p $out
+            flake8 . --count --show-source --statistics | tee $out/test.log
+          '';
+        };
+        checks.tests = pkgs.stdenv.mkDerivation {
+          dontPatch = true;
+          dontConfigure = true;
+          dontBuild = true;
+          dontInstall = true;
+          doCheck = true;
+          name = "test";
+          src = ./.;
+          checkInputs = [ pkgs.inventoryEnv ];
+          checkPhase = ''
+             mkdir -p $out
+             pytest --ds=network_inventory.settings.ram_test \
+                    -nauto \
+                    --nomigrations \
+                    --cov=./src \
+                    --cov-report=html \
+                    ./src
+            cp -r htmlcov $out/
+          '';
+        };
         packages.venv = pkgs.inventoryEnv;
         packages.inventory = pkgs.inventoryPackage;
         packages.default = pkgs.inventoryPackage;
       }));
 }
+
