@@ -14,10 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v18
-      - name: Linting
+      - name: Test
         run: |
-          nix develop --command flake8 . --count --show-source --statistics
-
-      - name: Testing
-        run: |
-          nix develop --command make test
+          nix flake check
