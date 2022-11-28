@@ -179,3 +179,4 @@ htmlcov/
 .idea/
 db_data
 .direnv
+/result
