@@ -131,7 +131,6 @@
                 pkgs.inventoryEnv
                 inventory
                 (pkgs.writeShellScriptBin "start-inventory" ''
-                  cd /code
                   if [ -f .second_run ]; then
                       sleep 2
                       ${pkgs.python3}/bin/python manage.py collectstatic --noinput
@@ -165,6 +164,7 @@
             };
             config = {
               Cmd = [ "start-inventory" ];
+              WorkingDir = "/code";
               Env = [
                 "POSTGRES_DB=network_inventory"
                 "DJANGO_SETTINGS_MODULE=network_inventory.settings.production"
