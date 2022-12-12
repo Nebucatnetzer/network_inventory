@@ -54,6 +54,7 @@
                   "poetry.toml"
                   "pyproject.toml"
                   "pytest.ini"
+                  "*.pyc"
                 ]);
             src = ./.;
           });
