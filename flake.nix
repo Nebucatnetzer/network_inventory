@@ -68,7 +68,7 @@
           '';
         };
       in
-      {
+      rec {
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
@@ -169,7 +169,7 @@
               ];
             };
           };
-          default = self.packages.container;
+          default = packages.container;
         };
       }));
 }
