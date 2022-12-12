@@ -180,3 +180,4 @@ htmlcov/
 db_data
 .direnv
 /result
+/static/
