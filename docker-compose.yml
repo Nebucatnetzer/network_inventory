@@ -10,14 +10,14 @@ services:
       - ./db_data:/var/lib/postgresql/data/
 
   web:
-    image: ghcr.io/nebucatnetzer/network_inventory/network_inventory:master
-    # build: .
+    image: ghcr.io/nebucatnetzer/network_inventory/network-inventory
     volumes:
-      - .:/code
+      - ./static/:/code/static
     environment:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
       - DJANGO_SECRET_KEY
+      - "DJANGO_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
     depends_on:
       - db
 
