@@ -49,6 +49,7 @@
             pkgs.inventoryDevEnv
             pkgs.poetry
             pkgs.python310Packages.pip
+            (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
