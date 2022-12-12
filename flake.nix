@@ -49,6 +49,7 @@
                   ".flake8"
                   ".gitignore"
                   ".gitlab-ci.yml"
+                  "conftest.py"
                   "docker-compose.yaml"
                   "flake.lock"
                   "flake.nix"
@@ -57,7 +58,9 @@
                   "poetry.toml"
                   "pyproject.toml"
                   "pytest.ini"
+                  "__pycache__"
                   "*.pyc"
+                  "tests"
                 ]);
             src = ./.;
           });
