@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ -f .second_run ]; then
     sleep 2
     python manage.py collectstatic --noinput

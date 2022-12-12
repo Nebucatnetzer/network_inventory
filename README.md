@@ -12,26 +12,28 @@ inventory over my various servers and other network equipment.
    and `DJANGO_SECRET_KEY` variables to something secure.
 3. Run `docker-compose up` and connect to http://localhost
 
-### Local Development Setup
+## Development Setup
 
-The local setup is mainly intended to run the tests quickly. I recommend that
-you use the Docker setup if you want to interact with the website.
+There are two ways to work on this project.
+For the first one you will need to install the Nix package manager[^1].
+Afterwards you can enter the development environment with `nix develop`.
 
-1. Run `make local` to create the virtual environment for development.
-   You're now all set to start developing.
+For the other way you have to install poetry[^2] and then run `poetry shell` to
+enter the virtual environment.
 
-### Docker Development Setup
+Please note that I will only use and test the first method.
 
-This is very similar to the production setup with the difference that the image
-for the `web` application gets built locally instead of getting pulled from
-Dockerhub.
+[^1]: https://nixos.org/download.html
 
-1. Run `make` to start the server. You can access it
-   at   http://localhost . You're now all set to start working.
-2. If you want to have some example data to work with run the command `make
-   init` after you successfully run `make`.
+[^2]: https://python-poetry.org
 
-#### Environment Variables
+After you've entered the development environment with either method you can
+start the server with `make`. This will start a PostgreSQL database running
+inside a docker container and start the Django development server.
+You can then access it in the browser under the FQDN of your computer. E.g.
+`mypc.domain.local`.
+
+## Environment Variables
 
 To customise the application in the Docker container you can use environment
 variables in the docker-compose.yml file. Currently the following variables are
