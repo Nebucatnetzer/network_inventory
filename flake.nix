@@ -13,13 +13,17 @@
     {
       overlays.default = nixpkgs.lib.composeManyExtensions [
         poetry2nix.overlay
-        (final: prev: {
-          inventoryEnv = prev.poetry2nix.mkPoetryEnv {
-            projectDir = ./.;
-          };
+        (final: prev: rec {
+          inventoryDevEnv = prev.poetry2nix.mkPoetryEnv
+            {
+              projectDir = ./.;
+              groups = [ "main" "dev" ];
+            };
           inventoryPackage = prev.poetry2nix.mkPoetryApplication {
             projectDir = ./.;
+            groups = [ "main" ];
           };
+          inventoryEnv = inventoryPackage.dependencyEnv;
         })
       ];
     } // (flake-utils.lib.eachDefaultSystem (system:
@@ -28,38 +32,8 @@
           inherit system;
           overlays = [ self.overlays.default ];
         };
-        src = with pkgs.lib;
-          cleanSource (cleanSourceWith {
-            filter = name: type:
-              let
-                baseName = baseNameOf (toString name);
-              in
-                !(builtins.elem baseName [
-                  ".coverage"
-                  ".coveragerc"
-                  ".dir-locals.el"
-                  ".direnv"
-                  ".git"
-                  ".github"
-                  ".env"
-                  ".envrc"
-                  ".flake8"
-                  ".gitignore"
-                  ".gitlab-ci.yml"
-                  "docker-compose.yaml"
-                  "flake.lock"
-                  "flake.nix"
-                  "Makefile"
-                  "poetry.lock"
-                  "poetry.toml"
-                  "pyproject.toml"
-                  "pytest.ini"
-                  "*.pyc"
-                ]);
-            src = ./.;
-          });
         inventory = pkgs.stdenv.mkDerivation {
-          inherit src;
+          src = ./.;
           version = "latest";
           pname = "network-inventory";
           installPhase = ''
@@ -72,9 +46,10 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
-            pkgs.inventoryEnv
+            pkgs.inventoryDevEnv
             pkgs.poetry
             pkgs.python310Packages.pip
+            (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
@@ -89,7 +64,7 @@
             doCheck = true;
             name = "lint";
             src = ./.;
-            checkInputs = [ pkgs.inventoryEnv ];
+            checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
               flake8 . --count --show-source --statistics
@@ -103,7 +78,7 @@
             doCheck = true;
             name = "test";
             src = ./.;
-            checkInputs = [ pkgs.inventoryEnv ];
+            checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
               pytest --ds=network_inventory.settings.ram_test \
@@ -125,47 +100,46 @@
               paths = [
                 pkgs.bashInteractive
                 pkgs.coreutils
-                pkgs.inventoryEnv
                 inventory
                 (pkgs.writeShellScriptBin "start-inventory" ''
-                  cd /code
                   if [ -f .second_run ]; then
                       sleep 2
-                      ${pkgs.python3}/bin/python manage.py collectstatic --noinput
-                      ${pkgs.python3}/bin/python manage.py makemigrations
-                      ${pkgs.python3}/bin/python manage.py migrate
+                      ${pkgs.inventoryEnv}/bin/django-admin collectstatic --noinput
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations
+                      ${pkgs.inventoryEnv}/bin/django-admin migrate
                   else
-                      ${pkgs.python3}/bin/python manage.py collectstatic --noinput
-                      ${pkgs.python3}/bin/python manage.py makemigrations backups
-                      ${pkgs.python3}/bin/python manage.py makemigrations computers
-                      ${pkgs.python3}/bin/python manage.py makemigrations core
-                      ${pkgs.python3}/bin/python manage.py makemigrations customers
-                      ${pkgs.python3}/bin/python manage.py makemigrations devices
-                      ${pkgs.python3}/bin/python manage.py makemigrations licenses
-                      ${pkgs.python3}/bin/python manage.py makemigrations nets
-                      ${pkgs.python3}/bin/python manage.py makemigrations softwares
-                      ${pkgs.python3}/bin/python manage.py makemigrations users
-                      ${pkgs.python3}/bin/python manage.py makemigrations
-                      ${pkgs.python3}/bin/python manage.py migrate
-                      ${pkgs.python3}/bin/python manage.py loaddata backups
-                      ${pkgs.python3}/bin/python manage.py loaddata computers
-                      ${pkgs.python3}/bin/python manage.py loaddata core
-                      ${pkgs.python3}/bin/python manage.py loaddata devices
-                      ${pkgs.python3}/bin/python manage.py loaddata nets
-                      ${pkgs.python3}/bin/python manage.py loaddata softwares
-                      ${pkgs.python3}/bin/python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
+                      ${pkgs.inventoryEnv}/bin/django-admin collectstatic --noinput
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations backups
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations computers
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations core
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations customers
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations devices
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations licenses
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations nets
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations softwares
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations users
+                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations
+                      ${pkgs.inventoryEnv}/bin/django-admin migrate
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata backups
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata computers
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata core
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata devices
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata nets
+                      ${pkgs.inventoryEnv}/bin/django-admin loaddata softwares
+                      ${pkgs.inventoryEnv}/bin/django-admin shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
                       touch .second_run
                   fi
-                  ${pkgs.python310Packages.gunicorn}/bin/gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
+                  ${pkgs.inventoryEnv}/bin/gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
                 '')
               ];
             };
             config = {
               Cmd = [ "start-inventory" ];
+              WorkingDir = "/code";
               Env = [
                 "POSTGRES_DB=network_inventory"
                 "DJANGO_SETTINGS_MODULE=network_inventory.settings.production"
-                "PYTHONPATH=/lib/python3.10:/lib/python3.10/site-packages"
+                "PYTHONPATH=/lib/python3.10:/lib/python3.10/site-packages:/code"
               ];
             };
           };

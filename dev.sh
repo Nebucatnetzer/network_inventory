@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+run () {
+    setup
+    find . -name __pycache__ -o -name "*.pyc" -delete
+    sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
+    python ./src/manage.py runserver 0.0.0.0:8000
+}
+
+setup () {
+    docker-compose -f docker-compose-development.yml up -d
+    if [ -f .second_run ]; then
+        sleep 2
+        python ./src/manage.py collectstatic --noinput
+        python ./src/manage.py makemigrations
+        python ./src/manage.py migrate
+    else
+        python ./src/manage.py collectstatic --noinput
+        python ./src/manage.py makemigrations backups
+        python ./src/manage.py makemigrations computers
+        python ./src/manage.py makemigrations core
+        python ./src/manage.py makemigrations customers
+        python ./src/manage.py makemigrations devices
+        python ./src/manage.py makemigrations licenses
+        python ./src/manage.py makemigrations nets
+        python ./src/manage.py makemigrations softwares
+        python ./src/manage.py makemigrations users
+        python ./src/manage.py makemigrations
+        python ./src/manage.py migrate
+        python ./src/manage.py loaddata backups
+        python ./src/manage.py loaddata computers
+        python ./src/manage.py loaddata core
+        python ./src/manage.py loaddata devices
+        python ./src/manage.py loaddata nets
+        python ./src/manage.py loaddata softwares
+        python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
+        touch .second_run
+    fi
+}
+
+venv () {
+    nix build .#venv -o venv
+}
+
+docker (){
+    nix build && docker load < result && docker run --rm -ti network-inventory:latest
+}
+
+clean () {
+    docker-compose -f docker-compose-development.yml down -v
+    find . \( -name __pycache__ -o -name "*.pyc" \) -delete
+    rm -rf htmlcov/
+    rm -f */migrations/0*.py
+    rm .second_run
+}
+
+cleanall () {
+    clean
+    docker-compose  -f docker-compose-development.yml down -v --rmi local
+    rm -r .venv
+}
+
+init () {
+    python ./src/manage.py loaddata network_inventory.yaml
+}
+
+debug () {
+    pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
+}
+
+test (){
+    nix flake check
+}
+
+tasks=("clean" "cleanall" "debug" "docker" "run" "test" "venv")
+
+# only one task at a time
+if [ $# != 1 ]; then
+    echo "usage: $0 <task_name>"
+    echo "All tasks: ${tasks[@]}"
+fi
+
+
+case $1 in
+    "${tasks[0]}")     clean;;
+    "${tasks[1]}")  cleanall;;
+    "${tasks[2]}")     debug;;
+    "${tasks[3]}")    docker;;
+    "${tasks[4]}")       run;;
+    "${tasks[5]}")      test;;
+    "${tasks[6]}")      venv;;
+esac
