@@ -14,11 +14,14 @@
       overlays.default = nixpkgs.lib.composeManyExtensions [
         poetry2nix.overlay
         (final: prev: {
+          inventoryDevEnv = prev.poetry2nix.mkPoetryEnv
+            {
+              projectDir = ./.;
+              groups = [ "main" "dev" ];
+            };
           inventoryEnv = prev.poetry2nix.mkPoetryEnv {
             projectDir = ./.;
-          };
-          inventoryPackage = prev.poetry2nix.mkPoetryApplication {
-            projectDir = ./.;
+            groups = [ "main" ];
           };
         })
       ];
@@ -72,7 +75,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnumake
-            pkgs.inventoryEnv
+            pkgs.inventoryDevEnv
             pkgs.poetry
             pkgs.python310Packages.pip
           ];
@@ -89,7 +92,7 @@
             doCheck = true;
             name = "lint";
             src = ./.;
-            checkInputs = [ pkgs.inventoryEnv ];
+            checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
               flake8 . --count --show-source --statistics
@@ -103,7 +106,7 @@
             doCheck = true;
             name = "test";
             src = ./.;
-            checkInputs = [ pkgs.inventoryEnv ];
+            checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
               pytest --ds=network_inventory.settings.ram_test \
