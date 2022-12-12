@@ -17,6 +17,7 @@ services:
       - DJANGO_SETTINGS_MODULE
       - DJANGO_DEBUG
       - DJANGO_SECRET_KEY
+      - "DJANGO_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
     depends_on:
       - db
 
