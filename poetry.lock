@@ -340,14 +340,14 @@ test = ["Pillow", "dj-database-url", "django-selenosis", "pytest", "pytest-cov",
 
 [[package]]
 name = "django-tables2"
-version = "2.5.1"
+version = "2.5.2"
 description = "Table/data-grid framework for Django"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-tables2-2.5.1.tar.gz", hash = "sha256:25ed2c28d3508558a4246a255c381784b20b439ef175e3954a103ffbc3a63757"},
-    {file = "django_tables2-2.5.1-py2.py3-none-any.whl", hash = "sha256:62d65e745073892741ccdb6137bfdbcae7f83142d07494fe865d389af1f2befd"},
+    {file = "django-tables2-2.5.2.tar.gz", hash = "sha256:6e22dd27fcddb1aa2f1c3cb089fcfa4df9094dae1ec16314c7c774289a3bf1fc"},
+    {file = "django_tables2-2.5.2-py2.py3-none-any.whl", hash = "sha256:9441862bfe7a3a29cc11d25d94a9da449e7665dd2510d0d242953230cf58b0cd"},
 ]
 
 [package.dependencies]
@@ -1179,4 +1179,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "48db57321f84c2360090998ff69b2430ce6154151b12903fc0018a0e5c3aa7f7"
+content-hash = "86f039c85a3fd243a5771bb78f510fe38934494cb2618adab2f07cee9ba7d037"
