@@ -13,7 +13,9 @@ class Login(models.Model):
     enabled = models.BooleanField()
     description = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.DO_NOTHING)
+    service = models.ForeignKey(
+        Service, on_delete=models.DO_NOTHING, blank=True, null=True
+    )
     groups = models.ManyToManyField(Group, through="LoginInGroup")
 
 
