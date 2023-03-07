@@ -68,15 +68,20 @@ debug () {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
 }
 
-test (){
+check (){
     nix flake check
+}
+
+test (){
+    export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
+    pytest -nauto --nomigrations --cov-report=html --cov=./src ./src
 }
 
 update (){
     poetry update --lock
 }
 
-tasks=("clean" "cleanall" "debug" "docker" "run" "test" "venv" "update")
+tasks=("check" "clean" "cleanall" "debug" "docker" "run" "test" "update" "venv")
 
 # only one task at a time
 if [ $# != 1 ]; then
@@ -86,12 +91,13 @@ fi
 
 
 case $1 in
-    "${tasks[0]}")     clean;;
-    "${tasks[1]}")  cleanall;;
-    "${tasks[2]}")     debug;;
-    "${tasks[3]}")    docker;;
-    "${tasks[4]}")       run;;
-    "${tasks[5]}")      test;;
-    "${tasks[6]}")      venv;;
-    "${tasks[7]}")      update;;
+    "${tasks[0]}")     check;;
+    "${tasks[1]}")     clean;;
+    "${tasks[2]}")  cleanall;;
+    "${tasks[3]}")     debug;;
+    "${tasks[4]}")    docker;;
+    "${tasks[5]}")       run;;
+    "${tasks[6]}")      test;;
+    "${tasks[7]}")    update;;
+    "${tasks[8]}")      venv;;
 esac
