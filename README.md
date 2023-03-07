@@ -24,15 +24,15 @@ enter the virtual environment.
 Please note that I will only use and test the first method.
 
 [^1]: https://nixos.org/download.html
-
 [^2]: https://python-poetry.org
 
 After you've entered the development environment with either method you can
 start the server. With the nix version you can start it with `dev run`. With
 poetry `./dev.sh run`. This will start a PostgreSQL database running inside a
 docker container and start the Django development server. You can then access
-it in the browser under the FQDN of your computer. E.g. `mypc.domain.local`.
-Run the `dev` command without an argument to see all options.
+it in the browser under the FQDN of your computer. E.g.
+`http://mypc.domain.local:8000`. Run the `dev` command without an argument to
+see all options.
 
 ## Environment Variables
 
