@@ -72,7 +72,11 @@ test (){
     nix flake check
 }
 
-tasks=("clean" "cleanall" "debug" "docker" "run" "test" "venv")
+update (){
+    poetry update --lock
+}
+
+tasks=("clean" "cleanall" "debug" "docker" "run" "test" "venv" "update")
 
 # only one task at a time
 if [ $# != 1 ]; then
@@ -89,4 +93,5 @@ case $1 in
     "${tasks[4]}")       run;;
     "${tasks[5]}")      test;;
     "${tasks[6]}")      venv;;
+    "${tasks[7]}")      update;;
 esac
