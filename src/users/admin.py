@@ -4,9 +4,10 @@ from licenses.models import LicenseWithUser
 
 from .models import (
     Group,
+    Login,
+    LoginInGroup,
     MailAlias,
     User,
-    UserInGroup,
 )
 
 
@@ -17,7 +18,7 @@ class LicenseWithUserInLine(admin.StackedInline):
 
 
 class GroupInLine(admin.StackedInline):
-    model = UserInGroup
+    model = LoginInGroup
     extra = 0
     verbose_name_plural = "Groups"
 
@@ -28,10 +29,14 @@ class MailAliasInLine(admin.StackedInline):
     verbose_name_plural = "Mail Aliases"
 
 
+class LoginAdmin(admin.ModelAdmin):
+    list_display = ("login", "enabled")
+    inlines = (GroupInLine,)
+
+
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("name", "customer", "enabled")
+    list_display = ("name", "customer")
     inlines = (
-        GroupInLine,
         MailAliasInLine,
         LicenseWithUserInLine,
     )
@@ -40,4 +45,5 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(Group)
 admin.site.register(MailAlias)
 admin.site.register(User, UserAdmin)
-admin.site.register(UserInGroup)
+admin.site.register(Login, LoginAdmin)
+admin.site.register(LoginInGroup)
