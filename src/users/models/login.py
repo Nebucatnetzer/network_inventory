@@ -20,5 +20,5 @@ class Login(models.Model):
 
 
 class LoginInGroup(models.Model):
-    user = models.ForeignKey(Login, on_delete=models.CASCADE)
+    login = models.ForeignKey(Login, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
