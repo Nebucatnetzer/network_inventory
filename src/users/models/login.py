@@ -12,7 +12,7 @@ class Login(models.Model):
     email = models.CharField(max_length=50, blank=True)
     enabled = models.BooleanField()
     description = models.TextField(blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL)
     service = models.ForeignKey(
         Service, on_delete=models.SET_NULL, blank=True, null=True
     )
