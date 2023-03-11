@@ -1,18 +1,23 @@
 {% extends "core/base.html" %}
-{% block section_title %}{{ customer.name }}{% endblock %}
+{% block section_title %}Customer Details{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col mt-3">
-
         <div class="card mt-3">
             <div class="card-body">
+                <h2 class="card-title">{{ customer.name }}</h2>
                 <h4>Description</h4>
                 <div class="card-text"><p>{{ customer.description }}</p></div>
                 <h4>Project Manager</h4>
-                <div class="card-text"><p>{{ customer.project_manager }}</p></div>
+                <div class="card-text"><p>
+                    <ul>
+                        {% for pm in customer.project_manager.all %}
+                        <li>{{ pm }}</li>
+                        {% endfor %}
+                    </ul>
+                </p></div>
             </div>
         </div>
-
     </div>
 </div>
 {% endblock %}
