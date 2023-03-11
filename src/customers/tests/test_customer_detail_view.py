@@ -29,8 +29,11 @@ def test_customer_detail_view(create_admin_user):
     project_manager = User.objects.create_superuser(
         "meyer", "meyer@contria.com", "password"
     )
-    customer.project_manager.set(project_manager)
-    customer.save()
+    customer.project_manager.set(
+        [
+            project_manager,
+        ]
+    )
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/customer/" + str(customer.id) + "/")
