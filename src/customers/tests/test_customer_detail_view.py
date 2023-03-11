@@ -34,7 +34,6 @@ def test_customer_detail_view(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/customer/" + str(customer.id) + "/")
-    print(response.content)
     assert (
         response.status_code == 200
         and helper.in_content(response, customer.name)

@@ -82,7 +82,6 @@ def group_detail_view(request, pk):
     group = utils.get_object_with_view_permission(Group, user=request.user, pk=pk)
     users = group.user_set.all()
     groups = Group.objects.filter(parent_group=group)
-    print(groups)
     return render(
         request,
         "groups/group_details.html",
