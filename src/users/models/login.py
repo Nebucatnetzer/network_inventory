@@ -2,8 +2,8 @@ from django.db import models
 
 from core.models import Service
 
-from .user import User
-from .groups import Group
+from users.models import User
+from users.models import Group
 
 
 class Login(models.Model):
