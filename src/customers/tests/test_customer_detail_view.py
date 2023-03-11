@@ -29,7 +29,7 @@ def test_customer_detail_view(create_admin_user):
     project_manager = User.objects.create_superuser(
         "meyer", "meyer@contria.com", "password"
     )
-    customer.project_manager = project_manager
+    customer.project_manager.set(project_manager)
     customer.save()
     client = Client()
     client.login(username="pharma-admin", password="password")
