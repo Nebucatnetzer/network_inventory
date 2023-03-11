@@ -1,5 +1,6 @@
 from django.db import models
 
+from core.models import Service
 from customers.models import Customer
 
 
@@ -10,6 +11,9 @@ class Group(models.Model):
     mail_address = models.EmailField(blank=True, null=True)
     parent_group = models.ForeignKey(
         "self", blank=True, null=True, on_delete=models.SET_NULL
+    )
+    service = models.ForeignKey(
+        Service, blank=True, null=True, on_delete=models.SET_NULL
     )
 
     def __str__(self):
