@@ -1,10 +1,10 @@
 from django.db import models
-from users.models import User
+from users.models import Login
 
 
 class MailAlias(models.Model):
     email_address = models.EmailField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    login = models.ForeignKey(Login, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.email_address

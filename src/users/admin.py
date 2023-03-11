@@ -31,15 +31,15 @@ class MailAliasInLine(admin.StackedInline):
 
 class LoginAdmin(admin.ModelAdmin):
     list_display = ("login", "enabled")
-    inlines = (GroupInLine,)
+    inlines = (
+        GroupInLine,
+        MailAliasInLine,
+    )
 
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ("name", "customer")
-    inlines = (
-        MailAliasInLine,
-        LicenseWithUserInLine,
-    )
+    inlines = (LicenseWithUserInLine,)
 
 
 admin.site.register(Group)
