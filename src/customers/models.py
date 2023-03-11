@@ -9,8 +9,8 @@ class Owner(Company):
 
 class Customer(Company):
     name = models.CharField(max_length=50, unique=True)
-    project_manager = models.ForeignKey(
-        InventoryUser, null=True, blank=True, on_delete=models.SET_NULL
+    project_manager = models.ManyToManyField(
+        InventoryUser, null=True, blank=True
     )
 
     class Meta:
