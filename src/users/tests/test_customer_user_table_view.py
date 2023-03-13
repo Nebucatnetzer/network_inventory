@@ -28,7 +28,7 @@ def test_customer_user_table(create_admin_user):
         response.status_code == 200
         and helper.in_content(response, user.name)
         and helper.in_content(response, group)
-        and helper.in_content(response, user.primary_mail)
+        and helper.in_content(response, login)
     )
 
 
