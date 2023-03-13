@@ -52,10 +52,19 @@
             <div class="card-header">Mail Alias</div>
             <div class="card-body">
                 <table class="table table-bordered">
+                    <th>Alias</th>
+                    <th>Login</th>
+                    <th>Group</th>
                     {% for alias in mail_alias %}
                     <tr>
                     <td>
                     {{ alias }}
+                    </td>
+                    <td>
+                        {{ alias.login }}
+                    </td>
+                    <td>
+                        {{ alias.group }}
                     </td>
                     </tr>
                     {% endfor %}
