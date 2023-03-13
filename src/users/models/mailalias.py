@@ -5,7 +5,9 @@ from users.models import Login
 
 class MailAlias(models.Model):
     email_address = models.EmailField()
-    login = models.ForeignKey(Login, on_delete=models.CASCADE)
+    login = models.ForeignKey(
+        Login, null=True, blank=True, on_delete=models.SET_NULL
+    )
     group = models.ForeignKey(
         Group, null=True, blank=True, on_delete=models.SET_NULL
     )
