@@ -13,26 +13,6 @@
                         <td><a href="{% url 'customer' user.customer.id %}">{{ user.customer }}</a></td>
                     </tr>
                     <tr>
-                        <td><b>AD Login</b></td>
-                        <td>{{ user.ad_login }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>AD Password</b></td>
-                        <td>{{ user.ad_pw }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Email Address</b></td>
-                        <td>{{ user.ad_login }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Mail Password</b></td>
-                        <td>{{ user.mail_pw }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>User is activ</b></td>
-                        <td>{{ user.enabled }}</td>
-                    </tr>
-                    <tr>
                         <td><b>Comptuers</b></td>
                         <td>
                         {% for computer in computers %}
