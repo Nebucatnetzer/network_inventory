@@ -48,6 +48,7 @@ def user_detail_view(request, pk):
         {
             "user": user,
             "groups": groups,
+            "logins": logins,
             "mail_alias": mail_alias,
             "computers": computers,
             "licenses": licenses,
