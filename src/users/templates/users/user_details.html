@@ -13,7 +13,7 @@
                         <td><a href="{% url 'customer' user.customer.id %}">{{ user.customer }}</a></td>
                     </tr>
                     <tr>
-                        <td><b>Comptuers</b></td>
+                        <td><b>Computers</b></td>
                         <td>
                         {% for computer in computers %}
                             <a href="{% url 'computer' computer.id %}">{{ computer}}</a>
