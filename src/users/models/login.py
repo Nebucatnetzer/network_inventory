@@ -20,6 +20,12 @@ class Login(models.Model):
     )
     groups = models.ManyToManyField(Group, through="LoginInGroup")
 
+    class Meta:
+        ordering = ["login"]
+
+    def __str__(self):
+        return self.login
+
 
 class LoginInGroup(models.Model):
     login = models.ForeignKey(Login, on_delete=models.CASCADE)
