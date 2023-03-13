@@ -20,8 +20,9 @@ def test_customer_user_table(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     user = mixer.blend("users.User", customer=mixer.SELECT)
+    login = mixer.blend("users.Login", customer=mixer.SELECT, user=user)
     group = mixer.blend("users.Group")
-    mixer.blend("users.UserInGroup", user=user, group=group)
+    mixer.blend("users.LoginInGroup", login=login, group=group)
     response = client.get("/customer/" + str(customer.id) + "/users/")
     assert (
         response.status_code == 200
