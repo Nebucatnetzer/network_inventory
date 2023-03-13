@@ -53,6 +53,32 @@
         </div>
         {% endif %}
 
+        {% if logins %} <div class="card mt-3">
+            <div class="card-header">Logins</div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                    <th>Login Name</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Enabled</th>
+                    <th>Description</th>
+                    <th>Service</th>
+                    </tr>
+                    {% for login in logins %}
+                    <tr>
+                        <td>{{ login.login }}</td>
+                        <td><code>{{ login.password }}</code></td>
+                        <td>{{ login.email }}</td>
+                        <td>{{ login.enabled }}</td>
+                        <td>{{ login.description }}</td>
+                        <td>{{ login.service }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {% endif %}
         {% if groups %} <div class="card mt-3">
             <div class="card-header">Groups</div>
             <div class="card-body">
