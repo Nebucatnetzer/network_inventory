@@ -17,6 +17,8 @@ from licenses.models import LicenseWithUser
 
 from .decorators import user_view_permission
 from .models import Group
+from .models import Login
+from .models import LoginInGroup
 from .models import MailAlias
 from .models import User
 from .tables import GroupsTable
@@ -35,8 +37,9 @@ def users_table_view(request, pk):
 @user_view_permission
 def user_detail_view(request, pk):
     user = get_object_or_404(User, pk=pk)
-    groups = Group.objects.filter(user=user)
-    mail_alias = MailAlias.objects.filter(user=user)
+    logins = Login.objects.filter(user=user)
+    groups = LoginInGroup.objects.filter(login__user=user)
+    mail_alias = MailAlias.objects.filter(login__user=user)
     computers = Computer.objects.filter(user=user)
     licenses = LicenseWithUser.objects.filter(user=user)
     return render(
