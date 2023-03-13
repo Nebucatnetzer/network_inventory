@@ -34,11 +34,7 @@ def test_customer_list_view(create_admin_user):
     )
     fixture = create_admin_user()
     customer = fixture["customer"]
-    customer.project_manager.set(
-        [
-            project_manager,
-        ]
-    )
+    customer.project_manager.add(project_manager)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/")
