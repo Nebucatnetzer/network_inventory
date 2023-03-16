@@ -9,9 +9,7 @@ class Owner(Company):
 
 class Customer(Company):
     name = models.CharField(max_length=50, unique=True)
-    project_manager = models.ManyToManyField(
-        InventoryUser, null=True, blank=True
-    )
+    project_manager = models.ManyToManyField(InventoryUser, blank=True)
 
     class Meta:
         ordering = ["name"]
