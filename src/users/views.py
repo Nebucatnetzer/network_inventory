@@ -84,12 +84,12 @@ def groups_table_view(request, pk):
 @login_required
 def group_detail_view(request, pk):
     group = utils.get_object_with_view_permission(Group, user=request.user, pk=pk)
-    users = group.login_set.all()
+    logins = group.login_set.all()
     groups = Group.objects.filter(parent_group=group)
     return render(
         request,
         "groups/group_details.html",
-        {"group": group, "users": users, "groups": groups},
+        {"group": group, "logins": logins, "groups": groups},
     )
 
 

@@ -13,12 +13,12 @@
                     </a></p>
                 <table class="table table-bordered">
                     <tr>
-                    <th>User</th>
+                    <th>Logins</th>
                     </tr>
-                    {% for user in users %}
+                    {% for login in logins %}
                     <tr>
-                        <td><a href="{% url 'user' user.id %}">
-                            {{ user }}
+                        <td><a href="{% url 'user' login.user.id %}">
+                            {{ login }}
                         </a></td>
                     </tr>
                     {% endfor %}
