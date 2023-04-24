@@ -50,8 +50,8 @@ clean () {
     docker-compose -f docker-compose-development.yml down -v
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
-    rm -f */migrations/0*.py
-    rm .second_run
+    rm -f src/*/migrations/0*.py
+    rm -f .second_run
 }
 
 cleanall () {
