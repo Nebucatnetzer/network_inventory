@@ -51,6 +51,7 @@
             pkgs.python310Packages.pip
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
+          PYTHON_KEYRING_BACKEND="keyring.backends.fail.Keyring";
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
