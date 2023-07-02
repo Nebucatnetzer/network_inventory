@@ -15,6 +15,11 @@ packages = [
 exclude = [
     "tests/",
 ]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "network_inventory.settings.local"
+
 [[tool.mypy.overrides]]
 module = [
        "nested_admin.*",
