@@ -68,7 +68,7 @@
             checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
-              mypy src/
+              cd src/ && mypy --config-file=../pyproject.toml .
               flake8 . --count --show-source --statistics
             '';
           };
