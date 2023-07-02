@@ -63,7 +63,7 @@ class BackupCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class BackupDeleteView(LoginRequiredMixin, DeleteView):
+class BackupDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Backup
     template_name = "backups/backup_confirm_delete.html"
 
@@ -71,7 +71,7 @@ class BackupDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("computer", args=(self.object.computer.pk,))
 
 
-class BackupDeleteFromTableView(LoginRequiredMixin, DeleteView):
+class BackupDeleteFromTableView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Backup
     template_name = "backups/backup_confirm_delete.html"
 

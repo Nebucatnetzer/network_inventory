@@ -60,7 +60,7 @@ def customer_detail_view(request, pk):
     )
 
 
-class CustomerDeleteView(LoginRequiredMixin, DeleteView):
+class CustomerDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Customer
 
     def get_success_url(self):

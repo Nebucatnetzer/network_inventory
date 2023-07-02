@@ -34,7 +34,7 @@ def net_detail_view(request, pk):
     )
 
 
-class NetDeleteView(LoginRequiredMixin, DeleteView):
+class NetDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Net
 
     def get_success_url(self):

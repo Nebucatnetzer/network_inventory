@@ -152,7 +152,7 @@ def computer_update_view(request, pk):
     return TemplateResponse(request, template_name, {"form": form})
 
 
-class ComputerDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Computer
 
     def get_success_url(self):
@@ -178,7 +178,7 @@ class ComputerRamRelationCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerRamRelationDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerRamRelationDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerRamRelation
     template_name = "computers/relation_confirm_delete.html"
 
@@ -205,7 +205,7 @@ class ComputerCpuRelationCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerCpuRelationDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerCpuRelationDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerCpuRelation
     template_name = "computers/relation_confirm_delete.html"
 
@@ -232,7 +232,7 @@ class ComputerGpuRelationCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerGpuRelationDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerGpuRelationDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerGpuRelation
     template_name = "computers/relation_confirm_delete.html"
 
@@ -259,7 +259,7 @@ class ComputerDiskRelationCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerDiskRelationDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerDiskRelationDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerDiskRelation
     template_name = "computers/relation_confirm_delete.html"
 
@@ -286,7 +286,7 @@ class ComputerSoftwareRelationCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class ComputerSoftwareRelationDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerSoftwareRelationDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerSoftwareRelation
     template_name = "computers/relation_confirm_delete.html"
 
@@ -313,7 +313,7 @@ class RaidCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class RaidDeleteView(LoginRequiredMixin, DeleteView):
+class RaidDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Raid
     template_name = "computers/relation_confirm_delete.html"
 

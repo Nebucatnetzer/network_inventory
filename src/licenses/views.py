@@ -57,7 +57,7 @@ class LicenseWithComputerCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class LicenseWithComputerDeleteView(LoginRequiredMixin, DeleteView):
+class LicenseWithComputerDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = LicenseWithComputer
     template_name = "licenses/license_with_computer_confirm_delete.html"
 
@@ -65,7 +65,7 @@ class LicenseWithComputerDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("computer", args=(self.object.computer.pk,))
 
 
-class UserLicenseDeleteView(LoginRequiredMixin, DeleteView):
+class UserLicenseDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = UserLicense
     template_name = "licenses/license_confirm_delete.html"
 
@@ -73,7 +73,7 @@ class UserLicenseDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("licenses", args=(self.object.customer.pk,))
 
 
-class ComputerLicenseDeleteView(LoginRequiredMixin, DeleteView):
+class ComputerLicenseDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = ComputerLicense
     template_name = "licenses/license_confirm_delete.html"
 

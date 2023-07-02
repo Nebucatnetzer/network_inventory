@@ -52,7 +52,7 @@ def user_detail_view(request, pk):
     )
 
 
-class UserDeleteView(LoginRequiredMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = User
 
     def get_success_url(self):

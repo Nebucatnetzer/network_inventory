@@ -124,7 +124,7 @@ def device_update_view(request, pk):
     return TemplateResponse(request, template_name, {"form": form})
 
 
-class DeviceDeleteView(LoginRequiredMixin, DeleteView):
+class DeviceDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Device
 
     def get_success_url(self):
@@ -160,7 +160,7 @@ class WarrantyUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.POST.get("previous_page")
 
 
-class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
+class WarrantyDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Warranty
 
     def get_success_url(self):
@@ -195,7 +195,7 @@ class DeviceInNetUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.POST.get("previous_page")
 
 
-class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
+class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = DeviceInNet
     template_name = "devices/device_in_net_confirm_delete.html"
 
