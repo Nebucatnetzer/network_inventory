@@ -38,9 +38,7 @@ class DeviceCategory(Category):
 
 class HardwareModel(models.Model):
     name = models.CharField(max_length=50)
-    manufacturer = models.ForeignKey(
-        DeviceManufacturer, on_delete=models.CASCADE
-    )
+    manufacturer = models.ForeignKey(DeviceManufacturer, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["name"]
@@ -56,19 +54,13 @@ class Device(models.Model):
     category = models.ForeignKey(
         DeviceCategory, on_delete=models.SET_NULL, null=True, blank=True
     )
-    owner = models.ForeignKey(
-        Owner, on_delete=models.SET_NULL, null=True, blank=True
-    )
+    owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     manufacturer = models.ForeignKey(
         DeviceManufacturer, models.SET_NULL, null=True, blank=True
     )
-    model = models.ForeignKey(
-        HardwareModel, models.SET_NULL, null=True, blank=True
-    )
-    location = models.ForeignKey(
-        Location, models.SET_NULL, null=True, blank=True
-    )
+    model = models.ForeignKey(HardwareModel, models.SET_NULL, null=True, blank=True)
+    location = models.ForeignKey(Location, models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)
     installation_date = models.DateField(null=True, blank=True)
     net = models.ManyToManyField(Net, through="DeviceInNet")

@@ -6,9 +6,7 @@ from core.tables import CoreTable
 
 class CustomersTable(CoreTable):
     name = tables.LinkColumn("customer", args=[A("pk")])
-    nets = tables.LinkColumn(
-        "nets", text="Nets", args=[A("pk")], orderable=False
-    )
+    nets = tables.LinkColumn("nets", text="Nets", args=[A("pk")], orderable=False)
     computers = tables.LinkColumn(
         "computers", text="Computers", args=[A("pk")], orderable=False
     )
@@ -21,12 +19,8 @@ class CustomersTable(CoreTable):
     licenses = tables.LinkColumn(
         "licenses", text="Licenses", args=[A("pk")], orderable=False
     )
-    users = tables.LinkColumn(
-        "users", text="Users", args=[A("pk")], orderable=False
-    )
-    groups = tables.LinkColumn(
-        "groups", text="Groups", args=[A("pk")], orderable=False
-    )
+    users = tables.LinkColumn("users", text="Users", args=[A("pk")], orderable=False)
+    groups = tables.LinkColumn("groups", text="Groups", args=[A("pk")], orderable=False)
     project_manager = tables.Column(verbose_name="Project Manager")
     delete = tables.LinkColumn(
         "customer_delete",

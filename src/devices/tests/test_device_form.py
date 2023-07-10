@@ -12,9 +12,7 @@ def test_device_create_form(create_admin_user):
     fixture = create_admin_user()
     user = mixer.blend("core.InventoryUser", customer=fixture["customer"])
     form = forms.DeviceCreateForm(user=user, data={})
-    assert (
-        form.is_valid() is False
-    ), "Should be false because no data was given"
+    assert form.is_valid() is False, "Should be false because no data was given"
 
     data = {"name": "pharma-device1", "customer": 3}
     form = forms.DeviceCreateForm(user=user, data=data)
@@ -32,9 +30,7 @@ def test_device_update_form(create_admin_user):
     request = HttpRequest()
     request.user = fixture["admin"]
     form = forms.DeviceUpdateForm(request, data={})
-    assert (
-        form.is_valid() is False
-    ), "Should be false because no data was given"
+    assert form.is_valid() is False, "Should be false because no data was given"
 
     data = {"name": "pharma-device1", "customer": 3}
     form = forms.DeviceUpdateForm(request, data=data)
@@ -50,9 +46,7 @@ def test_device_update_form(create_admin_user):
 def test_device_create_form_duplicate_device(create_admin_user):
     fixture = create_admin_user()
     user = mixer.blend("core.InventoryUser", customer=fixture["customer"])
-    mixer.blend(
-        "devices.Device", name="pharma-device1", customer=fixture["customer"]
-    )
+    mixer.blend("devices.Device", name="pharma-device1", customer=fixture["customer"])
     data = {"name": "pharma-device1", "customer": fixture["customer"].id}
     form = forms.DeviceCreateForm(user=user, data=data)
     assert (

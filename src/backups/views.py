@@ -47,7 +47,7 @@ def backup_detail_view(request, pk):
 class BackupCreateView(LoginRequiredMixin, CreateView):
     model = Backup
     template_name = "backups/backup_create.html"
-    fields = "__all__"
+    fields = "__all__"  # type: ignore
 
     def get_success_url(self):
         return reverse("computer", args=(self.computer.pk,))

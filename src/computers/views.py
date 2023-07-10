@@ -41,9 +41,7 @@ from .tables import ComputersTable
 
 @login_required
 def computer_detail_view(request, pk):
-    device = utils.get_object_with_view_permission(
-        Computer, user=request.user, pk=pk
-    )
+    device = utils.get_object_with_view_permission(Computer, user=request.user, pk=pk)
     disks_relations = ComputerDiskRelation.objects.filter(computer=pk)
     warranty_relations = Warranty.objects.filter(device=pk)
     ram_relations = ComputerRamRelation.objects.filter(computer=pk)
@@ -76,9 +74,7 @@ def computer_detail_view(request, pk):
 @login_required
 def computers_table_view(request, pk):
     table = ComputersTable(
-        utils.get_objects_for_customer(
-            Computer, user=request.user, customer_pk=pk
-        )
+        utils.get_objects_for_customer(Computer, user=request.user, customer_pk=pk)
     )
     RequestConfig(request).configure(table)
     return render(
@@ -139,9 +135,7 @@ def computer_update_view(request, pk):
     A view to create a customer.
     """
     template_name = "computers/computer_update.html"
-    computer = utils.get_object_with_view_permission(
-        Computer, user=request.user, pk=pk
-    )
+    computer = utils.get_object_with_view_permission(Computer, user=request.user, pk=pk)
     if request.method == "POST":
         form = ComputerUpdateForm(request, request.POST, instance=computer)
         if form.is_valid():

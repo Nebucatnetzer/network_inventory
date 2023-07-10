@@ -10,8 +10,6 @@ def customer_view_permission(old_function):
         if user.has_perm("customers.view_customer", customer):
             return old_function(request, pk)
         else:
-            return HttpResponseForbidden(
-                "You're not allowed to access this page."
-            )
+            return HttpResponseForbidden("You're not allowed to access this page.")
 
     return new_function

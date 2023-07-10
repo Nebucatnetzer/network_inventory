@@ -68,8 +68,8 @@
             checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
+              pylint --errors-only src/
               cd src/ && mypy --config-file=../pyproject.toml .
-              flake8 . --count --show-source --statistics
             '';
           };
           tests = pkgs.stdenv.mkDerivation {

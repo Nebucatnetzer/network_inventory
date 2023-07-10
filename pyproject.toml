@@ -1,7 +1,5 @@
-[tool.black]
-line-length = 79
-
 [tool.pylint]
+max-line-length = 88
 load-plugins = [
     "pylint_django",
 ]
@@ -21,6 +19,24 @@ exclude = [
     "tests/",
 ]
 plugins = ["mypy_django_plugin.main"]
+mypy_path = "./src"
+# Start off with these
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# Getting these passing should be easy
+strict_equality = true
+strict_concatenate = true
+
+# Strongly recommend enabling this one as soon as you can
+#check_untyped_defs = true
+
+# These shouldn't be too much additional work, but may be tricky to
+# get passing if you use a lot of untyped libraries
+#disallow_subclassing_any = true
+#disallow_untyped_decorators = true
+#disallow_any_generics = true
 
 [tool.django-stubs]
 django_settings_module = "network_inventory.settings.local"

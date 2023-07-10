@@ -11,8 +11,6 @@ def device_view_permission(old_function):
         if user.has_perm("customers.view_customer", device.customer):
             return old_function(request, pk)
         else:
-            return HttpResponseForbidden(
-                "You're not allowed to access this device."
-            )
+            return HttpResponseForbidden("You're not allowed to access this device.")
 
     return new_function

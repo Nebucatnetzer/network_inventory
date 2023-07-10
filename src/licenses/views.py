@@ -41,7 +41,7 @@ def licenses_table_view(request, pk):
 class LicenseWithComputerCreateView(LoginRequiredMixin, CreateView):
     model = LicenseWithComputer
     template_name = "licenses/license_with_computer_create.html"
-    fields = "__all__"
+    fields = "__all__"  # type: ignore
 
     def get_success_url(self):
         return reverse("computer", args=(self.computer.pk,))

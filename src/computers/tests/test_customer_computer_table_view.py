@@ -21,9 +21,7 @@ def test_customer_computer_table(create_admin_user):
     client.login(username="pharma-admin", password="password")
     computer = mixer.blend("computers.Computer", customer=mixer.SELECT)
     response = client.get("/customer/" + str(customer.id) + "/computers/")
-    assert response.status_code == 200 and helper.in_content(
-        response, computer
-    )
+    assert response.status_code == 200 and helper.in_content(response, computer)
 
 
 def test_customer_computer_table_no_computer(create_admin_user):

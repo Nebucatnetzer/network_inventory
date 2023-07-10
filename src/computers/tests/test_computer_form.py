@@ -12,9 +12,7 @@ def test_computer_create_form(create_admin_user):
     fixture = create_admin_user()
     user = mixer.blend("core.InventoryUser", customer=fixture["customer"])
     form = forms.ComputerCreateForm(user=user, data={})
-    assert (
-        form.is_valid() is False
-    ), "Should be false because no data was given"
+    assert form.is_valid() is False, "Should be false because no data was given"
 
     data = {"name": "pharma-pc1", "customer": 3}
     form = forms.ComputerCreateForm(user=user, data=data)
@@ -32,9 +30,7 @@ def test_computer_update_form(create_admin_user):
     request = HttpRequest()
     request.user = fixture["admin"]
     form = forms.ComputerUpdateForm(request, data={})
-    assert (
-        form.is_valid() is False
-    ), "Should be false because no data was given"
+    assert form.is_valid() is False, "Should be false because no data was given"
 
     data = {"name": "pharma-pc1", "customer": 20356}
     form = forms.ComputerUpdateForm(request, data=data)

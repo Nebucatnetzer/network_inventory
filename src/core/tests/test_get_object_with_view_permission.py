@@ -15,9 +15,7 @@ def test_get_object_with_view_permission(create_admin_user):
     fixture = create_admin_user()
     customer = fixture["customer"]
     admin = fixture["admin"]
-    object = utils.get_object_with_view_permission(
-        Customer, user=admin, pk=customer.id
-    )
+    object = utils.get_object_with_view_permission(Customer, user=admin, pk=customer.id)
     assert object == customer
 
 
@@ -26,9 +24,7 @@ def test_get_object_with_view_permission_device(create_admin_user):
     customer = fixture["customer"]
     admin = fixture["admin"]
     device = mixer.blend(Device, customer=customer)
-    object = utils.get_object_with_view_permission(
-        Device, user=admin, pk=device.id
-    )
+    object = utils.get_object_with_view_permission(Device, user=admin, pk=device.id)
     assert object == device
 
 
@@ -37,9 +33,7 @@ def test_get_object_without_view_permission(create_admin_user):
     customer = mixer.blend(Customer)
     admin = fixture["admin"]
     with pytest.raises(Http404):
-        utils.get_object_with_view_permission(
-            Customer, user=admin, pk=customer.id
-        )
+        utils.get_object_with_view_permission(Customer, user=admin, pk=customer.id)
 
 
 def test_get_object_without_view_permission_device(create_admin_user):
