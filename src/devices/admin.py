@@ -12,13 +12,13 @@ from .models import (
 )
 
 
-class DeviceInNetInline(nested_admin.NestedStackedInline):
+class DeviceInNetInline(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = DeviceInNet
     extra = 0
     verbose_name_plural = "Nets"
 
 
-class DeviceAdmin(nested_admin.NestedModelAdmin):
+class DeviceAdmin(nested_admin.NestedModelAdmin):  # pylint: disable=no-member
     inlines = (DeviceInNetInline,)
 
 
