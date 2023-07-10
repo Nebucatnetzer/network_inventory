@@ -43,4 +43,4 @@ class DummyLocation(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.location
+        return self.location.name

@@ -16,9 +16,7 @@ def test_get_objects_for_customer_with_customer(create_admin_user):
     customer = fixture["customer"]
     admin = fixture["admin"]
     with pytest.raises(Exception):
-        utils.get_objects_for_customer(
-            Customer, user=admin, customer_pk=customer.id
-        )
+        utils.get_objects_for_customer(Customer, user=admin, customer_pk=customer.id)
 
 
 def test_get_objects_for_customer_device(create_admin_user):
@@ -37,9 +35,7 @@ def test_get_all_objects_for_unallowed_customers(create_admin_user):
     customer = mixer.blend(Customer)
     admin = fixture["admin"]
     with pytest.raises(Http404):
-        utils.get_objects_for_customer(
-            Customer, user=admin, customer_pk=customer.id
-        )
+        utils.get_objects_for_customer(Customer, user=admin, customer_pk=customer.id)
 
 
 def test_get_all_objects_for_unallowed_customers_device(create_admin_user):
@@ -48,6 +44,4 @@ def test_get_all_objects_for_unallowed_customers_device(create_admin_user):
     admin = fixture["admin"]
     mixer.blend(Device, customer=customer)
     with pytest.raises(Http404):
-        utils.get_objects_for_customer(
-            Device, user=admin, customer_pk=customer.id
-        )
+        utils.get_objects_for_customer(Device, user=admin, customer_pk=customer.id)

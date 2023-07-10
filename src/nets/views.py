@@ -29,12 +29,10 @@ def net_detail_view(request, pk):
     net = get_object_or_404(Net, pk=pk)
     table = NetDetailTable(DeviceInNet.objects.filter(net=net))
     RequestConfig(request).configure(table)
-    return render(
-        request, "nets/net_details.html", {"table": table, "net": net}
-    )
+    return render(request, "nets/net_details.html", {"table": table, "net": net})
 
 
-class NetDeleteView(LoginRequiredMixin, DeleteView):
+class NetDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Net
 
     def get_success_url(self):

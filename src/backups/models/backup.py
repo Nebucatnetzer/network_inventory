@@ -20,18 +20,12 @@ class Backup(models.Model):
     computer = models.ForeignKey(
         Computer, related_name="source_computer", on_delete=models.CASCADE
     )
-    method = models.ForeignKey(
-        BackupMethod, models.SET_NULL, blank=True, null=True
-    )
-    software = models.ForeignKey(
-        Software, models.SET_NULL, blank=True, null=True
-    )
+    method = models.ForeignKey(BackupMethod, models.SET_NULL, blank=True, null=True)
+    software = models.ForeignKey(Software, models.SET_NULL, blank=True, null=True)
     source_path = models.CharField(max_length=200, blank=True)
     exec_time = models.TimeField(null=True, blank=True)
     exec_days = models.ManyToManyField(Weekday, blank=True)
-    target_device = models.ManyToManyField(
-        Computer, through="TargetDevice", blank=True
-    )
+    target_device = models.ManyToManyField(Computer, through="TargetDevice", blank=True)
 
     class Meta:
         ordering = ["name"]
@@ -50,9 +44,7 @@ class Backup(models.Model):
 
 
 class TargetDevice(models.Model):
-    device = models.ForeignKey(
-        Computer, models.SET_NULL, blank=True, null=True
-    )
+    device = models.ForeignKey(Computer, models.SET_NULL, blank=True, null=True)
     backup = models.ForeignKey(Backup, on_delete=models.CASCADE)
     target_path = models.CharField(max_length=200, blank=True)
 

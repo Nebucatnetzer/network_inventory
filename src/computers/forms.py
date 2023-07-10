@@ -41,15 +41,9 @@ class ComputerUpdateForm(forms.ModelForm):
 
     def __init__(self, request, *args, **kwargs):
         super(ComputerUpdateForm, self).__init__(*args, **kwargs)
-        customers = utils.objects_for_allowed_customers(
-            Customer, user=request.user
-        )
-        locations = utils.objects_for_allowed_customers(
-            Location, user=request.user
-        )
-        hosts = utils.objects_for_allowed_customers(
-            Computer, user=request.user
-        )
+        customers = utils.objects_for_allowed_customers(Customer, user=request.user)
+        locations = utils.objects_for_allowed_customers(Location, user=request.user)
+        hosts = utils.objects_for_allowed_customers(Computer, user=request.user)
         users = utils.objects_for_allowed_customers(User, user=request.user)
         self.fields["customer"].queryset = customers
         self.fields["location"].queryset = locations

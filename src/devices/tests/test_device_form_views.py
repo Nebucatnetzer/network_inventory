@@ -35,9 +35,7 @@ def test_load_device_update_view(create_admin_user):
     client.login(username="pharma-admin", password="password")
     device = mixer.blend("devices.Device", customer=mixer.SELECT)
     response = client.get("/update/device/{}/".format(device.pk))
-    assert response.status_code == 200 and helper.in_content(
-        response, device.name
-    )
+    assert response.status_code == 200 and helper.in_content(response, device.name)
 
 
 def test_device_update_view(create_admin_user):
@@ -187,9 +185,7 @@ def test_device_in_net_update_view(create_admin_user):
         "mac_address": "",
         "ip_status": "1",
     }
-    response = client.post(
-        "/update/device-in-net/{}/".format(device_in_net.pk), data
-    )
+    response = client.post("/update/device-in-net/{}/".format(device_in_net.pk), data)
     assert response.status_code == 302
     device_in_net.refresh_from_db()
     assert device_in_net.ip == data["ip"]

@@ -26,62 +26,64 @@ from .models import (
 )
 
 
-class SoftwareInLine(nested_admin.NestedStackedInline):
+class SoftwareInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = ComputerSoftwareRelation
     extra = 0
     verbose_name_plural = "Software"
 
 
-class RamInLine(nested_admin.NestedStackedInline):
+class RamInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = ComputerRamRelation
     extra = 0
     verbose_name_plural = "RAM Modules"
 
 
-class DiskInLine(nested_admin.NestedStackedInline):
+class DiskInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = ComputerDiskRelation
     extra = 0
     verbose_name_plural = "Disks"
 
 
-class DisksInRaidInLine(nested_admin.NestedStackedInline):
+class DisksInRaidInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = DisksInRaid
     extra = 0
     verbose_name_plural = "Disks in RAID"
 
 
-class CpusInLine(nested_admin.NestedStackedInline):
+class CpusInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = ComputerCpuRelation
     extra = 0
     verbose_name_plural = "CPUs"
 
 
-class GpusInLine(nested_admin.NestedStackedInline):
+class GpusInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = ComputerGpuRelation
     extra = 0
     verbose_name_plural = "GPUs"
 
 
-class RaidInLine(nested_admin.NestedStackedInline):
+class RaidInLine(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = Raid
     extra = 0
     verbose_name_plural = "RAID"
     inlines = (DisksInRaidInLine,)
 
 
-class DeviceInNetInline(nested_admin.NestedStackedInline):
+class DeviceInNetInline(nested_admin.NestedStackedInline):  # pylint: disable=no-member
     model = DeviceInNet
     extra = 0
     verbose_name_plural = "Nets"
 
 
-class LicenseWithComputerInLine(nested_admin.NestedStackedInline):
+class LicenseWithComputerInLine(
+    nested_admin.NestedStackedInline
+):  # pylint: disable=no-member
     model = LicenseWithComputer
     extra = 0
     verbose_name_plural = "Licenses"
 
 
-class ComputerAdmin(nested_admin.NestedModelAdmin):
+class ComputerAdmin(nested_admin.NestedModelAdmin):  # pylint: disable=no-member
     list_display = ("name", "host")
     inlines = (
         SoftwareInLine,

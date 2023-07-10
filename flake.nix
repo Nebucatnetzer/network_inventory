@@ -51,7 +51,7 @@
             pkgs.python310Packages.pip
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
-          PYTHON_KEYRING_BACKEND="keyring.backends.fail.Keyring";
+          PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
@@ -68,8 +68,10 @@
             checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
-              flake8 . --count --show-source --statistics
+              pylint --rc-file pyproject.toml -j 0 -E src/
+              cd src/ && mypy --config-file=../pyproject.toml .
             '';
+            DJANGO_SETTINGS_MODULE = "network_inventory.settings.ram_test";
           };
           tests = pkgs.stdenv.mkDerivation {
             dontPatch = true;

@@ -34,9 +34,7 @@ def _get_customers(user):
 
     user : django.contrib.auth.models.User
     """
-    return get_objects_for_user(
-        user, "customers.view_customer", klass=Customer
-    )
+    return get_objects_for_user(user, "customers.view_customer", klass=Customer)
 
 
 def get_object_with_view_permission(model, user=None, pk=None):

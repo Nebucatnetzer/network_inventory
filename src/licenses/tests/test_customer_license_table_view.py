@@ -61,9 +61,7 @@ def test_customer_license_table_no_license(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/customer/" + str(customer.id) + "/licenses/")
-    assert response.status_code == 200 and helper.not_in_content(
-        response, customer
-    )
+    assert response.status_code == 200 and helper.not_in_content(response, customer)
 
 
 def test_customer_license_table_no_permission(create_admin_user):
