@@ -68,9 +68,10 @@
             checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
-              pylint --errors-only src/
+              pylint --rc-file pyproject.toml -j 0 -E src/
               cd src/ && mypy --config-file=../pyproject.toml .
             '';
+            DJANGO_SETTINGS_MODULE = "network_inventory.settings.ram_test";
           };
           tests = pkgs.stdenv.mkDerivation {
             dontPatch = true;
