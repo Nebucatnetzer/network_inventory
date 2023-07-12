@@ -60,15 +60,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1688992084,
-        "narHash": "sha256-pKOcnbTT0zAybza8Wz94ezG+5ghzXoHQxXahtsc2Yrw=",
-        "owner": "nix-community",
+        "lastModified": 1689189561,
+        "narHash": "sha256-tKBRS2boaGWcDQ0J4sh8jNMgmTJAdqLYp7UKozs+NPc=",
+        "owner": "Nebucatnetzer",
         "repo": "poetry2nix",
-        "rev": "77a4f59685053a77644fd35fc2063751af63aca7",
+        "rev": "2f53cf3c1b98680abb02b776dbb7ebb2fd8343b6",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "Nebucatnetzer",
+        "ref": "execnet-overrides",
         "repo": "poetry2nix",
         "type": "github"
       }

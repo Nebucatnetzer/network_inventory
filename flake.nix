@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     poetry2nix = {
-      url = "github:nix-community/poetry2nix";
+      url = "github:Nebucatnetzer/poetry2nix/execnet-overrides";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,15 +18,6 @@
             {
               projectDir = ./.;
               groups = [ "main" "dev" ];
-              overrides = poetry2nix.defaultPoetryOverrides.extend
-                (self: super: {
-                  execnet = super.execnet.overridePythonAttrs
-                    (
-                      old: {
-                        buildInputs = (old.buildInputs or [ ]) ++ [ super.hatchling ];
-                      }
-                    );
-                });
             };
           inventoryPackage = prev.poetry2nix.mkPoetryApplication {
             projectDir = ./.;
