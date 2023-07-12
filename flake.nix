@@ -49,6 +49,7 @@
             pkgs.inventoryDevEnv
             pkgs.poetry
             pkgs.python310Packages.pip
+            pkgs.overmind
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
           PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
