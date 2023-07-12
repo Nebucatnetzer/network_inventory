@@ -50,6 +50,7 @@
             pkgs.poetry
             pkgs.python310Packages.pip
             pkgs.overmind
+            pkgs.postgresql_15
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
           PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
