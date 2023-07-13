@@ -45,7 +45,6 @@
       rec {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.gnumake
             pkgs.inventoryDevEnv
             pkgs.poetry
             pkgs.python310Packages.pip
