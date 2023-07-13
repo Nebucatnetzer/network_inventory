@@ -73,7 +73,7 @@ check (){
 }
 
 test (){
-    export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
+    export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
     pytest -nauto --nomigrations --cov-report=html --cov=./src ./src
 }
 
