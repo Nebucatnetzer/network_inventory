@@ -8,6 +8,7 @@ run () {
 }
 
 setup () {
+    overmind start -l db -D
     if [ -f .second_run ]; then
         sleep 2
         python ./src/manage.py collectstatic --noinput
@@ -33,7 +34,8 @@ setup () {
         python ./src/manage.py loaddata nets
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-        touch .second_run
+        touch .direnv/.second_run
+        overmind quit
     fi
 }
 
