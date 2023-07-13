@@ -50,13 +50,12 @@ docker (){
 clean () {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
-    rm -f src/*/migrations/0*.py
-    rm -f .second_run
+    rm -f src/*/migrations/0*.py .direnv/.second_run
 }
 
 cleanall () {
     clean
-    rm -r .venv .direnv/
+    rm -rf .venv .direnv/
 }
 
 init () {
