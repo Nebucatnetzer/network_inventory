@@ -71,7 +71,7 @@ check (){
 
 test (){
     export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
-    pytest -nauto --nomigrations --cov-report=html --cov=./src ./src
+    pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
 }
 
 update (){
