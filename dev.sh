@@ -8,7 +8,6 @@ run () {
 }
 
 setup () {
-    docker-compose -f docker-compose-development.yml up -d
     if [ -f .second_run ]; then
         sleep 2
         python ./src/manage.py collectstatic --noinput
@@ -47,7 +46,6 @@ docker (){
 }
 
 clean () {
-    docker-compose -f docker-compose-development.yml down -v
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
     rm -f src/*/migrations/0*.py
@@ -56,7 +54,6 @@ clean () {
 
 cleanall () {
     clean
-    docker-compose  -f docker-compose-development.yml down -v --rmi local
     rm -r .venv
 }
 
