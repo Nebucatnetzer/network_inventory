@@ -38,7 +38,7 @@ setup () {
 }
 
 venv () {
-    nix build .#venv -o venv
+    nix build .#venv -o .venv
 }
 
 docker (){
