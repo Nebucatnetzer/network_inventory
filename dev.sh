@@ -54,7 +54,7 @@ clean () {
 
 cleanall () {
     clean
-    rm -r .venv
+    rm -r .venv .direnv/
 }
 
 init () {
