@@ -82,10 +82,10 @@
             doCheck = true;
             name = "test";
             src = ./.;
-            checkInputs = [ pkgs.inventoryDevEnv pkgs.postgresql_15 pkgs.overmind ];
+            checkInputs = [ pkgs.inventoryDevEnv ];
             checkPhase = ''
               mkdir -p $out
-              pytest --ds=network_inventory.settings.local \
+              pytest --ds=network_inventory.settings.ram_test \
                      -nauto \
                      --nomigrations \
                      --cov=./src \
