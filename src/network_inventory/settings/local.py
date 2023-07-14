@@ -32,6 +32,5 @@ DATABASES = {
         "USER": os.environ.get("USER"),
         "HOST": "localhost",
         "PORT": 5432,
-        "PASSWORD": "password",
     }
 }
