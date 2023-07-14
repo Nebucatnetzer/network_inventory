@@ -28,7 +28,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": os.environ.get("USER"),
         "USER": os.environ.get("USER"),
         "HOST": "localhost",
         "PORT": 5432,
