@@ -35,8 +35,9 @@ setup () {
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
         touch .direnv/.second_run
-        overmind quit
     fi
+    overmind quit
+
 }
 
 venv () {
