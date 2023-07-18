@@ -50,7 +50,7 @@ docker (){
 
 clean () {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
-    rm -rf htmlcov/
+    rm -rf htmlcov/ .direnv/postgres/
     rm -f src/*/migrations/0*.py .direnv/first_run
 }
 
