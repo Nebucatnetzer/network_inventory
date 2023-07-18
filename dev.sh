@@ -38,6 +38,7 @@ setup () {
         touch .direnv/first_run
     fi
     overmind quit
+    sleep 2
 
 }
 
