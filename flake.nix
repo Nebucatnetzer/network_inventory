@@ -106,7 +106,7 @@
                 pkgs.coreutils
                 inventory
                 (pkgs.writeShellScriptBin "start-inventory" ''
-                  if [ -f .second_run ]; then
+                  if [ -f .first_run ]; then
                       sleep 2
                       ${pkgs.inventoryEnv}/bin/django-admin collectstatic --noinput
                       ${pkgs.inventoryEnv}/bin/django-admin makemigrations
@@ -131,7 +131,7 @@
                       ${pkgs.inventoryEnv}/bin/django-admin loaddata nets
                       ${pkgs.inventoryEnv}/bin/django-admin loaddata softwares
                       ${pkgs.inventoryEnv}/bin/django-admin shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-                      touch .second_run
+                      touch .first_run
                   fi
                   ${pkgs.inventoryEnv}/bin/gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
                 '')

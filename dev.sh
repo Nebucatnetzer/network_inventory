@@ -9,7 +9,7 @@ run () {
 
 setup () {
     overmind start -l db -D
-    if [ -f .second_run ]; then
+    if [ -f .direnv/first_run ]; then
         sleep 2
         python ./src/manage.py collectstatic --noinput
         python ./src/manage.py makemigrations
@@ -34,7 +34,7 @@ setup () {
         python ./src/manage.py loaddata nets
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-        touch .direnv/.second_run
+        touch .direnv/first_run
     fi
     overmind quit
 
@@ -51,7 +51,7 @@ docker (){
 clean () {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
-    rm -f src/*/migrations/0*.py .direnv/.second_run
+    rm -f src/*/migrations/0*.py .direnv/first_run
 }
 
 cleanall () {

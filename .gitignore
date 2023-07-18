@@ -173,7 +173,7 @@ migrations/
 .vscode/
 .pytest_cache/
 htmlcov/
-.second_run
+.first_run
 
 /src/static
 .idea/
