@@ -16,8 +16,8 @@ inventory over my various servers and other network equipment.
 
 There is currently only one supported way to work with this repository. You
 will need a Linux system (WSL might work) onto wich you install the Nix package
-manager with Flakes enabled[^1] and direnv[^3]. Afterwards you can enter the development
-environment with `direnv allow`.
+manager with Flakes enabled[^1] and direnv[^3]. Afterwards you can enter the
+development environment with `direnv allow`.
 
 [^1]: https://nixos.org/download.html
 [^3]: https://direnv.net/
