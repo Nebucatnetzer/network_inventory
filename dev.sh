@@ -55,8 +55,7 @@ clean () {
 }
 
 cleanall () {
-    clean
-    rm -rf .venv .direnv/
+    git clean -xdf
 }
 
 init () {
