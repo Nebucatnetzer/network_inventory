@@ -30,7 +30,6 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django",
         "USER": os.environ.get("USER"),
-        "HOST": "localhost",
-        "PORT": 5432,
+        "HOST": os.environ.get("PGHOST"),
     }
 }
