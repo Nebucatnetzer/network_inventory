@@ -2,6 +2,8 @@ from socket import gethostname
 from socket import gethostbyname
 from socket import getfqdn
 
+import os
+
 from .base import *
 
 
@@ -26,10 +28,9 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
+        "NAME": "django",
+        "USER": os.environ.get("USER"),
         "HOST": "localhost",
         "PORT": 5432,
-        "PASSWORD": "password",
     }
 }

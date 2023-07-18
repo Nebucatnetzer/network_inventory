@@ -4,12 +4,12 @@ run () {
     setup
     find . -name __pycache__ -o -name "*.pyc" -delete
     sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
-    python ./src/manage.py runserver 0.0.0.0:8000
+    overmind start
 }
 
 setup () {
-    docker-compose -f docker-compose-development.yml up -d
-    if [ -f .second_run ]; then
+    overmind start -l db -D
+    if [ -f .direnv/first_run ]; then
         sleep 2
         python ./src/manage.py collectstatic --noinput
         python ./src/manage.py makemigrations
@@ -34,12 +34,16 @@ setup () {
         python ./src/manage.py loaddata nets
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-        touch .second_run
+        init
+        touch .direnv/first_run
     fi
+    overmind quit
+    sleep 2
+
 }
 
 venv () {
-    nix build .#venv -o venv
+    nix build .#venv -o .venv
 }
 
 docker (){
@@ -47,21 +51,19 @@ docker (){
 }
 
 clean () {
-    docker-compose -f docker-compose-development.yml down -v
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
+    rm -f .direnv/first_run
     rm -f src/*/migrations/0*.py
-    rm -f .second_run
+    rm -rf .direnv/postgres/
 }
 
 cleanall () {
-    clean
-    docker-compose  -f docker-compose-development.yml down -v --rmi local
-    rm -r .venv
+    git clean -xdf
 }
 
 init () {
-    python ./src/manage.py loaddata network_inventory.yaml
+    python ./src/manage.py loaddata src/network_inventory.yaml
 }
 
 debug () {
@@ -73,8 +75,8 @@ check (){
 }
 
 test (){
-    export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
-    pytest -nauto --nomigrations --cov-report=html --cov=./src ./src
+    export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
+    pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
 }
 
 update (){
