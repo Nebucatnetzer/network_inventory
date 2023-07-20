@@ -85,11 +85,13 @@
             checkInputs = [ pkgs.inventoryDevEnv pkgs.postgresql_15 pkgs.overmind ];
             checkPhase = ''
               mkdir -p $out
+              overmind start -D -l db
               pytest --ds=network_inventory.settings.local \
-                     -nauto \
-                     --nomigrations \
-                     --cov=./src \
-                     ./src
+                      -nauto \
+                      --nomigrations \
+                      --cov=./src \
+                      ./src
+              overmind quit
             '';
           };
         };
