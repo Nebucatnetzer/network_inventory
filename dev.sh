@@ -1,27 +1,13 @@
 #!/usr/bin/env bash
 
-declare -A tasks
-declare -A descriptions
-
-run () {
-    setup
-    find . -name __pycache__ -o -name "*.pyc" -delete
-    sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
-    printf "\n---\n webserver: http://$(hostname -f):$WEBPORT\n---\n"
-    overmind start -D
+# Helper functions not exposed to the user {
+# Load example data
+_init () {
+    python ./src/manage.py loaddata src/network_inventory.yaml
 }
-descriptions["run"]="Start the webserver."
-tasks["run"]=run
-descriptions["start"]="Alias for run."
-tasks["start"]=run
 
-stop () {
-    overmind quit
-}
-descriptions["stop"]="Stop the webserver and DB."
-tasks["stop"]=stop
-
-setup () {
+# Setup the database
+_setup () {
     overmind start -l db -D
     if [ -f .direnv/first_run ]; then
         sleep 2
@@ -48,12 +34,35 @@ setup () {
         python ./src/manage.py loaddata nets
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-        init
+        _init
         touch .direnv/first_run
     fi
     overmind quit
     sleep 2
 }
+#}
+
+# Main tasks start
+declare -A tasks
+declare -A descriptions
+
+run () {
+    _setup
+    find . -name __pycache__ -o -name "*.pyc" -delete
+    sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
+    printf "\n---\n webserver: http://$(hostname -f):$WEBPORT\n---\n"
+    overmind start -D
+}
+descriptions["run"]="Start the webserver."
+tasks["run"]=run
+descriptions["start"]="Alias for run."
+tasks["start"]=run
+
+stop () {
+    overmind quit
+}
+descriptions["stop"]="Stop the webserver and DB."
+tasks["stop"]=stop
 
 venv () {
     nix build .#venv -o .venv
@@ -83,10 +92,6 @@ cleanall () {
 }
 descriptions["cleanall"]="Completly remove any files which are not checked into git."
 tasks["cleanall"]=cleanall
-
-init () {
-    python ./src/manage.py loaddata src/network_inventory.yaml
-}
 
 debug () {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
