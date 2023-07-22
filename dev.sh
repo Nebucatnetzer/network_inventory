@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 declare -A tasks
+declare -A descriptions
 
 run () {
     setup
@@ -9,12 +10,15 @@ run () {
     printf "\n---\n webserver: http://$(hostname -f):$WEBPORT\n---\n"
     overmind start -D
 }
+descriptions["run"]="Start the webserver."
 tasks["run"]=run
+descriptions["start"]="Alias for run."
 tasks["start"]=run
 
 stop () {
     overmind quit
 }
+descriptions["stop"]="Stop the webserver and DB."
 tasks["stop"]=stop
 
 setup () {
@@ -49,17 +53,18 @@ setup () {
     fi
     overmind quit
     sleep 2
-
 }
 
 venv () {
     nix build .#venv -o .venv
 }
+descriptions["venv"]="Build a pseudo venv that editors like VS Code can use."
 tasks["venv"]=venv
 
 build-container (){
     nix build && docker load < result && docker run --rm -ti network-inventory:latest
 }
+descriptions["build-container"]="Build and load OCI container."
 tasks["build-container"]=build-container
 
 clean () {
@@ -69,11 +74,14 @@ clean () {
     rm -f src/*/migrations/0*.py
     rm -rf .direnv/postgres/
 }
+descriptions["clean"]="Reset the project to a fresh state including the database."
 tasks["clean"]=clean
+
 
 cleanall () {
     git clean -xdf
 }
+descriptions["cleanall"]="Completly remove any files which are not checked into git."
 tasks["cleanall"]=cleanall
 
 init () {
@@ -83,11 +91,13 @@ init () {
 debug () {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
 }
+descriptions["debug"]="Run the tests and drop into the debugger on failure."
 tasks["debug"]=debug
 
 check (){
     nix flake check
 }
+descriptions["check"]="Run the linter and tests."
 tasks["check"]=check
 
 
@@ -95,17 +105,23 @@ test (){
     export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
     pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
 }
+descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test
 
 update (){
     poetry update --lock
 }
+descriptions["update"]="Update the dependencies."
 tasks["update"]=update
 
 # only one task at a time
 if [ $# != 1 ]; then
-    echo "usage: dev <task_name>"
-    echo "All tasks: ${!tasks[@]}"
+    printf "usage: dev <task_name>\n\n"
+    for task in "${!tasks[@]}"
+    do
+        echo "$task - ${descriptions[$task]}"
+    done
+
 else
     # Check if task is available
     if [[ -v "tasks[$1]" ]] ; then
