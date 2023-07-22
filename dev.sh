@@ -7,10 +7,15 @@ run () {
     find . -name __pycache__ -o -name "*.pyc" -delete
     sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
     printf "\n---\n webserver: http://$(hostname -f):$WEBPORT\n---\n"
-    overmind start
+    overmind start -D
 }
 tasks["run"]=run
 tasks["start"]=run
+
+stop () {
+    overmind quit
+}
+tasks["stop"]=stop
 
 setup () {
     overmind start -l db -D
