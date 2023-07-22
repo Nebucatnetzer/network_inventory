@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+declare -A tasks
+
 run () {
     setup
     find . -name __pycache__ -o -name "*.pyc" -delete
@@ -7,6 +9,8 @@ run () {
     overmind start -D
     echo "http://$(hostname -f):$WEBPORT"
 }
+tasks["run"]=run
+tasks["start"]=run
 
 setup () {
     overmind start -l db -D
@@ -46,10 +50,12 @@ setup () {
 venv () {
     nix build .#venv -o .venv
 }
+tasks["venv"]=venv
 
-docker (){
+build-container (){
     nix build && docker load < result && docker run --rm -ti network-inventory:latest
 }
+tasks["build-container"]=build-container
 
 clean () {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
@@ -58,10 +64,12 @@ clean () {
     rm -f src/*/migrations/0*.py
     rm -rf .direnv/postgres/
 }
+tasks["clean"]=clean
 
 cleanall () {
     git clean -xdf
 }
+tasks["cleanall"]=cleanall
 
 init () {
     python ./src/manage.py loaddata src/network_inventory.yaml
@@ -70,37 +78,34 @@ init () {
 debug () {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
 }
+tasks["debug"]=debug
 
 check (){
     nix flake check
 }
+tasks["check"]=check
+
 
 test (){
     export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
     pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
 }
+tasks["test"]=test
 
 update (){
     poetry update --lock
 }
-
-tasks=("check" "clean" "cleanall" "debug" "docker" "run" "test" "update" "venv")
+tasks["update"]=update
 
 # only one task at a time
 if [ $# != 1 ]; then
-    echo "usage: $0 <task_name>"
-    echo "All tasks: ${tasks[@]}"
+    echo "usage: dev <task_name>"
+    echo "All tasks: ${!tasks[@]}"
+else
+    # Check if task is available
+    if [[ -v "tasks[$1]" ]] ; then
+        ${tasks["$1"]}
+    else
+        echo "Task not found."
+    fi
 fi
-
-
-case $1 in
-    "${tasks[0]}")     check;;
-    "${tasks[1]}")     clean;;
-    "${tasks[2]}")  cleanall;;
-    "${tasks[3]}")     debug;;
-    "${tasks[4]}")    docker;;
-    "${tasks[5]}")       run;;
-    "${tasks[6]}")      test;;
-    "${tasks[7]}")    update;;
-    "${tasks[8]}")      venv;;
-esac
