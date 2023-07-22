@@ -31,5 +31,6 @@ DATABASES = {
         "NAME": "django",
         "USER": os.environ.get("USER"),
         "HOST": os.environ.get("PGHOST"),
+        "PORT": os.environ.get("PGPORT"),
     }
 }
