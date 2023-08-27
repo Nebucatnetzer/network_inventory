@@ -132,7 +132,7 @@ descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test
 
 update (){
-    poetry update --lock
+    pdm update
 }
 descriptions["update"]="Update the dependencies."
 tasks["update"]=update
