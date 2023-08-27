@@ -1,34 +1,19 @@
-[project]
-description = "A Django application designed to track IT inventory of multiple customers."
-authors = [
-    {name = "Andreas Zweili", email = "andreas@zweili.ch"},
-]
-dependencies = [
-    "Django>=4.1.3",
-    "django-crispy-forms>=1.14,<2.0.0", # version 2 breaks tests
-    "django-filter>=23.2",
-    "django-floppyforms>=1.9.0",
-    "django-guardian>=2.4.0",
-    "django-htmx>=1.16.0",
-    "django-model-utils>=4.3.1",
-    "django-nested-admin>=4.0.2",
-    "django-tables2>=2.4.1,<2.6.0", # version 2.6 breaks tests
-    "gunicorn>=21.2.0",
-    "psycopg2-binary>=2.9.7",
-    "PyYAML>=6.0.1",
-    "setuptools>=68.1.2",
-]
-requires-python = ">=3.10"
-license = {text = "GPLv3+"}
-classifiers = [
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
-]
-
 [tool.pylint]
 max-line-length = 88
 load-plugins = [
     "pylint_django",
 ]
+
+[tool.poetry]
+name = "network_inventory"
+version = "0.1.0"
+description = ""
+authors = ["Andreas Zweili <andreas@zweili.ch>"]
+license = "GPLv3"
+packages = [
+  { include = "src" },
+]
+virtualenvs.in-project = true
 
 [tool.mypy]
 exclude = [
@@ -69,20 +54,35 @@ module = [
 ]
 ignore_missing_imports = true
 
-[tool.pdm.dev-dependencies]
-linting = [
-    "black>=23.7.0",
-    "django-stubs>=4.2.3",
-    "mypy>=1.5.1",
-    "pylint>=2.17.5",
-    "pylint-django>=2.5.3",
-]
-test = [
-    "coverage>=7.3.0",
-    "mixer>=7.2.2",
-    "pytest>=7.4.0",
-    "pytest-cov>=4.1.0",
-    "pytest-django>=4.5.2",
-    "pytest-xdist>=3.3.1",
-    "python-lsp-server>=1.7.4",
-]
+[tool.poetry.group.main.dependencies]
+python = "^3.9"
+Django = "^4.1.3"
+django-crispy-forms = "^1.14.0"
+django-filter = "^23.2"
+django-floppyforms = "^1.9.0"
+django-guardian = "^2.4.0"
+django-htmx = "^1.13.0"
+django-model-utils = "^4.2.0"
+django-nested-admin = "^4.0.2"
+django-tables2 = "^2.4.1"
+gunicorn = "^20.1.0"
+psycopg2-binary = "^2.9.5"
+PyYAML = "^6.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+coverage = "^6.5.0"
+mixer = "^7.2.2"
+pylint = "^2.15.8"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pytest-django = "^4.5.2"
+pytest-xdist = "^3.1.0"
+python-lsp-server = "^1.7.3"
+mypy = "^1.4.1"
+django-stubs = "^4.2.3"
+pylint-django = "^2.5.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

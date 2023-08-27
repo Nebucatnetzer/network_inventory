@@ -13,9 +13,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - name: Setup dependencies
-        run: nix develop --command bash -c "pdm sync"
-      - name: Linting
-        run: nix develop --command bash -c "pdm run dev linting"
-      - name: Tests
-        run: nix develop --command bash -c "pdm run pytest --ds=network_inventory.settings.ram_test -nauto --nomigrations --cov=./src ./src"
+      - name: Test
+        run: |
+          nix flake check -L -j auto
