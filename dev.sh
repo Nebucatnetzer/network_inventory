@@ -2,12 +2,12 @@
 
 # Helper functions not exposed to the user {
 # Load example data
-_init () {
+_init() {
     python ./src/manage.py loaddata src/network_inventory.yaml
 }
 
 # Setup the database
-_setup () {
+_setup() {
     overmind start -l db -D
     if [ -f .direnv/first_run ]; then
         sleep 2
@@ -41,15 +41,15 @@ _setup () {
     sleep 2
 }
 
-_open_url () {
+_open_url() {
     if [[ ! -z "${DEFAULT_BROWSER}" ]]; then
         $DEFAULT_BROWSER $url
-    elif type explorer.exe &> /dev/null; then
+    elif type explorer.exe &>/dev/null; then
         explorer.exe $url
     fi
 }
 
-_create_url () {
+_create_url() {
     if [ -f /etc/wsl.conf ]; then
         echo "http://localhost:$WEBPORT"
     else
@@ -62,7 +62,7 @@ _create_url () {
 declare -A tasks
 declare -A descriptions
 
-run () {
+run() {
     _setup
     find . -name __pycache__ -o -name "*.pyc" -delete
     url=$(_create_url)
@@ -76,25 +76,25 @@ tasks["run"]=run
 descriptions["start"]="Alias for run."
 tasks["start"]=run
 
-stop () {
+stop() {
     overmind quit
 }
 descriptions["stop"]="Stop the webserver and DB."
 tasks["stop"]=stop
 
-venv () {
+venv() {
     nix build .#venv -o .venv
 }
 descriptions["venv"]="Build a pseudo venv that editors like VS Code can use."
 tasks["venv"]=venv
 
-build-container (){
-    nix build && docker load < result && docker run --rm -ti network-inventory:latest
+build-container() {
+    nix build && docker load <result && docker run --rm -ti network-inventory:latest
 }
 descriptions["build-container"]="Build and load OCI container."
 tasks["build-container"]=build-container
 
-clean () {
+clean() {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
     rm -f .direnv/first_run
@@ -104,34 +104,32 @@ clean () {
 descriptions["clean"]="Reset the project to a fresh state including the database."
 tasks["clean"]=clean
 
-
-cleanall () {
+cleanall() {
     git clean -xdf
 }
 descriptions["cleanall"]="Completly remove any files which are not checked into git."
 tasks["cleanall"]=cleanall
 
-debug () {
+debug() {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
 }
 descriptions["debug"]="Run the tests and drop into the debugger on failure."
 tasks["debug"]=debug
 
-check (){
+check() {
     nix flake check
 }
 descriptions["check"]="Run the linter and tests."
 tasks["check"]=check
 
-
-test (){
+test() {
     export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
     pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
 }
 descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test
 
-update (){
+update() {
     pdm update
 }
 descriptions["update"]="Update the dependencies."
@@ -140,14 +138,13 @@ tasks["update"]=update
 # only one task at a time
 if [ $# != 1 ]; then
     printf "usage: dev <task_name>\n\n"
-    for task in "${!tasks[@]}"
-    do
+    for task in "${!tasks[@]}"; do
         echo "$task - ${descriptions[$task]}"
     done
 
 else
     # Check if task is available
-    if [[ -v "tasks[$1]" ]] ; then
+    if [[ -v "tasks[$1]" ]]; then
         ${tasks["$1"]}
     else
         echo "Task not found."
