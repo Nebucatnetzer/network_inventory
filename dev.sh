@@ -116,15 +116,26 @@ debug() {
 descriptions["debug"]="Run the tests and drop into the debugger on failure."
 tasks["debug"]=debug
 
+linting() {
+    pylint --rc-file pyproject.toml -j 0 -E ./src/
+    mypy ./src/
+}
+descriptions["linting"]="Run the linters agains the source code. Tests are excluded."
+tasks["linting"]=linting
+
 check() {
-    nix flake check
+    linting
+    test
 }
 descriptions["check"]="Run the linter and tests."
 tasks["check"]=check
 
 test() {
-    export DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test
-    pytest -nauto --nomigrations --cov-config="$PROJECT_DIR/.coveragerc" --cov-report=html "$PROJECT_DIR/src"
+    DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test \
+        pytest -nauto \
+        --nomigrations \
+        --cov-config="$PROJECT_DIR/.coveragerc" \
+        --cov-report=html "$PROJECT_DIR/src"
 }
 descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test
