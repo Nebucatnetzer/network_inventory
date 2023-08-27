@@ -32,7 +32,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Buid container
         run: |
-          nix build --no-sandbox .#container
+          nix build .#container
           docker load < result
 
       - name: Log into registry
