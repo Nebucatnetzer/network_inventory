@@ -13,7 +13,6 @@ license = "GPLv3"
 packages = [
   { include = "src" },
 ]
-virtualenvs.in-project = true
 
 [tool.mypy]
 exclude = [
