@@ -89,7 +89,7 @@ descriptions["venv"]="Build a pseudo venv that editors like VS Code can use."
 tasks["venv"]=venv
 
 build-container() {
-    nix build && docker load <result && docker run --rm -ti network-inventory:latest
+    nix build && docker load <result
 }
 descriptions["build-container"]="Build and load OCI container."
 tasks["build-container"]=build-container
@@ -118,21 +118,18 @@ tasks["debug"]=debug
 
 lint() {
     echo "Running pylint"
-    poetry run \
-        pylint \
+    pylint \
         --rc-file="$PROJECT_DIR/pyproject.toml" \
         -j 0 \
         -E "$PROJECT_DIR/src"
     echo "Running mypy"
-    poetry run \
-        mypy --config-file="$PROJECT_DIR/pyproject.toml" "$PROJECT_DIR/src"
+    mypy --config-file="$PROJECT_DIR/pyproject.toml" "$PROJECT_DIR/src"
 }
 descriptions["lint"]="Run the linters against the src directory."
 tasks["lint"]=lint
 
 test() {
-    DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test poetry run \
-        pytest \
+    DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test pytest \
         -nauto \
         --nomigrations \
         --cov-config="$PROJECT_DIR/.coveragerc" \
