@@ -39,9 +39,7 @@ def test_warranties_view_plenty_of_time(create_admin_user):
     user.save()
     device = mixer.blend("devices.Device", customer=fixture["customer"])
     more_than_one_year = datetime.date(datetime.today() + timedelta(400))
-    mixer.blend(
-        "devices.Warranty", device=device, valid_until=more_than_one_year
-    )
+    mixer.blend("devices.Warranty", device=device, valid_until=more_than_one_year)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/warranties/")
@@ -77,9 +75,7 @@ def test_warranties_view_warranty_one_year_till_expiration(create_admin_user):
     user.save()
     device = mixer.blend("devices.Device", customer=fixture["customer"])
     not_one_year_more = datetime.date(datetime.today() + timedelta(200))
-    mixer.blend(
-        "devices.Warranty", device=device, valid_until=not_one_year_more
-    )
+    mixer.blend("devices.Warranty", device=device, valid_until=not_one_year_more)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/warranties/")

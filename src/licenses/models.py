@@ -48,9 +48,7 @@ class LicenseWithUser(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(
-                fields=["user", "license"], name="user per license"
-            )
+            models.UniqueConstraint(fields=["user", "license"], name="user per license")
         ]
 
 

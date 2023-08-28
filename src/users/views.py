@@ -52,7 +52,7 @@ def user_detail_view(request, pk):
     )
 
 
-class UserDeleteView(LoginRequiredMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = User
 
     def get_success_url(self):
@@ -64,9 +64,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 def groups_table_view(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     groups_table = GroupsTable(
-        utils.get_objects_for_customer(
-            Group, user=request.user, customer_pk=pk
-        )
+        utils.get_objects_for_customer(Group, user=request.user, customer_pk=pk)
     )
     RequestConfig(request).configure(groups_table)
     return TemplateResponse(
@@ -81,9 +79,7 @@ def groups_table_view(request, pk):
 
 @login_required
 def group_detail_view(request, pk):
-    group = utils.get_object_with_view_permission(
-        Group, user=request.user, pk=pk
-    )
+    group = utils.get_object_with_view_permission(Group, user=request.user, pk=pk)
     users = group.user_set.all()
     groups = Group.objects.filter(parent_group=group)
     print(groups)
@@ -96,9 +92,7 @@ def group_detail_view(request, pk):
 
 @login_required
 def delete_group(request, pk):
-    group = utils.get_object_with_view_permission(
-        Group, user=request.user, pk=pk
-    )
+    group = utils.get_object_with_view_permission(Group, user=request.user, pk=pk)
     if request.method == "POST":
         group.delete()
         return redirect("groups", pk=group.customer.pk)

@@ -16,9 +16,7 @@ class WarrantyType(Category):
 
 
 class Warranty(models.Model):
-    customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, blank=True
-    )
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     valid_from = models.DateField()
     valid_until = models.DateField()

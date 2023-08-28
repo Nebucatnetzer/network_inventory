@@ -9,9 +9,7 @@ pytestmark = pytest.mark.django_db
 def test_warranty_create_form(create_admin_user):
     create_admin_user()
     form = forms.WarrantyCreateForm(data={})
-    assert (
-        form.is_valid() is False
-    ), "Should be false because no data was given"
+    assert form.is_valid() is False, "Should be false because no data was given"
 
     device = mixer.blend("devices.Device")
 
@@ -33,8 +31,7 @@ def test_warranty_create_form(create_admin_user):
         form.is_valid() is False
     ), "Should be false because valid from is before valid until"
     assert (
-        "Valid from date must be before valid until date"
-        == form.errors["__all__"][0]
+        "Valid from date must be before valid until date" == form.errors["__all__"][0]
     )
 
 
@@ -51,6 +48,5 @@ def test_warranty_update_form(create_admin_user):
     form = forms.WarrantyUpdateForm(data=data)
     assert form.is_valid() is False
     assert (
-        "Valid from date must be before valid until date"
-        == form.errors["__all__"][0]
+        "Valid from date must be before valid until date" == form.errors["__all__"][0]
     )

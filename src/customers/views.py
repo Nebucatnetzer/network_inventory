@@ -24,9 +24,7 @@ def customers_table_view(request):
     customers = utils.objects_for_allowed_customers(Customer, request.user)
     table = CustomersTable(customers)
     RequestConfig(request).configure(table)
-    return render(
-        request, "customers/customer_list.html", {"customers": table}
-    )
+    return render(request, "customers/customer_list.html", {"customers": table})
 
 
 @login_required
@@ -44,23 +42,17 @@ def create_customer(request):
             )
     form = CustomerForm()
     context = {"form": form}
-    return TemplateResponse(
-        request, "customers/partials/customer_create.html", context
-    )
+    return TemplateResponse(request, "customers/partials/customer_create.html", context)
 
 
 @login_required
 def customer_detail_view(request, pk):
-    customer = utils.get_object_with_view_permission(
-        Customer, user=request.user, pk=pk
-    )
+    customer = utils.get_object_with_view_permission(Customer, user=request.user, pk=pk)
     context = {"customer": customer}
-    return TemplateResponse(
-        request, "customers/customer_details.html", context
-    )
+    return TemplateResponse(request, "customers/customer_details.html", context)
 
 
-class CustomerDeleteView(LoginRequiredMixin, DeleteView):
+class CustomerDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Customer
 
     def get_success_url(self):

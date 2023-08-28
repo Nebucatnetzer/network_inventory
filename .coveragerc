@@ -1,4 +1,9 @@
+[paths]
+source = ${PROJECT_DIR-default .}/src/
+[html]
+directory = ${PROJECT_DIR-default .}/htmlcov
 [run]
+data_file = ${PROJECT_DIR-default .}/.coverage
 omit =
      *apps.py,
      *migrations/*,

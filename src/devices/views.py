@@ -60,16 +60,12 @@ def device_detail_view(request, pk):
 def devices_table_view(request, pk):
     table = DevicesTable(Device.objects.filter(customer=pk))
     RequestConfig(request).configure(table)
-    return render(
-        request, "devices/device_list.html", {"devices": table, "pk": pk}
-    )
+    return render(request, "devices/device_list.html", {"devices": table, "pk": pk})
 
 
 @login_required
 def warranties_view(request):
-    table = WarrantiesTable(
-        utils.objects_for_allowed_customers(Warranty, request.user)
-    )
+    table = WarrantiesTable(utils.objects_for_allowed_customers(Warranty, request.user))
     RequestConfig(request).configure(table)
     return render(request, "devices/warranties_list.html", {"devices": table})
 
@@ -111,9 +107,7 @@ def device_update_view(request, pk):
     """
     template_name = "devices/device_update.html"
     request.session["device_to_update"] = pk
-    device = utils.get_object_with_view_permission(
-        Device, user=request.user, pk=pk
-    )
+    device = utils.get_object_with_view_permission(Device, user=request.user, pk=pk)
     if request.method == "POST" and "save_device" in request.POST:
         form = DeviceUpdateForm(request, request.POST, instance=device)
         if form.is_valid():
@@ -124,7 +118,7 @@ def device_update_view(request, pk):
     return TemplateResponse(request, template_name, {"form": form})
 
 
-class DeviceDeleteView(LoginRequiredMixin, DeleteView):
+class DeviceDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Device
 
     def get_success_url(self):
@@ -160,7 +154,7 @@ class WarrantyUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.POST.get("previous_page")
 
 
-class WarrantyDeleteView(LoginRequiredMixin, DeleteView):
+class WarrantyDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Warranty
 
     def get_success_url(self):
@@ -195,7 +189,7 @@ class DeviceInNetUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.POST.get("previous_page")
 
 
-class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):
+class DeviceInNetDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = DeviceInNet
     template_name = "devices/device_in_net_confirm_delete.html"
 

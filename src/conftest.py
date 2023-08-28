@@ -22,9 +22,7 @@ def django_db_setup(django_db_setup, django_db_blocker):
 def create_admin_user():
     def _create_admin_user():
         User = get_user_model()
-        admin = User.objects.create_user(
-            "pharma-admin", "admin@pharma.com", "password"
-        )
+        admin = User.objects.create_user("pharma-admin", "admin@pharma.com", "password")
         customer = mixer.blend("customers.Customer")
         group = Group.objects.create(name="Pharma Corp. Admin")
         admin.groups.add(group)

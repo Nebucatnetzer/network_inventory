@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-run () {
-    setup
-    find . -name __pycache__ -o -name "*.pyc" -delete
-    sudo iptables -I INPUT -p tcp --dport 8000 -j ACCEPT
-    python ./src/manage.py runserver 0.0.0.0:8000
+# Helper functions not exposed to the user {
+# Load example data
+_init() {
+    python ./src/manage.py loaddata src/network_inventory.yaml
 }
 
-setup () {
-    docker-compose -f docker-compose-development.yml up -d
-    if [ -f .second_run ]; then
+# Setup the database
+_setup() {
+    overmind start -l db -D
+    if [ -f .direnv/first_run ]; then
         sleep 2
         python ./src/manage.py collectstatic --noinput
         python ./src/manage.py makemigrations
@@ -34,59 +34,129 @@ setup () {
         python ./src/manage.py loaddata nets
         python ./src/manage.py loaddata softwares
         python ./src/manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-        touch .second_run
+        _init
+        touch .direnv/first_run
+    fi
+    overmind quit
+    sleep 2
+}
+
+_open_url() {
+    if [[ ! -z "${DEFAULT_BROWSER}" ]]; then
+        $DEFAULT_BROWSER $url
+    elif type explorer.exe &>/dev/null; then
+        explorer.exe $url
     fi
 }
 
-venv () {
-    nix build .#venv -o venv
+_create_url() {
+    if [ -f /etc/wsl.conf ]; then
+        echo "http://localhost:$WEBPORT"
+    else
+        echo "http://$(hostname -f):$WEBPORT"
+    fi
 }
+#}
 
-docker (){
-    nix build && docker load < result && docker run --rm -ti network-inventory:latest
+# Main tasks start
+declare -A tasks
+declare -A descriptions
+
+run() {
+    _setup
+    find . -name __pycache__ -o -name "*.pyc" -delete
+    url=$(_create_url)
+    sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
+    overmind start -D
+    printf "\n---\n webserver: $url\n---\n"
+    _open_url $url
 }
+descriptions["run"]="Start the webserver."
+tasks["run"]=run
+descriptions["start"]="Alias for run."
+tasks["start"]=run
 
-clean () {
-    docker-compose -f docker-compose-development.yml down -v
+stop() {
+    overmind quit
+}
+descriptions["stop"]="Stop the webserver and DB."
+tasks["stop"]=stop
+
+venv() {
+    nix build .#venv -o .venv
+}
+descriptions["venv"]="Build a pseudo venv that editors like VS Code can use."
+tasks["venv"]=venv
+
+build-container() {
+    nix build && docker load <result
+}
+descriptions["build-container"]="Build and load OCI container."
+tasks["build-container"]=build-container
+
+clean() {
     find . \( -name __pycache__ -o -name "*.pyc" \) -delete
     rm -rf htmlcov/
-    rm -f */migrations/0*.py
-    rm .second_run
+    rm -f .direnv/first_run
+    rm -f src/*/migrations/0*.py
+    rm -rf .direnv/postgres/
 }
+descriptions["clean"]="Reset the project to a fresh state including the database."
+tasks["clean"]=clean
 
-cleanall () {
-    clean
-    docker-compose  -f docker-compose-development.yml down -v --rmi local
-    rm -r .venv
+cleanall() {
+    git clean -xdf
 }
+descriptions["cleanall"]="Completly remove any files which are not checked into git."
+tasks["cleanall"]=cleanall
 
-init () {
-    python ./src/manage.py loaddata network_inventory.yaml
-}
-
-debug () {
+debug() {
     pytest --pdb --nomigrations --cov=. --cov-report=html ./src/
 }
+descriptions["debug"]="Run the tests and drop into the debugger on failure."
+tasks["debug"]=debug
 
-test (){
-    nix flake check
+lint() {
+    echo "Running pylint"
+    pylint \
+        --rc-file="$PROJECT_DIR/pyproject.toml" \
+        -j 0 \
+        -E "$PROJECT_DIR/src"
+    echo "Running mypy"
+    mypy --config-file="$PROJECT_DIR/pyproject.toml" "$PROJECT_DIR/src"
 }
+descriptions["lint"]="Run the linters against the src directory."
+tasks["lint"]=lint
 
-tasks=("clean" "cleanall" "debug" "docker" "run" "test" "venv")
+test() {
+    DJANGO_SETTINGS_MODULE=network_inventory.settings.ram_test pytest \
+        -nauto \
+        --nomigrations \
+        --cov-config="$PROJECT_DIR/.coveragerc" \
+        --cov-report=html \
+        "$PROJECT_DIR/src"
+}
+descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
+tasks["test"]=test
+
+update() {
+    poetry update --lock
+}
+descriptions["update"]="Update the dependencies."
+tasks["update"]=update
 
 # only one task at a time
 if [ $# != 1 ]; then
-    echo "usage: $0 <task_name>"
-    echo "All tasks: ${tasks[@]}"
+    printf "usage: dev <task_name>\n\n"
+    for task in "${!tasks[@]}"; do
+        echo "$task - ${descriptions[$task]}"
+    done
+
+else
+    # Check if task is available
+    if [[ -v "tasks[$1]" ]]; then
+        ${tasks["$1"]}
+    else
+        echo "Task not found."
+    fi
 fi
-
-
-case $1 in
-    "${tasks[0]}")     clean;;
-    "${tasks[1]}")  cleanall;;
-    "${tasks[2]}")     debug;;
-    "${tasks[3]}")    docker;;
-    "${tasks[4]}")       run;;
-    "${tasks[5]}")      test;;
-    "${tasks[6]}")      venv;;
-esac

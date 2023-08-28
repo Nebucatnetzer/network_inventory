@@ -1,5 +1,18 @@
-[tool.black]
-line-length = 79
+[tool.pylint]
+max-line-length = 88
+load-plugins = [
+    "pylint_django",
+]
+good-names = [
+    "pk",
+    "ip",
+]
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "missing-function-docstring",
+    "missing-class-docstring",
+]
 
 [tool.poetry]
 name = "network_inventory"
@@ -11,36 +24,73 @@ packages = [
   { include = "src" },
 ]
 
+[tool.mypy]
+exclude = [
+    "tests/",
+]
+plugins = ["mypy_django_plugin.main"]
+mypy_path = "./src"
+# Start off with these
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# Getting these passing should be easy
+strict_equality = true
+strict_concatenate = true
+
+# Strongly recommend enabling this one as soon as you can
+#check_untyped_defs = true
+
+# These shouldn't be too much additional work, but may be tricky to
+# get passing if you use a lot of untyped libraries
+#disallow_subclassing_any = true
+#disallow_untyped_decorators = true
+#disallow_any_generics = true
+
+[tool.django-stubs]
+django_settings_module = "network_inventory.settings.local"
+
+[[tool.mypy.overrides]]
+module = [
+       "nested_admin.*",
+       "django_tables2.*",
+       "floppyforms.*",
+       "django_filters.*",
+       "crispy_forms.*",
+       "mixer.*",
+       "guardian.*",
+]
+ignore_missing_imports = true
+
 [tool.poetry.group.main.dependencies]
 python = "^3.9"
 Django = "^4.1.3"
 django-crispy-forms = "^1.14.0"
-django-filter = "^22.1"
+django-filter = "^23.2"
 django-floppyforms = "^1.9.0"
 django-guardian = "^2.4.0"
 django-htmx = "^1.13.0"
 django-model-utils = "^4.2.0"
 django-nested-admin = "^4.0.2"
-django-tables2 = "^2.4.1"
+django-tables2 = "^2.4.1,<2.6.0"
 gunicorn = "^20.1.0"
 psycopg2-binary = "^2.9.5"
 PyYAML = "^6.0"
 
 [tool.poetry.group.dev.dependencies]
-autopep8 = "^2.0.0"
 black = "^22.10.0"
 coverage = "^6.5.0"
-flake8 = "^6.0.0"
-jedi = "^0.18.2"
 mixer = "^7.2.2"
-pep8 = "^1.7.1"
 pylint = "^2.15.8"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 pytest-django = "^4.5.2"
 pytest-xdist = "^3.1.0"
-rope = "^1.5.1"
-yapf = "^0.32.0"
+python-lsp-server = "^1.7.3"
+mypy = "^1.4.1"
+django-stubs = "^4.2.3"
+pylint-django = "^2.5.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

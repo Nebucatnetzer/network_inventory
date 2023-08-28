@@ -1,8 +1,0 @@
-[flake8]
-exclude =
-    *migrations*,
-    __init__.py,
-    *cache*,
-    venv/,
-    src/manage.py,
-    src/network_inventory/settings/*

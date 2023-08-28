@@ -47,7 +47,7 @@ def backup_detail_view(request, pk):
 class BackupCreateView(LoginRequiredMixin, CreateView):
     model = Backup
     template_name = "backups/backup_create.html"
-    fields = "__all__"
+    fields = "__all__"  # type: ignore
 
     def get_success_url(self):
         return reverse("computer", args=(self.computer.pk,))
@@ -63,7 +63,7 @@ class BackupCreateView(LoginRequiredMixin, CreateView):
         }
 
 
-class BackupDeleteView(LoginRequiredMixin, DeleteView):
+class BackupDeleteView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Backup
     template_name = "backups/backup_confirm_delete.html"
 
@@ -71,7 +71,7 @@ class BackupDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("computer", args=(self.object.computer.pk,))
 
 
-class BackupDeleteFromTableView(LoginRequiredMixin, DeleteView):
+class BackupDeleteFromTableView(LoginRequiredMixin, DeleteView):  # type: ignore
     model = Backup
     template_name = "backups/backup_confirm_delete.html"
 

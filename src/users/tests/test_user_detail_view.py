@@ -38,9 +38,7 @@ def test_user_detail_view_group(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, "Groups"
-    )
+    assert response.status_code == 200 and helper.in_content(response, "Groups")
 
 
 def test_user_detail_view_mail_alias(create_admin_user):
@@ -50,9 +48,7 @@ def test_user_detail_view_mail_alias(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, "Mail Alias"
-    )
+    assert response.status_code == 200 and helper.in_content(response, "Mail Alias")
 
 
 def test_user_detail_view_license(create_admin_user):
@@ -63,9 +59,7 @@ def test_user_detail_view_license(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, "License"
-    )
+    assert response.status_code == 200 and helper.in_content(response, "License")
 
 
 def test_user_detail_view_computer(create_admin_user):
@@ -75,9 +69,7 @@ def test_user_detail_view_computer(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, computer
-    )
+    assert response.status_code == 200 and helper.in_content(response, computer)
 
 
 def test_user_detail_view_no_permission(create_admin_user):

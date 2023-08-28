@@ -15,15 +15,11 @@ def test_computer_detail_view_not_logged_in():
 
 def test_computer_detail_view(create_admin_user):
     create_admin_user()
-    computer = mixer.blend(
-        "computers.Computer", customer=mixer.SELECT, os=mixer.SELECT
-    )
+    computer = mixer.blend("computers.Computer", customer=mixer.SELECT, os=mixer.SELECT)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/computer/" + str(computer.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, computer
-    )
+    assert response.status_code == 200 and helper.in_content(response, computer)
 
 
 def test_computer_detail_view_not_found(create_admin_user):
@@ -43,9 +39,7 @@ def test_computer_detail_view_ram_relation(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/computer/" + str(computer.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, "RAM Modules:"
-    )
+    assert response.status_code == 200 and helper.in_content(response, "RAM Modules:")
 
 
 def test_computer_detail_view_raid_relation(create_admin_user):
@@ -53,9 +47,7 @@ def test_computer_detail_view_raid_relation(create_admin_user):
     computer = mixer.blend("computers.Computer", customer=mixer.SELECT)
     raid_type = mixer.blend("computers.RaidType")
     disk = mixer.blend("computers.Disk")
-    raid = mixer.blend(
-        "computers.Raid", computer=computer, raid_type=raid_type
-    )
+    raid = mixer.blend("computers.Raid", computer=computer, raid_type=raid_type)
     mixer.blend("computers.DisksInRaid", raid=raid, disk=disk)
     client = Client()
     client.login(username="pharma-admin", password="password")

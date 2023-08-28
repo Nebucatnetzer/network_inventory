@@ -23,12 +23,8 @@ class Computer(Device):
     ram = models.ManyToManyField(Ram, through="ComputerRamRelation")
     gpu = models.ManyToManyField(Gpu, through="ComputerGpuRelation")
     disks = models.ManyToManyField(Disk, through="ComputerDiskRelation")
-    software = models.ManyToManyField(
-        Software, through="ComputerSoftwareRelation"
-    )
-    host = models.ForeignKey(
-        "self", null=True, blank=True, on_delete=models.CASCADE
-    )
+    software = models.ManyToManyField(Software, through="ComputerSoftwareRelation")
+    host = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
     allocated_space = models.IntegerField(null=True, blank=True)
 
     def __str__(self):

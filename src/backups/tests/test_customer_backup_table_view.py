@@ -23,9 +23,7 @@ def test_customer_backup_table(create_admin_user):
     computer = mixer.blend("computers.Computer", customer=customer)
     backup = mixer.blend("backups.Backup", computer=computer)
     response = client.get("/customer/" + str(customer.id) + "/backups/")
-    assert response.status_code == 200 and helper.in_content(
-        response, backup.name
-    )
+    assert response.status_code == 200 and helper.in_content(response, backup.name)
 
 
 def test_customer_backup_table_no_backup(create_admin_user):

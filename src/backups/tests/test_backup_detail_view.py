@@ -53,9 +53,7 @@ def test_backup_detail_view_with_target_device(create_admin_user):
         software=mixer.SELECT,
         method=mixer.SELECT,
     )
-    mixer.blend(
-        "backups.TargetDevice", device=target_computer, backup=mixer.SELECT
-    )
+    mixer.blend("backups.TargetDevice", device=target_computer, backup=mixer.SELECT)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/backup/" + str(backup.id) + "/")
@@ -79,9 +77,7 @@ def test_backup_detail_view_with_notification(create_admin_user):
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/backup/" + str(backup.id) + "/")
-    assert response.status_code == 200 and helper.in_content(
-        response, notification
-    )
+    assert response.status_code == 200 and helper.in_content(response, notification)
 
 
 def test_backup_detail_view_with_day_relation(create_admin_user):
