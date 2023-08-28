@@ -8,6 +8,11 @@ good-names = [
     "ip",
 ]
 
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "missing-function-docstring",
+    "missing-class-docstring",
+]
 
 [tool.poetry]
 name = "network_inventory"
