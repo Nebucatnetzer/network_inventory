@@ -3,6 +3,11 @@ max-line-length = 88
 load-plugins = [
     "pylint_django",
 ]
+good-names = [
+    "pk",
+    "ip",
+]
+
 
 [tool.poetry]
 name = "network_inventory"
