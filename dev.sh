@@ -142,6 +142,13 @@ test() {
 descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test
 
+check() {
+    lint
+    test
+}
+descriptions["check"]="Run lint and test in one session"
+tasks["check"]=check
+
 update() {
     poetry update
 }
