@@ -24,6 +24,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.poetry
+            pkgs.python310
             pkgs.overmind
             pkgs.postgresql_15
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
