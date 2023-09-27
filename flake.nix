@@ -3,34 +3,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    poetry2nix = {
-      url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
-  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
-    {
-      overlays.default = nixpkgs.lib.composeManyExtensions [
-        poetry2nix.overlay
-        (final: prev: rec {
-          inventoryDevEnv = prev.poetry2nix.mkPoetryEnv
-            {
-              projectDir = ./.;
-              groups = [ "main" "dev" ];
-            };
-          inventoryPackage = prev.poetry2nix.mkPoetryApplication {
-            projectDir = ./.;
-            groups = [ "main" ];
-          };
-          inventoryEnv = inventoryPackage.dependencyEnv;
-        })
-      ];
-    } // (flake-utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, flake-utils }:
+    (flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ self.overlays.default ];
         };
         inventory = pkgs.stdenv.mkDerivation {
           src = ./.;
@@ -45,40 +23,29 @@
       rec {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.inventoryDevEnv
             pkgs.poetry
-            pkgs.python310Packages.pip
+            pkgs.python310
             pkgs.overmind
             pkgs.postgresql_15
             (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
           ];
+          # Put the venv on the repo, so direnv can access it
+          POETRY_VIRTUALENVS_IN_PROJECT = "true";
+          # Use python from path, so you can use a different version to the one
+          # bundled with poetry
+          POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON = "true";
           PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+            pkgs.stdenv.cc.cc
+            # Add any missing library needed You can use the nix-index package
+            # to locate them, e.g.
+            # nix-locate -w --top-level --at-root /lib/libudev.so.1
+          ];
           shellHook = ''
             export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
           '';
         };
-        checks = {
-          tests = pkgs.stdenv.mkDerivation {
-            dontPatch = true;
-            dontConfigure = true;
-            dontBuild = true;
-            dontInstall = true;
-            doCheck = true;
-            name = "test";
-            src = ./.;
-            checkInputs = [ pkgs.inventoryDevEnv ];
-            checkPhase = ''
-              mkdir -p $out
-              pytest --ds=network_inventory.settings.ram_test \
-                      -nauto \
-                      --nomigrations \
-                      --cov=./src \
-                      ./src
-            '';
-          };
-        };
         packages = {
-          venv = pkgs.inventoryEnv;
           container = pkgs.dockerTools.buildImage {
             name = "network-inventory";
             tag = "latest";
@@ -86,38 +53,39 @@
             copyToRoot = pkgs.buildEnv {
               name = "image-root";
               paths = [
+                inventory
                 pkgs.bashInteractive
                 pkgs.coreutils
-                inventory
+                pkgs.poetry
                 (pkgs.writeShellScriptBin "start-inventory" ''
                   if [ -f .first_run ]; then
                       sleep 2
-                      ${pkgs.inventoryEnv}/bin/django-admin collectstatic --noinput
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations
-                      ${pkgs.inventoryEnv}/bin/django-admin migrate
+                      django-admin collectstatic --noinput
+                      django-admin makemigrations
+                      django-admin migrate
                   else
-                      ${pkgs.inventoryEnv}/bin/django-admin collectstatic --noinput
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations backups
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations computers
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations core
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations customers
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations devices
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations licenses
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations nets
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations softwares
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations users
-                      ${pkgs.inventoryEnv}/bin/django-admin makemigrations
-                      ${pkgs.inventoryEnv}/bin/django-admin migrate
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata backups
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata computers
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata core
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata devices
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata nets
-                      ${pkgs.inventoryEnv}/bin/django-admin loaddata softwares
-                      ${pkgs.inventoryEnv}/bin/django-admin shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
+                      django-admin collectstatic --noinput
+                      django-admin makemigrations backups
+                      django-admin makemigrations computers
+                      django-admin makemigrations core
+                      django-admin makemigrations customers
+                      django-admin makemigrations devices
+                      django-admin makemigrations licenses
+                      django-admin makemigrations nets
+                      django-admin makemigrations softwares
+                      django-admin makemigrations users
+                      django-admin makemigrations
+                      django-admin migrate
+                      django-admin loaddata backups
+                      django-admin loaddata computers
+                      django-admin loaddata core
+                      django-admin loaddata devices
+                      django-admin loaddata nets
+                      django-admin loaddata softwares
+                      django-admin shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
                       touch .first_run
                   fi
-                  ${pkgs.inventoryEnv}/bin/gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
+                  gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
                 '')
               ];
             };
