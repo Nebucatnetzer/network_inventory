@@ -80,7 +80,7 @@ PyYAML = "^6.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"
-coverage = "^7.3.0"
+coverage = "^7.3.2"
 mixer = "^7.2.2"
 pylint = "^2.15.8"
 pytest = "^7.4.2"
