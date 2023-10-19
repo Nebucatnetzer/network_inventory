@@ -2,105 +2,58 @@
   description = "A Python API for various tools I use at work.";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    systems.url = "github:nix-systems/default";
+    devenv.url = "github:cachix/devenv";
   };
-  outputs = { self, nixpkgs, flake-utils }:
-    (flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-        inventory = pkgs.stdenv.mkDerivation {
-          src = ./.;
-          version = "latest";
-          pname = "network-inventory";
-          installPhase = ''
-            mkdir -p $out
-            cp -r ./src $out/code
-          '';
-        };
-      in
-      rec {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.poetry
-            pkgs.python310
-            pkgs.overmind
-            pkgs.postgresql_15
-            (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
-          ];
-          # Put the venv on the repo, so direnv can access it
-          POETRY_VIRTUALENVS_IN_PROJECT = "true";
-          # Use python from path, so you can use a different version to the one
-          # bundled with poetry
-          POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON = "true";
-          PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
-          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-            pkgs.stdenv.cc.cc
-            # Add any missing library needed You can use the nix-index package
-            # to locate them, e.g.
-            # nix-locate -w --top-level --at-root /lib/libudev.so.1
-          ];
-          shellHook = ''
-            export DJANGO_SETTINGS_MODULE=network_inventory.settings.local
-          '';
-        };
-        packages = {
-          container = pkgs.dockerTools.buildImage {
-            name = "network-inventory";
-            tag = "latest";
-            created = "now";
-            copyToRoot = pkgs.buildEnv {
-              name = "image-root";
-              paths = [
-                inventory
-                pkgs.bashInteractive
-                pkgs.coreutils
-                pkgs.poetry
-                (pkgs.writeShellScriptBin "start-inventory" ''
-                  if [ -f .first_run ]; then
-                      sleep 2
-                      django-admin collectstatic --noinput
-                      django-admin makemigrations
-                      django-admin migrate
-                  else
-                      django-admin collectstatic --noinput
-                      django-admin makemigrations backups
-                      django-admin makemigrations computers
-                      django-admin makemigrations core
-                      django-admin makemigrations customers
-                      django-admin makemigrations devices
-                      django-admin makemigrations licenses
-                      django-admin makemigrations nets
-                      django-admin makemigrations softwares
-                      django-admin makemigrations users
-                      django-admin makemigrations
-                      django-admin migrate
-                      django-admin loaddata backups
-                      django-admin loaddata computers
-                      django-admin loaddata core
-                      django-admin loaddata devices
-                      django-admin loaddata nets
-                      django-admin loaddata softwares
-                      django-admin shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')"
-                      touch .first_run
-                  fi
-                  gunicorn network_inventory.wsgi:application --reload --bind 0.0.0.0:8000 --workers 3
-                '')
-              ];
-            };
-            config = {
-              Cmd = [ "start-inventory" ];
-              WorkingDir = "/code";
-              Env = [
-                "POSTGRES_DB=network_inventory"
-                "DJANGO_SETTINGS_MODULE=network_inventory.settings.production"
-                "PYTHONPATH=/lib/python3.10:/lib/python3.10/site-packages:/code"
-              ];
-            };
-          };
-          default = packages.container;
-        };
-      }));
-}
+  nixConfig = {
+    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
+    extra-substituters = "https://devenv.cachix.org";
+  };
 
+  outputs = { self, nixpkgs, devenv, systems }@inputs:
+    let
+      forEachSystem = nixpkgs.lib.genAttrs (import systems);
+    in
+    {
+      packages = forEachSystem (system: {
+        devenv-up = self.devShells.${system}.default.config.procfileScript;
+      });
+      devShells = forEachSystem
+        (system:
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          {
+            default = devenv.lib.mkShell {
+              inherit inputs pkgs;
+              modules = [
+                {
+                  packages = [
+                    pkgs.overmind
+                    (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
+                  ];
+                  env = {
+                    DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
+                    PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
+                  };
+                  languages.python = {
+                    enable = true;
+                    package = pkgs.python310;
+                    poetry = {
+                      activate.enable = true;
+                      enable = true;
+                      install.enable = true;
+                    };
+                  };
+                  processes.webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                  services.postgres = {
+                    enable = true;
+                    initialDatabases = [{ name = "django"; }];
+                    package = pkgs.postgresql_15;
+                  };
+                }
+              ];
+            };
+          });
+    };
+}

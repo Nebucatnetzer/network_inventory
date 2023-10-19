@@ -8,9 +8,9 @@ _init() {
 
 # Setup the database
 _setup() {
-    overmind start -l db -D
+    overmind start -D
+    sleep 5
     if [ -f .direnv/first_run ]; then
-        sleep 2
         python ./src/manage.py collectstatic --noinput
         python ./src/manage.py makemigrations
         python ./src/manage.py migrate
@@ -37,8 +37,6 @@ _setup() {
         _init
         touch .direnv/first_run
     fi
-    overmind quit
-    sleep 2
 }
 
 _open_url() {
@@ -67,9 +65,9 @@ run() {
     find . -name __pycache__ -o -name "*.pyc" -delete
     url=$(_create_url)
     sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
-    overmind start -D
     printf "\n---\n webserver: $url\n---\n"
     _open_url $url
+    overmind echo
 }
 descriptions["run"]="Start the webserver."
 tasks["run"]=run
