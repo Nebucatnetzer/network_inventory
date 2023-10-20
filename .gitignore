@@ -181,3 +181,4 @@ db_data
 .direnv
 /result
 /static/
+/.devenv/

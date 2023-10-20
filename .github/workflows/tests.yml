@@ -14,8 +14,8 @@ jobs:
       - uses: cachix/install-nix-action@v22
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Environment setup
-        run: nix develop --command bash -c "poetry install"
+        run: nix develop --impure --command bash -c "poetry install"
       - name: Test
-        run: nix develop --command bash -c "dev test"
+        run: nix develop --impure --command bash -c "dev test"
         env:
           PROJECT_DIR: ${{ github.workspace }}
