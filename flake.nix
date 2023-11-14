@@ -29,7 +29,6 @@
               modules = [
                 {
                   packages = [
-                    pkgs.overmind
                     (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
                   ];
                   env = {
@@ -45,7 +44,13 @@
                       install.enable = true;
                     };
                   };
-                  processes.webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                  process.implementation = "process-compose";
+                  process-managers.process-compose.enable = true;
+                  # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
+                  processes = {
+                    webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                    setup.exec = "dev start";
+                  };
                   services.postgres = {
                     enable = true;
                     initialDatabases = [{ name = "django"; }];

@@ -8,7 +8,6 @@ _init() {
 
 # Setup the database
 _setup() {
-    overmind start -D
     sleep 5
     if [ -f .direnv/first_run ]; then
         python ./src/manage.py collectstatic --noinput
@@ -67,7 +66,6 @@ run() {
     sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
     printf "\n---\n webserver: $url\n---\n"
     _open_url $url
-    overmind echo
 }
 descriptions["run"]="Start the webserver."
 tasks["run"]=run
@@ -75,7 +73,7 @@ descriptions["start"]="Alias for run."
 tasks["start"]=run
 
 stop() {
-    overmind quit
+    process-compose down
 }
 descriptions["stop"]="Stop the webserver and DB."
 tasks["stop"]=stop
