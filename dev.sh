@@ -63,7 +63,6 @@ run() {
     _setup
     find . -name __pycache__ -o -name "*.pyc" -delete
     url=$(_create_url)
-    sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
     printf "\n---\n webserver: $url\n---\n"
     _open_url $url
 }
@@ -150,6 +149,12 @@ update() {
 }
 descriptions["update"]="Update the dependencies."
 tasks["update"]=update
+
+open-port() {
+    sudo iptables -I INPUT -p tcp --dport $WEBPORT -j ACCEPT
+}
+descriptions["op"]="(o)pen the (p)ort in iptables fireall."
+tasks["op"]=open-port
 
 # only one task at a time
 if [ $# != 1 ]; then
