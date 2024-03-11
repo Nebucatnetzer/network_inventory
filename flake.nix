@@ -59,7 +59,14 @@
                 process-managers.process-compose.enable = true;
                 # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
                 processes = {
-                  webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                  webserver = {
+                    exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                    process-compose.depends_on = {
+                      setup = {
+                        condition = "process_completed_successfully";
+                      };
+                    };
+                  };
                   setup.exec = "dev setup";
                 };
                 services.postgres = {
