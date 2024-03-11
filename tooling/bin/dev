@@ -3,7 +3,7 @@
 # Helper functions not exposed to the user {
 # Load example data
 _init() {
-    python ./src/manage.py loaddata src/network_inventory.yaml
+    python ./src/manage.py loaddata src/network_inventory.json
 }
 
 _open_url() {
@@ -144,6 +144,19 @@ open-port() {
 }
 descriptions["op"]="(o)pen the (p)ort in iptables fireall."
 tasks["op"]=open-port
+
+dump-fixtures() {
+    python "$DEVENV_ROOT"/src/manage.py dumpdata \
+        --all \
+        --indent 2 \
+        --exclude=admin.logentry \
+        --exclude=contenttypes \
+        --exclude=auth \
+        --exclude=core \
+        >"$DEVENV_ROOT"/src/network_inventory.json
+}
+descriptions["df"]="(d)ump data into (f)ixtures"
+tasks["df"]=dump-fixtures
 
 # only one task at a time
 if [ $# != 1 ]; then
