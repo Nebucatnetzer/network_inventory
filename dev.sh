@@ -72,12 +72,6 @@ tasks["run"]=run
 descriptions["start"]="Alias for run."
 tasks["start"]=run
 
-stop() {
-    process-compose down
-}
-descriptions["stop"]="Stop the webserver and DB."
-tasks["stop"]=stop
-
 build-container() {
     nix build && docker load <result && docker run --rm -ti network-inventory:latest
 }
