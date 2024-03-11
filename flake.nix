@@ -38,6 +38,7 @@
                 '';
                 env = {
                   DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
+                  PC_PORT_NUM = "9999";
                   PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
                   LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
                     pkgs.stdenv.cc.cc
