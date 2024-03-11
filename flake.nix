@@ -10,62 +10,67 @@
     extra-substituters = "https://devenv.cachix.org";
   };
 
-  outputs = { self, nixpkgs, devenv, systems }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      devenv,
+      systems,
+    }@inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
     in
     {
-      devShells = forEachSystem
-        (system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-          in
-          {
-            default = devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                {
-                  packages = [
-                    (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
+      devShells = forEachSystem (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
           config = self.devShells.${system}.default.config;
+        in
+        {
+          default = devenv.lib.mkShell {
+            inherit inputs pkgs;
+            modules = [
+              {
                 enterShell = ''
                   ln -sf ${config.process-managers.process-compose.configFile} ${config.env.DEVENV_ROOT}/process-compose.yml
                 '';
+                packages = [ (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}") ];
+                env = {
+                  DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
+                  PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
+                  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+                    pkgs.stdenv.cc.cc
+                    # Add any missing library needed You can use the nix-index package
+                    # to locate them, e.g.
+                    # nix-locate -w --top-level --at-root /lib/libudev.so.1
                   ];
-                  env = {
-                    DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
-                    PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
-                    LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-                      pkgs.stdenv.cc.cc
-                      # Add any missing library needed You can use the nix-index package
-                      # to locate them, e.g.
-                      # nix-locate -w --top-level --at-root /lib/libudev.so.1
-                    ];
-                  };
-                  languages.python = {
+                };
+                languages.python = {
+                  enable = true;
+                  package = pkgs.python310;
+                  poetry = {
+                    activate.enable = true;
                     enable = true;
-                    package = pkgs.python310;
-                    poetry = {
-                      activate.enable = true;
-                      enable = true;
-                      install.enable = true;
-                    };
+                    install.enable = true;
                   };
-                  process.implementation = "process-compose";
-                  process-managers.process-compose.enable = true;
-                  # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
-                  processes = {
-                    webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
-                    setup.exec = "dev setup";
-                  };
-                  services.postgres = {
-                    enable = true;
-                    initialDatabases = [{ name = "django"; }];
-                    package = pkgs.postgresql_15;
-                  };
-                }
-              ];
-            };
-          });
+                };
+                process.implementation = "process-compose";
+                process-managers.process-compose.enable = true;
+                # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
+                processes = {
+                  webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                  setup.exec = "dev setup";
+                };
+                services.postgres = {
+                  enable = true;
+                  initialDatabases = [ { name = "django"; } ];
+                  package = pkgs.postgresql_15;
+                };
+              }
+            ];
+          };
+        }
+      );
     };
 }
