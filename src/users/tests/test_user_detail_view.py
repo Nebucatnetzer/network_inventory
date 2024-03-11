@@ -33,8 +33,9 @@ def test_user_detail_view_not_found(create_admin_user):
 def test_user_detail_view_group(create_admin_user):
     create_admin_user()
     user = mixer.blend("users.User", customer=mixer.SELECT)
+    login = mixer.blend("users.Login", user=user)
     group = mixer.blend("users.Group")
-    mixer.blend("users.UserInGroup", user=user, group=group)
+    mixer.blend("users.LoginInGroup", login=login, group=group)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
@@ -44,7 +45,8 @@ def test_user_detail_view_group(create_admin_user):
 def test_user_detail_view_mail_alias(create_admin_user):
     create_admin_user()
     user = mixer.blend("users.User", customer=mixer.SELECT)
-    mixer.blend("users.MailAlias", user=user)
+    login = mixer.blend("users.Login", user=user)
+    mixer.blend("users.MailAlias", login=login)
     client = Client()
     client.login(username="pharma-admin", password="password")
     response = client.get("/user/" + str(user.id) + "/")
