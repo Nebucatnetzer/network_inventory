@@ -47,9 +47,10 @@ def test_group_detail_view_with_user(create_admin_user):
     client.login(username="pharma-admin", password="password")
     response = client.get("/group/" + str(group.id) + "/")
     user = mixer.blend("users.User", customer=mixer.SELECT)
-    user.groups.add(group)
+    login = mixer.blend("users.Login", user=user)
+    login.groups.add(group)
     response = client.get("/group/" + str(group.id) + "/")
-    assert response.status_code == 200 and helper.in_content(response, user)
+    assert response.status_code == 200 and helper.in_content(response, login)
 
 
 def test_group_detail_view_with_child_group(create_admin_user):
