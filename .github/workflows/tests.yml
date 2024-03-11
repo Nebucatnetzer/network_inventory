@@ -18,4 +18,4 @@ jobs:
       - name: Test
         run: nix develop --impure --command bash -c "dev test"
         env:
-          PROJECT_DIR: ${{ github.workspace }}
+          DEVENV_ROOT: ${{ github.workspace }}

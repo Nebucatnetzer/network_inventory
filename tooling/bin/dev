@@ -104,12 +104,12 @@ lint() {
     echo "Running pylint"
     poetry run \
         pylint \
-        --rc-file="$PROJECT_DIR/pyproject.toml" \
+        --rc-file="$DEVENV_ROOT"/pyproject.toml \
         -j 0 \
-        -E "$PROJECT_DIR/src"
+        -E "$DEVENV_ROOT"/src
     echo "Running mypy"
     poetry run \
-        mypy --config-file="$PROJECT_DIR/pyproject.toml" "$PROJECT_DIR/src"
+        mypy --config-file="$DEVENV_ROOT/"pyproject.toml "$DEVENV_ROOT"/src
 }
 descriptions["lint"]="Run the linters against the src directory."
 tasks["lint"]=lint
@@ -119,9 +119,9 @@ test() {
         pytest \
         -nauto \
         --nomigrations \
-        --cov-config="$PROJECT_DIR/.coveragerc" \
+        --cov-config="$DEVENV_ROOT"/.coveragerc \
         --cov-report=html \
-        "$PROJECT_DIR/src"
+        "$DEVENV_ROOT"/src
 }
 descriptions["test"]="Run the tests in the RAM DB and write a coverage report."
 tasks["test"]=test

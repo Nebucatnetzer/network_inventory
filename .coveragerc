@@ -1,9 +1,9 @@
 [paths]
-source = ${PROJECT_DIR-default .}/src/
+source = ${DEVENV_ROOT-default .}/src/
 [html]
-directory = ${PROJECT_DIR-default .}/htmlcov
+directory = ${DEVENV_ROOT-default .}/htmlcov
 [run]
-data_file = ${PROJECT_DIR-default .}/.coverage
+data_file = ${DEVENV_ROOT-default .}/.coverage
 omit =
      *apps.py,
      *migrations/*,
