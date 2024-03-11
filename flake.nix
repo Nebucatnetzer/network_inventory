@@ -34,9 +34,6 @@
               {
                 enterShell = ''
                   export PATH=$PATH:$DEVENV_ROOT/tooling/bin/
-                  export PGPORT=$(($WEBPORT + 100))
-                  export PROJECT_DIR=$(pwd)
-                  export WEBPORT=$(($RANDOM + 1100))
                   ln -sf ${config.process-managers.process-compose.configFile} ${config.env.DEVENV_ROOT}/process-compose.yml
                 '';
                 env = {
@@ -48,6 +45,7 @@
                     # to locate them, e.g.
                     # nix-locate -w --top-level --at-root /lib/libudev.so.1
                   ];
+                  WEBPORT = "8080";
                 };
                 languages.python = {
                   enable = true;
@@ -63,7 +61,7 @@
                 # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
                 processes = {
                   webserver = {
-                    exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
+                    exec = "poetry run python ./src/manage.py runserver 0.0.0.0:${config.env.WEBPORT}";
                     process-compose.depends_on = {
                       setup = {
                         condition = "process_completed_successfully";
