@@ -78,12 +78,6 @@ stop() {
 descriptions["stop"]="Stop the webserver and DB."
 tasks["stop"]=stop
 
-venv() {
-    nix build .#venv -o .venv
-}
-descriptions["venv"]="Build a pseudo venv that editors like VS Code can use."
-tasks["venv"]=venv
-
 build-container() {
     nix build && docker load <result && docker run --rm -ti network-inventory:latest
 }
