@@ -33,9 +33,9 @@
             modules = [
               {
                 enterShell = ''
-                  export WEBPORT=$(($RANDOM + 1100))
                   export PGPORT=$(($WEBPORT + 100))
                   export PROJECT_DIR=$(pwd)
+                  export WEBPORT=$(($RANDOM + 1100))
                   ln -sf ${config.process-managers.process-compose.configFile} ${config.env.DEVENV_ROOT}/process-compose.yml
                 '';
                 packages = [ (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}") ];
