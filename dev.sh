@@ -6,9 +6,30 @@ _init() {
     python ./src/manage.py loaddata src/network_inventory.yaml
 }
 
+_open_url() {
+    if [[ ! -z "${DEFAULT_BROWSER}" ]]; then
+        $DEFAULT_BROWSER $url
+    elif type explorer.exe &>/dev/null; then
+        explorer.exe $url
+    fi
+}
+
+_create_url() {
+    if [ -f /etc/wsl.conf ]; then
+        echo "http://localhost:$WEBPORT"
+    else
+        echo "http://$(hostname -f):$WEBPORT"
+    fi
+}
+#}
+
+# Main tasks start
+declare -A tasks
+declare -A descriptions
+
 # Setup the database
-_setup() {
-    sleep 5
+setup() {
+    find . -name __pycache__ -o -name "*.pyc" -delete
     if [ -f .direnv/first_run ]; then
         python ./src/manage.py collectstatic --noinput
         python ./src/manage.py makemigrations
@@ -36,35 +57,15 @@ _setup() {
         _init
         touch .direnv/first_run
     fi
-}
-
-_open_url() {
-    if [[ ! -z "${DEFAULT_BROWSER}" ]]; then
-        $DEFAULT_BROWSER $url
-    elif type explorer.exe &>/dev/null; then
-        explorer.exe $url
-    fi
-}
-
-_create_url() {
-    if [ -f /etc/wsl.conf ]; then
-        echo "http://localhost:$WEBPORT"
-    else
-        echo "http://$(hostname -f):$WEBPORT"
-    fi
-}
-#}
-
-# Main tasks start
-declare -A tasks
-declare -A descriptions
-
-run() {
-    _setup
-    find . -name __pycache__ -o -name "*.pyc" -delete
     url=$(_create_url)
     printf "\n---\n webserver: $url\n---\n"
-    _open_url $url
+    _open_url $url sleep 5
+}
+descriptions["setup"]="Setup the database and load example data."
+tasks["setup"]=setup
+
+run() {
+    process-compose up
 }
 descriptions["run"]="Start the webserver."
 tasks["run"]=run

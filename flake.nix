@@ -15,9 +15,6 @@
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
     in
     {
-      packages = forEachSystem (system: {
-        devenv-up = self.devShells.${system}.default.config.procfileScript;
-      });
       devShells = forEachSystem
         (system:
           let
@@ -30,6 +27,10 @@
                 {
                   packages = [
                     (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}")
+          config = self.devShells.${system}.default.config;
+                enterShell = ''
+                  ln -sf ${config.process-managers.process-compose.configFile} ${config.env.DEVENV_ROOT}/process-compose.yml
+                '';
                   ];
                   env = {
                     DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
@@ -55,7 +56,7 @@
                   # https://github.com/cachix/devenv/blob/main/examples/process-compose/devenv.nix
                   processes = {
                     webserver.exec = "poetry run python ./src/manage.py runserver 0.0.0.0:$WEBPORT";
-                    setup.exec = "dev start";
+                    setup.exec = "dev setup";
                   };
                   services.postgres = {
                     enable = true;
