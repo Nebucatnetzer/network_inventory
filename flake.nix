@@ -33,12 +33,12 @@
             modules = [
               {
                 enterShell = ''
+                  export PATH=$PATH:$DEVENV_ROOT/tooling/bin/
                   export PGPORT=$(($WEBPORT + 100))
                   export PROJECT_DIR=$(pwd)
                   export WEBPORT=$(($RANDOM + 1100))
                   ln -sf ${config.process-managers.process-compose.configFile} ${config.env.DEVENV_ROOT}/process-compose.yml
                 '';
-                packages = [ (pkgs.writeScriptBin "dev" "${builtins.readFile ./dev.sh}") ];
                 env = {
                   DJANGO_SETTINGS_MODULE = "network_inventory.settings.local";
                   PYTHON_KEYRING_BACKEND = "keyring.backends.fail.Keyring";
