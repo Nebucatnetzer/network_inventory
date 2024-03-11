@@ -83,7 +83,7 @@ clean() {
     rm -rf htmlcov/
     rm -f .direnv/first_run
     rm -f src/*/migrations/0*.py
-    rm -rf .direnv/postgres/
+    rm -rf $DEVENV_STATE
 }
 descriptions["clean"]="Reset the project to a fresh state including the database."
 tasks["clean"]=clean
