@@ -205,14 +205,17 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-crispy-forms"
-version = "1.14.0"
+version = "2.3"
 description = "Best way to have Django DRY forms"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "django-crispy-forms-1.14.0.tar.gz", hash = "sha256:35887b8851a931374dd697207a8f56c57a9c5cb9dbf0b9fa54314da5666cea5b"},
-    {file = "django_crispy_forms-1.14.0-py3-none-any.whl", hash = "sha256:bc4d2037f6de602d39c0bc452ac3029d1f5d65e88458872cc4dbc01c3a400604"},
+    {file = "django_crispy_forms-2.3-py3-none-any.whl", hash = "sha256:efc4c31e5202bbec6af70d383a35e12fc80ea769d464fb0e7fe21768bb138a20"},
+    {file = "django_crispy_forms-2.3.tar.gz", hash = "sha256:2db17ae08527201be1273f0df789e5f92819e23dd28fec69cffba7f3762e1a38"},
 ]
+
+[package.dependencies]
+django = ">=4.2"
 
 [[package]]
 name = "django-filter"
@@ -1186,4 +1189,4 @@ test = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more-it
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "f7c1e99b771fc1819356d8fc69e4711d81a0260f99eac123ddd86d52b5d2e995"
+content-hash = "9cb28fe6fd4ad0ac44fbc8e3d4794465b33d6aea711d7c2d9efda8158fa3a7fc"
